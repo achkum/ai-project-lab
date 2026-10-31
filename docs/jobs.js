@@ -35,8 +35,17 @@ function jobControls(lane){
 function singleJobAction(x){if(!manualStartAllowed(x))return '<p class="callout">New starts are held during the evidence audit. <a href="audit.html">Review findings</a></p>';return '<div class="choice-actions"><strong>Start a bounded '+(x.lane==='Thesis'?'investigation':'build')+'</strong><p>This queues only '+esc(x.id)+'. Other selected ideas are kept. The worker uses your subscription allowance and pauses if it cannot verify availability.</p><button class="primary" data-start-one="'+esc(x.id)+'">'+(x.lane==='Thesis'?'Start investigation':'Start build')+'</button></div>';}
 function redrawJobs(){
  renderCards('Thesis',$('thesis-search').value);renderCards('Project');
+ if(dashboardKey&&workerInfo&&!queueError){
+  for(const lane of ['thesis','project']){
+   const states=liveJobs.filter(j=>j.lane===lane).map(j=>j.state);
+   const state=['running','needs_attention','quota_wait','queued','paused','review_ready'].find(x=>states.includes(x))||'awaiting_selection';
+   $(lane+'-state').textContent=state.replaceAll('_',' ');
+   if(lane==='project')$('project-stage').textContent=state.replaceAll('_',' ');
+  }
+ }
  const overview=$('overview-live-work');
  if(overview){
+  if(dashboardKey&&!workerInfo&&!queueError){overview.innerHTML='<h2>Live work status</h2><p>Connecting to the VPS for current job status…</p>';return;}
   const current=liveJobs.filter(j=>data.opportunities.some(c=>c.id===j.candidate));
   overview.innerHTML='<h2>Live work status</h2>'+(dashboardKey?'<p>'+esc(queueError?'Connection interrupted — showing last received status.':(workerInfo?.online?'Workers online':'Workers offline or connecting')+' · '+queueCapacity+' parallel slots · refreshes every 15 seconds.')+'</p>'+current.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.title)+'</p><p>'+esc(j.message)+'</p></div><a href="#'+(j.lane==='thesis'?'thesis':'projects')+'">View & manage →</a></article>').join('')+(current.length?'':'<p>No jobs started for the current options.</p>'):'<p>Sign in to see live investigation and build status.</p><button data-connect-queue>Sign in</button>');
  }
