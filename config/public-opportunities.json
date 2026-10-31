@@ -68,68 +68,6 @@
     "quality_gate_version": 2
   },
   {
-    "id": "P10",
-    "title": "Can this customer’s data support the model they want?",
-    "domain": "Custom models · service feasibility",
-    "summary": "Before quoting a custom visual model, an AI consultant needs to know whether the customer’s labels and examples can support the requested outcome. Build a customer-facing feasibility report that exposes label disagreements and the value of correcting them.",
-    "audience": "Small consultancies adapting pretrained vision models for clients",
-    "buyer": "Consultancy lead scoping a paid model pilot",
-    "flow": [
-      "Import labelled images and target cost of errors",
-      "Compare baseline + rank suspect labels",
-      "Review corrections + produce a go/no-go pilot brief"
-    ],
-    "deliverable": "A local visual-data audit and reproducible pilot feasibility report",
-    "question": "Does reviewing suspect labels change the model choice or attainable error rate enough to affect a pilot decision?",
-    "measure": "Held-out quality before/after a fixed review budget, review precision, runtime and changed go/no-go decisions. Keep the final test set untouched.",
-    "baseline": "Cleanlab already identifies potential label errors; pretrained features and simple classifiers already support small-data baselines.",
-    "proposed_difference": "Test a service deliverable linking evidence quality, review effort and customer error costs to a pilot decision. This is packaging and evaluation, not a new label-cleaning algorithm.",
-    "risk": "Exploratory: no specific buyer complaint has been verified. Stop if consultants already produce the report easily or no customer will share suitable labelled data.",
-    "data_plan": "Small licensed visual subset with known seeded label errors, documented provenance and held-out split. No claim that public data represents a client.",
-    "model_plan": "Cached pretrained image embeddings + linear classifier; compare simple baseline and existing label-quality tooling. No GPU training required for the first slice.",
-    "why_ml": "This tests whether adapting a pretrained model is viable for a customer rather than assuming it is worth building.",
-    "venture": "A paid feasibility audit could lead to customer-specific model adaptation and monitoring contracts; demand must be established before expanding.",
-    "customer_test": "First obtain feedback from a consultant on whether the report changes a real quotation or pilot decision. Stronger evidence is required before automatic build selection.",
-    "week_test": "In 3–5 days produce one local image-label review journey, frozen test split, before/after comparison and exportable client brief. First milestone: inspect data/licence and baseline runtime.",
-    "growth_path": "Feasibility audit → bounded model adaptation pilot → measured maintenance under data changes.",
-    "evidence": "Published research establishes that label errors can change model rankings; Cleanlab is an established alternative. Neither establishes that this consultancy report is a missing product.",
-    "evidence_level": "Research evidence only; customer pain unverified",
-    "market": "Evidence review pending; no automatic build",
-    "provenance": [
-      {
-        "title": "Label errors can change model rankings",
-        "url": "https://arxiv.org/abs/2103.14749",
-        "kind": "Research evidence",
-        "finding": "Studies label errors across ten benchmark test sets and their effect on model comparisons. It does not establish a buyer for our proposed service."
-      },
-      {
-        "title": "Cleanlab existing tooling",
-        "url": "https://github.com/cleanlab/cleanlab",
-        "kind": "Existing solution",
-        "finding": "Provides established data-quality and label-error tooling; our work must compare against it rather than rebrand it."
-      }
-    ],
-    "reason": "Directly explores a custom-model business, with an explicit evidence gap rather than presenting a tutorial as an opportunity.",
-    "recommended": false,
-    "lane": "Project",
-    "version": 1,
-    "status": "Possibility",
-    "batch": "problem-evidence",
-    "shortlist": "20261031-problem-project",
-    "publication": "owner_requested_visual_summary",
-    "published_at": 1793455470.3583255,
-    "review_deadline": null,
-    "contribution": "A local visual-data audit and reproducible pilot feasibility report",
-    "effort": "3–6 days",
-    "feasibility": "Laptop-first, small fixtures, no paid APIs or compute. Customer validation remains a separate owner-led step.",
-    "next": "In 3–5 days produce one local image-label review journey, frozen test split, before/after comparison and exportable client brief. First milestone: inspect data/licence and baseline runtime.",
-    "originality": "Not claimed novel. Sources establish the problem or existing methods; the proposed product gap and willingness to pay remain hypotheses.",
-    "evidence_url": "https://arxiv.org/abs/2103.14749",
-    "alternative": "Cleanlab already identifies potential label errors; pretrained features and simple classifiers already support small-data baselines.",
-    "auto_eligible": false,
-    "quality_gate_version": 2
-  },
-  {
     "id": "T4",
     "lane": "Thesis",
     "title": "Can a defect detector survive a change of lighting?",

@@ -32,6 +32,10 @@
     "Resolved reports and intentional documented behaviour are counterevidence. They cannot justify an unresolved-gap claim without independent current evidence of a remaining problem.",
     "New/trending claims require dated corroborating signals across time and independent origins; otherwise explicitly say trend not assessed.",
     "For every auto-eligible recommendation require full_thread_reviewed=true, resolution_status=unresolved, published_at, verified_at and remaining_gap on at least one problem source. These are reviewed facts, never guessed metadata.",
-    "P8 is withdrawn. P9 and P10 remain exploratory and cannot auto-start until a new reviewed version and review window are published. Do not substitute another recommendation to fill the slot."
+    "P8 is withdrawn. P9 and P10 remain exploratory and cannot auto-start until a new reviewed version and review window are published. Do not substitute another recommendation to fill the slot.",
+    "Historical papers and tutorials may supply background, baselines or methods only. They cannot establish a current business opportunity by themselves. Record publication and revision dates separately from verification dates.",
+    "For a current opportunity, independently verify recent evidence that the customer problem persists and review present-day alternatives. Explain why now. Older unresolved needs are permitted with current corroboration; age alone is not a rejection rule.",
+    "For claims of emerging or trending opportunities, use recent dated independent signals and comparative activity over time. A single paper, repository or complaint does not establish a trend.",
+    "P10 is withdrawn, not merely downgraded. Do not republish without a newly sourced current problem and competitive review."
   ]
 }
