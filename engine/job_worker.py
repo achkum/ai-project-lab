@@ -179,7 +179,7 @@ def run_one(profile):
         source=Path(profile['private_root'])/'research/jobs'/starter
         if source.is_dir():shutil.copytree(source,workspace/'starter',dirs_exist_ok=True)
     def checkpoint():
-        remote('heartbeat',jid=job['id'],token=job['token'],message='Investigating' if job['lane']=='thesis' else 'Building a scoped draft')
+        remote('heartbeat',jid=job['id'],token=job['token'],message='Investigating' if job['lane']=='thesis' else 'Building and testing browser app')
         remote('seen',detail='Working on '+job['scope']['id']+'; other jobs remain queued')
     prompt=(
         'Produce a research feasibility brief, not a completed thesis. Write BRIEF.md and evidence.json. '

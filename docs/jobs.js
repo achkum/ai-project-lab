@@ -21,8 +21,9 @@ function jobControls(lane){
  const jobs=liveJobs.filter(x=>x.lane===lane.toLowerCase());
  const waiting=liveJobs.filter(j=>j.state==='queued').sort((a,b)=>a.created-b.created||a.id.localeCompare(b.id));
  const running=liveJobs.filter(j=>j.state==='running');
- const active=jobs.filter(j=>!['completed','review_ready','cancelled'].includes(j.state)).sort((a,b)=>(a.state==='running'?-1:b.state==='running'?1:a.created-b.created));
- const history=jobs.filter(j=>['completed','review_ready','cancelled'].includes(j.state)).sort((a,b)=>b.updated-a.updated);
+ const isCurrent=j=>data.opportunities.some(c=>c.id===j.candidate&&c.version===j.version);
+ const active=jobs.filter(j=>!['completed','review_ready','cancelled'].includes(j.state)||isCurrent(j)).sort((a,b)=>(a.state==='running'?-1:b.state==='running'?1:a.created-b.created));
+ const history=jobs.filter(j=>['completed','review_ready','cancelled'].includes(j.state)&&!isCurrent(j)).sort((a,b)=>b.updated-a.updated);
  const progress=running.length?((workerInfo?.online?'Running: ':'Last reported running: ')+running.map(j=>j.candidate).join(', ')+' — '+running.length+'/'+queueCapacity+' parallel slots; '+waiting.length+' waiting.'):(waiting.length?waiting.length+' jobs waiting. '+(workerInfo?.online?'Workers are checking subscription availability.':'Keep the laptop awake to run them.'):'No jobs currently running or queued.');
  const row=j=>{
   const position=waiting.findIndex(x=>x.id===j.id);
@@ -47,7 +48,7 @@ function redrawJobs(){
  if(overview){
   if(dashboardKey&&!workerInfo&&!queueError){overview.innerHTML='<h2>Live work status</h2><p>Connecting to the VPS for current job status…</p>';return;}
   const current=liveJobs.filter(j=>data.opportunities.some(c=>c.id===j.candidate&&c.version===j.version));
-  overview.innerHTML='<h2>Live work status</h2>'+(dashboardKey?'<p>'+esc(queueError?'Connection interrupted — showing last received status.':(workerInfo?.online?'Workers online':'Workers offline or connecting')+' · '+queueCapacity+' parallel slots · refreshes every 15 seconds.')+'</p>'+current.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.title)+'</p><p>'+esc(j.message)+'</p></div><a href="#'+(j.lane==='thesis'?'thesis':'projects')+'">View & manage →</a></article>').join('')+(current.length?'':'<p>No jobs started for the current options.</p>'):'<p>Sign in to see live investigation and build status.</p><button data-connect-queue>Sign in</button>');
+  overview.innerHTML='<h2>Live work status</h2>'+(dashboardKey?'<p>'+esc(queueError?'Connection interrupted — showing last received status.':(workerInfo?.online?'Workers online':'Workers offline or connecting')+' · '+queueCapacity+' parallel slots · refreshes every 15 seconds.')+'</p>'+current.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.title)+'</p><p>'+esc(j.message)+'</p></div>'+(j.result?.demo_url?'<a href="'+esc(safeLink(j.result.demo_url))+'" target="_blank" rel="noopener noreferrer">Open app →</a>':'<a href="#'+(j.lane==='thesis'?'thesis':'projects')+'">View & manage →</a>')+'</article>').join('')+(current.length?'':'<p>No jobs started for the current options.</p>'):'<p>Sign in to see live investigation and build status.</p><button data-connect-queue>Sign in</button>');
  }
 }
 async function queueRequest(path,body){
