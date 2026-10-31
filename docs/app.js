@@ -65,7 +65,7 @@ function openConversation(mode,lane,id) {
  $('prepare-agent-message').onclick=()=>{
  const q=$('agent-question').value.trim();
  const persistence=$('preference-duration').value==='persistent'?'Remember my stated interests as editable ranking preferences, while keeping broad discovery.':'Apply this request only to this discussion; do not change my long-term discovery preferences.';
- const instruction=mode==='new'?'I want a fresh set of '+lane+' options now. Pause work on a currently selected idea in this lane before replacing it. Research 3–5 alternatives and update the visual dashboard before building.':mode==='refine'?'Refine '+context+' now. Preserve existing work and show the revised scope on the dashboard before continuing implementation.':'Explain '+context+' now. This is a question, not a selection change or approval to build.';
+ const instruction=mode==='new'?'I want a fresh set of '+lane+' options now. Research 3–5 additional alternatives and update the visual dashboard before building. Preserve all existing jobs unless I explicitly request replacing or cancelling one.':mode==='refine'?'Refine '+context+' now. Preserve existing work and show the revised scope on the dashboard before continuing implementation.':'Explain '+context+' now. This is a question, not a selection change or approval to build.';
  $('agent-message').value=instruction+'\n\n'+(q||'Help me assess the problem, potential outcome, existing alternatives, feasibility and market uncertainty.')+'\n\n'+persistence;
  $('agent-message-area').hidden=false;
  };
@@ -133,7 +133,6 @@ document.addEventListener('click',async e=>{
  ...(x.model_plan?[['Model approach',x.model_plan],['Why ML here?',x.why_ml],['Data access & evaluation inputs',x.data_plan]]:[]),
  ['What success would look like',x.measure||x.contribution],
  ['Who might use it—and why',x.venture],
- ['What already exists',x.alternative||'Closest alternatives still need checking'],
  ['Why consider this option',x.reason||x.feasibility],
  ['What could make us drop it',x.risk||x.feasibility]
  ].map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>'+provenanceDetails(x)+'<div class="next-step"><span class="tag">BOUNDED NEXT STEP · '+esc(x.effort||'TO ASSESS')+'</span><p>'+esc(x.next)+'</p><p class="muted">'+esc(x.feasibility)+'</p></div><details class="evidence-details"><summary>Evidence & uncertainty</summary><p>'+esc(x.evidence)+'</p>'+(x.evidence_url?'<a class="text-link" href="'+esc(safeLink(x.evidence_url))+'" target="_blank" rel="noopener noreferrer">Read the original source ↗</a>':'')+'</details>'+(typeof singleJobAction==='function'?singleJobAction(x):'');

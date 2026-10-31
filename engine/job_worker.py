@@ -69,6 +69,7 @@ def publish_review_bundle(profile,job,workspace,response):
         if any(x.startswith('.') or x in ('node_modules','__pycache__') for x in rel.parts):continue
         target=dest/rel;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target);copied.append(str(rel))
     if not copied:raise RuntimeError('No reviewable files produced; response alone is not a completed investigation/build')
+    response=response.replace(workspace.as_posix(),'.').replace(str(workspace),'.')
     (dest/'WORKER_REPORT.txt').write_text('DRAFT FOR REVIEW — not a validated production release.\n\n'+response,encoding='utf-8')
     path='research/jobs/'+job['id']
     subprocess.run(['git','add','--',path],cwd=root,check=True,capture_output=True)

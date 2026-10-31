@@ -78,6 +78,23 @@ def export(profile, workflow, discovery, sources):
             {'title': 'Local subscription workflow', 'detail': 'Daily discovery and recurring project checks scheduled.' if scheduled else 'Coordinator works locally. Recurring scheduling is not yet active.'},
             {'title': 'Options before work', 'detail': 'Open a private shortlist to choose or hold. After 24 hours without a response, the recommendation is selected on the next successful check.'}
         ]}
+    if profile.get('execution_mode')=='vps_jobs':
+        try:
+            from .job_worker import remote
+            live=remote('snapshot')
+            for lane in ('thesis','project'):
+                jobs=[j for j in live['jobs'] if j['lane']==lane]
+                states={j['state'] for j in jobs}
+                state=next((s for s in ('running','needs_attention','quota_wait','queued','paused','review_ready') if s in states),'awaiting_selection')
+                snapshot[lane]['state']=state
+                if lane=='project':snapshot[lane]['stage']=state.replace('_',' ')
+            for card in opportunities:
+                job=next((j for j in live['jobs'] if j['candidate']==card['id'] and j['version']==card['version']),None)
+                card['selected']=bool(job and job['state']!='cancelled')
+                card['status']=job['state'] if job else 'Possibility'
+            snapshot['events'][-1]={'title':'Multiple independent jobs','detail':'Select cards and start investigations/builds on the dashboard. The VPS keeps requests while the laptop is off. Authenticated live status appears above each lane.'}
+        except Exception:
+            snapshot['events'].append({'title':'Queue status unavailable','detail':'Could not refresh the VPS queue snapshot. Connect the dashboard for live status; do not infer that work completed.'})
     # Construct an allowlist object; never merge private candidate dictionaries into this output.
     write_json(Path(profile['public_root'])/'docs/data/status.json', snapshot)
     return snapshot

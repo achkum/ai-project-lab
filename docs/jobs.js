@@ -1,7 +1,7 @@
 'use strict';
 const QUEUE_API='https://198.44.116.159.sslip.io';
 const selectedIdeas=new Set();
-let liveJobs=[],workerInfo=null,queueError='',sending=false;
+let liveJobs=[],workerInfo=null,queueError='',sending=false,lastQueueSignature='';
 let dashboardKey='';try{dashboardKey=sessionStorage.getItem('lab-dashboard-key')||'';}catch{}
 function selectionControl(x){
  return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='applied-ai'?'New · applied AI':'Earlier option')+'</span></label>';
@@ -20,7 +20,9 @@ async function queueRequest(path,body){
 }
 async function loadJobs(){
  if(!dashboardKey)return;
- try{const r=await queueRequest('/jobs');liveJobs=r.jobs;workerInfo=r.worker;queueError='';}
+ try{const r=await queueRequest('/jobs');
+ const signature=JSON.stringify({jobs:r.jobs.map(({updated,created,...rest})=>rest),worker:{online:r.worker.online,detail:r.worker.detail}});
+ liveJobs=r.jobs;workerInfo=r.worker;const unchanged=signature===lastQueueSignature&&!queueError;queueError='';lastQueueSignature=signature;if(unchanged)return;}
  catch(e){queueError='Could not reach the queue: '+e.message;}
  redrawJobs();
 }
