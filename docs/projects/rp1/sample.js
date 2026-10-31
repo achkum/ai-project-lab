@@ -1,0 +1,27 @@
+﻿window.SYNTHETIC_SAMPLE = {
+  "schema_version": 1,
+  "pull_requests": [
+    {"id":"stale", "events":[
+      {"id":"a1","type":"approval","at":"2026-01-01T10:00:00Z","revision":"aaa","actor":"reviewer","actor_kind":"individual","body":"Looks good."},
+      {"id":"m1","type":"merge","at":"2026-01-01T11:00:00Z","revision":"bbb"}
+    ]},
+    {"id":"late-check", "events":[
+      {"id":"m2","type":"merge","at":"2026-01-02T11:00:00Z","revision":"ccc"},
+      {"id":"c2","type":"check","at":"2026-01-02T11:05:00Z","revision":"ccc","name":"test","conclusion":"success"}
+    ]},
+    {"id":"shared-actor", "events":[
+      {"id":"a3","type":"approval","at":"2026-01-03T10:00:00Z","revision":"ddd","actor":"team-bot","actor_kind":"shared","body":"Approved."},
+      {"id":"m3","type":"merge","at":"2026-01-03T11:00:00Z","revision":"ddd"}
+    ]},
+    {"id":"conditional", "events":[
+      {"id":"a4","type":"approval","at":"2026-01-04T10:00:00Z","revision":"eee","actor":"reviewer","actor_kind":"individual","body":"Approved if the migration is tested."},
+      {"id":"c4","type":"check","at":"2026-01-04T10:30:00Z","revision":"eee","name":"unit-tests","conclusion":"success"},
+      {"id":"m4","type":"merge","at":"2026-01-04T11:00:00Z","revision":"eee"}
+    ]},
+    {"id":"missing", "events":[
+      {"id":"a5","type":"approval","at":"2026-01-05T10:00:00Z","actor_kind":"unknown"},
+      {"id":"m5","type":"merge","at":"2026-01-05T11:00:00Z"}
+    ]}
+  ]
+}
+;
