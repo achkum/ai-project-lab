@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "status": "requires_model_binding",
+  "tiers": {
+    "analysis": {
+      "model_id": null,
+      "quality": "strongest_suitable_available",
+      "tasks": [
+        "initial_analysis",
+        "prior_work",
+        "thesis_feasibility",
+        "venture_assessment",
+        "architecture",
+        "final_substantive_review"
+      ]
+    },
+    "implementation": {
+      "model_id": null,
+      "quality": "mid_tier",
+      "tasks": [
+        "approved_spec_implementation",
+        "routine_tests",
+        "routine_fixes",
+        "documentation"
+      ]
+    },
+    "economy": {
+      "model_id": null,
+      "quality": "low_cost",
+      "tasks": [
+        "schema_checked_extraction",
+        "bounded_formatting"
+      ],
+      "requires_reliable_validation": true
+    }
+  },
+  "deterministic_first": [
+    "fetch",
+    "hash",
+    "schedule",
+    "count",
+    "schema_validate"
+  ],
+  "escalation": {
+    "failed_implementation_attempts": 2,
+    "ambiguity": "analysis",
+    "security_sensitive_design": "analysis",
+    "failed_extraction_validation": "analysis"
+  },
+  "silent_downgrade": false,
+  "on_required_tier_unavailable": "pause_and_report",
+  "on_budget_exhausted": "pause_and_report",
+  "monthly_cap_sek": null,
+  "per_run_cap_sek": null
+}

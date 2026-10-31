@@ -6,11 +6,19 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 const pretty = s => String(s || 'Unknown').replaceAll('_',' ');
 const when = (s,fallback) => s && Number.isFinite(Date.parse(s)) ? new Date(s).toLocaleString('en-GB',{timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}) : fallback;
 function valid(d) {
- return d && d.schema_version===1 && ['sample','live'].includes(d.mode) && typeof d.connected==='boolean' &&
- d.thesis && d.project && d.coverage && d.usage && Number.isFinite(d.releases_last_7_days) &&
- Array.isArray(d.sources) && d.sources.every(x=>typeof x.name==='string'&&typeof x.category==='string'&&typeof x.url==='string') &&
- Array.isArray(d.opportunities) && d.opportunities.every(x=>typeof x.id==='string'&&typeof x.title==='string'&&['Thesis','Project'].includes(x.lane)) &&
- Array.isArray(d.events) && (d.mode==='sample'||Number.isFinite(Date.parse(d.generated_at)));
+ const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+ const strings=(x,keys)=>obj(x)&&keys.every(k=>typeof x[k]==='string');
+ const count=x=>Number.isInteger(x)&&x>=0;
+ const date=x=>x===null||(typeof x==='string'&&Number.isFinite(Date.parse(x)));
+ return !!(obj(d) && d.schema_version===1 && ['sample','live'].includes(d.mode) && typeof d.connected==='boolean' &&
+ strings(d.thesis,['state']) && date(d.thesis.last_success) && date(d.thesis.next_run) &&
+ strings(d.project,['state','stage']) && date(d.project.window_start) && date(d.project.target_at) &&
+ obj(d.coverage) && ['checked','target','registered','blocked'].every(k=>count(d.coverage[k])) &&
+ obj(d.usage) && ['spent_sek','limit_sek'].every(k=>d.usage[k]===null||(Number.isFinite(d.usage[k])&&d.usage[k]>=0)) && count(d.releases_last_7_days) &&
+ Array.isArray(d.sources) && d.sources.every(x=>strings(x,['id','name','category','url','access','status'])) &&
+ Array.isArray(d.opportunities) && d.opportunities.every(x=>strings(x,['id','title','lane','status','summary','contribution','feasibility','venture','next','evidence'])&&['Thesis','Project'].includes(x.lane)) &&
+ Array.isArray(d.events) && d.events.every(x=>strings(x,['title','detail'])) &&
+ (d.mode==='sample'?d.connected===false:typeof d.generated_at==='string'&&Number.isFinite(Date.parse(d.generated_at))));
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
 function showView(){
