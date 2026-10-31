@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T14:11:12.541823+00:00",
+  "generated_at": "2026-10-31T14:21:36.292509+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
-    "last_success": "2026-10-31T12:48:17.055116+00:00",
+    "last_success": "2026-10-31T14:17:30.666583+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
@@ -433,7 +433,7 @@
       "publication": "owner_requested_visual_summary",
       "published_at": 1793453416.624857,
       "review_deadline": 1793539816.6248577,
-      "recommended": true,
+      "recommended": false,
       "selected": false,
       "decision_url": ""
     },
@@ -656,7 +656,7 @@
       "baseline": "Ordinary diffs, approval dialogs and checklists",
       "published_at": 1793453416.6248658,
       "review_deadline": 1793539816.6248658,
-      "recommended": true,
+      "recommended": false,
       "selected": true,
       "decision_url": "https://github.com/achkum/ai-thesis-lab/issues/1"
     },
@@ -799,5 +799,284 @@
       "title": "Multiple independent jobs",
       "detail": "Select cards and start investigations/builds on the dashboard. The VPS keeps requests while the laptop is off. Authenticated live status appears above each lane."
     }
-  ]
+  ],
+  "audit": {
+    "date": "2026-10-31",
+    "hold": true,
+    "review_state": "Initial audit complete; no candidate approved for a new start",
+    "findings": [
+      "Collector fetches public metadata, not full papers or discussion resolutions. This is suitable for leads, not recommendations.",
+      "Old digest sorted by first_seen and sampled six rows/source. It did not enforce publication-age windows.",
+      "Atom updated and Hugging Face lastModified could masquerade as publication dates. Existing records refreshed only last_seen, freezing stale metadata.",
+      "Curated public cards are exported separately from private worker briefs. There is no automatic semantic reconciliation; T6 counterevidence stayed in the private brief.",
+      "Worker research is bounded to roughly 12 minutes. Its source/read-depth limitations must survive into the dashboard, not disappear behind review_ready.",
+      "Schema/unit tests verify software contracts, not truth, research novelty, trend or commercial value."
+    ],
+    "collection": {
+      "registered": 35,
+      "returned_records": 27,
+      "empty": 8,
+      "families": 13,
+      "unique_imported_records": 598,
+      "counts_by_source": {
+        "recent_30d": 398,
+        "background": 86,
+        "corroboration_90d": 101,
+        "modified_only": 51
+      },
+      "note": "Counts by source include duplicate provenance. Dates are feed assertions pending primary-source verification. Eight empty channels are coverage gaps, not successful research."
+    },
+    "candidates": [
+      {
+        "id": "T1",
+        "decision": "Revise",
+        "headline": "Recent source, insufficient support for the proposed experiment",
+        "finding": "The October theory paper is adjacent evidence, not a test of approval fatigue or consequence previews. The private worker brief explicitly leaves novelty and recruitment unproven.",
+        "required_next": "Need closest empirical interface studies, measurable hypotheses, power/recruitment feasibility and supervisor fit.",
+        "sources": [
+          0
+        ]
+      },
+      {
+        "id": "T2",
+        "decision": "Revise",
+        "headline": "Generic workflow-evaluation claim overlaps current work",
+        "finding": "October work already evaluates stateful customer-support workflows and tool use. The dashboard linked only generic n8n documentation.",
+        "required_next": "Define a specific failure class and compare against current workflow evaluators; verify dataset/tool access.",
+        "sources": [
+          1
+        ]
+      },
+      {
+        "id": "T3",
+        "decision": "Withdraw",
+        "headline": "Integration documentation is not a research gap",
+        "finding": "Existing Bayesian sensor fusion was used to infer a new topic without recent unmet-need evidence or a feasible dataset.",
+        "required_next": "A new evidence-backed question and actual sensor-data plan are required before reconsideration.",
+        "sources": [
+          9
+        ]
+      },
+      {
+        "id": "T4",
+        "decision": "Revise",
+        "headline": "Lighting shift is already part of the benchmark",
+        "finding": "MVTec AD 2 already tests lighting differences. Original scope did not establish what existing calibration/adaptation studies leave unanswered.",
+        "required_next": "Review 2026 challenge methods; choose an explicit remaining comparison and public split. Verify local runtime and non-commercial boundaries.",
+        "sources": [
+          5
+        ]
+      },
+      {
+        "id": "T5",
+        "decision": "Withdraw",
+        "headline": "Tutorial-led proposal without a dataset",
+        "finding": "A transfer-learning tutorial does not establish a contribution. Current DCASE work directly addresses environmental noise and domain shifts.",
+        "required_next": "Start from a current unresolved task and access to a suitable licensed dataset, not a classifier tutorial.",
+        "sources": [
+          6,
+          7,
+          10
+        ]
+      },
+      {
+        "id": "T6",
+        "decision": "Revise",
+        "headline": "Substantial recent overlap; dashboard omitted it",
+        "finding": "Private worker brief already found October retail comparisons and warned that novelty is weak. July and October studies further overlap the broad question.",
+        "required_next": "Do a precise comparison matrix before narrowing; dataset overlap and laptop feasibility remain untested. Preserve the existing brief as research, not endorsement.",
+        "sources": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "id": "T7",
+        "decision": "Withdraw",
+        "headline": "Broad active-learning question was not scoped",
+        "finding": "A 2009 survey plus tutorials is background. Recent long-tail sample-selection work shows why current baselines must be reviewed.",
+        "required_next": "Specify modality, label budget, annotation cost, dataset and a remaining empirical question; no claim of novelty from the current card.",
+        "sources": [
+          8
+        ]
+      },
+      {
+        "id": "P9",
+        "decision": "Withdraw",
+        "headline": "Current demand and unresolved gap not established",
+        "finding": "Primary complaint was only seen in a search index; supporting vendor documents were historical. No local customer evidence or current comparison was established.",
+        "required_next": "Read the complete report, check current alternatives and obtain evidence of a remaining operator problem before proposing a product.",
+        "sources": []
+      },
+      {
+        "id": "P8",
+        "decision": "Withdrawn earlier",
+        "headline": "Resolved report misused",
+        "finding": "Author accepted guidance on May 28; intentional replay behaviour was framed as opportunity evidence.",
+        "required_next": "Retain only in the rejection log; do not restart.",
+        "sources": []
+      },
+      {
+        "id": "P10",
+        "decision": "Withdrawn earlier",
+        "headline": "2021 background paper misused",
+        "finding": "Label-error research does not establish current consultancy demand.",
+        "required_next": "Retain only as background; do not restart.",
+        "sources": []
+      }
+    ],
+    "sources": [
+      {
+        "title": "Verification Learning Theory",
+        "url": "https://arxiv.org/html/2610.37875v1",
+        "published": "2026-10-27",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract, date, model predictions and limitations sections",
+        "finding": "Theory and simulations, not empirical evidence that approval previews work. Recent, but only adjacent to T1."
+      },
+      {
+        "title": "Workflow executors in customer support",
+        "url": "https://arxiv.org/html/2610.14346v2",
+        "published": "2026-10-09; revised 2026-10-14",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract, introduction and benchmark overview",
+        "finding": "Already evaluates stateful workflows and rule-based tool checks. Counterevidence to framing T2 as an untouched question."
+      },
+      {
+        "title": "Load forecasting under covariate uncertainty",
+        "url": "https://arxiv.org/html/2610.07232v1",
+        "published": "2026-10-05",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract, introduction and experiment-design overview",
+        "finding": "Already compares pretrained and task-trained models under varying covariate quality. Reported results are not independently reproduced."
+      },
+      {
+        "title": "Timestral demand forecasting evaluation",
+        "url": "https://winder.ai/timestral-ai-demand-forecasting/",
+        "published": "October 2026; exact day not independently established here",
+        "checked": "2026-10-31",
+        "read_scope": "Evaluation, history-length, shift and methodology sections",
+        "finding": "Vendor-authored experiments closely overlap T6. Different history budgets and baseline training data matter. Existing worker brief had already identified this overlap."
+      },
+      {
+        "title": "Forecasting break-even analysis",
+        "url": "https://arxiv.org/html/2607.04919v1",
+        "published": "2026-07-06",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract, related work and methodology sections",
+        "finding": "Already compares pretrained and classical models across data budgets. Outside 90 days: counterevidence/background, not a fresh trigger."
+      },
+      {
+        "title": "MVTec AD 2 official dataset",
+        "url": "https://www.mvtec.com/research-teaching/datasets/mvtec-ad-2",
+        "published": "Landing-page date unknown; cited journal version April 2026",
+        "checked": "2026-10-31",
+        "read_scope": "Dataset description, evaluation and licence sections",
+        "finding": "Lighting variation is already in the benchmark. Some ground truth is private; dataset terms are non-commercial. No downloads or licence acceptance performed."
+      },
+      {
+        "title": "DCASE 2026 task 2",
+        "url": "https://dcase.community/challenge2026/task-first-shot-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring",
+        "published": "2026 challenge; data update 2026-04-08",
+        "checked": "2026-10-31",
+        "read_scope": "Task requirements and data-update notice",
+        "finding": "Noise and domain shifts are established challenge requirements. A YAMNet tutorial alone misses relevant contemporary baselines."
+      },
+      {
+        "title": "Relative Mismatch for sound detection",
+        "url": "https://arxiv.org/abs/2609.29746",
+        "published": "2026-09-24",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract and submission history only",
+        "finding": "Recent corroboration that domain-shift calibration is actively studied; full method and code review still needed."
+      },
+      {
+        "title": "Stage-adaptive sample selection",
+        "url": "https://arxiv.org/abs/2609.25850",
+        "published": "2026-09-22",
+        "checked": "2026-10-31",
+        "read_scope": "Abstract and submission history only",
+        "finding": "Active learning under long-tail imbalance is already studied in a medical segmentation setting. Not a validated small-business opportunity."
+      },
+      {
+        "title": "Home Assistant Bayesian integration",
+        "url": "https://www.home-assistant.io/integrations/bayesian/",
+        "published": "Original date unknown; current documentation",
+        "checked": "2026-10-31",
+        "read_scope": "Overview and supported behaviour",
+        "finding": "Sensor fusion for unreliable sensors already exists. No current unanswered customer problem was established for T3."
+      },
+      {
+        "title": "YAMNet transfer-learning tutorial",
+        "url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+        "published": "Original date not established",
+        "checked": "2026-10-31",
+        "read_scope": "Tutorial overview",
+        "finding": "Implementation reference only; insufficient thesis justification."
+      },
+      {
+        "title": "Food-label contradiction report",
+        "url": "https://forum.openfoodfacts.org/t/packaging-explicitly-states-no-palm-oil/2438",
+        "published": "2026-10-27",
+        "checked": "2026-10-31",
+        "read_scope": "Entire accessible 18-line thread; no replies visible",
+        "finding": "One user reports conflict between packaging and inferred ingredient information. Resolution unknown; no independent corroboration or buyer evidence. Retain as a lead, do not recommend a product."
+      },
+      {
+        "title": "Ask HN: overnight agent delivery",
+        "url": "https://news.ycombinator.com/item?id=50315898",
+        "published": "2026-10-31 from feed only",
+        "checked": "2026-10-31",
+        "read_scope": "Metadata only; full-page access failed",
+        "finding": "Rejected for synthesis this cycle: cannot verify discussion or responses."
+      },
+      {
+        "title": "Discourse delayed-job report",
+        "url": "https://meta.discourse.org/t/delayed-jobs-are-intermittently-lost-between-the-sidekiq-schedule-zset-and-execution-no-perform-no-retry-no-trace/416214",
+        "published": "2026-10-30 from feed only",
+        "checked": "2026-10-31",
+        "read_scope": "Metadata only; full-page access failed",
+        "finding": "Rejected for synthesis this cycle: unresolved status and cause were not verified."
+      }
+    ],
+    "limits": [
+      "This is an initial evidence audit, not a systematic literature review or LTU topic approval.",
+      "No new opportunity passed validation. No customer interviews, experiments, model downloads or dataset trials were performed.",
+      "Read scope is explicit per source. Abstract-only and inaccessible sources cannot establish novelty or unresolved status.",
+      "Trend is not established for any lead; longitudinal independent signals are missing.",
+      "Broad live metadata covers many domains, but this manual audit prioritised existing cards and a small cross-domain sample."
+    ],
+    "changes": [
+      "Server-side hold blocks enqueue and new claims in both lanes; existing running work, selections and artifacts are preserved.",
+      "Scheduled agents are in audit mode; collections continue while recommendations/default builds remain held.",
+      "Digest now prioritises publication-age buckets: 30-day leads, 90-day corroboration, separate old/modified/unknown/future records.",
+      "Publication and verification dates must be shown separately. A current read does not make an old source new."
+    ],
+    "search_ledger": {
+      "checked_on": "2026-10-31",
+      "queries": [
+        "AI approval fatigue human agent oversight study after:2026-10-01 before:2026-11-01",
+        "machine learning domain shift industrial anomaly detection lighting MVTec AD 2 2026 benchmark",
+        "pretrained time series forecasting chronos benchmark 2026 October evaluation",
+        "active learning audio domain adaptation 2026 October research",
+        "\"VAND 4.0\" arxiv 2026",
+        "site.arxiv.org October 2026 \"active learning\" \"annotation\"",
+        "site.arxiv.org October 2026 \"anomalous sound\" domain",
+        "site.arxiv.org October 2026 \"agent\" \"evaluation\" \"workflow\"",
+        "consumer app complaints accessibility October 2026 after:2026-10-01 before:2026-11-01",
+        "restaurant small business software problem October 2026 after:2026-10-01 before:2026-11-01",
+        "site.arxiv.org \"October 2026\" \"active learning\" annotation cost",
+        "site.arxiv.org \"2026\" \"anomalous sound detection\" \"domain\""
+      ],
+      "selection": "Existing candidate audit plus a small cross-domain recent-lead sample; not an exhaustive search. Search dates were checked against primary pages; out-of-window results kept only as counterevidence.",
+      "rejected_leads": [
+        "P8: resolved report",
+        "P10: old research without current customer evidence",
+        "HN overnight agents: full thread inaccessible",
+        "Discourse delayed jobs: full thread inaccessible",
+        "Open Food Facts label mismatch: one visible report, no resolution verification or corroboration; lead only"
+      ]
+    }
+  }
 }

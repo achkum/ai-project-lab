@@ -1,0 +1,6 @@
+{
+  "audit_hold": true,
+  "since": "2026-10-31",
+  "lanes": ["thesis", "project"],
+  "reason": "Evidence quality audit. No new starts or default recommendations until owner review. Existing running work and selections are preserved."
+}

@@ -11,6 +11,7 @@ from contextlib import contextmanager
 class Jobs:
     def __init__(self, path, catalog, clock=time.time):
         self.clock = clock
+        self.hold_file = Path(path).parent/'discovery-hold.json'
         self.catalog = {x['id']: x for x in catalog}
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(path, isolation_level=None, timeout=15)
@@ -43,6 +44,8 @@ class Jobs:
         self.db.execute('INSERT INTO job_events(job,at,action) VALUES(?,?,?)',(job,self.clock(),action))
 
     def enqueue(self, items, request_id):
+        if self.hold_file.exists():
+            raise ValueError('Discovery audit hold: new starts are suspended; existing work is preserved')
         if not isinstance(request_id,str) or not 8 <= len(request_id) <= 100:
             raise ValueError('A request ID is required')
         if not isinstance(items,list) or not 1 <= len(items) <= 12:
@@ -93,6 +96,7 @@ class Jobs:
         self.db.execute('INSERT OR REPLACE INTO worker VALUES(1,?,?)',(self.clock(),str(detail)[:250]))
 
     def claim(self):
+        if self.hold_file.exists(): return None
         with self.transaction():
             now=self.clock()
             # Lost leases need review, never launch a second copy of possibly running work.

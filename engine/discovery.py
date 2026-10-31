@@ -3,6 +3,7 @@ import concurrent.futures
 import hashlib
 import html
 import json
+import math
 import re
 import sqlite3
 import time
@@ -12,6 +13,29 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlsplit
+from email.utils import parsedate_to_datetime
+
+def dated_record(record, now):
+    """Publication age, never crawl age. Modified-only and unknown dates fail closed."""
+    out=dict(record)
+    raw=out.get('published')
+    try: raw=json.loads(raw) if isinstance(raw,str) else raw
+    except (ValueError,TypeError): pass
+    kind='published'
+    if isinstance(raw,dict):kind=raw.get('kind','unknown');raw=raw.get('value')
+    stamp=None
+    try:
+        if isinstance(raw,(float,int)) and not isinstance(raw,bool):stamp=float(raw)
+        elif raw:
+            try:d=datetime.fromisoformat(str(raw).replace('Z','+00:00'))
+            except ValueError:d=parsedate_to_datetime(str(raw))
+            if d.tzinfo is not None:stamp=d.timestamp()
+    except (ValueError,TypeError,OverflowError):pass
+    if stamp is not None and not math.isfinite(stamp):stamp=None
+    age=(now-stamp)/86400 if stamp is not None else None
+    bucket='unknown_date' if age is None else 'future_date' if age<0 else 'modified_only' if kind!='published' else 'recent_30d' if age<=30 else 'corroboration_90d' if age<=90 else 'background'
+    out.update(publication_timestamp=stamp,date_kind=kind,age_days=round(age,2) if age is not None else None,recency_bucket=bucket,review_status='metadata_only_not_verified')
+    return out
 
 AGENT = "ResearchBuildLab/1.0 (personal research; public feed metadata only)"
 
@@ -46,7 +70,7 @@ def parse(source, raw):
                 return ''.join(fields[key].itertext()) if key in fields else ''
             links = [x for x in item if x.tag.rsplit('}', 1)[-1] == 'link']
             link = next((x.get('href') for x in links if x.get('href') and x.get('rel', 'alternate') == 'alternate'), val('link'))
-            rows.append({'title': val('title'), 'url': link, 'published': val('published') or val('pubDate') or val('updated'),
+            rows.append({'title': val('title'), 'url': link, 'published': val('published') or val('pubDate') or val('updated'), 'date_kind':'published' if val('published') or val('pubDate') else 'modified',
                          'summary': ''})
     else:
         data = json.loads(raw)
@@ -59,7 +83,7 @@ def parse(source, raw):
         elif kind == 'hn':
             rows = [{'title': x.get('title'), 'url': 'https://news.ycombinator.com/item?id=' + x['objectID'], 'published': x.get('created_at'), 'summary': ''} for x in data['hits']]
         elif kind == 'huggingface':
-            rows = [{'title': x['id'], 'url': 'https://huggingface.co/datasets/' + x['id'], 'published': x.get('lastModified'), 'summary': ''} for x in data]
+            rows = [{'title': x['id'], 'url': 'https://huggingface.co/datasets/' + x['id'], 'published': x.get('lastModified'), 'date_kind':'modified', 'summary': ''} for x in data]
         else:
             raise ValueError('Unsupported connector')
     result = []
@@ -69,7 +93,7 @@ def parse(source, raw):
             continue
         title = clean(x['title'])
         if title:
-            result.append({'title': title, 'url': url, 'published': x.get('published'), 'summary': clean(x.get('summary'), 200)})
+            result.append({'title': title, 'url': url, 'published': x.get('published'), 'date_kind':x.get('date_kind','published'), 'summary': clean(x.get('summary'), 200)})
     return result
 
 
@@ -111,8 +135,8 @@ class Discovery:
                 for item in rows:
                     eid = hashlib.sha256(item['url'].encode()).hexdigest()[:24]
                     self.db.execute('''INSERT INTO evidence VALUES(?,?,?,?,?,?,?) ON CONFLICT(url)
-                      DO UPDATE SET last_seen=excluded.last_seen''',
-                      (eid, item['url'], item['title'], item['summary'], json.dumps(item['published']), now, now))
+                      DO UPDATE SET last_seen=excluded.last_seen,title=excluded.title,summary=excluded.summary,published=excluded.published''',
+                      (eid, item['url'], item['title'], item['summary'], json.dumps({'value':item['published'],'kind':item['date_kind']}), now, now))
                     self.db.execute('INSERT OR IGNORE INTO provenance VALUES(?,?)', (eid, s['id']))
                 self.db.commit()
                 outcomes.append({'source': s['id'], 'status': status, 'items': len(rows), 'error': error})
@@ -132,8 +156,23 @@ class Discovery:
     def digest(self, sources):
         # Per-source sampling prevents a busy technical feed drowning out other communities.
         entries = []
+        now=time.time()
+        counts={}
         for s in sources:
             rows = self.db.execute('''SELECT e.* FROM evidence e JOIN provenance p ON e.id=p.evidence
-              WHERE p.source=? ORDER BY e.first_seen DESC,e.id LIMIT 6''', (s['id'],))
-            entries.append({'source': s['name'], 'family': s['family'], 'domain': s['domain'], 'records': [dict(r) for r in rows]})
-        return {'generated_at': time.time(), 'untrusted_source_content': True, 'coverage': self.coverage(sources), 'sources': entries}
+              WHERE p.source=?''', (s['id'],))
+            classified=[dated_record(r,now) for r in rows]
+            # Legacy HF rows stored lastModified as publication; repair interpretation.
+            if s.get('kind')=='huggingface':
+                for r in classified:
+                    if r['recency_bucket']!='unknown_date':r.update(date_kind='modified',recency_bucket='modified_only')
+            groups={}
+            for r in classified:groups.setdefault(r['recency_bucket'],[]).append(r)
+            for bucket,rs in groups.items():counts[bucket]=counts.get(bucket,0)+len(rs)
+            sort=lambda rs:sorted(rs,key=lambda r:r['publication_timestamp'] or 0,reverse=True)
+            entries.append({'source':s['name'],'family':s['family'],'domain':s['domain'],
+                'records':sort(groups.get('recent_30d',[]))[:20],
+                'corroboration':sort(groups.get('corroboration_90d',[]))[:10],
+                'excluded_counts':{k:len(v) for k,v in groups.items() if k not in ('recent_30d','corroboration_90d')},
+                'background_examples':sort(groups.get('background',[]))[:3]})
+        return {'generated_at':now,'untrusted_source_content':True,'evidence_warning':'Metadata leads only. Publication dates are source-supplied and require verification. No trend, resolution or market claim is established.', 'recency_counts_by_source':counts,'coverage':self.coverage(sources),'sources':entries}

@@ -97,6 +97,11 @@ def export(profile, workflow, discovery, sources):
             snapshot['events'][-1]={'title':'Multiple independent jobs','detail':'Select cards and start investigations/builds on the dashboard. The VPS keeps requests while the laptop is off. Authenticated live status appears above each lane.'}
         except Exception:
             snapshot['events'].append({'title':'Queue status unavailable','detail':'Could not refresh the VPS queue snapshot. Connect the dashboard for live status; do not infer that work completed.'})
+    audit_file=Path(profile['public_root'])/'config/discovery-audit.json'
+    if audit_file.exists():
+        snapshot['audit']=json.loads(audit_file.read_text(encoding='utf-8'))
+        if snapshot['audit'].get('hold'):
+            for card in opportunities:card['recommended']=False
     # Construct an allowlist object; never merge private candidate dictionaries into this output.
     write_json(Path(profile['public_root'])/'docs/data/status.json', snapshot)
     return snapshot

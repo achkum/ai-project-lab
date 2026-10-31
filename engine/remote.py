@@ -28,7 +28,7 @@ def import_collection(discovery,packet,sources):
                 discovery.db.execute('INSERT INTO checks(source,checked,status,error,count) VALUES(?,?,?,?,?)',tuple(r[k] for k in ('source','checked','status','error','count')))
         for r in packet['evidence']:
             discovery.db.execute('''INSERT INTO evidence VALUES(?,?,?,?,?,?,?) ON CONFLICT(url)
-              DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)''',tuple(r[k] for k in ('id','url','title','summary','published','first_seen','last_seen')))
+              DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen),title=excluded.title,summary=excluded.summary,published=excluded.published''',tuple(r[k] for k in ('id','url','title','summary','published','first_seen','last_seen')))
         for r in packet['provenance']:
             discovery.db.execute('INSERT OR IGNORE INTO provenance VALUES(?,?)',(r['evidence'],r['source']))
     return {'mode':'vps_import','snapshot_at':stamp,'records':len(packet['evidence'])}

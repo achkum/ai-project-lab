@@ -105,7 +105,11 @@ def run_one(profile):
         'Produce a research feasibility brief, not a completed thesis. Write BRIEF.md and evidence.json. '
         'Include exact source links, source findings, closest prior work, proposed difference, novelty uncertainty, data/licence access, '
         'a simple baseline, model adaptation plan, leakage-safe evaluation, compute budget, risks and go/no-go criteria. '
-        'Use web research to check claims. Explicitly separate proposed ideas from established facts. Stop within 12 minutes.'
+        'Use web research to check claims. Prioritise events within 30 days and corroboration within 90 days; older sources are background. '
+        'Record original publication date, checked date, read scope, accepted resolutions and subsequent work. Search for counterevidence and current alternatives. '
+        'A source abstract or snippet is not full-text review. A crawl date is not publication. No novelty or trend claims from missing evidence. '
+        'Write an explicit keep/revise/withdraw conclusion and a dashboard-safe audit summary; unsupported scope is a no-go, not a conditional endorsement. '
+        'Explicitly separate proposed ideas from established facts. Stop within 12 minutes; report incomplete research rather than infer completion.'
         if job['lane']=='thesis' else
         'Build the bounded local demo described below. Write runnable source, a README, meaningful checks, a model/data card if relevant, '
         'limitations and a draft sharing post. Run appropriate checks and report actual results. Do not substitute fake model outputs '
