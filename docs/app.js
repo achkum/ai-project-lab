@@ -103,7 +103,7 @@ function render(){
  $('activity').innerHTML=data.events.map(x=>'<div class="event"><strong>'+esc(x.title)+'</strong><p>'+esc(x.detail)+'</p></div>').join('');
  $('decision-list').innerHTML=renderDecisions();
  $('source-notice').textContent=data.mode==='sample'?'Sample source catalogue. No checks represented.':data.coverage.checked+' channels returned records across '+data.coverage.source_families+' independent source families in seven days. Empty channels do not count as successful coverage. Source breadth is not proof of demand.';
- renderCards('Thesis',$('thesis-search').value);renderCards('Project');renderSources();showView();
+ if(typeof redrawJobs==='function')redrawJobs();else{renderCards('Thesis',$('thesis-search').value);renderCards('Project');}renderSources();showView();
 }
 async function refresh(){
  $('refresh').disabled=true;
