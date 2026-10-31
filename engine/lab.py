@@ -102,6 +102,8 @@ def export(profile, workflow, discovery, sources):
         snapshot['audit']=json.loads(audit_file.read_text(encoding='utf-8'))
         if snapshot['audit'].get('hold'):
             for card in opportunities:card['recommended']=False
+            if 'manual_start_ids' in snapshot['audit']:
+                snapshot['opportunities']=[c for c in opportunities if c['id'] in snapshot['audit']['manual_start_ids']]
     # Construct an allowlist object; never merge private candidate dictionaries into this output.
     write_json(Path(profile['public_root'])/'docs/data/status.json', snapshot)
     return snapshot

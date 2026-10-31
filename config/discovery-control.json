@@ -1,6 +1,11 @@
 {
   "audit_hold": true,
-  "since": "2026-10-31",
-  "lanes": ["thesis", "project"],
-  "reason": "Evidence quality audit. No new starts or default recommendations until owner review. Existing running work and selections are preserved."
+  "manual_start_ids": [
+    "RT1",
+    "RT2",
+    "RP1",
+    "RP2"
+  ],
+  "automatic_starts": false,
+  "reason": "Owner explicitly requested dashboard starts. Allow these options only; preserve historical queued selections and pause automatic defaults."
 }

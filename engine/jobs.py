@@ -43,8 +43,16 @@ class Jobs:
     def event(self, job, action):
         self.db.execute('INSERT INTO job_events(job,at,action) VALUES(?,?,?)',(job,self.clock(),action))
 
+    def manual_start_ids(self):
+        if not self.hold_file.exists(): return None
+        try:
+            ids=json.loads(self.hold_file.read_text()).get('manual_start_ids',[])
+            return ids if isinstance(ids,list) and all(isinstance(x,str) for x in ids) else []
+        except (ValueError,OSError): return []
+
     def enqueue(self, items, request_id):
-        if self.hold_file.exists():
+        allowed=self.manual_start_ids()
+        if allowed is not None and (not isinstance(items,list) or not items or any(not isinstance(i,dict) or i.get('id') not in allowed for i in items)):
             raise ValueError('Discovery audit hold: new starts are suspended; existing work is preserved')
         if not isinstance(request_id,str) or not 8 <= len(request_id) <= 100:
             raise ValueError('A request ID is required')
@@ -96,13 +104,17 @@ class Jobs:
         self.db.execute('INSERT OR REPLACE INTO worker VALUES(1,?,?)',(self.clock(),str(detail)[:250]))
 
     def claim(self):
-        if self.hold_file.exists(): return None
+        allowed=self.manual_start_ids()
+        if allowed==[]: return None
         with self.transaction():
             now=self.clock()
             # Lost leases need review, never launch a second copy of possibly running work.
             self.db.execute("UPDATE jobs SET state='needs_attention',token=NULL,lease_until=NULL,message='Worker disconnected; review partial work before resuming',updated=? WHERE state='running' AND lease_until<=?",(now,now))
             if self.db.execute("SELECT 1 FROM jobs WHERE state='running'").fetchone(): return None
-            r=self.db.execute("SELECT * FROM jobs WHERE state='queued' ORDER BY created,id LIMIT 1").fetchone()
+            if allowed is None:
+                r=self.db.execute("SELECT * FROM jobs WHERE state='queued' ORDER BY created,id LIMIT 1").fetchone()
+            else:
+                r=self.db.execute("SELECT * FROM jobs WHERE state='queued' AND candidate IN ("+','.join('?' for _ in allowed)+") ORDER BY created,id LIMIT 1",allowed).fetchone()
             if not r: return None
             token=uuid.uuid4().hex
             self.db.execute("UPDATE jobs SET state='running',token=?,lease_until=?,updated=?,message='Starting scoped work' WHERE id=?",(token,now+180,now,r['id']))
