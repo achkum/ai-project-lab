@@ -26,7 +26,7 @@ function valid(d) {
 }
 function decisionLink(value) { return /^https:\/\/github\.com\/achkum\/ai-thesis-lab\/issues\/[1-9][0-9]*$/.test(value) ? value : '#'; }
 function renderDecisions(lane) {
- const rows=(data.decisions||[]).filter(x=>!lane||x.lane===lane);
+ const rows=(data.decisions||[]).filter(x=>(!lane||x.lane===lane)&&data.opportunities.some(c=>c.shortlist===x.id));
  return rows.map(d=>{
  const c=data.opportunities.find(x=>x.id===(d.selected||d.recommended)&&x.shortlist===d.id);
  return '<article class="decision-summary"><span class="tag">'+esc(d.lane)+' · '+esc(pretty(d.state))+'</span><h3>'+esc(c?.title||d.id)+'</h3><p>'+(d.selected?'Selected for the manual run.': 'Recommendation ready. Review until '+esc(when(d.deadline,'not set'))+'.')+'</p><a class="text-link" href="#'+(d.lane==='project'?'projects':'thesis')+'">Explore the options →</a></article>';

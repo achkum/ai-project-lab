@@ -1,6 +1,8 @@
 """Publication gate for evidence-led opportunity cards, not a demand scoring model."""
 def validate_card(card):
     if card.get('quality_gate_version', 0) < 2:
+        if card.get('lane') == 'Project':
+            raise ValueError('New project publication requires evidence-led quality gate v2')
         return  # Existing thesis investigations retain their immutable scope.
     required=('buyer','customer_test','week_test','growth_path','baseline',
               'proposed_difference','risk','evidence_level')
