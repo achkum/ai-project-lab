@@ -38,7 +38,7 @@ function showView(){
 function renderCards(lane,query=''){
  const filtered=data.opportunities.filter(x=>x.lane===lane&&(x.title+' '+x.summary).toLowerCase().includes(query.toLowerCase()));
  const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
- dest.innerHTML=renderDecisions(lane.toLowerCase())+(filtered.length?filtered.map(x=>'<article class="panel opportunity"><span class="tag">'+esc(x.id)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2><p>'+esc(x.summary)+'</p><button data-detail="'+esc(x.id)+'">Inspect possibility →</button></article>').join(''):'<div class="empty">No matching opportunities. Nothing is generated to fill a quota.</div>');
+ dest.innerHTML=renderDecisions(lane.toLowerCase())+(filtered.length?filtered.map(x=>'<article class="panel opportunity"><span class="tag">'+esc(x.id)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2><p>'+esc(x.summary)+'</p><button data-detail="'+esc(x.id)+'">Inspect possibility →</button></article>').join(''):(data.mode==='live'?'':'<div class="empty">No matching opportunities. Nothing is generated to fill a quota.</div>'));
 }
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
@@ -83,11 +83,12 @@ $('source-search').oninput=renderSources;$('source-category').onchange=renderSou
 window.addEventListener('hashchange',showView);
 function list(id){return $(id).value.split(/[,;\n]/).map(x=>x.trim()).filter(Boolean);}
 $('profile-form').onsubmit=e=>{
- e.preventDefault();const p={schema_version:1,timezone:'Europe/Stockholm',interests:list('interests'),domains:list('domains'),exclusions:list('exclusions'),hours_per_week:$('hours').value===''?null:Number($('hours').value),monthly_budget_sek:$('budget').value===''?null:Number($('budget').value),setup_complete:false};
+ e.preventDefault();const p={schema_version:1,timezone:'Europe/Stockholm',interests:list('interests'),domains:list('domains'),exclusions:list('exclusions'),hours_per_week:$('hours').value===''?null:Number($('hours').value),monthly_budget_sek:0,setup_complete:false};
  let saved=true;try{localStorage.setItem('lab-profile-draft',JSON.stringify(p));}catch{saved=false;}
  const blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='profile.draft.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  $('profile-message').textContent=(saved?'Draft saved in this browser and exported.':'Exported; browser storage is unavailable.')+' Workflow settings are unchanged; apply the draft through the private coordinator.';
 };
-try{const p=JSON.parse(localStorage.getItem('lab-profile-draft'));if(p){for(const k of ['interests','domains','exclusions'])$(k).value=(p[k]||[]).join(', ');$('hours').value=p.hours_per_week??'';$('budget').value=p.monthly_budget_sek??'';}}catch{}
+try{const p=JSON.parse(localStorage.getItem('lab-profile-draft'));if(p){for(const k of ['interests','domains','exclusions'])$(k).value=(p[k]||[]).join(', ');$('hours').value=p.hours_per_week??'';}}catch{}
+$('budget').value=0;
 render();refresh();setInterval(refresh,60000);
 
