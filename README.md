@@ -9,15 +9,21 @@ Daily broad discovery and independently queued research/build jobs. Visual cards
 ## Start work from the dashboard
 
 1. Set your own password using the private, one-hour setup invitation opened by the agent. Then use **Sign in** on the dashboard and optionally **Remember this browser**.
-2. Select any combination of cards. Use **Investigate selected** or **Build selected** and confirm the scopes.
-3. Each option becomes a separate durable job. The VPS accepts requests while your laptop is off; the laptop processes one at a time when awake.
+2. Select any combination of cards. Use **Investigate selected** or **Build selected**. There is no additional confirmation or draft-approval step.
+3. Each option becomes a separate durable job. The VPS accepts requests while your laptop is off; four managed laptop slots process independent jobs when awake.
 4. Monitor live status, pause/cancel individual jobs, resume blocked work and open private review artifacts.
 
 Password authentication uses a salted PBKDF2-HMAC-SHA256 hash (600,000 iterations) and persistent sign-in rate limits. Session tokens are stored hashed on the VPS. Remembered sessions last 30 days; normal sessions last up to 12 hours and use tab session storage. Sign out revokes that browser session. The password is never stored in browser storage, Git or logs.
 
 Initial setup requires a short-lived private invitation, cannot overwrite an existing password and disables the legacy dashboard key. There is no public password-reset endpoint; recovery requires owner-authorised VPS administration. The HTTPS endpoint uses sslip.io DNS and automatic certificate renewal. No ChatGPT, GitHub or SSH credential goes into the page or VPS.
 
-Thesis jobs produce investigation briefs, not complete theses. Project jobs produce bounded drafts. **Review ready is not a production release.** The strongest-model/agent review validates results before promoting a demo.
+Thesis jobs produce feasibility investigations, not complete theses. Current cards show the investigation decision, completed work and unresolved requirements directly. Project jobs continue through implementation, checks and deployment. A deployed prototype is not evidence of customer demand or production readiness.
+
+## What you can use now
+
+- [Public PR checkup](https://achkum.github.io/ai-project-lab/projects/rp1/): paste a public GitHub pull request URL; inspect older-revision approvals, possible conditions and failed/pending current-head checks; follow source links and download findings. Read-only requests go to GitHub, with no token. It does not verify branch rules or authorize merging. Endpoint reference: [GitHub review API](https://docs.github.com/en/rest/pulls/reviews).
+- [Next-day preparation planner](https://achkum.github.io/ai-project-lab/projects/rp2/#planning): load daily sales for one item, set quantity and cost assumptions, calculate a next-day preparation quantity, compare historical excess/shortfalls against fixed daily preparation and download the plan. Start with the sample above the planning section. Rules only; no trained model or measured customer savings. Sold quantities can understate demand during stockouts.
+- [Thesis findings](https://achkum.github.io/ai-project-lab/#thesis): RT1 is a small-pilot possibility with data/annotation gaps; RT2 is no-go in its original scope. Neither has experimental results.
 
 ## Discovery and provenance
 

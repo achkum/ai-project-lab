@@ -18,7 +18,7 @@ async function inspect(url,fetcher=fetch){
  for(const c of checks)if(c.status!=='completed'||!['success','neutral','skipped'].includes(c.conclusion))add('Check needs attention: '+c.name,c.status==='completed'?'Result: '+c.conclusion:'Still '+c.status,c.html_url);
  const statusMap=new Map();for(const s of statuses)if(!statusMap.has(s.context))statusMap.set(s.context,s);
  for(const s of statusMap.values())if(s.state!=='success')add('Status needs attention: '+s.context,s.state+' — '+(s.description||''),s.target_url);
- if(!reviews.some(r=>r.state==='APPROVED'&&r.commit_id===pr.head.sha))add('No approval on the current revision was returned','This does not mean your repository requires one. Check its review rules.');
+ if(![...latest.values()].some(r=>r.state==='APPROVED'&&r.commit_id===pr.head.sha))add('No approval on the current revision was returned','This does not mean your repository requires one. Check its review rules.');
  if(!checks.length&&!statuses.length)add('No checks were returned for the current head','Checks may run against a test merge commit or a fork. This is missing information, not a failed test.');
  return {title:pr.title,url:pr.html_url,state:pr.merged?'merged':pr.state,head:pr.head.sha,checked_at:new Date().toISOString(),findings,counts:{reviews:reviews.length,checks:checks.length,statuses:statuses.length},limits:'Current public API snapshot only. Branch rules, inline discussion resolution, test-merge checks, prior merge-time state and human identity are not verified. This report never grants permission to merge.'};
 }
