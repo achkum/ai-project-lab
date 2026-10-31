@@ -1,4 +1,4 @@
-﻿(function(root, factory) {
+(function(root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ReviewAnalysis = api;
@@ -15,12 +15,14 @@
   }
   function validate(data) {
     if (!data || typeof data !== 'object' || Array.isArray(data) || data.schema_version !== 1 || !Array.isArray(data.pull_requests)) throw new Error('Expected an object with schema_version: 1 and a pull_requests array.');
-    const prs = new Set();
+    if(data.pull_requests.length>200)throw new Error('Use a bundle of at most 200 pull requests.');
+    let totalEvents=0; const prs = new Set();
     data.pull_requests.forEach((pr, i) => {
       const loc = 'PR ' + (i + 1);
       if (!pr || typeof pr !== 'object' || Array.isArray(pr) || typeof pr.id !== 'string' || !pr.id.trim() || prs.has(pr.id)) throw new Error(loc + ': each PR needs a unique nonempty string id.');
       prs.add(pr.id);
       if (!Array.isArray(pr.events)) throw new Error(loc + ': events must be an array.');
+      totalEvents+=pr.events.length; if(pr.events.length>500||totalEvents>10000)throw new Error('Use at most 500 events per PR and 10,000 events per bundle.');
       const ids = new Set(); let merges = 0;
       pr.events.forEach((e, j) => {
         const at = loc + ', event ' + (j + 1);
