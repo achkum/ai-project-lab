@@ -33,7 +33,14 @@ function jobControls(lane){
  return '<section class="job-panel"><div class="job-toolbar"><div><strong>'+count+' selected</strong><p>Select several options; each gets a separate job.</p></div><button class="primary" data-start-lane="'+lane+'" '+(!count||sending?'disabled':'')+'>'+(lane==='Thesis'?'Investigate selected':'Build selected')+'</button><button data-connect-queue>'+(dashboardKey?'Account & sign out':'Sign in')+'</button></div>'+(queueNotice?'<p role="status">'+esc(queueNotice)+'</p>':'')+'<p class="queue-state" role="status">'+esc(queueError||(dashboardKey?(workerInfo?.online?'Laptop worker online · live status refreshes every 15 seconds.':'Laptop offline or starting. The VPS retains queued jobs.'):'Sign in with your password to start work. Viewing ideas is public.'))+'</p>'+(dashboardKey?'<div class="callout" aria-live="polite"><strong>'+esc(progress)+'</strong><p>'+esc(workerInfo?.detail||'Connecting to live queue…')+'</p></div>':'')+active.map(row).join('')+(history.length?'<details><summary>Previous results ('+history.length+')</summary>'+history.map(row).join('')+'</details>':'')+'</section>';
 }
 function singleJobAction(x){if(!manualStartAllowed(x))return '<p class="callout">New starts are held during the evidence audit. <a href="audit.html">Review findings</a></p>';return '<div class="choice-actions"><strong>Start a bounded '+(x.lane==='Thesis'?'investigation':'build')+'</strong><p>This queues only '+esc(x.id)+'. Other selected ideas are kept. The worker uses your subscription allowance and pauses if it cannot verify availability.</p><button class="primary" data-start-one="'+esc(x.id)+'">'+(x.lane==='Thesis'?'Start investigation':'Start build')+'</button></div>';}
-function redrawJobs(){renderCards('Thesis',$('thesis-search').value);renderCards('Project');}
+function redrawJobs(){
+ renderCards('Thesis',$('thesis-search').value);renderCards('Project');
+ const overview=$('overview-live-work');
+ if(overview){
+  const current=liveJobs.filter(j=>data.opportunities.some(c=>c.id===j.candidate));
+  overview.innerHTML='<h2>Live work status</h2>'+(dashboardKey?'<p>'+esc(queueError?'Connection interrupted — showing last received status.':(workerInfo?.online?'Workers online':'Workers offline or connecting')+' · '+queueCapacity+' parallel slots · refreshes every 15 seconds.')+'</p>'+current.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.title)+'</p><p>'+esc(j.message)+'</p></div><a href="#'+(j.lane==='thesis'?'thesis':'projects')+'">View & manage →</a></article>').join('')+(current.length?'':'<p>No jobs started for the current options.</p>'):'<p>Sign in to see live investigation and build status.</p><button data-connect-queue>Sign in</button>');
+ }
+}
 async function queueRequest(path,body){
  if(!dashboardKey)throw Error('Connect the dashboard first.');
  const r=await fetch(QUEUE_API+path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+dashboardKey,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',signal:AbortSignal.timeout(15000)});
