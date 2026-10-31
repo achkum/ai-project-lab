@@ -1,0 +1,15 @@
+[Unit]
+Description=Research and Build Lab public evidence collection
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/openclaw/ai-discovery
+ExecStart=/usr/bin/python3 -m engine.vps_collector
+StandardOutput=append:/home/openclaw/ai-discovery/runtime/collector.log
+StandardError=append:/home/openclaw/ai-discovery/runtime/collector.log
+UMask=0077
+Nice=10
+CPUQuota=25%
+MemoryMax=192M
+NoNewPrivileges=true
+TimeoutStartSec=15min

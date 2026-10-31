@@ -1,6 +1,6 @@
 # Research & Build Lab
 
-Local-first daily discovery and rolling project delivery, with a public GitHub Pages dashboard and private GitHub decisions.
+VPS-backed daily discovery and rolling project delivery, with a public GitHub Pages dashboard and private GitHub decisions.
 
 ## What runs
 - 30 bounded public RSS/Atom/API collectors, metadata deduplication, provenance and honest seven-day coverage.
@@ -31,6 +31,9 @@ Private RUNBOOK.txt contains daily analysis, publication, worker execution, revi
 Open a shortlist from the dashboard and comment using its /lab commands. Select, hold, refine, request more, save, reject or resume. Without a response, the eligible recommendation starts on the next successful check after 24 hours. A change during execution revokes the worker lease and pauses for a checkpoint. If GitHub cannot be checked, no automatic selection proceeds.
 
 ## Operational limits
-A sleeping/offline laptop delays work and leaves a stale dashboard. Backups currently remain on the same laptop. Source-channel counts differ from independent source-family counts. Evidence is a lead, not validated demand or novelty. Deployment and user-journey checks remain agent-mediated; code generation is not a production guarantee.
+The VPS collects public evidence daily even with the laptop off. A sleeping/offline laptop delays AI analysis, builds and dashboard updates. The dashboard can therefore be stale while collection continues. Backups currently remain on the same laptop. Source-channel counts differ from independent source-family counts. Evidence is a lead, not validated demand or novelty. Deployment and user-journey checks remain agent-mediated; code generation is not a production guarantee.
 
 GitHub Pages publishes docs/ from main. Runtime records, credentials, private candidate descriptions and employer data must never enter this repository. The old engine.queue smoke queue remains separate from the operational workflow state machine.
+
+## VPS collector
+User-level systemd units are in deploy/. The existing openclaw SSH alias pulls metadata snapshots; collector_host=vps in the ignored local profile enables this transport. No GitHub or model credentials are copied to the VPS. User lingering keeps the timer active after logout. Collection runs at 07:30 Europe/Stockholm; the laptop analysis schedule remains 08:00.

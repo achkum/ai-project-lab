@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T12:35:46.584792+00:00",
+  "generated_at": "2026-10-31T12:51:13.975613+00:00",
   "connected": true,
   "thesis": {
     "state": "awaiting_owner_selection",
-    "last_success": "2026-10-31T12:21:16.159586+00:00",
+    "last_success": "2026-10-31T12:48:17.055116+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
@@ -291,7 +291,12 @@
       "selected": null
     }
   ],
+  "collector_host": "vps",
   "events": [
+    {
+      "title": "Collector host",
+      "detail": "VPS collects daily at 07:30 Stockholm while the laptop is off. Analysis/builds and dashboard synchronization wait for the laptop."
+    },
     {
       "title": "Public collection connected",
       "detail": "27 channels returned records across 13 source families in seven days. Counts are not validated market opportunities."

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "overall_state": "local_pipeline_active_initial_shortlists_in_review",
+  "overall_state": "hybrid_pipeline_active_vps_collection_laptop_ai",
   "completed": [
     "30 bounded public feed/API connectors and metadata/provenance store",
     "First live collection: 27 populated channels across 13 source families; 3 empty",
@@ -11,16 +11,21 @@
     "Public-safe live dashboard snapshot and private shortlist links",
     "Native daily 08:00 Stockholm discovery and two-hour progress schedules",
     "SQLite backup and integrity verification",
-    "25 Python tests plus JavaScript snapshot/link-validation tests"
+    "25 Python tests plus JavaScript snapshot/link-validation tests",
+    "VPS connected using existing openclaw SSH account",
+    "Owner-authorized removal of SubTrack/OpenClaw without backup",
+    "User systemd collector timer enabled at 07:30 Stockholm with lingering",
+    "Successful VPS collection and idempotent laptop import: 540 records",
+    "28 Python tests including remote import validation"
   ],
   "remaining_limits": [
     "First selected product/research delivery awaits owner choice or review deadline; no product release claimed",
     "No future scheduled wake has run yet",
     "Backups are local only; off-device backup not configured",
-    "VPS unused; laptop and app must be awake",
     "Claude adapter not configured; no silent fallback",
     "External market validation and academic supervisor approval remain unestablished",
-    "Implementation and publication remain agent-mediated with mandatory acceptance checks"
+    "Implementation and publication remain agent-mediated with mandatory acceptance checks",
+    "AI analysis, builds and GitHub dashboard refresh still require the laptop; VPS collection runs independently"
   ],
   "required_owner_inputs": [
     "Keep laptop and Codex app running for scheduled work",

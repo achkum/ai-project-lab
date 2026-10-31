@@ -57,7 +57,9 @@ def export(profile, workflow, discovery, sources):
         'coverage': {k: coverage[k] for k in ('checked','target','registered','blocked','source_families')},
         'sources': [{k: s[k] for k in ('id','name','category','url','access','status')} for s in coverage['rows']],
         'opportunities': [], 'decisions': decisions,
+        'collector_host': profile.get('collector_host','laptop'),
         'events': [
+            {'title': 'Collector host', 'detail': 'VPS collects daily at 07:30 Stockholm while the laptop is off. Analysis/builds and dashboard synchronization wait for the laptop.' if profile.get('collector_host')=='vps' else 'Collection runs on the laptop.'},
             {'title': 'Public collection connected', 'detail': f"{coverage['checked']} channels returned records across {coverage['source_families']} source families in seven days. Counts are not validated market opportunities."},
             {'title': 'Local subscription workflow', 'detail': 'Daily discovery and recurring project checks scheduled.' if scheduled else 'Coordinator works locally. Recurring scheduling is not yet active.'},
             {'title': 'Options before work', 'detail': 'Open a private shortlist to choose or hold. After 24 hours without a response, the recommendation is selected on the next successful check.'}
@@ -90,7 +92,11 @@ def main():
     discovery = Discovery(root/'evidence.sqlite')
     try:
         if args.command == 'collect':
-            result = discovery.collect(sources)
+            if profile.get('collector_host') == 'vps':
+                from .remote import pull
+                result = pull(discovery,sources)
+            else:
+                result = discovery.collect(sources)
             write_json(Path(profile['private_root'])/'digests/latest-evidence.json', discovery.digest(sources))
         elif args.command == 'submit':
             result = {'id': flow.submit(json.loads(Path(args.file).read_text(encoding='utf-8')))}

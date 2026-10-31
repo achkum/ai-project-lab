@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily public discovery before laptop analysis
+
+[Timer]
+OnCalendar=*-*-* 07:30:00 Europe/Stockholm
+Persistent=true
+RandomizedDelaySec=120
+Unit=ai-discovery.service
+
+[Install]
+WantedBy=timers.target
