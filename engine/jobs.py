@@ -9,8 +9,16 @@ from contextlib import contextmanager
 
 
 class Jobs:
-    def __init__(self, path, catalog, clock=time.time):
+    def __init__(self, path, catalog, clock=time.time, max_parallel=None):
         self.clock = clock
+        self.require_slot=False
+        if max_parallel is None:
+            policy=Path(path).parent.parent/'config/worker-policy.json'
+            settings=json.loads(policy.read_text()) if policy.exists() else {}
+            max_parallel=settings.get('max_parallel',1)
+            self.require_slot=settings.get('require_slot',False)
+        if type(max_parallel) is not int or not 1<=max_parallel<=4: raise ValueError('Worker capacity must be between 1 and 4')
+        self.max_parallel=max_parallel
         self.hold_file = Path(path).parent/'discovery-hold.json'
         self.catalog = {x['id']: x for x in catalog}
         Path(path).parent.mkdir(parents=True, exist_ok=True)
@@ -22,7 +30,7 @@ class Jobs:
           lane TEXT, title TEXT, scope TEXT, state TEXT, created REAL, updated REAL,
           token TEXT, lease_until REAL, message TEXT, result TEXT,
           UNIQUE(candidate,version));
-        CREATE UNIQUE INDEX IF NOT EXISTS serial_worker ON jobs((1)) WHERE state='running';
+        DROP INDEX IF EXISTS serial_worker;
         CREATE TABLE IF NOT EXISTS requests(id TEXT PRIMARY KEY, digest TEXT, result TEXT);
         CREATE TABLE IF NOT EXISTS worker(id INTEGER PRIMARY KEY CHECK(id=1), seen REAL, detail TEXT);
         CREATE TABLE IF NOT EXISTS job_events(id INTEGER PRIMARY KEY, job TEXT, at REAL, action TEXT);
@@ -97,20 +105,23 @@ class Jobs:
             rows.append({k:r[k] for k in ('id','candidate','version','lane','title','state','created','updated','message')}
                         | {'result':json.loads(r['result']) if r['result'] else None})
         w=self.db.execute('SELECT seen,detail FROM worker WHERE id=1').fetchone()
-        return {'jobs':rows,'worker':{'online':bool(w and self.clock()-w['seen']<100),
+        return {'jobs':rows,'capacity':self.max_parallel,'worker':{'online':bool(w and self.clock()-w['seen']<100),
                 'last_seen':w['seen'] if w else None,'detail':w['detail'] if w else 'Laptop worker has not connected'}}
 
     def seen(self, detail='Ready; one job at a time'):
+        running=[r['candidate'] for r in self.db.execute("SELECT candidate FROM jobs WHERE state='running' ORDER BY created")]
+        if running:detail='Working on '+', '.join(running)+' ('+str(len(running))+'/'+str(self.max_parallel)+' slots)'
         self.db.execute('INSERT OR REPLACE INTO worker VALUES(1,?,?)',(self.clock(),str(detail)[:250]))
 
-    def claim(self):
+    def claim(self,worker_slot=None):
+        if self.require_slot and (type(worker_slot) is not int or not 1<=worker_slot<=4):return None
         allowed=self.manual_start_ids()
         if allowed==[]: return None
         with self.transaction():
             now=self.clock()
             # Lost leases need review, never launch a second copy of possibly running work.
             self.db.execute("UPDATE jobs SET state='needs_attention',token=NULL,lease_until=NULL,message='Worker disconnected; review partial work before resuming',updated=? WHERE state='running' AND lease_until<=?",(now,now))
-            if self.db.execute("SELECT 1 FROM jobs WHERE state='running'").fetchone(): return None
+            if self.db.execute("SELECT COUNT(*) FROM jobs WHERE state='running'").fetchone()[0]>=self.max_parallel: return None
             if allowed is None:
                 r=self.db.execute("SELECT * FROM jobs WHERE state='queued' ORDER BY created,id LIMIT 1").fetchone()
             else:

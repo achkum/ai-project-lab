@@ -1,4 +1,4 @@
-"""Serial laptop worker for VPS jobs. Existing ChatGPT subscription only."""
+"""Independent laptop worker slot. VPS atomically enforces global capacity."""
 import argparse
 import json
 import os
@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import time
 from pathlib import Path
+from contextlib import contextmanager
 from .allowance import fresh_proof,clean_env,codex_executable
 from .subscription import MODELS
 
@@ -57,7 +58,41 @@ def execute(tier,prompt,workspace,output,checkpoint,timeout=900):
     return output.read_text(encoding='utf-8') if output.exists() else ''
 
 
+@contextmanager
+def publication_lock(profile,job):
+    """Separate model processes share one private Git checkout safely."""
+    path=Path(profile['runtime_root'])/'review-publication.lock'
+    handle=path.open('a+')
+    if path.stat().st_size==0:handle.write('0');handle.flush()
+    try:
+        while True:
+            # During a rolling upgrade, let a legacy worker finish its publication.
+            barrier=Path(profile['runtime_root'])/'legacy-worker-drain.json'
+            old=json.loads(barrier.read_text()).get('jobs',[]) if barrier.exists() else []
+            legacy_running=old and any(j['id'] in old and j['state']=='running' for j in remote('snapshot')['jobs'])
+            if not legacy_running:
+                try:
+                    handle.seek(0)
+                    if os.name=='nt':
+                        import msvcrt
+                        msvcrt.locking(handle.fileno(),msvcrt.LK_NBLCK,1)
+                    else:
+                        import fcntl
+                        fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                    break
+                except (OSError,BlockingIOError):pass
+            remote('heartbeat',jid=job['id'],token=job['token'],message='Draft ready; waiting to publish review files')
+            time.sleep(5)
+        yield
+    finally:handle.close()
+
+
 def publish_review_bundle(profile,job,workspace,response):
+    with publication_lock(profile,job):
+        return _publish_review_bundle(profile,job,workspace,response)
+
+
+def _publish_review_bundle(profile,job,workspace,response):
     """Publish small private review artifacts, not a production release."""
     root=Path(profile['private_root']);dest=root/'research/jobs'/job['id']
     dest.mkdir(parents=True,exist_ok=True)
@@ -93,7 +128,7 @@ def run_one(profile):
         (Path(profile['runtime_root'])/'job-worker-error.log').write_text(traceback.format_exc(),encoding='utf-8')
         remote('seen',detail='Paused: allowance/login verification failed: '+str(e)[:140])
         return False
-    job=remote('claim')
+    job=remote('claim',worker_slot=profile.get('_worker_slot',1))
     if not job:
         remote('seen',detail='Ready; waiting for selected jobs');return False
     workspace=Path(profile['runtime_root'])/'jobs'/job['id']
@@ -128,10 +163,11 @@ def run_one(profile):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--profile',default='config/profile.local.json');p.add_argument('--once',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--profile',default='config/profile.local.json');p.add_argument('--once',action='store_true');p.add_argument('--slot',type=int,choices=range(1,5),default=1);a=p.parse_args()
     profile=json.loads(Path(a.profile).read_text(encoding='utf-8'))
-    # Local process lock complements the atomic single-running-job constraint on VPS.
-    lock=Path(profile['runtime_root'])/'job-worker.lock';handle=lock.open('a+')
+    profile['_worker_slot']=a.slot
+    # One process per local slot; the VPS enforces global capacity across machines.
+    lock=Path(profile['runtime_root'])/('job-worker.lock' if a.slot==1 else f'job-worker-slot-{a.slot}.lock');handle=lock.open('a+')
     if os.name=='nt':
         import msvcrt
         if lock.stat().st_size==0:handle.write('0');handle.flush()

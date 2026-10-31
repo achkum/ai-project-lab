@@ -1,0 +1,6 @@
+{
+  "max_parallel": 4,
+  "require_slot": true,
+  "subscription_only": true,
+  "paid_fallback": false
+}

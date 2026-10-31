@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T14:41:19.521163+00:00",
+  "generated_at": "2026-10-31T15:48:38.961383+00:00",
   "connected": true,
   "thesis": {
-    "state": "review_ready",
+    "state": "running",
     "last_success": "2026-10-31T14:17:30.666583+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
-    "state": "review_ready",
-    "stage": "review ready",
+    "state": "running",
+    "stage": "running",
     "window_start": "2026-10-31T12:54:52.504456+00:00",
     "target_at": "2026-11-07T12:54:52.504456+00:00"
   },
@@ -362,7 +362,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "running",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -396,7 +396,7 @@
           "read_scope": "Human assignment, publishing identity and review-evidence sections"
         }
       ],
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     },
     {
@@ -454,7 +454,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "running",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -506,7 +506,7 @@
           "read_scope": "Problem formulation, adaptation features and Appendix A proxy-label/duplicate semantics"
         }
       ],
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     },
     {
@@ -562,7 +562,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "running",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -596,7 +596,7 @@
           "read_scope": "Repository README capabilities; not installed or tested"
         }
       ],
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     },
     {
@@ -654,7 +654,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "running",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -706,7 +706,7 @@
           "read_scope": "Documentation overview and quickstart including evaluation_summary; implementation not tested"
         }
       ],
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     }
   ],
