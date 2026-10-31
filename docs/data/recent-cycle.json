@@ -1,0 +1,285 @@
+{
+  "date": "2026-10-31",
+  "status": "Owner-review possibilities; not build-approved",
+  "automatic_starts": false,
+  "options": [
+    {
+      "id": "RT1",
+      "lane": "Thesis",
+      "title": "Can a small model recognise the conditions hidden inside an “approval”?",
+      "intro": "Study a task-specific model that flags conditional, ambiguous or superseded approval text for human review. It must never authorise a merge or infer who actually made a decision.",
+      "why_now": "The October 19 case study reports a concrete mismatch between review wording and recorded approval state.",
+      "flow": [
+        "Review text + event context",
+        "Rules vs small pretrained text model",
+        "Flag condition / abstain + cite evidence"
+      ],
+      "question": "Does adapting a small text encoder improve conditional-approval recall over rules, while keeping false alarms low on unseen phrasing and projects?",
+      "experiment": "Compare regex/rules, TF-IDF + logistic regression, frozen sentence embeddings and a small adapted encoder. Split by author/template and scenario family; measure precision, recall, calibration and abstention coverage. Include negation, resolved conditions and harmless suggestions.",
+      "data": "First create a labelled synthetic feasibility set; it cannot establish real-world performance. A thesis requires consented or appropriately licensed review examples, independent annotation and a leakage-safe held-out set. These are not secured yet.",
+      "first_week": "Produce annotation guidelines, 50 independently checked pilot cases and a baseline confusion matrix. Stop if reviewers cannot agree on labels or rules already solve the task.",
+      "venture": "Possible reviewer-assistance component for an AI-Org reliability service. No buyer demand or standalone market is established.",
+      "alternatives": "GitHub already supports requested changes and independent review; the case study recommends those practices. This would be an aid for ambiguous legacy text, not a replacement for proper controls.",
+      "difference": "Our proposed contribution is a bounded comparison of extraction and abstention under wording shift. It is not invention of conditional review or secure approvals.",
+      "kill": "Drop if a closest-work search finds the same evaluation, real data cannot be obtained, or a simple rule performs equally well. LTU supervisor acceptance and study design remain to confirm.",
+      "scope": "Applied NLP / custom small model. CPU baselines first; adaptation runtime must be measured before committing.",
+      "sources": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "confidence": "Concrete recent failure; research gap and dataset unconfirmed"
+    },
+    {
+      "id": "RT2",
+      "lane": "Thesis",
+      "title": "Does a contamination detector confuse familiarity with prior exposure?",
+      "intro": "Stress-test existing forecasting-model audit methods with controlled examples that separate exact prior exposure from unseen series sharing the same generating process.",
+      "why_now": "The October 15 model release and October 17 disclosure question make evaluation uncertainty current. September research and the older TSFMAudit method are essential counterevidence.",
+      "flow": [
+        "Controlled seen / unseen series",
+        "Adaptation probes + reference baselines",
+        "Measure false accusations and uncertainty"
+      ],
+      "question": "Under a fixed local compute budget, how reliably do adaptation-based audits separate deliberately exposed sequences from new same-process sequences?",
+      "experiment": "Use small, dated synthetic series generated after model release and controlled adaptations with known exposure. Compare static loss, candidate-only probes and reference-debiased probes. Hold out generating-process families. Measure false-positive rate on unseen familiar processes, sensitivity and compute cost.",
+      "data": "Original synthetic generators allow known exposure in the controlled adaptation stage. They do not reveal a foundation model’s actual pretraining corpus. Verify one checkpoint licence and implementation access before downloads; no paid compute.",
+      "first_week": "Inspect the existing audit implementation, map exactly what it already tests, and time one smallest-model probe. Produce a go/no-go report. No full benchmark or large-model fine-tuning in week one.",
+      "venture": "Could inform a specialist model-evaluation service for customer-specific deployments. Commercial value is hypothetical; do not sell contamination certificates.",
+      "alternatives": "TSFMAudit already debiases for dataset difficulty and tests transformed duplicates. The September study already discusses domain familiarity. A generic contamination benchmark would duplicate prior work.",
+      "difference": "The proposed test targets known adaptation exposure versus new same-process samples under a small compute budget. Whether this adds anything beyond existing ablations must be established first.",
+      "kill": "Drop if existing code already covers the proposed distinction, controlled ground truth cannot isolate the factor, or even the smallest probe exceeds laptop resources.",
+      "scope": "Non-LLM model adaptation / evaluation. Higher feasibility risk than RT1; research-only until the pilot passes.",
+      "sources": [
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9"
+      ],
+      "confidence": "Current trigger; narrow contribution and runtime unconfirmed"
+    },
+    {
+      "id": "RP1",
+      "lane": "Project",
+      "title": "A read-only review-evidence checkup for teams using coding agents",
+      "intro": "Turn a repository’s exported review events into a small, inspectable report of what is supported, contradicted or unknowable. Sell the usefulness of the review, not a claim that AI can prove human judgement.",
+      "why_now": "October case evidence makes this timely; existing GitHub guidance and Kosli mean the opportunity, if any, is a lightweight diagnostic service.",
+      "flow": [
+        "Import exported PR events",
+        "Check revision, time and stated conditions",
+        "Show evidence gaps + existing remedies"
+      ],
+      "question": "Would a small team use this report to change one concrete review or credential practice?",
+      "experiment": "Implement fixtures for stale approvals, checks finishing after merge, ambiguous actor identity and conditional text. Compare findings against manual inspection and native GitHub controls. The report must say unknown when evidence is missing.",
+      "data": "Start with synthetic event bundles and this owner’s explicitly selected test repository if later authorised. No employer data, secret scanning, production permissions or automatic repository changes.",
+      "first_week": "Build a complete local import → evidence timeline → export journey in 3–5 days, with a documented fixture suite and a walkthrough. A later owner-led trial with two maintainers tests usefulness.",
+      "venture": "Potential fixed-scope setup/reliability review for small development teams; repeat maintenance only if customers identify recurring value. No willingness-to-pay evidence yet.",
+      "alternatives": "GitHub rulesets and identity separation prevent many failures. Kosli already collects delivery evidence. Prefer configuring existing tools when that solves the problem.",
+      "difference": "A narrow, local diagnostic and onboarding deliverable. It is explicitly an integration/service hypothesis, not a new approval protocol or compliance certification.",
+      "kill": "Drop if the report adds nothing beyond native settings or an existing tool’s report, or maintainers will not use it. Do not build another general agent platform.",
+      "scope": "One-week product experiment; deterministic checks first. Optional classifier only after RT1 evidence supports it.",
+      "sources": [
+        "S1",
+        "S3",
+        "S4"
+      ],
+      "confidence": "Reported operational problem; service demand untested"
+    },
+    {
+      "id": "RP2",
+      "lane": "Project",
+      "title": "A forecast pilot report a customer can actually challenge",
+      "intro": "Package one model pilot so a customer can inspect data dates, baseline fairness, uncertainty and known disclosure gaps before accepting a headline accuracy claim.",
+      "why_now": "October’s small-model release and linked evaluation discussion show why a model ranking alone leaves important questions unanswered.",
+      "flow": [
+        "One dataset + existing evaluator",
+        "Check dates, baselines and missing disclosures",
+        "Produce a client decision report"
+      ],
+      "question": "Does a transparent pilot report help a prospective custom-model customer choose between a simple baseline and adapting a pretrained model?",
+      "experiment": "Use fev outputs or a small equivalent baseline run; separate measured outcomes from supplied metadata. Display model-release date, target dates, model hash, evaluation window, latency and uncertainty. Missing corpus disclosure stays unknown.",
+      "data": "First ship an honest sample report with synthetic data and real baseline calculations. Any pretrained run must pass licence and CPU timing checks; never populate model results with invented predictions.",
+      "first_week": "Deliver a local data import → baseline evaluation → evidence report in 4–6 days. The finished slice is one decision report, not a leaderboard or training platform.",
+      "venture": "Possible entry deliverable for a custom-model consultancy. Buyer access and value are untested; a client conversation is necessary before building recurring infrastructure.",
+      "alternatives": "fev already provides tasks and summaries; post-release evaluations already exist. Existing tooling should do the numerical work. Generic forecast dashboards are not the opportunity.",
+      "difference": "A proposed client-facing interpretation and evidence layer around an existing evaluation. No novel metric or contamination detector is claimed.",
+      "kill": "Drop if existing fev reports answer the customer’s questions, no customer will share a usable dataset, or the report does not change a decision.",
+      "scope": "One-week service prototype. No API fees, GPU provisioning or paid model access.",
+      "sources": [
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S10"
+      ],
+      "confidence": "Timely technical need; product gap and demand unvalidated"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Who Approved This?",
+      "url": "https://arxiv.org/html/2610.28683v1",
+      "published": "2026-10-19",
+      "verified": "2026-10-31",
+      "role": "Recent first-hand case study",
+      "read_scope": "Setting, methods, incident descriptions, lessons and post-study discussion; no raw-data reproduction",
+      "finding": "Reports ambiguity in approval evidence and conditional approvals treated as ordinary approvals. Single organisation; existing platform remedies are explicitly discussed."
+    },
+    {
+      "id": "S2",
+      "title": "I-HITL / Countersign",
+      "url": "https://arxiv.org/html/2610.35835v1",
+      "published": "2026-10-26",
+      "verified": "2026-10-31",
+      "role": "Recent existing solution / counterevidence",
+      "read_scope": "Abstract, threat model, implementation and limitations; proofs not independently checked",
+      "finding": "Already proposes an approval protocol and prototype. This is counterevidence to inventing a generic secure approval layer; it does not prove what a person understood."
+    },
+    {
+      "id": "S3",
+      "title": "GitHub human review patterns",
+      "url": "https://github.github.com/gh-aw/reference/compliance-patterns/",
+      "published": "Unknown; current documentation checked 2026-10-31",
+      "verified": "2026-10-31",
+      "role": "Existing platform guidance",
+      "read_scope": "Human assignment, publishing identity and review-evidence sections",
+      "finding": "Already distinguishes account attribution, human sponsorship and independent review."
+    },
+    {
+      "id": "S4",
+      "title": "Kosli CLI",
+      "url": "https://github.com/kosli-dev/cli",
+      "published": "Original date not established",
+      "verified": "2026-10-31",
+      "role": "Existing product",
+      "read_scope": "Repository README capabilities; not installed or tested",
+      "finding": "Already records delivery evidence, approvals and attestations. A new generic evidence dashboard would overlap."
+    },
+    {
+      "id": "S5",
+      "title": "Timestral release",
+      "url": "https://mistral.ai/news/timestral/",
+      "published": "2026-10-15",
+      "verified": "2026-10-31",
+      "role": "Recent technical trigger",
+      "read_scope": "Release announcement and available sizes",
+      "finding": "A new family of small pretrained forecasters provides a timely test subject, not evidence of customer demand."
+    },
+    {
+      "id": "S6",
+      "title": "Timestral training-data question",
+      "url": "https://github.com/mistralai/timestral/issues/3",
+      "published": "2026-10-17",
+      "verified": "2026-10-31",
+      "role": "Recent practitioner question",
+      "read_scope": "Issue body, open status and linked Hugging Face discussion",
+      "finding": "Asks for training cutoff and data disclosure. Open status alone is insufficient: the linked discussion contains a substantive response."
+    },
+    {
+      "id": "S7",
+      "title": "Linked discussion and post-release evaluation",
+      "url": "https://huggingface.co/mistralai/Timestral-209M/discussions/5",
+      "published": "Exact opening date not established; visible activity October 2026",
+      "verified": "2026-10-31",
+      "role": "Counterevidence / same originating question, not independent demand",
+      "read_scope": "All visible posts, including response, table and limitations",
+      "finding": "A responder already ran post-release evaluations and explains what they cannot establish. Results are user-reported, not independently reproduced."
+    },
+    {
+      "id": "S8",
+      "title": "A Later Test Set Is Not a New Domain",
+      "url": "https://arxiv.org/html/2609.10357v1",
+      "published": "2026-09; arXiv identifier month, exact date not verified here",
+      "verified": "2026-10-31",
+      "role": "Within 90 days; research corroboration",
+      "read_scope": "Abstract, protocol, related work and limitations",
+      "finding": "Temporal holdout does not establish domain novelty. The authors describe their familiarity finding as association, not demonstrated causation."
+    },
+    {
+      "id": "S9",
+      "title": "TSFMAudit",
+      "url": "https://arxiv.org/html/2605.26161v1",
+      "published": "2026-05-24",
+      "verified": "2026-10-31",
+      "role": "Older closest work / baseline, not fresh discovery",
+      "read_scope": "Problem formulation, adaptation features and Appendix A proxy-label/duplicate semantics",
+      "finding": "Already audits contamination using adaptation dynamics and reference models. Documented exposure is proxy supervision; normalised duplicates are already tested."
+    },
+    {
+      "id": "S10",
+      "title": "fev evaluation library",
+      "url": "https://autogluon.github.io/fev/",
+      "published": "Original date not established",
+      "verified": "2026-10-31",
+      "role": "Existing tool",
+      "read_scope": "Documentation overview and quickstart including evaluation_summary; implementation not tested",
+      "finding": "Provides repeatable forecasting tasks and summaries. Reuse or compare with it; do not recreate its functionality as a new contribution."
+    },
+    {
+      "id": "S11",
+      "title": "Open Food Facts label contradiction",
+      "url": "https://forum.openfoodfacts.org/t/packaging-explicitly-states-no-palm-oil/2438",
+      "published": "2026-10-27",
+      "verified": "2026-10-31",
+      "role": "Recent watchlist signal",
+      "read_scope": "All accessible thread content; no visible replies",
+      "finding": "A single report of packaging and inferred information conflicting. Resolution and commercial demand are unverified."
+    },
+    {
+      "id": "S12",
+      "title": "ISP-AD original paper",
+      "url": "https://arxiv.org/abs/2503.04997",
+      "published": "2025-03",
+      "verified": "2026-10-31",
+      "role": "Rejected freshness claim",
+      "read_scope": "Primary abstract record",
+      "finding": "Search results described a recent appearance, but the primary paper identifier is from March 2025. Not retained as a fresh release."
+    }
+  ],
+  "rejected": [
+    {
+      "lead": "Generic secure approval platform",
+      "reason": "Countersign already proposes a protocol and prototype; this is not an empty product category.",
+      "sources": [
+        "S2"
+      ]
+    },
+    {
+      "lead": "“Unanswered” Timestral GitHub issue",
+      "reason": "Cross-post has a substantial response and a post-release evaluation. These are the same originating question, not two independent demand signals.",
+      "sources": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "lead": "Food-label contradiction app",
+      "reason": "One October report is insufficient corroboration. Keep as a watchlist item, not a build recommendation.",
+      "sources": [
+        "S11"
+      ]
+    },
+    {
+      "lead": "ISP-AD as an October release",
+      "reason": "Primary paper is from March 2025; recent indexing is not a new event.",
+      "sources": [
+        "S12"
+      ]
+    }
+  ],
+  "limits": [
+    "No claim of novelty, trend or validated market demand. No customer interviews or experiments were conducted in this cycle.",
+    "Research is selective, not a systematic literature review. Source reading depth is listed. Linked replies and existing alternatives changed the outcomes.",
+    "The broader collector has 35 channels; this shortlist is concentrated in software and model evaluation because the sampled food lead did not pass corroboration. This is not a permanent scope restriction.",
+    "Small-model fit, data licences and LTU topic suitability require investigation. Both lanes remain on hold."
+  ],
+  "queries": [
+    "\"conditional approval\" \"code review\" classifier",
+    "\"code review\" \"conditional\" \"approval\" NLP model",
+    "\"TSFMAudit\" \"familiarity\"",
+    "\"forecast\" \"evaluation\" \"provenance\" \"model\" toolkit"
+  ],
+  "query_ledger_scope": "Exact final closest-work searches; not a complete transcript of the discovery cycle."
+}
