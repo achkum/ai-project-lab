@@ -55,13 +55,20 @@ class RoutingTests(unittest.TestCase):
         self.assertIsNone(required_tier("hash"))
         self.assertEqual(required_tier("routine_fixes",repair_attempts=2),"analysis")
         self.assertEqual(required_tier("schema_checked_extraction",ambiguous=True),"analysis")
-    def test_no_unbound_or_unbudgeted_execution(self):
+    def test_subscription_only_requires_verified_auth_and_no_overage(self):
         with self.assertRaises(SetupRequired): resolve_model(self.policy,"initial_analysis")
         p=copy.deepcopy(self.policy)
         p["tiers"]["analysis"]["model_id"]="fixture-only"
         with self.assertRaises(SetupRequired): resolve_model(p,"initial_analysis")
-        p.update(monthly_cap_sek=100,per_run_cap_sek=10)
-        self.assertEqual(resolve_model(p,"initial_analysis")["model_id"],"fixture-only")
+        with self.assertRaises(SetupRequired):
+            resolve_model(p,"initial_analysis",auth_method="api_key",overage_disabled=True)
+        with self.assertRaises(SetupRequired):
+            resolve_model(p,"initial_analysis",auth_method="chatgpt_subscription")
+        self.assertEqual(resolve_model(p,"initial_analysis",auth_method="chatgpt_subscription",
+                                       overage_disabled=True)["model_id"],"fixture-only")
+        p["monthly_cap_sek"]=100
+        with self.assertRaises(SetupRequired):
+            resolve_model(p,"initial_analysis",auth_method="chatgpt_subscription",overage_disabled=True)
     def test_unknown_task_is_not_cheap_by_default(self):
         with self.assertRaises(ValueError): required_tier("unclassified")
 

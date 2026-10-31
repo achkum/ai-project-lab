@@ -50,6 +50,10 @@
   "silent_downgrade": false,
   "on_required_tier_unavailable": "pause_and_report",
   "on_budget_exhausted": "pause_and_report",
-  "monthly_cap_sek": null,
-  "per_run_cap_sek": null
+  "monthly_cap_sek": 0,
+  "per_run_cap_sek": 0,
+  "spending_mode": "subscription_only",
+  "api_fallback": false,
+  "paid_overage_allowed": false,
+  "on_subscription_limit": "pause_until_reset"
 }

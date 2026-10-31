@@ -12,7 +12,7 @@ Run from this repository with Python 3.10 or later:
     python -m engine doctor
     python -m engine dry-run
 
-The dry run uses an ignored runtime/dry-run.sqlite fixture database and makes no model calls. The persistent queue supports deduplication, expiring leases, attempt tokens and bounded retry. Model routing requires explicit model bindings and positive spending caps; it does not yet implement metering, reservation or a provider adapter. No background service is installed. A job completion record does not itself publish any artifact; durable upload and release fencing remain implementation work.
+The dry run uses an ignored runtime/dry-run.sqlite fixture database and makes no model calls. The persistent queue supports deduplication, expiring leases, attempt tokens and bounded retry. Model routing requires explicit model bindings. The current policy permits subscription-only usage with zero additional spending, verified subscription authentication and disabled paid overage. The guard checks supplied verification results; a real provider/auth verification adapter is not yet implemented. No background service is installed. A job completion record does not itself publish any artifact; durable upload and release fencing remain implementation work.
 
 ## Dashboard
 Open docs/index.html locally, or serve docs with a static HTTP server. GitHub Pages publishes docs from main. No build dependencies.

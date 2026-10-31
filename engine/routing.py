@@ -16,13 +16,22 @@ def required_tier(task, *, ambiguous=False, repair_attempts=0):
     if task in deterministic: return None
     raise ValueError("Unclassified task requires an explicit routing decision")
 
-def resolve_model(policy, task, *, ambiguous=False, repair_attempts=0):
+def resolve_model(policy, task, *, ambiguous=False, repair_attempts=0,
+                  auth_method=None, overage_disabled=False):
     tier = required_tier(task, ambiguous=ambiguous, repair_attempts=repair_attempts)
     if tier is None:
         return {"tier":"deterministic","model_id":None}
     model = policy.get("tiers",{}).get(tier,{}).get("model_id")
     if not isinstance(model,str) or not model.strip():
         raise SetupRequired("Bind a verified model to required tier: " + tier)
+    if policy.get("spending_mode") == "subscription_only":
+        if policy.get("monthly_cap_sek") != 0 or policy.get("per_run_cap_sek") != 0:
+            raise SetupRequired("Subscription-only execution requires zero additional spending caps")
+        if auth_method not in {"chatgpt_subscription", "claude_subscription"}:
+            raise SetupRequired("Verify subscription authentication; API fallback is forbidden")
+        if overage_disabled is not True:
+            raise SetupRequired("Verify paid overage is disabled before unattended execution")
+        return {"tier":tier,"model_id":model,"spending_mode":"subscription_only"}
     for key in ("monthly_cap_sek","per_run_cap_sek"):
         cap = policy.get(key)
         if isinstance(cap,bool) or not isinstance(cap,(float,int)) or cap <= 0:

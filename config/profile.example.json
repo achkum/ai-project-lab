@@ -5,7 +5,7 @@
   "domains": [],
   "exclusions": [],
   "hours_per_week": null,
-  "monthly_budget_sek": null,
+  "monthly_budget_sek": 0,
   "thesis_start_date": null,
   "data_access": [],
   "compute": {
