@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "implementation_status": "specification_only_runtime_gate_and_dashboard_controls_pending",
+  "implementation_status": "implemented_and_tested_local_coordinator_private_github_controls",
   "applies_to": [
     "thesis",
     "projects"
@@ -141,5 +141,6 @@
     "owner_override": "Owner choice before the deadline wins. After work starts, checkpoint and reconcile a change of direction before switching; do not discard work silently.",
     "thesis_scope": "Proceed with the recommended bounded research/proposal/evaluation-planning step, not automatic academic commitment or a complete product.",
     "new_shortlist_rule": "A daily discovery refresh does not reset a pending deadline or replace an active topic. New candidate/scope versions need a fresh visible review window."
-  }
+  },
+  "verification_note": "Live shortlists are pending review; automatic selection, holds and worker fencing verified with controlled clocks. First real selected delivery has not yet occurred."
 }

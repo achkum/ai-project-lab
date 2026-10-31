@@ -11,6 +11,15 @@ def main():
     parser.add_argument("--runtime",default="runtime")
     args = parser.parse_args()
     if args.command == "doctor":
+        local = Path('config/profile.local.json')
+        if local.exists():
+            profile=json.loads(local.read_text(encoding='utf-8'))
+            print(json.dumps({'state':'local_coordinator_configured',
+                'runtime_database_present':(Path(profile['runtime_root'])/'workflow.sqlite').exists(),
+                'scheduler_status':profile.get('scheduler_status','unknown'),
+                'model_execution':'requires_fresh_subscription_allowance_proof_each_run',
+                'paid_api_fallback':False}))
+            return
         policy = json.loads(Path("config/model-policy.example.json").read_text(encoding="utf-8"))
         try:
             route = resolve_model(policy,"initial_analysis")

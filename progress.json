@@ -1,27 +1,35 @@
 {
   "schema_version": 1,
-  "overall_state": "foundation_in_progress",
+  "overall_state": "local_pipeline_active_initial_shortlists_in_review",
   "completed": [
-    "Published sample dashboard",
-    "Private thesis and public project monorepos",
-    "Implementation proposal and handoff",
-    "Initial persistent local queue with leases and attempt fencing",
-    "Quality tier resolver with explicit binding and budget prerequisites",
-    "Eight foundation tests and zero-model-call fixture smoke run"
+    "30 bounded public feed/API connectors and metadata/provenance store",
+    "First live collection: 27 populated channels across 13 source families; 3 empty",
+    "GPT-6 Astra initial synthesis: three thesis and three project options",
+    "Private GitHub decision views with owner commands and 24-hour authorized default",
+    "Immutable selection scope, one active shortlist per lane, leased workers and checkpoint fencing",
+    "GPT-6 Astra and GPT-6.1 Terra subscription adapter smoke tests",
+    "Public-safe live dashboard snapshot and private shortlist links",
+    "Native daily 08:00 Stockholm discovery and two-hour progress schedules",
+    "SQLite backup and integrity verification",
+    "25 Python tests plus JavaScript snapshot/link-validation tests"
   ],
-  "not_implemented": [
-    "Model adapters and real spending reservations",
-    "Source connectors and actual discovery",
-    "Authenticated remote worker transport",
-    "Isolated build runner and durable release publishing",
-    "Schedulers and live dashboard export",
-    "Owner choice with authorized recommended-default selection in both lanes and authenticated dashboard decision controls"
+  "remaining_limits": [
+    "First selected product/research delivery awaits owner choice or review deadline; no product release claimed",
+    "No future scheduled wake has run yet",
+    "Backups are local only; off-device backup not configured",
+    "VPS unused; laptop and app must be awake",
+    "Claude adapter not configured; no silent fallback",
+    "External market validation and academic supervisor approval remain unestablished",
+    "Implementation and publication remain agent-mediated with mandatory acceptance checks"
   ],
   "required_owner_inputs": [
-    "Interests and exclusions",
-    "Actual model access and spending cap",
-    "Worker machine authorization and weekly availability",
-    "Secure VPS access if hybrid mode is chosen"
+    "Keep laptop and Codex app running for scheduled work",
+    "Optionally choose or hold either private shortlist before its deadline",
+    "Confirm exact thesis dates and supervisor constraints when available"
   ],
-  "next_action": "Validate owner inputs, implement a private local profile and permitted collector vertical slice; bind model tiers only after verifying access."
+  "next_action": "On next wake sync GitHub decisions, preserve pending review, collect if a new Stockholm day; after selection execute only the selected bounded scope.",
+  "automations": [
+    "daily-broad-thesis-discovery",
+    "project-and-research-progress"
+  ]
 }

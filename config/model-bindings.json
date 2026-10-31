@@ -1,0 +1,5 @@
+{
+  "analysis": "gpt-6-astra",
+  "implementation": "gpt-6.1-terra",
+  "economy": "gpt-6-luna"
+}

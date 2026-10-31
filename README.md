@@ -1,32 +1,36 @@
-# AI project lab
+# Research & Build Lab
 
-Public monorepo for continuous project delivery and a static dashboard spanning two lanes. Private companion: ai-thesis-lab.
+Local-first daily discovery and rolling project delivery, with a public GitHub Pages dashboard and private GitHub decisions.
 
-## Current state
-Dashboard shell and an initial local queue/routing foundation are implemented. Collectors, AI workers, VPS scheduling, authenticated commands and live export are not implemented. Example opportunities are illustrative, not research findings.
+## What runs
+- 30 bounded public RSS/Atom/API collectors, metadata deduplication, provenance and honest seven-day coverage.
+- SQLite selection state, immutable candidate scope, one active shortlist per lane, owner-only GitHub commands, and a 24-hour recommended default.
+- Leased workers with checkpoint/finish fencing, isolated workspace preparation, and subscription-backed Codex CLI adapter.
+- Allowlisted public status export; detailed options and evidence stay in the private companion repository.
+- Native Codex scheduled runs operate the pipeline while this laptop and the app are awake.
 
-## Local foundation
-Run from this repository with Python 3.10 or later:
+No paid API fallback or credit purchase. GPT-6 Astra for analysis/review; GPT-6.1 Terra for implementation; deterministic code for collection and state transitions. Fresh allowance checks fail closed when credit availability or quotas are unknown. This is not an account billing-settings lock.
+
+## Run locally
+Use Python 3.10+ (install tzdata if your Windows Python lacks timezone data), GitHub CLI authenticated as the owner, and Codex CLI authenticated with ChatGPT. Create ignored config/profile.local.json using config/local-runtime.example.json. Keep runtime databases outside this public repo, in the private companion repo.
+
+    python -m engine.lab collect
+    python -m engine.lab status
+    python -m engine.lab cycle
+    python -m engine.lab export
+    python -m engine.lab backup
+
+Run tests:
 
     python -m unittest discover -s tests -p "test_*.py" -v
-    python -m engine doctor
-    python -m engine dry-run
+    node tests/status.test.cjs
 
-The dry run uses an ignored runtime/dry-run.sqlite fixture database and makes no model calls. The persistent queue supports deduplication, expiring leases, attempt tokens and bounded retry. Model routing requires explicit model bindings. The current policy permits subscription-only usage with zero additional spending, verified subscription authentication and disabled paid overage. The guard checks supplied verification results; a real provider/auth verification adapter is not yet implemented. No background service is installed. A job completion record does not itself publish any artifact; durable upload and release fencing remain implementation work.
+Private RUNBOOK.txt contains daily analysis, publication, worker execution, review and recovery instructions. The scheduler's model host supplies current account-usage proof before the subscription adapter runs; these proofs are ignored local runtime files.
 
-## Dashboard
-Open docs/index.html locally, or serve docs with a static HTTP server. GitHub Pages publishes docs from main. No build dependencies.
-data/status.json loads over HTTP; local file previews use sample.js. Profile export downloads a local draft and does not change VPS settings.
+## Choose a direction
+Open a shortlist from the dashboard and comment using its /lab commands. Select, hold, refine, request more, save, reject or resume. Without a response, the eligible recommendation starts on the next successful check after 24 hours. A change during execution revokes the worker lease and pauses for a checkpoint. If GitHub cannot be checked, no automatic selection proceeds.
 
-## Publish
-Settings > Pages > Deploy from a branch > main > /docs > Save.
-If a future exporter uses Actions GITHUB_TOKEN to commit status, add an explicit Pages Actions workflow; do not assume those pushes trigger branch Pages builds. A scoped VPS credential or GitHub App can publish allowlisted snapshots. No browser credentials.
+## Operational limits
+A sleeping/offline laptop delays work and leaves a stale dashboard. Backups currently remain on the same laptop. Source-channel counts differ from independent source-family counts. Evidence is a lead, not validated demand or novelty. Deployment and user-journey checks remain agent-mediated; code generation is not a production guarantee.
 
-## Layout
-docs/: public dashboard only.
-projects/<slug>/: each project owns its dependencies, tests and release materials.
-config/: non-sensitive example profiles.
-Unpublished ideas, evidence, logs and secrets: private VPS storage.
-
-## Handoff
-Read proposal.html and AGENT_HANDOFF.txt in private ai-thesis-lab. Implement one real end-to-end slice at a time. Preserve explicit setup and sample states.
+GitHub Pages publishes docs/ from main. Runtime records, credentials, private candidate descriptions and employer data must never enter this repository. The old engine.queue smoke queue remains separate from the operational workflow state machine.

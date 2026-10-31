@@ -1,336 +1,308 @@
 {
   "schema_version": 1,
-  "mode": "sample",
-  "generated_at": null,
-  "connected": false,
+  "mode": "live",
+  "generated_at": "2026-10-31T12:35:46.584792+00:00",
+  "connected": true,
   "thesis": {
-    "state": "needs_setup",
-    "last_success": null,
-    "next_run": null
+    "state": "awaiting_owner_selection",
+    "last_success": "2026-10-31T12:21:16.159586+00:00",
+    "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
-    "state": "needs_setup",
-    "stage": "Not started",
+    "state": "awaiting_owner_selection",
+    "stage": "awaiting owner selection",
     "window_start": null,
     "target_at": null
   },
   "releases_last_7_days": 0,
   "usage": {
-    "spent_sek": null,
-    "limit_sek": null
+    "spent_sek": 0,
+    "limit_sek": 0
   },
   "coverage": {
+    "checked": 27,
     "target": 20,
-    "checked": 0,
+    "registered": 30,
     "blocked": 0,
-    "registered": 30
+    "source_families": 13
   },
-  "opportunities": [
-    {
-      "id": "EXAMPLE-01",
-      "title": "When should an AI workflow ask for human review?",
-      "lane": "Thesis",
-      "status": "Illustrative",
-      "summary": "Compare review-selection strategies on a narrowly defined document task.",
-      "contribution": "Evaluate error versus review effort under distribution shift; verify closest work first.",
-      "feasibility": "Depends on representative labelled documents. Compute and model costs unconfirmed.",
-      "venture": "Potential review-routing component. Buyer access and willingness to pay are untested.",
-      "next": "Find closest studies and a permitted dataset before shortlisting.",
-      "evidence": "No evidence collected. An interface example, not a research finding."
-    },
-    {
-      "id": "EXAMPLE-02",
-      "title": "A release report for one critical user journey",
-      "lane": "Project",
-      "status": "Illustrative",
-      "summary": "A tool that runs a specified journey and packages reproducible failures.",
-      "contribution": "A focused integration and evidence report, not production certification.",
-      "feasibility": "Narrow to one controlled demo app and one browser journey.",
-      "venture": "Possible agency service; no customer validation yet.",
-      "next": "Find actual complaints and a willing tester before selecting.",
-      "evidence": "No evidence collected. An interface example, not a selected project."
-    }
-  ],
   "sources": [
     {
-      "id": "s01",
-      "name": "arXiv",
+      "id": "arxiv-ai",
+      "name": "arXiv AI",
       "category": "Research",
-      "url": "https://arxiv.org",
-      "access": "API or feeds",
-      "status": "not_configured",
-      "last_checked": null
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s02",
-      "name": "OpenReview",
+      "id": "arxiv-hci",
+      "name": "arXiv HCI",
       "category": "Research",
-      "url": "https://openreview.net",
-      "access": "API subject to access",
-      "status": "not_configured",
-      "last_checked": null
+      "url": "https://arxiv.org/list/cs.HC/recent",
+      "access": "Public feed",
+      "status": "empty"
     },
     {
-      "id": "s03",
-      "name": "Semantic Scholar",
+      "id": "arxiv-se",
+      "name": "arXiv software engineering",
       "category": "Research",
-      "url": "https://www.semanticscholar.org",
-      "access": "API subject to quotas",
-      "status": "not_configured",
-      "last_checked": null
+      "url": "https://arxiv.org/list/cs.SE/recent",
+      "access": "Public feed",
+      "status": "empty"
     },
     {
-      "id": "s04",
-      "name": "OpenAlex",
-      "category": "Research",
-      "url": "https://openalex.org",
-      "access": "API subject to current access",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "hn",
+      "name": "Hacker News questions",
+      "category": "Community",
+      "url": "https://news.ycombinator.com/ask",
+      "access": "Public metadata API",
+      "status": "checked"
     },
     {
-      "id": "s05",
-      "name": "ACL Anthology",
-      "category": "Research",
-      "url": "https://aclanthology.org",
-      "access": "Public metadata and papers",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "github",
+      "name": "GitHub recently updated popular repositories",
+      "category": "Engineering",
+      "url": "https://github.com",
+      "access": "Public metadata API",
+      "status": "checked"
     },
     {
-      "id": "s06",
-      "name": "PMLR",
-      "category": "Research",
-      "url": "https://proceedings.mlr.press",
-      "access": "Public proceedings",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s07",
-      "name": "CVF Open Access",
-      "category": "Research",
-      "url": "https://openaccess.thecvf.com",
-      "access": "Public proceedings",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s08",
-      "name": "ACM Digital Library",
-      "category": "Research",
-      "url": "https://dl.acm.org",
-      "access": "Metadata or licensed access",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s09",
-      "name": "IEEE Xplore",
-      "category": "Research",
-      "url": "https://ieeexplore.ieee.org",
-      "access": "Metadata or licensed access",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s10",
-      "name": "DiVA and LTU theses",
-      "category": "Research",
-      "url": "https://ltu.diva-portal.org",
-      "access": "Public repository metadata",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s11",
+      "id": "hf-data",
       "name": "Hugging Face datasets",
       "category": "Data",
       "url": "https://huggingface.co/datasets",
-      "access": "Hub API and dataset cards",
-      "status": "not_configured",
-      "last_checked": null
+      "access": "Public metadata API",
+      "status": "checked"
     },
     {
-      "id": "s12",
-      "name": "OpenML",
-      "category": "Data",
-      "url": "https://www.openml.org",
-      "access": "API",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s13",
-      "name": "Kaggle",
-      "category": "Data",
-      "url": "https://www.kaggle.com",
-      "access": "Permitted API or manual leads",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s14",
-      "name": "UCI ML Repository",
-      "category": "Data",
-      "url": "https://archive.ics.uci.edu",
-      "access": "Public metadata",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s15",
-      "name": "GitHub",
-      "category": "Engineering",
-      "url": "https://github.com",
-      "access": "API for issues discussions and releases",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s16",
-      "name": "GitLab",
-      "category": "Engineering",
-      "url": "https://gitlab.com",
-      "access": "Public API where permitted",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s17",
-      "name": "Stack Overflow",
-      "category": "Engineering",
-      "url": "https://stackoverflow.com",
-      "access": "Stack Exchange API",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s18",
-      "name": "Cross Validated",
-      "category": "Engineering",
-      "url": "https://stats.stackexchange.com",
-      "access": "Stack Exchange API",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s19",
-      "name": "Data Science Stack Exchange",
-      "category": "Engineering",
-      "url": "https://datascience.stackexchange.com",
-      "access": "Stack Exchange API",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s20",
-      "name": "Reddit communities",
-      "category": "Community",
-      "url": "https://www.reddit.com",
-      "access": "Approved API or manual leads",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s21",
-      "name": "Hacker News",
-      "category": "Community",
-      "url": "https://news.ycombinator.com",
-      "access": "Official API",
-      "status": "not_configured",
-      "last_checked": null
-    },
-    {
-      "id": "s22",
+      "id": "hf-forum",
       "name": "Hugging Face forums",
       "category": "Community",
       "url": "https://discuss.huggingface.co",
-      "access": "Permitted feeds or public endpoints",
-      "status": "not_configured",
-      "last_checked": null
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s23",
+      "id": "pytorch",
       "name": "PyTorch forums",
       "category": "Community",
       "url": "https://discuss.pytorch.org",
-      "access": "Permitted feeds or public endpoints",
-      "status": "not_configured",
-      "last_checked": null
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s24",
-      "name": "Indie Hackers",
-      "category": "Market",
-      "url": "https://www.indiehackers.com",
-      "access": "Permitted public access or manual leads",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "home-assistant",
+      "name": "Home Assistant community",
+      "category": "Community",
+      "url": "https://community.home-assistant.io",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s25",
-      "name": "Product Hunt",
-      "category": "Market",
-      "url": "https://www.producthunt.com",
-      "access": "Approved API or manual leads",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "n8n",
+      "name": "n8n community",
+      "category": "Community",
+      "url": "https://community.n8n.io",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s26",
-      "name": "G2",
-      "category": "Market",
-      "url": "https://www.g2.com",
-      "access": "Licensed or manual review",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "obsidian",
+      "name": "Obsidian forum",
+      "category": "Community",
+      "url": "https://forum.obsidian.md",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s27",
-      "name": "Capterra",
-      "category": "Market",
-      "url": "https://www.capterra.com",
-      "access": "Licensed or manual review",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "discourse",
+      "name": "Discourse community",
+      "category": "Community",
+      "url": "https://meta.discourse.org",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s28",
-      "name": "EU CORDIS",
-      "category": "Public needs",
-      "url": "https://cordis.europa.eu",
-      "access": "Open project data",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "blender",
+      "name": "Blender development",
+      "category": "Community",
+      "url": "https://devtalk.blender.org",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s29",
-      "name": "Vinnova",
-      "category": "Public needs",
-      "url": "https://www.vinnova.se",
-      "access": "Public project information",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "openfoodfacts",
+      "name": "Open Food Facts forum",
+      "category": "Community",
+      "url": "https://forum.openfoodfacts.org",
+      "access": "Public feed",
+      "status": "checked"
     },
     {
-      "id": "s30",
-      "name": "Swedish data portal",
-      "category": "Public needs",
-      "url": "https://www.dataportal.se",
-      "access": "Open dataset metadata",
-      "status": "not_configured",
-      "last_checked": null
+      "id": "erpnext",
+      "name": "Frappe ERPNext forum",
+      "category": "Community",
+      "url": "https://discuss.frappe.io",
+      "access": "Public feed",
+      "status": "checked"
+    },
+    {
+      "id": "wordpress",
+      "name": "WordPress support",
+      "category": "Community",
+      "url": "https://wordpress.org/support",
+      "access": "Public feed",
+      "status": "empty"
+    },
+    {
+      "id": "se-cooking",
+      "name": "Seasoned Advice",
+      "category": "Community",
+      "url": "https://cooking.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-fitness",
+      "name": "Physical Fitness",
+      "category": "Community",
+      "url": "https://fitness.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-travel",
+      "name": "Travel Stack Exchange",
+      "category": "Community",
+      "url": "https://travel.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-parenting",
+      "name": "Parenting Stack Exchange",
+      "category": "Community",
+      "url": "https://parenting.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-diy",
+      "name": "Home Improvement",
+      "category": "Community",
+      "url": "https://diy.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-money",
+      "name": "Personal Finance",
+      "category": "Community",
+      "url": "https://money.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-ux",
+      "name": "User Experience",
+      "category": "Community",
+      "url": "https://ux.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-softwareengineering",
+      "name": "Software Engineering",
+      "category": "Community",
+      "url": "https://softwareengineering.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-datascience",
+      "name": "Data Science",
+      "category": "Community",
+      "url": "https://datascience.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-stats",
+      "name": "Cross Validated",
+      "category": "Community",
+      "url": "https://stats.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-stackoverflow",
+      "name": "Stack Overflow",
+      "category": "Community",
+      "url": "https://stackoverflow.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-workplace",
+      "name": "The Workplace",
+      "category": "Community",
+      "url": "https://workplace.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-opensource",
+      "name": "Open Source",
+      "category": "Community",
+      "url": "https://opensource.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    },
+    {
+      "id": "se-sustainability",
+      "name": "Sustainable Living",
+      "category": "Community",
+      "url": "https://sustainability.stackexchange.com",
+      "access": "Public metadata API",
+      "status": "checked"
+    }
+  ],
+  "opportunities": [],
+  "decisions": [
+    {
+      "id": "20261031-project",
+      "lane": "project",
+      "state": "awaiting_owner_selection",
+      "url": "https://github.com/achkum/ai-thesis-lab/issues/2",
+      "deadline": "2026-11-01T12:31:04.361504+00:00",
+      "selection_origin": null,
+      "recommended": "P1",
+      "selected": null
+    },
+    {
+      "id": "20261031-thesis",
+      "lane": "thesis",
+      "state": "awaiting_owner_selection",
+      "url": "https://github.com/achkum/ai-thesis-lab/issues/1",
+      "deadline": "2026-11-01T12:30:59.552857+00:00",
+      "selection_origin": null,
+      "recommended": "T1",
+      "selected": null
     }
   ],
   "events": [
     {
-      "title": "Dashboard shell prepared",
-      "detail": "Interface only. No VPS job has run."
+      "title": "Public collection connected",
+      "detail": "27 channels returned records across 13 source families in seven days. Counts are not validated market opportunities."
     },
     {
-      "title": "Setup inputs needed",
-      "detail": "Choose interests, provide secure VPS access and confirm the model budget."
+      "title": "Local subscription workflow",
+      "detail": "Daily discovery and recurring project checks scheduled."
+    },
+    {
+      "title": "Options before work",
+      "detail": "Open a private shortlist to choose or hold. After 24 hours without a response, the recommendation is selected on the next successful check."
     }
   ]
 }

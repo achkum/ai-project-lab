@@ -18,7 +18,14 @@ function valid(d) {
  Array.isArray(d.sources) && d.sources.every(x=>strings(x,['id','name','category','url','access','status'])) &&
  Array.isArray(d.opportunities) && d.opportunities.every(x=>strings(x,['id','title','lane','status','summary','contribution','feasibility','venture','next','evidence'])&&['Thesis','Project'].includes(x.lane)) &&
  Array.isArray(d.events) && d.events.every(x=>strings(x,['title','detail'])) &&
+ (d.decisions===undefined||(Array.isArray(d.decisions)&&d.decisions.every(x=>strings(x,['id','lane','state','url','recommended'])&&['thesis','project'].includes(x.lane)&&date(x.deadline)&&decisionLink(x.url)!=='#'))) &&
+
  (d.mode==='sample'?d.connected===false:typeof d.generated_at==='string'&&Number.isFinite(Date.parse(d.generated_at))));
+}
+function decisionLink(value) { return /^https:\/\/github\.com\/achkum\/ai-thesis-lab\/issues\/[1-9][0-9]*$/.test(value) ? value : '#'; }
+function renderDecisions(lane) {
+ const rows=(data.decisions||[]).filter(x=>!lane||x.lane===lane);
+ return rows.length?rows.map(x=>'<article class="panel"><span class="tag">'+esc(x.lane)+' / '+esc(pretty(x.state))+'</span><h2>'+esc(x.id)+'</h2><p>Recommended: '+esc(x.recommended)+'. '+(x.selected?'Selected: '+esc(x.selected)+' ('+esc(pretty(x.selection_origin))+').':'Choose an option or hold the shortlist.')+'</p><p>Review deadline: <strong>'+esc(when(x.deadline,'Not published'))+'</strong> · Stockholm</p><p>No response selects the recommendation on the next successful check after the deadline.</p><a class="button primary" href="'+esc(decisionLink(x.url))+'" target="_blank" rel="noopener noreferrer">Review options & choose privately ↗</a></article>').join(''):'<div class="empty">No shortlist awaiting review. Discovery continues across domains.</div>';
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
 function showView(){
@@ -31,7 +38,7 @@ function showView(){
 function renderCards(lane,query=''){
  const filtered=data.opportunities.filter(x=>x.lane===lane&&(x.title+' '+x.summary).toLowerCase().includes(query.toLowerCase()));
  const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
- dest.innerHTML=filtered.length?filtered.map(x=>'<article class="panel opportunity"><span class="tag">'+esc(x.id)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2><p>'+esc(x.summary)+'</p><button data-detail="'+esc(x.id)+'">Inspect possibility →</button></article>').join(''):'<div class="empty">No matching opportunities. Nothing is generated to fill a quota.</div>';
+ dest.innerHTML=renderDecisions(lane.toLowerCase())+(filtered.length?filtered.map(x=>'<article class="panel opportunity"><span class="tag">'+esc(x.id)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2><p>'+esc(x.summary)+'</p><button data-detail="'+esc(x.id)+'">Inspect possibility →</button></article>').join(''):'<div class="empty">No matching opportunities. Nothing is generated to fill a quota.</div>');
 }
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
@@ -40,17 +47,19 @@ function renderSources(){
  $('source-rows').innerHTML=rows.length?rows.map(x=>'<tr><td><a href="'+esc(safeLink(x.url))+'" target="_blank" rel="noopener noreferrer">'+esc(x.name)+' ↗</a></td><td>'+esc(x.category)+'</td><td>'+esc(x.access)+'</td><td><span class="pill">'+esc(pretty(x.status))+'</span></td></tr>').join(''):'<tr><td colspan="4">No matching sources.</td></tr>';
 }
 function render(){
- const sample=data.mode==='sample',age=data.generated_at?Date.now()-Date.parse(data.generated_at):null,stale=!sample&&age>3600000;
- $('notice').textContent=lastError || (sample?'Sample mode · Illustrative records only. No workflow is connected.':!data.connected?'Not connected · Backend setup is incomplete.':stale?'Stale snapshot · The last update is over one hour old. Check the coordinator.':'Live snapshot · Public-safe status only. Private details stay in GitHub.');
+ const sample=data.mode==='sample',age=data.generated_at?Date.now()-Date.parse(data.generated_at):null,stale=!sample&&age>10800000;
+ $('notice').textContent=lastError || (sample?'Sample mode · Illustrative records only. No workflow is connected.':!data.connected?'Not connected · Backend setup is incomplete.':stale?'Stale snapshot · The last update is over three hours old. Check the coordinator.':'Live snapshot · Public-safe status only. Private details stay in GitHub.');
  $('notice').classList.toggle('error',!!lastError||stale);
  $('connection').textContent=sample||!data.connected?'Not connected':stale?'Snapshot stale':'Snapshot connected';
  $('freshness').textContent=sample?'Awaiting first live snapshot':'Updated '+when(data.generated_at,'Unknown');
- const stats=[['Thesis cadence','Daily','Owner-selected interests'],['Delivery window','7 days','No fixed weekday stages'],['Source coverage',data.coverage.checked+' / '+data.coverage.target,data.coverage.registered+' candidate sources'],['Releases this week',data.releases_last_7_days,'Actual releases only']];
+ const stats=[['Thesis cadence','Daily','Broad discovery, personalised ranking'],['Delivery window','7 days','No fixed weekday stages'],['Source coverage',data.coverage.checked+' / '+data.coverage.target,data.coverage.registered+' channels · '+(data.coverage.source_families??'—')+' source families'],['Releases this week',data.releases_last_7_days,'Actual releases only']];
  $('stats').innerHTML=stats.map(([l,v,n])=>'<div class="stat"><div class="label">'+esc(l)+'</div><div class="value">'+esc(v)+'</div><div class="note">'+esc(n)+'</div></div>').join('');
  $('thesis-state').textContent=pretty(data.thesis.state);$('project-state').textContent=pretty(data.project.state);
  $('thesis-last').textContent=when(data.thesis.last_success,'Not run');$('thesis-next').textContent=when(data.thesis.next_run,'Not scheduled');
  $('project-stage').textContent=data.project.stage;$('project-target').textContent=when(data.project.target_at,'Starts with first selection');
  $('activity').innerHTML=data.events.map(x=>'<div class="event"><strong>'+esc(x.title)+'</strong><p>'+esc(x.detail)+'</p></div>').join('');
+ $('decision-list').innerHTML=renderDecisions();
+ $('source-notice').textContent=data.mode==='sample'?'Sample source catalogue. No checks represented.':data.coverage.checked+' channels returned records across '+data.coverage.source_families+' independent source families in seven days. Empty channels do not count as successful coverage. Source breadth is not proof of demand.';
  renderCards('Thesis',$('thesis-search').value);renderCards('Project');renderSources();showView();
 }
 async function refresh(){
@@ -77,7 +86,7 @@ $('profile-form').onsubmit=e=>{
  e.preventDefault();const p={schema_version:1,timezone:'Europe/Stockholm',interests:list('interests'),domains:list('domains'),exclusions:list('exclusions'),hours_per_week:$('hours').value===''?null:Number($('hours').value),monthly_budget_sek:$('budget').value===''?null:Number($('budget').value),setup_complete:false};
  let saved=true;try{localStorage.setItem('lab-profile-draft',JSON.stringify(p));}catch{saved=false;}
  const blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='profile.draft.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
- $('profile-message').textContent=(saved?'Draft saved in this browser and exported.':'Exported; browser storage is unavailable.')+' VPS settings are unchanged.';
+ $('profile-message').textContent=(saved?'Draft saved in this browser and exported.':'Exported; browser storage is unavailable.')+' Workflow settings are unchanged; apply the draft through the private coordinator.';
 };
 try{const p=JSON.parse(localStorage.getItem('lab-profile-draft'));if(p){for(const k of ['interests','domains','exclusions'])$(k).value=(p[k]||[]).join(', ');$('hours').value=p.hours_per_week??'';$('budget').value=p.monthly_budget_sek??'';}}catch{}
 render();refresh();setInterval(refresh,60000);

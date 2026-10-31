@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "owner": "YOUR_GITHUB_LOGIN",
+  "private_repo": "YOUR_GITHUB_LOGIN/ai-thesis-lab",
+  "review_window_hours": 24,
+  "timezone": "Europe/Stockholm",
+  "daily_discovery_hour": 8,
+  "runtime_root": "/absolute/private-repo/runtime",
+  "private_root": "/absolute/private-repo",
+  "public_root": "/absolute/public-repo",
+  "model_spending_sek": 0,
+  "worker": "subscription_session",
+  "scheduler_status": "not_installed"
+}
