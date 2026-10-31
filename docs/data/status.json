@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T17:16:32.890742+00:00",
+  "generated_at": "2026-10-31T17:21:55.486049+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -9,8 +9,8 @@
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
-    "state": "review_ready",
-    "stage": "review ready",
+    "state": "completed",
+    "stage": "completed",
     "window_start": "2026-10-31T12:54:52.504456+00:00",
     "target_at": "2026-11-07T12:54:52.504456+00:00"
   },
@@ -562,7 +562,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "completed",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -598,7 +598,7 @@
       ],
       "delivery_mode": "tested_web_app",
       "starter_job_id": "cefb082c7bb340f5b41c4a4e7a189a84",
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     },
     {
@@ -656,7 +656,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "Possibility",
+      "status": "completed",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -710,7 +710,7 @@
       ],
       "delivery_mode": "tested_web_app",
       "starter_job_id": "c5738b875e514c6f89c2b6186b498c8c",
-      "selected": false,
+      "selected": true,
       "decision_url": ""
     }
   ],

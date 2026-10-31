@@ -54,3 +54,11 @@ GitHub Pages publishes docs/ from main. Never commit runtime databases, private 
 ## Discuss or change direction now
 
 **Ask about this idea**, **Refine this direction** and **Find different ideas** prepare a message to paste into the Codex chat for immediate discussion. Those discussion controls are not a hosted chatbot; the start buttons are real queue actions. Questions preserve selections. Explicit refinements pause only affected work, and one-off preferences are not silently made permanent.
+
+
+## Working browser apps
+
+- [Review evidence checkup](https://achkum.github.io/ai-project-lab/projects/rp1/): import normalized review-event JSON, inspect findings and timelines, export a report.
+- [Forecast pilot](https://achkum.github.io/ai-project-lab/projects/rp2/): import consecutive daily CSV observations, compare rolling baselines, explore the chart and export a report. No pretrained model is evaluated in this slice.
+
+Both process imported data locally in the browser and include labelled synthetic samples. These are usable prototypes, not validated commercial releases. Selected project builds proceed through automated checks and Pages deployment without a second approval gate.

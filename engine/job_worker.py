@@ -81,7 +81,7 @@ def publication_lock(profile,job):
                         fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
                     break
                 except (OSError,BlockingIOError):pass
-            remote('heartbeat',jid=job['id'],token=job['token'],message='Draft ready; waiting to publish review files')
+            remote('heartbeat',jid=job['id'],token=job['token'],message='Artifacts ready; waiting for the publication slot')
             time.sleep(5)
         yield
     finally:handle.close()
@@ -202,7 +202,7 @@ def run_one(profile):
                 'visual interactive results, useful validation errors, export/download and a link back to ../../#projects. '
                 'Processing stays entirely in the browser; do not use network APIs, tokens, localStorage or analytics. '
                 'Write pure analysis logic in a browser JS file that also exports via CommonJS for Node tests. '
-                'Write meaningful tests/*.test.cjs using node:test and node:assert for correctness, malformed data and relevant edge cases. '
+                'Write meaningful tests/*.test.cjs using node:test and node:assert for correctness, malformed data and relevant edge cases. Test the actual shipped sample.js browser binding, not just a separate fixture file. Bound input sizes before expensive work. '
                 'Run the checks and fix failures. README must describe how to use the app, data provenance and honest limitations. '
                 'The coordinator runs your Node tests again, deploys site/ and verifies Pages. No human approval step is needed. '
                 'Do not push or deploy yourself. Complete a coherent usable slice within 35 minutes; never fake model outputs.')

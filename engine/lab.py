@@ -87,7 +87,7 @@ def export(profile, workflow, discovery, sources):
             for lane in ('thesis','project'):
                 jobs=[j for j in live['jobs'] if j['lane']==lane]
                 states={j['state'] for j in jobs}
-                state=next((s for s in ('running','needs_attention','quota_wait','queued','paused','review_ready') if s in states),'awaiting_selection')
+                state=next((s for s in ('running','needs_attention','quota_wait','queued','paused','completed','review_ready') if s in states),'awaiting_selection')
                 snapshot[lane]['state']=state
                 if lane=='project':snapshot[lane]['stage']=state.replace('_',' ')
             for card in opportunities:
