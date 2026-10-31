@@ -328,5 +328,60 @@
     "endpoint": "https://api.stackexchange.com/2.3/questions?site=sustainability&pagesize=20&order=desc&sort=creation",
     "url": "https://sustainability.stackexchange.com",
     "access": "Public metadata API"
+  },
+  {
+    "id": "arxiv-cs-cv",
+    "name": "arXiv Computer vision",
+    "category": "Research",
+    "family": "arxiv",
+    "domain": "computer vision",
+    "kind": "feed",
+    "endpoint": "https://rss.arxiv.org/rss/cs.CV",
+    "url": "https://arxiv.org/list/cs.CV/recent",
+    "access": "Public feed"
+  },
+  {
+    "id": "arxiv-cs-sd",
+    "name": "arXiv Sound",
+    "category": "Research",
+    "family": "arxiv",
+    "domain": "sound",
+    "kind": "feed",
+    "endpoint": "https://rss.arxiv.org/rss/cs.SD",
+    "url": "https://arxiv.org/list/cs.SD/recent",
+    "access": "Public feed"
+  },
+  {
+    "id": "arxiv-cs-lg",
+    "name": "arXiv Machine learning",
+    "category": "Research",
+    "family": "arxiv",
+    "domain": "machine learning",
+    "kind": "feed",
+    "endpoint": "https://rss.arxiv.org/rss/cs.LG",
+    "url": "https://arxiv.org/list/cs.LG/recent",
+    "access": "Public feed"
+  },
+  {
+    "id": "arxiv-stat-ml",
+    "name": "arXiv Statistical learning",
+    "category": "Research",
+    "family": "arxiv",
+    "domain": "statistical learning",
+    "kind": "feed",
+    "endpoint": "https://rss.arxiv.org/rss/stat.ML",
+    "url": "https://arxiv.org/list/stat.ML/recent",
+    "access": "Public feed"
+  },
+  {
+    "id": "arxiv-eess-sp",
+    "name": "arXiv Signal processing",
+    "category": "Research",
+    "family": "arxiv",
+    "domain": "signal processing",
+    "kind": "feed",
+    "endpoint": "https://rss.arxiv.org/rss/eess.SP",
+    "url": "https://arxiv.org/list/eess.SP/recent",
+    "access": "Public feed"
   }
 ]

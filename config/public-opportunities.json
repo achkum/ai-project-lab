@@ -1,5 +1,441 @@
 [
   {
+    "id": "T4",
+    "lane": "Thesis",
+    "title": "Can a defect detector survive a change of lighting?",
+    "summary": "Adapt pretrained visual features to a small inspection task, then test when lighting changes make the detector unreliable.",
+    "domain": "Vision · domain shift",
+    "flow": [
+      "Normal product images",
+      "Adapt visual features + threshold",
+      "Test new lighting + abstention"
+    ],
+    "deliverable": "A small-data robustness study with explicit failure boundaries",
+    "question": "Does threshold calibration or limited adaptation improve reliability under lighting shift at a fixed false-alarm budget?",
+    "measure": "Image-level AUROC, recall at fixed false-alarm rate, calibration, inference time; split by acquisition condition.",
+    "baseline": "Frozen features + nearest-neighbour anomaly score; simple image statistics; an existing Anomalib baseline.",
+    "alternative": "Frozen features + nearest-neighbour anomaly score; simple image statistics; an existing Anomalib baseline.",
+    "proposed_difference": "A controlled comparison of adaptation and calibration under predefined lighting shifts and label budgets—not a recreation of the benchmark.",
+    "risk": "Prior work may already answer the question; industrial images do not establish performance on a customer’s production line.",
+    "data_plan": "Inspect one MVTec AD 2 public subset. Verify dataset terms before downloading; commercial reuse is not assumed.",
+    "model_plan": "Pretrained vision backbone; frozen features first, a small adapter only if feasible.",
+    "why_ml": "Visual variability is hard to encode with fixed thresholds, but simple statistics may still win.",
+    "audience": "Small manufacturers / inspection teams",
+    "venture": "Possible service: adapt and validate inspection models on customer-owned images. No willingness-to-pay evidence yet.",
+    "market": "Unvalidated",
+    "contribution": "A small-data robustness study with explicit failure boundaries",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Write a feasibility brief, verify closest papers, inspect data access and design a leakage-safe pilot. Do not conduct the full thesis.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "1–2 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://www.mvtec.com/research-teaching/datasets/mvtec-ad-2",
+    "provenance": [
+      {
+        "title": "MVTec AD 2 benchmark",
+        "url": "https://www.mvtec.com/research-teaching/datasets/mvtec-ad-2",
+        "kind": "Dataset / research problem",
+        "finding": "Includes normal training images and test images under different lighting. This motivates a shift-robustness study, not a new anomaly-detection method."
+      },
+      {
+        "title": "Anomalib implementation library",
+        "url": "https://github.com/open-edge-platform/anomalib",
+        "kind": "Existing solution",
+        "finding": "Existing anomaly-detection implementations and deployment tooling. Use as baselines; do not present library functionality as original work."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-thesis",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.624857,
+    "review_deadline": 1793539816.6248577,
+    "recommended": true
+  },
+  {
+    "id": "T5",
+    "lane": "Thesis",
+    "title": "Can a sound model recognise your machine in a noisy room?",
+    "summary": "Use pretrained audio features and a small classifier; investigate transfer across microphones or recording environments.",
+    "domain": "Audio · transfer learning",
+    "flow": [
+      "Label a few sound clips",
+      "Train a compact task head",
+      "Evaluate on a different recording setup"
+    ],
+    "deliverable": "A transfer-learning feasibility study with leakage-safe splits",
+    "question": "How does a frozen audio representation compare with acoustic features when the recording environment changes?",
+    "measure": "Macro F1, per-class recall, unseen-condition error and CPU latency; never split overlapping clips across train and test.",
+    "baseline": "MFCC features + logistic regression; frozen YAMNet embeddings + linear head.",
+    "alternative": "MFCC features + logistic regression; frozen YAMNet embeddings + linear head.",
+    "proposed_difference": "Compare label budgets and recording-condition transfer for one accessible task; the tutorial’s training pipeline is prior work.",
+    "risk": "Without recording-condition metadata, a claimed domain-shift study may be invalid. Environmental recognition is not fault diagnosis.",
+    "data_plan": "First find a suitably licensed audio dataset with device/session metadata; if unavailable, narrow the question before committing.",
+    "model_plan": "YAMNet embeddings with a small supervised head; no speech LLM.",
+    "why_ml": "A small acoustic model can map sound patterns to bounded labels; a fixed amplitude threshold is the minimum baseline.",
+    "audience": "Equipment-service teams or consumer device builders",
+    "venture": "Possible customer-specific sound recognition service; need an actual use case and acceptable false-alarm cost.",
+    "market": "Unvalidated",
+    "contribution": "A transfer-learning feasibility study with leakage-safe splits",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Write a feasibility brief, verify closest papers, inspect data access and design a leakage-safe pilot. Do not conduct the full thesis.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "1–2 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+    "provenance": [
+      {
+        "title": "TensorFlow YAMNet transfer-learning tutorial",
+        "url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+        "kind": "Existing method / tutorial",
+        "finding": "Shows how to train a small classifier on pretrained sound embeddings. Reproducing that pipeline alone is not a thesis contribution."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-thesis",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.62486,
+    "review_deadline": 1793539816.6248605
+  },
+  {
+    "id": "T6",
+    "lane": "Thesis",
+    "title": "When does a pretrained forecast beat a simple local model?",
+    "summary": "Compare pretrained forecasting with small locally trained models when each business has only a short history.",
+    "domain": "Time series · low data",
+    "flow": [
+      "Short demand history",
+      "Compare pretrained + local baselines",
+      "Test future periods without leakage"
+    ],
+    "deliverable": "A data-budget and transfer study for one forecasting task",
+    "question": "Under what history length and shift conditions does a pretrained forecaster outperform seasonal and tabular baselines?",
+    "measure": "Rolling-origin MASE/MAE, interval coverage, inference cost; hold out both future time and entities where possible.",
+    "baseline": "Seasonal naive; moving average; gradient boosting with lag features; frozen Chronos baseline.",
+    "alternative": "Seasonal naive; moving average; gradient boosting with lag features; frozen Chronos baseline.",
+    "proposed_difference": "A preregistered comparison across history budgets and unseen entities, with compute-normalised results. A novelty check is required.",
+    "risk": "Public retail data may poorly represent a small restaurant; pretrained training-data overlap must be investigated.",
+    "data_plan": "Find an accessible demand dataset with entity and time identifiers; check licence and any pretrained overlap before finalising the study.",
+    "model_plan": "Small Chronos variant if local resources permit; task-specific lag-feature model as a serious competitor.",
+    "why_ml": "Demand has repeatable temporal structure; complex models must justify themselves against seasonal averages.",
+    "audience": "Small retailers / food operators",
+    "venture": "Possible tailored forecasting and monitoring service. Savings and customer willingness to share sales data remain untested.",
+    "market": "Unvalidated",
+    "contribution": "A data-budget and transfer study for one forecasting task",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Write a feasibility brief, verify closest papers, inspect data access and design a leakage-safe pilot. Do not conduct the full thesis.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "1–2 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://github.com/amazon-science/chronos-forecasting",
+    "provenance": [
+      {
+        "title": "Chronos pretrained forecasting models",
+        "url": "https://github.com/amazon-science/chronos-forecasting",
+        "kind": "Existing pretrained models",
+        "finding": "Provides pretrained time-series models. A local evaluation must compare them with simple seasonal and task-specific baselines."
+      },
+      {
+        "title": "Scikit-learn histogram gradient boosting",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html",
+        "kind": "Existing classical ML method",
+        "finding": "A documented task-specific regression baseline. Its availability is technical feasibility evidence, not evidence of customer demand."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-thesis",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.6248615,
+    "review_deadline": 1793539816.6248617
+  },
+  {
+    "id": "T7",
+    "lane": "Thesis",
+    "title": "Which examples are worth asking a business to label?",
+    "summary": "Study how to choose training examples when expert labels are expensive and the model must work on a new customer’s data.",
+    "domain": "Learning systems · annotation",
+    "flow": [
+      "Small labelled seed",
+      "Choose informative examples",
+      "Compare learning at equal label cost"
+    ],
+    "deliverable": "A bounded active-learning evaluation on one task",
+    "question": "Does uncertainty-based sampling outperform random selection once class imbalance and domain shift are controlled?",
+    "measure": "Performance versus label budget, minority recall and annotation effort; multiple seeds and a fixed untouched test set.",
+    "baseline": "Random sampling and class-balanced sampling using the same frozen representation and classifier.",
+    "alternative": "Random sampling and class-balanced sampling using the same frozen representation and classifier.",
+    "proposed_difference": "Study when a simple selection policy fails or helps under explicit label costs; do not claim a new active-learning algorithm.",
+    "risk": "A generic benchmark reproduction is insufficient for a thesis; a concrete task and literature gap must be established.",
+    "data_plan": "Reuse one feasible vision or sound dataset after checking labels, split design and permitted use.",
+    "model_plan": "Frozen pretrained features plus compact classifier; simple uncertainty sampling.",
+    "why_ml": "ML can prioritise ambiguous samples, but random or balanced sampling may be equally effective.",
+    "audience": "Businesses with limited expert labelling time",
+    "venture": "Possible model-customisation service with efficient data collection. Demand and annotation costs need customer evidence.",
+    "market": "Unvalidated",
+    "contribution": "A bounded active-learning evaluation on one task",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Write a feasibility brief, verify closest papers, inspect data access and design a leakage-safe pilot. Do not conduct the full thesis.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "1–2 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://github.com/open-edge-platform/anomalib",
+    "provenance": [
+      {
+        "title": "Settles — Active Learning Literature Survey (2009)",
+        "url": "https://research.cs.wisc.edu/techreports/viewreport.php?report=1648",
+        "kind": "Established prior research",
+        "finding": "Active learning and choosing informative training examples are established research areas. Our proposal is a constrained evaluation of existing strategies, not invention of active learning."
+      },
+      {
+        "title": "Anomalib implementation library",
+        "url": "https://github.com/open-edge-platform/anomalib",
+        "kind": "Existing solution",
+        "finding": "Existing anomaly-detection implementations and deployment tooling. Use as baselines; do not present library functionality as original work."
+      },
+      {
+        "title": "TensorFlow YAMNet transfer-learning tutorial",
+        "url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+        "kind": "Existing method / tutorial",
+        "finding": "Shows how to train a small classifier on pretrained sound embeddings. Reproducing that pipeline alone is not a thesis contribution."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-thesis",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.6248631,
+    "review_deadline": 1793539816.6248631
+  },
+  {
+    "id": "P4",
+    "lane": "Project",
+    "title": "Teach a small model your own visual categories",
+    "summary": "A local workbench that compares a pretrained feature extractor plus a small head against a simple baseline.",
+    "domain": "Vision · custom classifiers",
+    "flow": [
+      "Add a labelled sample dataset",
+      "Train a small task head",
+      "Inspect errors + export a model card"
+    ],
+    "deliverable": "A runnable classifier workbench with an honest evaluation report",
+    "question": "Can a non-specialist understand whether a custom visual classifier is ready to use?",
+    "measure": "One reproducible dataset split; confusion matrix; held-out predictions; CPU timing; clear sample-data labels.",
+    "baseline": "Existing transfer-learning notebooks and model-training tools.",
+    "alternative": "Existing transfer-learning notebooks and model-training tools.",
+    "proposed_difference": "A narrow user journey that makes data leakage, rare-class errors and deployment limits visible; portfolio integration, not a novel algorithm.",
+    "risk": "A polished dashboard without real held-out evaluation would be misleading.",
+    "data_plan": "Use a small permissively licensed image dataset or generated shapes for the baseline; identify pretrained-weight terms before enabling transfer.",
+    "model_plan": "Frozen compact vision encoder + linear head; never train a foundation model from scratch.",
+    "why_ml": "Useful only if learnt visual features improve on basic image statistics.",
+    "audience": "Small teams exploring custom classification",
+    "venture": "A demonstrator for a task-specific model service; validate with a real customer task before commercialising.",
+    "market": "Unvalidated",
+    "contribution": "A runnable classifier workbench with an honest evaluation report",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Build one bounded local demo with sample data, runnable checks and an honest limitations page. Implement real model integration only after data, weights and local resources are verified.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "3–5 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://github.com/open-edge-platform/anomalib",
+    "provenance": [
+      {
+        "title": "PyTorch transfer learning tutorial",
+        "url": "https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial",
+        "kind": "Existing method / tutorial",
+        "finding": "Provides a vision transfer-learning starting point. The proposed workbench adds a bounded evaluation and model-readiness user journey; it does not invent transfer learning."
+      },
+      {
+        "title": "Anomalib implementation library",
+        "url": "https://github.com/open-edge-platform/anomalib",
+        "kind": "Existing solution",
+        "finding": "Existing anomaly-detection implementations and deployment tooling. Use as baselines; do not present library functionality as original work."
+      },
+      {
+        "title": "MVTec AD 2 benchmark",
+        "url": "https://www.mvtec.com/research-teaching/datasets/mvtec-ad-2",
+        "kind": "Dataset / research problem",
+        "finding": "Includes normal training images and test images under different lighting. This motivates a shift-robustness study, not a new anomaly-detection method."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-project",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.624864,
+    "review_deadline": 1793539816.624864
+  },
+  {
+    "id": "P5",
+    "lane": "Project",
+    "title": "A sound-classifier workbench that shows uncertainty",
+    "summary": "Train a small classifier on audio embeddings and let someone inspect errors across different recording conditions.",
+    "domain": "Audio · custom classifiers",
+    "flow": [
+      "Import labelled short clips",
+      "Adapt pretrained audio embeddings",
+      "Inspect errors + confidence"
+    ],
+    "deliverable": "A local audio classification demo with a baseline and model card",
+    "question": "Can users see which recordings a small sound classifier does not handle reliably?",
+    "measure": "Hold out recording sessions; compare predicted classes with labels; include a reject/uncertain state without calling it calibrated until measured.",
+    "baseline": "The official YAMNet transfer-learning tutorial.",
+    "alternative": "The official YAMNet transfer-learning tutorial.",
+    "proposed_difference": "Build a usable evaluation workflow around an existing method; explicitly credit the tutorial and add condition-level error inspection.",
+    "risk": "Clip-level random splits can leak nearly identical sounds. Browser inference may need a separate model conversion step.",
+    "data_plan": "Start from a tiny licensed audio set; use no microphone recordings from the owner without explicit selection.",
+    "model_plan": "YAMNet embeddings + small classifier; MFCC baseline.",
+    "why_ml": "A specialised audio model suits bounded labels; no LLM required.",
+    "audience": "Makers / small equipment-service teams",
+    "venture": "A service demo for custom audio models, not a proven fault-detection product.",
+    "market": "Unvalidated",
+    "contribution": "A local audio classification demo with a baseline and model card",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Build one bounded local demo with sample data, runnable checks and an honest limitations page. Implement real model integration only after data, weights and local resources are verified.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "3–5 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+    "provenance": [
+      {
+        "title": "TensorFlow YAMNet transfer-learning tutorial",
+        "url": "https://www.tensorflow.org/tutorials/audio/transfer_learning_audio",
+        "kind": "Existing method / tutorial",
+        "finding": "Shows how to train a small classifier on pretrained sound embeddings. Reproducing that pipeline alone is not a thesis contribution."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-project",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.6248646,
+    "review_deadline": 1793539816.6248646
+  },
+  {
+    "id": "P6",
+    "lane": "Project",
+    "title": "Would a better forecast actually reduce over-ordering?",
+    "summary": "A small comparison tool that turns forecasting errors into an explicit waste-versus-stockout trade-off.",
+    "domain": "Food operations · forecasting",
+    "flow": [
+      "Load a sample sales series",
+      "Compare simple and pretrained forecasts",
+      "Explore waste / stockout assumptions"
+    ],
+    "deliverable": "A local forecasting comparison demo with transparent assumptions",
+    "question": "Does a more complex forecast change a concrete ordering decision under stated costs?",
+    "measure": "Rolling backtest; MAE/MASE; simulated ordering costs; disclose every cost assumption.",
+    "baseline": "Seasonal average and a spreadsheet; a lag-feature regressor; optional small pretrained model.",
+    "alternative": "Seasonal average and a spreadsheet; a lag-feature regressor; optional small pretrained model.",
+    "proposed_difference": "Translate model comparisons into a visible operational trade-off, not just an accuracy chart. No claim that the ordering policy is novel.",
+    "risk": "Synthetic cost assumptions are not measured restaurant savings; sparse real demand and stockout censoring complicate evaluation.",
+    "data_plan": "Start with an openly licensed sample series or clearly labelled synthetic data; no company integration in the first release.",
+    "model_plan": "Classical forecasting first; optional Chronos comparison after resource verification.",
+    "why_ml": "Temporal patterns can improve on manual averages, but the demo must expose cases where the average wins.",
+    "audience": "Bakeries / small food retailers",
+    "venture": "Possible paid adaptation and monitoring service if operators demonstrate a costly forecasting problem.",
+    "market": "Unvalidated",
+    "contribution": "A local forecasting comparison demo with transparent assumptions",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Build one bounded local demo with sample data, runnable checks and an honest limitations page. Implement real model integration only after data, weights and local resources are verified.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "2–4 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://github.com/amazon-science/chronos-forecasting",
+    "provenance": [
+      {
+        "title": "Chronos pretrained forecasting models",
+        "url": "https://github.com/amazon-science/chronos-forecasting",
+        "kind": "Existing pretrained models",
+        "finding": "Provides pretrained time-series models. A local evaluation must compare them with simple seasonal and task-specific baselines."
+      },
+      {
+        "title": "Scikit-learn histogram gradient boosting",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html",
+        "kind": "Existing classical ML method",
+        "finding": "A documented task-specific regression baseline. Its availability is technical feasibility evidence, not evidence of customer demand."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-project",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.6248648,
+    "review_deadline": 1793539816.624865,
+    "recommended": true
+  },
+  {
+    "id": "P7",
+    "lane": "Project",
+    "title": "Is this spreadsheet even ready for a predictive model?",
+    "summary": "A local data-readiness report that catches missing targets, leakage risks and weak evaluation plans before model training.",
+    "domain": "Tabular data · model readiness",
+    "flow": [
+      "Inspect a sample table",
+      "Flag data + split risks",
+      "Compare baseline with a small model"
+    ],
+    "deliverable": "A small data-audit and baseline-comparison app",
+    "question": "Can a business decide whether collecting better data is more useful than training a bigger model?",
+    "measure": "Known dirty-data fixtures; explicit split selection; held-out baseline score; no promise of automated leakage detection.",
+    "baseline": "Data profiling libraries, manual audits and scikit-learn baseline notebooks.",
+    "alternative": "Data profiling libraries, manual audits and scikit-learn baseline notebooks.",
+    "proposed_difference": "Combine a narrow diagnostic workflow and evidence-based go/no-go report; product integration rather than a new estimator.",
+    "risk": "Many data problems need domain knowledge; an automated report must not certify production readiness.",
+    "data_plan": "Use fictional tables for checks and a licensed public dataset for any genuine model score.",
+    "model_plan": "Gradient boosting or logistic regression, chosen by task; no pretrained model needed by default.",
+    "why_ml": "The audit itself is deterministic. Train only where prediction has a clear target and a usable evaluation split.",
+    "audience": "Small businesses considering their first ML project",
+    "venture": "A possible entry service for AI-Org: data assessment before bespoke modelling. Customer demand untested.",
+    "market": "Unvalidated",
+    "contribution": "A small data-audit and baseline-comparison app",
+    "feasibility": "Start with a small public-data feasibility check on the laptop. Record licences, memory and runtime before scaling; no paid compute.",
+    "next": "Build one bounded local demo with sample data, runnable checks and an honest limitations page. Implement real model integration only after data, weights and local resources are verified.",
+    "reason": "Fits task-specific applied AI; compare against simpler alternatives before committing.",
+    "effort": "2–3 days",
+    "evidence": "Technical starting points are verified below. Customer interviews, commercial rights and novelty checks are still outstanding.",
+    "evidence_level": "Primary technical sources; demand untested",
+    "evidence_url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html",
+    "provenance": [
+      {
+        "title": "Scikit-learn histogram gradient boosting",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html",
+        "kind": "Existing classical ML method",
+        "finding": "A documented task-specific regression baseline. Its availability is technical feasibility evidence, not evidence of customer demand."
+      }
+    ],
+    "originality": "Proposed adaptation/evaluation, not a new model architecture. The extension is a hypothesis; literature review must establish whether it is already answered.",
+    "batch": "applied-ai",
+    "shortlist": "20261031-applied-project",
+    "version": 1,
+    "status": "Possibility",
+    "publication": "owner_requested_visual_summary",
+    "published_at": 1793453416.6248653,
+    "review_deadline": 1793539816.6248653
+  },
+  {
     "id": "T1",
     "lane": "Thesis",
     "title": "Fewer approval clicks. Same ability to catch mistakes?",
@@ -29,7 +465,21 @@
     "shortlist": "20261031-thesis",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "Research-backed starting point",
+        "url": "https://arxiv.org/abs/2610.37875",
+        "kind": "Prior lead",
+        "finding": "Adjacent research exists; this specific comparison still needs a prior-work check."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "Can consequence summaries reduce review effort while preserving consequential-error detection?",
+    "baseline": "Ordinary diffs, approval dialogs and checklists",
+    "published_at": 1793453416.6248658,
+    "review_deadline": 1793539816.6248658
   },
   {
     "id": "T2",
@@ -61,7 +511,21 @@
     "shortlist": "20261031-thesis",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "Docs + practitioner discussion",
+        "url": "https://docs.n8n.io/advanced-ai/evaluations/overview/",
+        "kind": "Prior lead",
+        "finding": "n8n already offers evaluations; operational complaints motivate investigation but do not prove a research gap."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "Do execution invariants detect failures that output-only evaluations miss?",
+    "baseline": "n8n evaluations, logs and unit tests",
+    "published_at": 1793453416.624866,
+    "review_deadline": 1793539816.6248662
   },
   {
     "id": "T3",
@@ -93,7 +557,21 @@
     "shortlist": "20261031-thesis",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "Existing technology + community lead",
+        "url": "https://www.home-assistant.io/integrations/bayesian/",
+        "kind": "Prior lead",
+        "finding": "Home Assistant already supports Bayesian sensor fusion. The possible gap is robustness to contradictory signals."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "When do whole-home constraints help, and when is an unknown answer safer?",
+    "baseline": "Bayesian sensors, timers and manual overrides",
+    "published_at": 1793453416.6248662,
+    "review_deadline": 1793539816.6248665
   },
   {
     "id": "P1",
@@ -125,7 +603,21 @@
     "shortlist": "20261031-project",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "Docs + practitioner discussion",
+        "url": "https://community.n8n.io/t/mitigating-postgresql-write-lag-and-execution-hangs-during-high-volume-n8n-sub-workflow-fan-out/325447",
+        "kind": "Prior lead",
+        "finding": "Workflow evaluations already exist. The test is whether this makes a failure easier to understand."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "Can you understand a workflow incident faster than by reading raw logs?",
+    "baseline": "n8n logs, JSON viewers and custom scripts",
+    "published_at": 1793453416.6248667,
+    "review_deadline": 1793539816.6248667
   },
   {
     "id": "P2",
@@ -157,7 +649,21 @@
     "shortlist": "20261031-project",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "One complaint + official documentation",
+        "url": "https://forum.openfoodfacts.org/t/compatibilite-qui-ne-change-pas-en-fonction-des-preferences/2413",
+        "kind": "Prior lead",
+        "finding": "One reported issue plus existing Open Food Facts matching APIs; the cause of that issue is unconfirmed."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "Is explaining an unchanged result more useful than a simple product filter?",
+    "baseline": "Product filters and Open Food Facts matching",
+    "published_at": 1793453416.6248674,
+    "review_deadline": 1793539816.6248674
   },
   {
     "id": "P3",
@@ -189,6 +695,20 @@
     "shortlist": "20261031-project",
     "version": 1,
     "status": "Possibility",
-    "publication": "owner_requested_visual_summary"
+    "publication": "owner_requested_visual_summary",
+    "batch": "earlier",
+    "provenance": [
+      {
+        "title": "Title-only lead; weaker evidence",
+        "url": "https://money.stackexchange.com/questions/170018/how-should-an-annual-insurance-payment-be-recorded-in-a-monthly-budget",
+        "kind": "Prior lead",
+        "finding": "A forum question title is a lead only; the underlying discussion has not yet been verified."
+      }
+    ],
+    "originality": "Novelty not established. This is a scoped investigation or portfolio adaptation, not a claim of inventing the underlying technique.",
+    "proposed_difference": "Does a timeline explain irregular bills better than a spreadsheet?",
+    "baseline": "Spreadsheets, savings pots and budgeting apps",
+    "published_at": 1793453416.6248677,
+    "review_deadline": 1793539816.6248677
   }
 ]

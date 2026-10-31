@@ -1,0 +1,17 @@
+[Unit]
+Description=AI Lab authenticated job queue
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/ai-discovery
+ExecStart=/usr/bin/python3 -m engine.queue_server
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+UMask=0077
+MemoryMax=128M
+CPUQuota=25%
+
+[Install]
+WantedBy=default.target

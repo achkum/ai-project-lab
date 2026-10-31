@@ -16,7 +16,9 @@ function valid(d) {
  obj(d.coverage) && ['checked','target','registered','blocked'].every(k=>count(d.coverage[k])) &&
  obj(d.usage) && ['spent_sek','limit_sek'].every(k=>d.usage[k]===null||(Number.isFinite(d.usage[k])&&d.usage[k]>=0)) && count(d.releases_last_7_days) &&
  Array.isArray(d.sources) && d.sources.every(x=>strings(x,['id','name','category','url','access','status'])) &&
- Array.isArray(d.opportunities) && d.opportunities.every(x=>strings(x,['id','title','lane','status','summary','contribution','feasibility','venture','next','evidence'])&&['Thesis','Project'].includes(x.lane)) &&
+ Array.isArray(d.opportunities) && d.opportunities.every(x=>strings(x,['id','title','lane','status','summary','contribution','feasibility','venture','next','evidence'])&&['Thesis','Project'].includes(x.lane)&&
+ (x.flow===undefined||(Array.isArray(x.flow)&&x.flow.every(s=>typeof s==='string')))&&
+ (x.provenance===undefined||(Array.isArray(x.provenance)&&x.provenance.every(s=>strings(s,['title','url','kind','finding']))))) &&
  Array.isArray(d.events) && d.events.every(x=>strings(x,['title','detail'])) &&
  (d.decisions===undefined||(Array.isArray(d.decisions)&&d.decisions.every(x=>strings(x,['id','lane','state','url','recommended'])&&['thesis','project'].includes(x.lane)&&date(x.deadline)&&decisionLink(x.url)!=='#'))) &&
 
@@ -27,14 +29,21 @@ function renderDecisions(lane) {
  const rows=(data.decisions||[]).filter(x=>!lane||x.lane===lane);
  return rows.map(d=>{
  const c=data.opportunities.find(x=>x.id===(d.selected||d.recommended)&&x.shortlist===d.id);
- return '<article class="decision-summary"><span class="tag">'+esc(d.lane)+' · '+esc(pretty(d.state))+'</span><h3>'+esc(c?.title||d.id)+'</h3><p>'+(d.selected?'Selected for the manual run.': 'Recommendation ready. Review until '+esc(when(d.deadline,'not set'))+'.')+'</p><a class="text-link" href="#'+(d.lane==='project'?'projects':'thesis')+'">See the three options →</a></article>';
+ return '<article class="decision-summary"><span class="tag">'+esc(d.lane)+' · '+esc(pretty(d.state))+'</span><h3>'+esc(c?.title||d.id)+'</h3><p>'+(d.selected?'Selected for the manual run.': 'Recommendation ready. Review until '+esc(when(d.deadline,'not set'))+'.')+'</p><a class="text-link" href="#'+(d.lane==='project'?'projects':'thesis')+'">Explore the options →</a></article>';
  }).join('')||'<p class="muted">Discovery is collecting the next set of possibilities.</p>';
 }
 function ideaFlow(x) {
  return '<ol class="idea-flow">'+(x.flow||[]).map((s,i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><p>'+esc(s)+'</p></li>').join('')+'</ol>';
 }
+function sourcePreview(x){
+ const s=(x.provenance||[])[0];
+ return s?'<div class="source-preview"><span class="label">IDEA STARTING POINT</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(s.kind)+' · Novelty unverified</small></div>':'';
+}
+function provenanceDetails(x){
+ return '<section class="provenance-panel"><h3>Where this idea came from</h3>'+(x.provenance||[]).map(s=>'<article><span class="tag">'+esc(s.kind)+'</span><a class="text-link" href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><p>'+esc(s.finding)+'</p></article>').join('')+'<h3>What already exists</h3><p>'+esc(x.baseline||x.alternative)+'</p><h3>What we propose to add or test</h3><p>'+esc(x.proposed_difference||x.question)+'</p><p class="originality-note">'+esc(x.originality||'Novelty has not been established.')+'</p></section>';
+}
 function ideaCard(x) {
- return '<article class="idea-card '+(x.selected?'chosen':'')+'"><div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge '+(x.selected?'chosen-badge':'')+'">'+(x.selected?'Selected':x.recommended?'Recommended':esc(x.id))+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'A bounded next step')+'</strong><p>'+esc(x.contribution)+'</p></div><div class="idea-facts"><div><span class="label">FIRST STEP</span><strong>'+esc(x.effort||'To assess')+'</strong></div><div><span class="label">MARKET DEMAND</span><strong>'+esc(x.market||'Unvalidated')+'</strong></div></div><p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">Explore '+esc(x.id)+' · outcomes & trade-offs →</button></article>';
+ return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge '+(x.selected?'chosen-badge':'')+'">'+(x.selected?'Selected':x.recommended?'Recommended':esc(x.id))+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+sourcePreview(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'A bounded next step')+'</strong>'+(x.contribution!==x.deliverable?'<p>'+esc(x.contribution)+'</p>':'')+'</div><div class="idea-facts"><div><span class="label">FIRST STEP</span><strong>'+esc(x.effort||'To assess')+'</strong></div><div><span class="label">MARKET DEMAND</span><strong>'+esc(x.market||'Unvalidated')+'</strong></div></div><p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">Explore '+esc(x.id)+' · outcomes & trade-offs →</button></article>';
 }
 function comparison(rows) {
  const fields=[['Who it helps','audience'],['First deliverable','deliverable'],['Initial effort','effort'],['Evidence strength','evidence_level'],['Main trade-off','risk']];
@@ -72,7 +81,7 @@ function renderCards(lane,query=''){
  const focus=chosen||recommended;
  const intro=focus?'<div class="lane-focus"><div><span class="tag">'+(chosen?'YOUR CURRENT DIRECTION':'OUR RECOMMENDATION')+'</span><p><strong>'+esc(focus.id)+'</strong> · '+esc(focus.reason||focus.title)+'</p></div><span class="pill">'+(chosen?esc(pretty(focus.status)):'Ready to review')+'</span></div>':'';
  const conversation='<div class="explore-again"><div><strong>Not your direction?</strong><p>Question the recommendation, change the angle or explore a fresh set now.</p></div><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></div>';
- dest.innerHTML=conversation+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">No matching ideas. Try another search.</div>');
+ dest.innerHTML=(typeof jobControls==='function'?jobControls(lane):'')+conversation+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">No matching ideas. Try another search.</div>');
 }
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
@@ -119,14 +128,15 @@ document.addEventListener('click',async e=>{
  }
  const b=e.target.closest('[data-detail]');if(!b)return;
  const x=data.opportunities.find(x=>x.id===b.dataset.detail);if(!x)return;
- $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+ideaFlow(x)+'<div class="detail-grid">'+[
+ $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+sourcePreview(x)+ideaFlow(x)+'<div class="detail-grid">'+[
  ['The question worth testing',x.question||x.summary],
+ ...(x.model_plan?[['Model approach',x.model_plan],['Why ML here?',x.why_ml],['Data access & evaluation inputs',x.data_plan]]:[]),
  ['What success would look like',x.measure||x.contribution],
  ['Who might use it—and why',x.venture],
  ['What already exists',x.alternative||'Closest alternatives still need checking'],
  ['Why consider this option',x.reason||x.feasibility],
  ['What could make us drop it',x.risk||x.feasibility]
- ].map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div><div class="next-step"><span class="tag">BOUNDED NEXT STEP · '+esc(x.effort||'TO ASSESS')+'</span><p>'+esc(x.next)+'</p><p class="muted">'+esc(x.feasibility)+'</p></div><details class="evidence-details"><summary>Evidence & uncertainty</summary><p>'+esc(x.evidence)+'</p>'+(x.evidence_url?'<a class="text-link" href="'+esc(safeLink(x.evidence_url))+'" target="_blank" rel="noopener noreferrer">Read the original source ↗</a>':'')+'</details>'+(x.decision_url?'<div class="choice-actions"><strong>'+(x.selected?'This option is already selected.':'Want to choose this direction?')+'</strong><p>Choices are saved through your private GitHub thread. Copy the command, open the thread and paste it as a comment. A change during work pauses at a checkpoint.</p><div><button data-copy-choice="'+esc(x.id)+'">Copy choice: '+esc(x.id)+'</button> <a class="button" href="'+esc(decisionLink(x.decision_url))+'#new_comment_field" target="_blank" rel="noopener noreferrer">Open private decision thread ↗</a></div></div>':'');
+ ].map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>'+provenanceDetails(x)+'<div class="next-step"><span class="tag">BOUNDED NEXT STEP · '+esc(x.effort||'TO ASSESS')+'</span><p>'+esc(x.next)+'</p><p class="muted">'+esc(x.feasibility)+'</p></div><details class="evidence-details"><summary>Evidence & uncertainty</summary><p>'+esc(x.evidence)+'</p>'+(x.evidence_url?'<a class="text-link" href="'+esc(safeLink(x.evidence_url))+'" target="_blank" rel="noopener noreferrer">Read the original source ↗</a>':'')+'</details>'+(typeof singleJobAction==='function'?singleJobAction(x):'');
  $('detail-content').insertAdjacentHTML('beforeend','<div class="discussion-actions"><button data-conversation="ask" data-lane="'+x.lane.toLowerCase()+'" data-idea="'+esc(x.id)+'">Ask about this idea</button><button data-conversation="refine" data-lane="'+x.lane.toLowerCase()+'" data-idea="'+esc(x.id)+'">Refine this direction</button></div>');
  $('detail').showModal();
 });

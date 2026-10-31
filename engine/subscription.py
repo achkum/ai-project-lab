@@ -69,8 +69,8 @@ def run(tier, prompt, cwd, output, proof_path, timeout=1200, *, packet_path=None
     # New agents only edit their scoped workspace. They never receive coordinator secrets.
     args = [executable,'exec','--ignore-user-config','--ephemeral','--model',MODELS[tier],
             '-c','forced_login_method="chatgpt"','-c','model_provider="openai"',
-            '-c','model_reasoning_effort="high"','--sandbox',
-            'workspace-write' if tier=='implementation' and not smoke else 'read-only',
+            '-c','model_reasoning_effort="high"','-c','windows.sandbox="elevated"','--sandbox',
+            'workspace-write' if packet_path and not smoke else 'read-only',
             '--cd',str(Path(cwd).resolve()),'--skip-git-repo-check','--color','never',
             '--output-last-message',str(output),'-']
     guard = ('Use subscription allowance only. Never purchase credits, use API keys, reset quotas, start other agents, '

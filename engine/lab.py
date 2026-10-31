@@ -52,7 +52,7 @@ def export(profile, workflow, discovery, sources):
             if card.get('publication')!='owner_requested_visual_summary':
                 continue
             decision=next((d for d in decisions if d['id']==card.get('shortlist')),None)
-            card['recommended']=bool(decision and decision['recommended']==card['id'])
+            card['recommended']=bool(decision['recommended']==card['id']) if decision else bool(card.get('recommended'))
             card['selected']=bool(decision and decision['selected']==card['id'])
             card['status']=decision['state'] if card['selected'] else 'Possibility'
             card['decision_url']=decision['url'] if decision else ''
@@ -100,6 +100,8 @@ def main():
         if cmd == 'finish': p.add_argument('result')
     args = parser.parse_args()
     profile = json.loads(Path(args.profile).read_text(encoding='utf-8'))
+    if profile.get('execution_mode')=='vps_jobs' and args.command in ('claim','check','heartbeat','finish'):
+        raise RuntimeError('Execution moved to the multi-job VPS queue. Use engine.job_worker; legacy worker claims are disabled.')
     root = Path(profile['runtime_root'])
     sources = json.loads((Path(profile['public_root'])/'config/collectors.json').read_text(encoding='utf-8'))
     flow = Workflow(root/'workflow.sqlite', profile['owner'], profile['private_repo'])
