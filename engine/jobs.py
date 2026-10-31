@@ -144,9 +144,13 @@ class Jobs:
             self.db.execute('UPDATE jobs SET lease_until=?,updated=?,message=? WHERE id=?',(self.clock()+180,self.clock(),str(message)[:400],jid))
 
     def finish(self,jid,token,state,message,result=None):
-        if state not in ('review_ready','needs_attention','quota_wait'): raise ValueError('Invalid completion state')
+        if state not in ('completed','review_ready','needs_attention','quota_wait'): raise ValueError('Invalid completion state')
         if result is not None:
-            if not isinstance(result,dict) or set(result)-{'url','summary','files','validation'}: raise ValueError('Invalid result')
+            if not isinstance(result,dict) or set(result)-{'url','demo_url','summary','files','validation'}: raise ValueError('Invalid result')
+            demo=result.get('demo_url','')
+            if demo:
+                import re
+                if not re.fullmatch(r'https://achkum\.github\.io/ai-project-lab/projects/[a-z0-9-]+/',demo):raise ValueError('Invalid demo URL')
             url=result.get('url','')
             if url and not url.startswith('https://github.com/achkum/ai-thesis-lab/tree/main/research/jobs/'): raise ValueError('Invalid artifact URL')
         with self.transaction():
@@ -162,7 +166,7 @@ class Jobs:
             if not r: raise ValueError('Unknown job')
             if action=='resume' and r['state'] not in ('paused','needs_attention','quota_wait'):
                 raise ValueError('Only paused or blocked jobs can resume')
-            if r['state'] in ('review_ready','cancelled'): raise ValueError('Job is already closed')
+            if r['state'] in ('completed','review_ready','cancelled'): raise ValueError('Job is already closed')
             state={'pause':'paused','resume':'queued','cancel':'cancelled'}[action]
             self.db.execute('UPDATE jobs SET state=?,token=NULL,lease_until=NULL,updated=?,message=? WHERE id=?',
                 (state,self.clock(),'Owner requested '+action,jid))

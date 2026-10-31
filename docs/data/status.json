@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T15:48:38.961383+00:00",
+  "generated_at": "2026-10-31T17:16:32.890742+00:00",
   "connected": true,
   "thesis": {
-    "state": "running",
+    "state": "review_ready",
     "last_success": "2026-10-31T14:17:30.666583+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
-    "state": "running",
-    "stage": "running",
+    "state": "review_ready",
+    "stage": "review ready",
     "window_start": "2026-10-31T12:54:52.504456+00:00",
     "target_at": "2026-11-07T12:54:52.504456+00:00"
   },
@@ -362,7 +362,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "running",
+      "status": "review_ready",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -454,7 +454,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "running",
+      "status": "review_ready",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -535,13 +535,13 @@
         "S4"
       ],
       "confidence": "Reported operational problem; service demand untested",
-      "version": 1,
+      "version": 2,
       "domain": "Review reliability",
       "summary": "Turn a repository’s exported review events into a small, inspectable report of what is supported, contradicted or unknowable. Sell the usefulness of the review, not a claim that AI can prove human judgement.",
-      "deliverable": "Build a complete local import → evidence timeline → export journey in 3–5 days, with a documented fixture suite and a walkthrough. A later owner-led trial with two maintainers tests usefulness.",
+      "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
       "contribution": "A narrow, local diagnostic and onboarding deliverable. It is explicitly an integration/service hypothesis, not a new approval protocol or compliance certification.",
       "feasibility": "One-week product experiment; deterministic checks first. Optional classifier only after RT1 evidence supports it.",
-      "next": "Build a complete local import → evidence timeline → export journey in 3–5 days, with a documented fixture suite and a walkthrough. A later owner-led trial with two maintainers tests usefulness.",
+      "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
       "evidence": "Reported operational problem; service demand untested",
       "evidence_level": "Reported operational problem; service demand untested",
       "baseline": "GitHub rulesets and identity separation prevent many failures. Kosli already collects delivery evidence. Prefer configuring existing tools when that solves the problem.",
@@ -562,7 +562,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "running",
+      "status": "Possibility",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -596,7 +596,9 @@
           "read_scope": "Repository README capabilities; not installed or tested"
         }
       ],
-      "selected": true,
+      "delivery_mode": "tested_web_app",
+      "starter_job_id": "cefb082c7bb340f5b41c4a4e7a189a84",
+      "selected": false,
       "decision_url": ""
     },
     {
@@ -627,13 +629,13 @@
         "S10"
       ],
       "confidence": "Timely technical need; product gap and demand unvalidated",
-      "version": 1,
+      "version": 2,
       "domain": "Task-specific model evaluation",
       "summary": "Package one model pilot so a customer can inspect data dates, baseline fairness, uncertainty and known disclosure gaps before accepting a headline accuracy claim.",
-      "deliverable": "Deliver a local data import → baseline evaluation → evidence report in 4–6 days. The finished slice is one decision report, not a leaderboard or training platform.",
+      "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
       "contribution": "A proposed client-facing interpretation and evidence layer around an existing evaluation. No novel metric or contamination detector is claimed.",
       "feasibility": "One-week service prototype. No API fees, GPU provisioning or paid model access.",
-      "next": "Deliver a local data import → baseline evaluation → evidence report in 4–6 days. The finished slice is one decision report, not a leaderboard or training platform.",
+      "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
       "evidence": "Timely technical need; product gap and demand unvalidated",
       "evidence_level": "Timely technical need; product gap and demand unvalidated",
       "baseline": "fev already provides tasks and summaries; post-release evaluations already exist. Existing tooling should do the numerical work. Generic forecast dashboards are not the opportunity.",
@@ -654,7 +656,7 @@
       "recommended": false,
       "auto_eligible": false,
       "quality_gate_version": 2,
-      "status": "running",
+      "status": "Possibility",
       "publication": "owner_requested_visual_summary",
       "batch": "reviewed-cycle",
       "shortlist": "20261031-reviewed",
@@ -706,7 +708,9 @@
           "read_scope": "Documentation overview and quickstart including evaluation_summary; implementation not tested"
         }
       ],
-      "selected": true,
+      "delivery_mode": "tested_web_app",
+      "starter_job_id": "c5738b875e514c6f89c2b6186b498c8c",
+      "selected": false,
       "decision_url": ""
     }
   ],

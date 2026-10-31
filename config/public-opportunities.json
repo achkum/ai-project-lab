@@ -648,13 +648,13 @@
       "S4"
     ],
     "confidence": "Reported operational problem; service demand untested",
-    "version": 1,
+    "version": 2,
     "domain": "Review reliability",
     "summary": "Turn a repository’s exported review events into a small, inspectable report of what is supported, contradicted or unknowable. Sell the usefulness of the review, not a claim that AI can prove human judgement.",
-    "deliverable": "Build a complete local import → evidence timeline → export journey in 3–5 days, with a documented fixture suite and a walkthrough. A later owner-led trial with two maintainers tests usefulness.",
+    "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
     "contribution": "A narrow, local diagnostic and onboarding deliverable. It is explicitly an integration/service hypothesis, not a new approval protocol or compliance certification.",
     "feasibility": "One-week product experiment; deterministic checks first. Optional classifier only after RT1 evidence supports it.",
-    "next": "Build a complete local import → evidence timeline → export journey in 3–5 days, with a documented fixture suite and a walkthrough. A later owner-led trial with two maintainers tests usefulness.",
+    "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
     "evidence": "Reported operational problem; service demand untested",
     "evidence_level": "Reported operational problem; service demand untested",
     "baseline": "GitHub rulesets and identity separation prevent many failures. Kosli already collects delivery evidence. Prefer configuring existing tools when that solves the problem.",
@@ -708,7 +708,9 @@
         "verified_at": "2026-10-31",
         "read_scope": "Repository README capabilities; not installed or tested"
       }
-    ]
+    ],
+    "delivery_mode": "tested_web_app",
+    "starter_job_id": "cefb082c7bb340f5b41c4a4e7a189a84"
   },
   {
     "id": "RP2",
@@ -738,13 +740,13 @@
       "S10"
     ],
     "confidence": "Timely technical need; product gap and demand unvalidated",
-    "version": 1,
+    "version": 2,
     "domain": "Task-specific model evaluation",
     "summary": "Package one model pilot so a customer can inspect data dates, baseline fairness, uncertainty and known disclosure gaps before accepting a headline accuracy claim.",
-    "deliverable": "Deliver a local data import → baseline evaluation → evidence report in 4–6 days. The finished slice is one decision report, not a leaderboard or training platform.",
+    "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
     "contribution": "A proposed client-facing interpretation and evidence layer around an existing evaluation. No novel metric or contamination detector is claimed.",
     "feasibility": "One-week service prototype. No API fees, GPU provisioning or paid model access.",
-    "next": "Deliver a local data import → baseline evaluation → evidence report in 4–6 days. The finished slice is one decision report, not a leaderboard or training platform.",
+    "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
     "evidence": "Timely technical need; product gap and demand unvalidated",
     "evidence_level": "Timely technical need; product gap and demand unvalidated",
     "baseline": "fev already provides tasks and summaries; post-release evaluations already exist. Existing tooling should do the numerical work. Generic forecast dashboards are not the opportunity.",
@@ -816,6 +818,8 @@
         "verified_at": "2026-10-31",
         "read_scope": "Documentation overview and quickstart including evaluation_summary; implementation not tested"
       }
-    ]
+    ],
+    "delivery_mode": "tested_web_app",
+    "starter_job_id": "c5738b875e514c6f89c2b6186b498c8c"
   }
 ]

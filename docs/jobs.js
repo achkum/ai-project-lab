@@ -21,14 +21,14 @@ function jobControls(lane){
  const jobs=liveJobs.filter(x=>x.lane===lane.toLowerCase());
  const waiting=liveJobs.filter(j=>j.state==='queued').sort((a,b)=>a.created-b.created||a.id.localeCompare(b.id));
  const running=liveJobs.filter(j=>j.state==='running');
- const active=jobs.filter(j=>!['review_ready','cancelled'].includes(j.state)).sort((a,b)=>(a.state==='running'?-1:b.state==='running'?1:a.created-b.created));
- const history=jobs.filter(j=>['review_ready','cancelled'].includes(j.state)).sort((a,b)=>b.updated-a.updated);
+ const active=jobs.filter(j=>!['completed','review_ready','cancelled'].includes(j.state)).sort((a,b)=>(a.state==='running'?-1:b.state==='running'?1:a.created-b.created));
+ const history=jobs.filter(j=>['completed','review_ready','cancelled'].includes(j.state)).sort((a,b)=>b.updated-a.updated);
  const progress=running.length?((workerInfo?.online?'Running: ':'Last reported running: ')+running.map(j=>j.candidate).join(', ')+' — '+running.length+'/'+queueCapacity+' parallel slots; '+waiting.length+' waiting.'):(waiting.length?waiting.length+' jobs waiting. '+(workerInfo?.online?'Workers are checking subscription availability.':'Keep the laptop awake to run them.'):'No jobs currently running or queued.');
  const row=j=>{
   const position=waiting.findIndex(x=>x.id===j.id);
   const state=j.state==='queued'?'Queued · '+(position===0?'next in line':'waiting position '+(position+1)):j.state.replaceAll('_',' ');
   const message=j.state==='queued'?(running.length?'Waiting for an available worker slot. Up to '+queueCapacity+' jobs run in parallel.':j.message):j.message;
-  return '<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(state)+'</strong><p>'+esc(j.title)+'</p><p>'+esc(message)+'</p>'+(j.result?.url?'<a href="'+esc(safeLink(j.result.url))+'" target="_blank" rel="noopener noreferrer">Open private review artifacts →</a>':'')+'</div><div>'+(['queued','running'].includes(j.state)?'<button data-job-action="pause" data-job-id="'+esc(j.id)+'">Pause</button>':'')+(['paused','needs_attention','quota_wait'].includes(j.state)?'<button data-job-action="resume" data-job-id="'+esc(j.id)+'">Resume</button>':'')+(!['review_ready','cancelled'].includes(j.state)?'<button data-job-action="cancel" data-job-id="'+esc(j.id)+'">Cancel</button>':'')+'</div></article>';
+  return '<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(state)+'</strong><p>'+esc(j.title)+'</p><p>'+esc(message)+'</p>'+(j.result?.demo_url?'<p><a class="primary" href="'+esc(safeLink(j.result.demo_url))+'" target="_blank" rel="noopener noreferrer">Open app →</a></p>':'')+(j.result?.url?'<a href="'+esc(safeLink(j.result.url))+'" target="_blank" rel="noopener noreferrer">Open private review artifacts →</a>':'')+'</div><div>'+(['queued','running'].includes(j.state)?'<button data-job-action="pause" data-job-id="'+esc(j.id)+'">Pause</button>':'')+(['paused','needs_attention','quota_wait'].includes(j.state)?'<button data-job-action="resume" data-job-id="'+esc(j.id)+'">Resume</button>':'')+(!['completed','review_ready','cancelled'].includes(j.state)?'<button data-job-action="cancel" data-job-id="'+esc(j.id)+'">Cancel</button>':'')+'</div></article>';
  };
  return '<section class="job-panel"><div class="job-toolbar"><div><strong>'+count+' selected</strong><p>Select several options; each gets a separate job.</p></div><button class="primary" data-start-lane="'+lane+'" '+(!count||sending?'disabled':'')+'>'+(lane==='Thesis'?'Investigate selected':'Build selected')+'</button><button data-connect-queue>'+(dashboardKey?'Account & sign out':'Sign in')+'</button></div>'+(queueNotice?'<p role="status">'+esc(queueNotice)+'</p>':'')+'<p class="queue-state" role="status">'+esc(queueError||(dashboardKey?(workerInfo?.online?'Laptop worker online · live status refreshes every 15 seconds.':'Laptop offline or starting. The VPS retains queued jobs.'):'Sign in with your password to start work. Viewing ideas is public.'))+'</p>'+(dashboardKey?'<div class="callout" aria-live="polite"><strong>'+esc(progress)+'</strong><p>'+esc(workerInfo?.detail||'Connecting to live queue…')+'</p></div>':'')+active.map(row).join('')+(history.length?'<details><summary>Previous results ('+history.length+')</summary>'+history.map(row).join('')+'</details>':'')+'</section>';
 }
@@ -38,7 +38,7 @@ function redrawJobs(){
  if(dashboardKey&&workerInfo&&!queueError){
   for(const lane of ['thesis','project']){
    const states=liveJobs.filter(j=>j.lane===lane).map(j=>j.state);
-   const state=['running','needs_attention','quota_wait','queued','paused','review_ready'].find(x=>states.includes(x))||'awaiting_selection';
+   const state=['running','needs_attention','quota_wait','queued','paused','completed','review_ready'].find(x=>states.includes(x))||'awaiting_selection';
    $(lane+'-state').textContent=state.replaceAll('_',' ');
    if(lane==='project')$('project-stage').textContent=state.replaceAll('_',' ');
   }
@@ -46,7 +46,7 @@ function redrawJobs(){
  const overview=$('overview-live-work');
  if(overview){
   if(dashboardKey&&!workerInfo&&!queueError){overview.innerHTML='<h2>Live work status</h2><p>Connecting to the VPS for current job status…</p>';return;}
-  const current=liveJobs.filter(j=>data.opportunities.some(c=>c.id===j.candidate));
+  const current=liveJobs.filter(j=>data.opportunities.some(c=>c.id===j.candidate&&c.version===j.version));
   overview.innerHTML='<h2>Live work status</h2>'+(dashboardKey?'<p>'+esc(queueError?'Connection interrupted — showing last received status.':(workerInfo?.online?'Workers online':'Workers offline or connecting')+' · '+queueCapacity+' parallel slots · refreshes every 15 seconds.')+'</p>'+current.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' · '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.title)+'</p><p>'+esc(j.message)+'</p></div><a href="#'+(j.lane==='thesis'?'thesis':'projects')+'">View & manage →</a></article>').join('')+(current.length?'':'<p>No jobs started for the current options.</p>'):'<p>Sign in to see live investigation and build status.</p><button data-connect-queue>Sign in</button>');
  }
 }
@@ -78,20 +78,22 @@ async function connectQueue(){
  try{const r=await fetch(QUEUE_API+'/auth/status',{cache:'no-store'});const status=await r.json();if(status.configured){$('auth-status').textContent='Use your password. It is sent directly to your VPS over HTTPS; it is not saved in this browser.';$('login-form').hidden=false;}else{$('auth-status').textContent='Your password has not been set yet. Use the private setup page opened for you in this chat. Once set, return here to sign in.';}}
  catch(err){$('auth-status').textContent='Could not reach sign-in service. Try again shortly.';}
 }
-function confirmStart(ids){
+async function confirmStart(ids){
+ if(sending)return;
  if(!dashboardKey){connectQueue();return;}
- const cards=ids.map(id=>data.opportunities.find(x=>x.id===id)).filter(Boolean);
+ const cards=ids.map(id=>data.opportunities.find(x=>x.id===id)).filter(x=>x&&manualStartAllowed(x));
  if(!cards.length)return;
- $('detail-content').innerHTML='<span class="tag">START '+cards.length+' SEPARATE JOB'+(cards.length===1?'':'S')+'</span><h2>Review the selected work</h2><ul>'+cards.map(c=>'<li><strong>'+esc(c.id)+' · '+esc(c.title)+'</strong><p>'+esc(c.deliverable)+'</p></li>').join('')+'</ul><p>Thesis jobs produce investigation briefs. Project jobs produce bounded drafts for review. Up to four jobs run independently on the laptop; the VPS retains work while it is off. No paid model fallback.</p><button id="confirm-start-jobs" class="primary">Confirm & queue '+cards.length+' job'+(cards.length===1?'':'s')+'</button><p id="start-result" role="status"></p>';
- $('detail').showModal();
- const requestId=crypto.randomUUID();
- $('confirm-start-jobs').onclick=async()=>{
- if(sending)return;sending=true;$('confirm-start-jobs').disabled=true;
- try{const r=await queueRequest('/jobs',{request_id:requestId,items:cards.map(c=>({id:c.id,version:c.version}))});liveJobs=r.jobs;workerInfo=r.worker;queueCapacity=r.capacity||1;queueError='';queueNotice='Request accepted for '+cards.map(c=>c.id).join(', ')+'. Live status is shown below.';cards.forEach(c=>selectedIdeas.delete(c.id));$('detail').close();}
- catch(e){$('start-result').textContent='Not confirmed: '+e.message+' You can retry safely.';$('confirm-start-jobs').disabled=false;}
+ sending=true;queueError='';queueNotice='Starting '+cards.map(c=>c.id).join(', ')+'…';redrawJobs();
+ try{
+  const r=await queueRequest('/jobs',{request_id:crypto.randomUUID(),items:cards.map(c=>({id:c.id,version:c.version}))});
+  liveJobs=r.jobs;workerInfo=r.worker;queueCapacity=r.capacity||1;
+  queueNotice='Started '+cards.map(c=>c.id).join(', ')+'. Work continues automatically; live status is below.';
+  cards.forEach(c=>selectedIdeas.delete(c.id));
+  if($('detail').open)$('detail').close();
+ }catch(e){queueError='Could not start: '+e.message+'. Your selection is kept; retry safely.';queueNotice='';}
  finally{sending=false;redrawJobs();}
- };
 }
+
 document.addEventListener('change',e=>{
  const el=e.target.closest('[data-select-idea]');if(!el)return;
  if(el.checked)selectedIdeas.add(el.dataset.selectIdea);else selectedIdeas.delete(el.dataset.selectIdea);

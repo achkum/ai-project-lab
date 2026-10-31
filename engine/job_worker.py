@@ -89,7 +89,45 @@ def publication_lock(profile,job):
 
 def publish_review_bundle(profile,job,workspace,response):
     with publication_lock(profile,job):
-        return _publish_review_bundle(profile,job,workspace,response)
+        demo=None
+        if job['lane']=='project' and job['scope'].get('delivery_mode')=='tested_web_app':
+            demo=publish_web_app(profile,job,workspace)
+        result=_publish_review_bundle(profile,job,workspace,response)
+        if demo:result.update(demo_url=demo,summary='Working browser prototype deployed after automated checks.',validation='See VALIDATION.txt for the independently executed Node test results.')
+        elif job['lane']=='thesis':result['summary']='Investigation complete; read the findings and limitations. No further approval is required to view the result.'
+        return result
+
+
+def publish_web_app(profile,job,workspace):
+    """Publish a selected project's tested static app, without an owner approval stop."""
+    import re
+    slug=job['scope']['id'].lower()
+    if not re.fullmatch('[a-z0-9-]+',slug):raise ValueError('Invalid project identifier')
+    site=workspace/'site'
+    tests=list((workspace/'tests').glob('*.test.cjs'))
+    if not (site/'index.html').is_file() or not tests:raise RuntimeError('A runnable site/index.html and meaningful tests/*.test.cjs are required')
+    run=subprocess.run(['node','--test',*[str(p.resolve()) for p in tests]],cwd=workspace,capture_output=True,text=True,encoding='utf-8',timeout=120)
+    (workspace/'VALIDATION.txt').write_text(run.stdout+'\n'+run.stderr,encoding='utf-8')
+    if run.returncode:raise RuntimeError('Automated app checks failed; implementation remains available for repair')
+    public=Path(profile['public_root']);dest=public/'docs/projects'/slug
+    files=[f for f in site.rglob('*') if f.is_file()]
+    if any(f.is_symlink() or f.suffix.lower() not in {'.html','.css','.js','.json','.svg','.csv','.txt'} or f.stat().st_size>1_000_000 for f in files):raise RuntimeError('Site contains unsupported files')
+    for f in files:
+        target=dest/f.relative_to(site);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target)
+    for root,path in [(public,'docs/projects/'+slug)]:
+        subprocess.run(['git','add','--',path],cwd=root,check=True,capture_output=True)
+        if subprocess.run(['git','diff','--cached','--quiet','--',path],cwd=root).returncode:
+            subprocess.run(['git','commit','--only','-m','Publish tested '+job['scope']['id']+' app','--',path],cwd=root,check=True,capture_output=True)
+            subprocess.run(['git','push'],cwd=root,check=True,capture_output=True,timeout=60)
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=public,text=True).strip()
+    for _ in range(60):
+        remote('heartbeat',jid=job['id'],token=job['token'],message='Tests passed; publishing the browser app')
+        check=subprocess.run(['gh','api','repos/achkum/ai-project-lab/pages/builds/latest'],capture_output=True,text=True,encoding='utf-8',timeout=20)
+        build=json.loads(check.stdout) if check.returncode==0 else {}
+        if build.get('commit')==commit and build.get('status')=='built':return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
+        if build.get('commit')==commit and build.get('status')=='errored':raise RuntimeError('Pages deployment failed; source and test results preserved')
+        time.sleep(5)
+    raise RuntimeError('Pages deployment not confirmed within five minutes; inspect deployment status')
 
 
 def _publish_review_bundle(profile,job,workspace,response):
@@ -97,7 +135,7 @@ def _publish_review_bundle(profile,job,workspace,response):
     root=Path(profile['private_root']);dest=root/'research/jobs'/job['id']
     dest.mkdir(parents=True,exist_ok=True)
     copied=[]
-    allowed={'.py','.html','.css','.js','.json','.txt','.md','.csv','.toml','.yaml','.yml'}
+    allowed={'.py','.html','.css','.js','.cjs','.json','.txt','.md','.csv','.toml','.yaml','.yml'}
     for f in workspace.rglob('*'):
         if not f.is_file() or f.is_symlink() or f.suffix.lower() not in allowed or f.stat().st_size>1_000_000:continue
         rel=f.relative_to(workspace)
@@ -133,6 +171,13 @@ def run_one(profile):
         remote('seen',detail='Ready; waiting for selected jobs');return False
     workspace=Path(profile['runtime_root'])/'jobs'/job['id']
     workspace.mkdir(parents=True,exist_ok=True)
+    if job['lane']=='project':job['scope'].setdefault('delivery_mode','tested_web_app')
+    starter=job['scope'].get('starter_job_id')
+    if starter:
+        import re
+        if not re.fullmatch('[a-f0-9]{32}',starter):raise ValueError('Invalid starter job')
+        source=Path(profile['private_root'])/'research/jobs'/starter
+        if source.is_dir():shutil.copytree(source,workspace/'starter',dirs_exist_ok=True)
     def checkpoint():
         remote('heartbeat',jid=job['id'],token=job['token'],message='Investigating' if job['lane']=='thesis' else 'Building a scoped draft')
         remote('seen',detail='Working on '+job['scope']['id']+'; other jobs remain queued')
@@ -150,11 +195,22 @@ def run_one(profile):
         'limitations and a draft sharing post. Run appropriate checks and report actual results. Do not substitute fake model outputs '
         'for a working model: label simulation clearly or report a dependency/data blocker. Stop at a reviewable checkpoint within 12 minutes.')
     try:
-        response=execute('analysis' if job['lane']=='thesis' else 'implementation',prompt+'\n\n'+json.dumps(job['scope'],ensure_ascii=False),workspace,workspace.parent/(job['id']+'-result.txt'),checkpoint)
+        if job['scope'].get('delivery_mode')=='tested_web_app':
+            prompt=('Build and finish a usable browser application, not a brief or command-line-only draft. '
+                'Read starter/ if present and improve the supplied implementation. All UI assets go in site/ with index.html. '
+                'Use plain browser JS/CSS, no paid services, no CDN, no npm dependencies. Provide local file import, a clearly labelled synthetic sample, '
+                'visual interactive results, useful validation errors, export/download and a link back to ../../#projects. '
+                'Processing stays entirely in the browser; do not use network APIs, tokens, localStorage or analytics. '
+                'Write pure analysis logic in a browser JS file that also exports via CommonJS for Node tests. '
+                'Write meaningful tests/*.test.cjs using node:test and node:assert for correctness, malformed data and relevant edge cases. '
+                'Run the checks and fix failures. README must describe how to use the app, data provenance and honest limitations. '
+                'The coordinator runs your Node tests again, deploys site/ and verifies Pages. No human approval step is needed. '
+                'Do not push or deploy yourself. Complete a coherent usable slice within 35 minutes; never fake model outputs.')
+        response=execute('analysis' if job['lane']=='thesis' else 'implementation',prompt+'\n\n'+json.dumps(job['scope'],ensure_ascii=False),workspace,workspace.parent/(job['id']+'-result.txt'),checkpoint,timeout=2400 if job['scope'].get('delivery_mode')=='tested_web_app' else 900)
         checkpoint()
         result=publish_review_bundle(profile,job,workspace,response)
         checkpoint()
-        remote('finish',jid=job['id'],token=job['token'],state='review_ready',message='Draft artifacts available; review before declaring a release',result=result)
+        remote('finish',jid=job['id'],token=job['token'],state='completed',message='App tested and deployed' if result.get('demo_url') else 'Investigation complete; findings available',result=result)
     except Exception as e:
         # A pause/cancel revokes the lease; never overwrite the owner's newer decision.
         try:remote('finish',jid=job['id'],token=job['token'],state='needs_attention',message=str(e)[:350])
