@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "overall_state": "foundation_in_progress",
+  "completed": [
+    "Published sample dashboard",
+    "Private thesis and public project monorepos",
+    "Implementation proposal and handoff",
+    "Initial persistent local queue with leases and attempt fencing",
+    "Quality tier resolver with explicit binding and budget prerequisites",
+    "Eight foundation tests and zero-model-call fixture smoke run"
+  ],
+  "not_implemented": [
+    "Model adapters and real spending reservations",
+    "Source connectors and actual discovery",
+    "Authenticated remote worker transport",
+    "Isolated build runner and durable release publishing",
+    "Schedulers and live dashboard export"
+  ],
+  "required_owner_inputs": [
+    "Interests and exclusions",
+    "Actual model access and spending cap",
+    "Worker machine authorization and weekly availability",
+    "Secure VPS access if hybrid mode is chosen"
+  ],
+  "next_action": "Validate owner inputs, implement a private local profile and permitted collector vertical slice; bind model tiers only after verifying access."
+}

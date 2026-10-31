@@ -3,7 +3,16 @@
 Public monorepo for continuous project delivery and a static dashboard spanning two lanes. Private companion: ai-thesis-lab.
 
 ## Current state
-Dashboard shell implemented. Collectors, AI workers, VPS scheduling, authenticated commands and live export are not implemented. Example opportunities are illustrative, not research findings.
+Dashboard shell and an initial local queue/routing foundation are implemented. Collectors, AI workers, VPS scheduling, authenticated commands and live export are not implemented. Example opportunities are illustrative, not research findings.
+
+## Local foundation
+Run from this repository with Python 3.10 or later:
+
+    python -m unittest discover -s tests -p "test_*.py" -v
+    python -m engine doctor
+    python -m engine dry-run
+
+The dry run uses an ignored runtime/dry-run.sqlite fixture database and makes no model calls. The persistent queue supports deduplication, expiring leases, attempt tokens and bounded retry. Model routing requires explicit model bindings and positive spending caps; it does not yet implement metering, reservation or a provider adapter. No background service is installed. A job completion record does not itself publish any artifact; durable upload and release fencing remain implementation work.
 
 ## Dashboard
 Open docs/index.html locally, or serve docs with a static HTTP server. GitHub Pages publishes docs from main. No build dependencies.
