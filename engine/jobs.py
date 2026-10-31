@@ -63,8 +63,12 @@ class Jobs:
                 return json.loads(old['result'])
             ids=[]
             for c in cards:
-                existing=self.db.execute('SELECT id FROM jobs WHERE candidate=? AND version=?',(c['id'],c['version'])).fetchone()
+                existing=self.db.execute('SELECT id,scope FROM jobs WHERE candidate=? AND version=?',(c['id'],c['version'])).fetchone()
                 if existing:
+                    transient={'published_at','review_deadline','status','selected','recommended','decision_url'}
+                    stable=lambda card:{k:v for k,v in card.items() if k not in transient}
+                    if stable(json.loads(existing['scope']))!=stable(c):
+                        raise ValueError('Option scope changed without a version bump; refresh after the catalog is corrected')
                     ids.append(existing['id']); continue
                 jid=uuid.uuid4().hex
                 now=self.clock()

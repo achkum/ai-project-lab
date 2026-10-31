@@ -59,7 +59,9 @@ class Handler(BaseHTTPRequestHandler):
             if not 0<n<=8192:raise ValueError('Request too large or empty')
             if self.headers.get('Content-Type','').split(';')[0]!='application/json':raise ValueError('JSON required')
             self.connection.settimeout(10)
-            body=json.loads(self.rfile.read(n));q=self.server.queue()
+            body=json.loads(self.rfile.read(n))
+            if not isinstance(body,dict):raise ValueError('JSON object required')
+            q=self.server.queue()
             if self.path=='/jobs':
                 ids=q.enqueue(body.get('items'),body.get('request_id'))
                 self.send(200,{'ids':ids,**q.snapshot()})

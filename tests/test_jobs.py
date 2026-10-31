@@ -36,6 +36,11 @@ class JobsTests(unittest.TestCase):
         self.q.enqueue([{'id':'T4','version':1}],'request-123');self.q.claim()
         row=self.q.snapshot()['jobs'][0]
         self.assertNotIn('scope',row);self.assertNotIn('token',row)
+    def test_material_scope_cannot_change_under_the_same_version(self):
+        self.q.enqueue([{'id':'T4','version':1}],'request-123')
+        self.q.catalog['T4']['title']='A different experiment'
+        with self.assertRaisesRegex(ValueError,'version bump'):
+            self.q.enqueue([{'id':'T4','version':1}],'request-456')
     def test_result_url_cannot_escape_private_artifact_directory(self):
         self.q.enqueue([{'id':'T4','version':1}],'request-123');a=self.q.claim()
         with self.assertRaises(ValueError):self.q.finish(a['id'],a['token'],'review_ready','done',{'url':'javascript:alert(1)'})
