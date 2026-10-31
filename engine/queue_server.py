@@ -52,6 +52,7 @@ class Handler(BaseHTTPRequestHandler):
         if not isinstance(value,dict):raise ValueError('JSON object required')
         return value
     def do_GET(self):
+        self.path=self.path.split('?',1)[0]
         if self.path in ('/password','/password.js'):
             path=ROOT/'deploy'/('password.html' if self.path=='/password' else 'password.js')
             raw=path.read_bytes();self.send_response(200)
