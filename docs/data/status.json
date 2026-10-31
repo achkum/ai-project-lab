@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T17:21:55.486049+00:00",
+  "generated_at": "2026-10-31T17:56:57.744716+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -312,7 +312,7 @@
     {
       "id": "RT1",
       "lane": "Thesis",
-      "title": "Can a small model recognise the conditions hidden inside an “approval”?",
+      "title": "Can a model spot “approved, but only if…”?",
       "intro": "Study a task-specific model that flags conditional, ambiguous or superseded approval text for human review. It must never authorise a merge or infer who actually made a decision.",
       "why_now": "The October 19 case study reports a concrete mismatch between review wording and recorded approval state.",
       "flow": [
@@ -337,7 +337,7 @@
       "confidence": "Concrete recent failure; research gap and dataset unconfirmed",
       "version": 1,
       "domain": "Review reliability",
-      "summary": "Study a task-specific model that flags conditional, ambiguous or superseded approval text for human review. It must never authorise a merge or infer who actually made a decision.",
+      "summary": "A reviewer approves code but includes a condition in the message. The approval button alone does not tell the team whether that condition was met.",
       "deliverable": "Produce annotation guidelines, 50 independently checked pilot cases and a baseline confusion matrix. Stop if reviewers cannot agree on labels or rules already solve the task.",
       "contribution": "Our proposed contribution is a bounded comparison of extraction and abstention under wording shift. It is not invention of conditional review or secure approvals.",
       "feasibility": "Applied NLP / custom small model. CPU baselines first; adaptation runtime must be measured before committing.",
@@ -396,13 +396,21 @@
           "read_scope": "Human assignment, publishing identity and review-evidence sections"
         }
       ],
+      "why_it_matters": "A team may merge code before the reviewer’s condition is satisfied.",
+      "proposed_fix": "Train and compare a small text model that highlights approval conditions for a person to check.",
+      "example": "“Approved once the migration test passes” should show the condition instead of looking like an unconditional yes.",
+      "investigation_result": "Small pilot only — not yet a ready thesis topic.",
+      "completed_work": "A literature and feasibility report, label definitions, baseline comparisons and an experiment plan. No model trained or experiment run.",
+      "remaining_work": "Secure reusable review data and two independent annotators; test whether they agree on the labels; then compare rules, a basic classifier and an adapted small encoder.",
+      "finding": "Related work already classifies review comments. The potential contribution is testing unresolved conditions and when the model should admit uncertainty, not inventing review classification.",
+      "artifact_url": "https://github.com/achkum/ai-thesis-lab/blob/main/research/jobs/7ea46cffc5214981a08c2e0c80e4bc8d/BRIEF.md",
       "selected": true,
       "decision_url": ""
     },
     {
       "id": "RT2",
       "lane": "Thesis",
-      "title": "Does a contamination detector confuse familiarity with prior exposure?",
+      "title": "Did the forecast model learn the pattern—or see the answers?",
       "intro": "Stress-test existing forecasting-model audit methods with controlled examples that separate exact prior exposure from unseen series sharing the same generating process.",
       "why_now": "The October 15 model release and October 17 disclosure question make evaluation uncertainty current. September research and the older TSFMAudit method are essential counterevidence.",
       "flow": [
@@ -429,7 +437,7 @@
       "confidence": "Current trigger; narrow contribution and runtime unconfirmed",
       "version": 1,
       "domain": "Task-specific model evaluation",
-      "summary": "Stress-test existing forecasting-model audit methods with controlled examples that separate exact prior exposure from unseen series sharing the same generating process.",
+      "summary": "A forecasting model can look accurate on a test without us knowing whether similar or identical data was used to train it.",
       "deliverable": "Inspect the existing audit implementation, map exactly what it already tests, and time one smallest-model probe. Produce a go/no-go report. No full benchmark or large-model fine-tuning in week one.",
       "contribution": "The proposed test targets known adaptation exposure versus new same-process samples under a small compute budget. Whether this adds anything beyond existing ablations must be established first.",
       "feasibility": "Non-LLM model adaptation / evaluation. Higher feasibility risk than RT1; research-only until the pilot passes.",
@@ -506,13 +514,21 @@
           "read_scope": "Problem formulation, adaptation features and Appendix A proxy-label/duplicate semantics"
         }
       ],
+      "why_it_matters": "You could choose a model using a misleading score and then get worse results on your own data.",
+      "proposed_fix": "Test an auditing method on controlled data: some examples deliberately used in training, and fresh examples with similar patterns.",
+      "example": "Can the audit distinguish a sales sequence it saw in training from a new sequence with the same weekly pattern?",
+      "investigation_result": "Do not pursue the original scope as it stands.",
+      "completed_work": "A prior-work and access review, a proposed controlled experiment and explicit stop conditions. No model or experiment run.",
+      "remaining_work": "Find a genuinely distinct experiment, resolve code and model reuse terms, and measure the smallest local training run before considering this topic again.",
+      "finding": "Existing work already includes controlled-exposure experiments. Originality remains unresolved; the inspected audit code and proposed weights also have access or licence obstacles.",
+      "artifact_url": "https://github.com/achkum/ai-thesis-lab/blob/main/research/jobs/c12f6f207a52484296c2ef79c34b6c21/BRIEF.md",
       "selected": true,
       "decision_url": ""
     },
     {
       "id": "RP1",
       "lane": "Project",
-      "title": "A read-only review-evidence checkup for teams using coding agents",
+      "title": "Check whether the latest code has matching reviews and tests",
       "intro": "Turn a repository’s exported review events into a small, inspectable report of what is supported, contradicted or unknowable. Sell the usefulness of the review, not a claim that AI can prove human judgement.",
       "why_now": "October case evidence makes this timely; existing GitHub guidance and Kosli mean the opportunity, if any, is a lightweight diagnostic service.",
       "flow": [
@@ -537,8 +553,8 @@
       "confidence": "Reported operational problem; service demand untested",
       "version": 2,
       "domain": "Review reliability",
-      "summary": "Turn a repository’s exported review events into a small, inspectable report of what is supported, contradicted or unknowable. Sell the usefulness of the review, not a claim that AI can prove human judgement.",
-      "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
+      "summary": "A pull request can have approval on an older revision while its latest checks fail or are still running. Bring the records that need attention into one view.",
+      "deliverable": "Public GitHub PR lookup, findings with source links, and downloadable report; local JSON remains supported.",
       "contribution": "A narrow, local diagnostic and onboarding deliverable. It is explicitly an integration/service hypothesis, not a new approval protocol or compliance certification.",
       "feasibility": "One-week product experiment; deterministic checks first. Optional classifier only after RT1 evidence supports it.",
       "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
@@ -598,13 +614,17 @@
       ],
       "delivery_mode": "tested_web_app",
       "starter_job_id": "cefb082c7bb340f5b41c4a4e7a189a84",
+      "why_it_matters": "Developers have to piece together reviews, versions and checks before deciding what still needs attention.",
+      "proposed_fix": "Paste a public GitHub PR link. Read current reviews and checks, highlight mismatches, and link back to the evidence.",
+      "example": "A reviewer approved yesterday’s code. Today’s push has no matching approval: the report points you to that review.",
+      "completed_work": "Working public-PR lookup plus local event analysis. This is a record checker, not an autonomous release decision.",
       "selected": true,
       "decision_url": ""
     },
     {
       "id": "RP2",
       "lane": "Project",
-      "title": "A forecast pilot report a customer can actually challenge",
+      "title": "Turn daily sales into tomorrow’s preparation quantity",
       "intro": "Package one model pilot so a customer can inspect data dates, baseline fairness, uncertainty and known disclosure gaps before accepting a headline accuracy claim.",
       "why_now": "October’s small-model release and linked evaluation discussion show why a model ranking alone leaves important questions unanswered.",
       "flow": [
@@ -631,8 +651,8 @@
       "confidence": "Timely technical need; product gap and demand unvalidated",
       "version": 2,
       "domain": "Task-specific model evaluation",
-      "summary": "Package one model pilot so a customer can inspect data dates, baseline fairness, uncertainty and known disclosure gaps before accepting a headline accuracy claim.",
-      "deliverable": "A usable, tested browser app with file import, interactive visual results and report export, deployed on GitHub Pages.",
+      "summary": "A small operator needs a quantity to prepare. Too much leaves unsold stock; too little can lose sales.",
+      "deliverable": "CSV import → next-day quantity → historical waste/shortfall comparison → downloadable plan.",
       "contribution": "A proposed client-facing interpretation and evidence layer around an existing evaluation. No novel metric or contamination detector is claimed.",
       "feasibility": "One-week service prototype. No API fees, GPU provisioning or paid model access.",
       "next": "Continue implementation automatically from the existing draft. Test and deploy without another approval checkpoint.",
@@ -710,6 +730,10 @@
       ],
       "delivery_mode": "tested_web_app",
       "starter_job_id": "c5738b875e514c6f89c2b6186b498c8c",
+      "why_it_matters": "A forecast chart alone does not tell the owner what to prepare or what a mistake could cost.",
+      "proposed_fix": "Upload daily units sold for one item, choose a simple rule, adjust the quantity and compare historical excess and shortfalls with a fixed daily plan.",
+      "example": "Upload daily sandwich sales. Get a quantity for the next date, change your expected uplift, and export the plan.",
+      "completed_work": "Working local planner with transparent rules. No pretrained model, live POS connection or validated customer savings.",
       "selected": true,
       "decision_url": ""
     }
