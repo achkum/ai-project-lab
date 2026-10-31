@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "mode": "sample",
+  "generated_at": null,
+  "connected": false,
+  "thesis": {
+    "state": "needs_setup",
+    "last_success": null,
+    "next_run": null
+  },
+  "project": {
+    "state": "needs_setup",
+    "stage": "Not started",
+    "window_start": null,
+    "target_at": null
+  },
+  "releases_last_7_days": 0,
+  "usage": {
+    "spent_sek": null,
+    "limit_sek": null
+  },
+  "coverage": {
+    "target": 20,
+    "checked": 0,
+    "blocked": 0,
+    "registered": 30
+  },
+  "opportunities": [
+    {
+      "id": "EXAMPLE-01",
+      "title": "When should an AI workflow ask for human review?",
+      "lane": "Thesis",
+      "status": "Illustrative",
+      "summary": "Compare review-selection strategies on a narrowly defined document task.",
+      "contribution": "Evaluate error versus review effort under distribution shift; verify closest work first.",
+      "feasibility": "Depends on representative labelled documents. Compute and model costs unconfirmed.",
+      "venture": "Potential review-routing component. Buyer access and willingness to pay are untested.",
+      "next": "Find closest studies and a permitted dataset before shortlisting.",
+      "evidence": "No evidence collected. An interface example, not a research finding."
+    },
+    {
+      "id": "EXAMPLE-02",
+      "title": "A release report for one critical user journey",
+      "lane": "Project",
+      "status": "Illustrative",
+      "summary": "A tool that runs a specified journey and packages reproducible failures.",
+      "contribution": "A focused integration and evidence report, not production certification.",
+      "feasibility": "Narrow to one controlled demo app and one browser journey.",
+      "venture": "Possible agency service; no customer validation yet.",
+      "next": "Find actual complaints and a willing tester before selecting.",
+      "evidence": "No evidence collected. An interface example, not a selected project."
+    }
+  ],
+  "sources": [
+    {
+      "id": "s01",
+      "name": "arXiv",
+      "category": "Research",
+      "url": "https://arxiv.org",
+      "access": "API or feeds",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s02",
+      "name": "OpenReview",
+      "category": "Research",
+      "url": "https://openreview.net",
+      "access": "API subject to access",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s03",
+      "name": "Semantic Scholar",
+      "category": "Research",
+      "url": "https://www.semanticscholar.org",
+      "access": "API subject to quotas",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s04",
+      "name": "OpenAlex",
+      "category": "Research",
+      "url": "https://openalex.org",
+      "access": "API subject to current access",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s05",
+      "name": "ACL Anthology",
+      "category": "Research",
+      "url": "https://aclanthology.org",
+      "access": "Public metadata and papers",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s06",
+      "name": "PMLR",
+      "category": "Research",
+      "url": "https://proceedings.mlr.press",
+      "access": "Public proceedings",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s07",
+      "name": "CVF Open Access",
+      "category": "Research",
+      "url": "https://openaccess.thecvf.com",
+      "access": "Public proceedings",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s08",
+      "name": "ACM Digital Library",
+      "category": "Research",
+      "url": "https://dl.acm.org",
+      "access": "Metadata or licensed access",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s09",
+      "name": "IEEE Xplore",
+      "category": "Research",
+      "url": "https://ieeexplore.ieee.org",
+      "access": "Metadata or licensed access",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s10",
+      "name": "DiVA and LTU theses",
+      "category": "Research",
+      "url": "https://ltu.diva-portal.org",
+      "access": "Public repository metadata",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s11",
+      "name": "Hugging Face datasets",
+      "category": "Data",
+      "url": "https://huggingface.co/datasets",
+      "access": "Hub API and dataset cards",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s12",
+      "name": "OpenML",
+      "category": "Data",
+      "url": "https://www.openml.org",
+      "access": "API",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s13",
+      "name": "Kaggle",
+      "category": "Data",
+      "url": "https://www.kaggle.com",
+      "access": "Permitted API or manual leads",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s14",
+      "name": "UCI ML Repository",
+      "category": "Data",
+      "url": "https://archive.ics.uci.edu",
+      "access": "Public metadata",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s15",
+      "name": "GitHub",
+      "category": "Engineering",
+      "url": "https://github.com",
+      "access": "API for issues discussions and releases",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s16",
+      "name": "GitLab",
+      "category": "Engineering",
+      "url": "https://gitlab.com",
+      "access": "Public API where permitted",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s17",
+      "name": "Stack Overflow",
+      "category": "Engineering",
+      "url": "https://stackoverflow.com",
+      "access": "Stack Exchange API",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s18",
+      "name": "Cross Validated",
+      "category": "Engineering",
+      "url": "https://stats.stackexchange.com",
+      "access": "Stack Exchange API",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s19",
+      "name": "Data Science Stack Exchange",
+      "category": "Engineering",
+      "url": "https://datascience.stackexchange.com",
+      "access": "Stack Exchange API",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s20",
+      "name": "Reddit communities",
+      "category": "Community",
+      "url": "https://www.reddit.com",
+      "access": "Approved API or manual leads",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s21",
+      "name": "Hacker News",
+      "category": "Community",
+      "url": "https://news.ycombinator.com",
+      "access": "Official API",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s22",
+      "name": "Hugging Face forums",
+      "category": "Community",
+      "url": "https://discuss.huggingface.co",
+      "access": "Permitted feeds or public endpoints",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s23",
+      "name": "PyTorch forums",
+      "category": "Community",
+      "url": "https://discuss.pytorch.org",
+      "access": "Permitted feeds or public endpoints",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s24",
+      "name": "Indie Hackers",
+      "category": "Market",
+      "url": "https://www.indiehackers.com",
+      "access": "Permitted public access or manual leads",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s25",
+      "name": "Product Hunt",
+      "category": "Market",
+      "url": "https://www.producthunt.com",
+      "access": "Approved API or manual leads",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s26",
+      "name": "G2",
+      "category": "Market",
+      "url": "https://www.g2.com",
+      "access": "Licensed or manual review",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s27",
+      "name": "Capterra",
+      "category": "Market",
+      "url": "https://www.capterra.com",
+      "access": "Licensed or manual review",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s28",
+      "name": "EU CORDIS",
+      "category": "Public needs",
+      "url": "https://cordis.europa.eu",
+      "access": "Open project data",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s29",
+      "name": "Vinnova",
+      "category": "Public needs",
+      "url": "https://www.vinnova.se",
+      "access": "Public project information",
+      "status": "not_configured",
+      "last_checked": null
+    },
+    {
+      "id": "s30",
+      "name": "Swedish data portal",
+      "category": "Public needs",
+      "url": "https://www.dataportal.se",
+      "access": "Open dataset metadata",
+      "status": "not_configured",
+      "last_checked": null
+    }
+  ],
+  "events": [
+    {
+      "title": "Dashboard shell prepared",
+      "detail": "Interface only. No VPS job has run."
+    },
+    {
+      "title": "Setup inputs needed",
+      "detail": "Choose interests, provide secure VPS access and confirm the model budget."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "timezone": "Europe/Stockholm",
+  "interests": [],
+  "domains": [],
+  "exclusions": [],
+  "hours_per_week": null,
+  "monthly_budget_sek": null,
+  "thesis_start_date": null,
+  "data_access": [],
+  "compute": {
+    "mode": "hybrid",
+    "vps_ram_gb": 4,
+    "vps_cpu": "unconfirmed",
+    "laptop_specs": "unconfirmed",
+    "max_build_workers": 1,
+    "local_large_model_inference": false
+  },
+  "thesis": {
+    "daily_local_time": "08:00",
+    "source_target_per_7_days": 20
+  },
+  "projects": {
+    "max_active": 1,
+    "delivery_window_days": 7,
+    "selection_mode": "owner_review",
+    "auto_publish_posts": false
+  },
+  "setup_complete": false
+}

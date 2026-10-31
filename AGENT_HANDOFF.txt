@@ -1,0 +1,1 @@
+Read proposal.html and AGENT_HANDOFF.txt in the private ai-thesis-lab repository. This public repo contains the dashboard shell and future project folders. Backend workflows are not implemented. Keep secrets, profiles and unpublished findings outside this repo.
