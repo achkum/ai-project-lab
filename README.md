@@ -1,19 +1,21 @@
 # Research & Build Lab
 
-**[Open the dashboard →](https://achkum.github.io/ai-project-lab/)**
+**[Open the dashboard â†’](https://achkum.github.io/ai-project-lab/)**
 
-[Thesis possibilities](https://achkum.github.io/ai-project-lab/#thesis) · [Project possibilities](https://achkum.github.io/ai-project-lab/#projects) · [Source library](https://achkum.github.io/ai-project-lab/#sources)
+[Thesis possibilities](https://achkum.github.io/ai-project-lab/#thesis) Â· [Project possibilities](https://achkum.github.io/ai-project-lab/#projects) Â· [Source library](https://achkum.github.io/ai-project-lab/#sources)
 
 Daily broad discovery and independently queued research/build jobs. Visual cards show their sources, existing work, proposed contribution, model/data choices and uncertainty.
 
 ## Start work from the dashboard
 
-1. Connect the browser once using your private dashboard key. Retrieve it locally with python -m engine.dashboard_key; never share or commit it.
+1. Set your own password using the private, one-hour setup invitation opened by the agent. Then use **Sign in** on the dashboard and optionally **Remember this browser**.
 2. Select any combination of cards. Use **Investigate selected** or **Build selected** and confirm the scopes.
 3. Each option becomes a separate durable job. The VPS accepts requests while your laptop is off; the laptop processes one at a time when awake.
 4. Monitor live status, pause/cancel individual jobs, resume blocked work and open private review artifacts.
 
-This uses dedicated key pairing, not GitHub OAuth. The key stays in the browser tab's session storage and expires after 90 days. No ChatGPT, GitHub or SSH credential goes into the page or VPS. The HTTPS endpoint uses an IP-based sslip.io hostname; DNS and certificate availability are dependencies.
+Password authentication uses a salted PBKDF2-HMAC-SHA256 hash (600,000 iterations) and persistent sign-in rate limits. Session tokens are stored hashed on the VPS. Remembered sessions last 30 days; normal sessions last up to 12 hours and use tab session storage. Sign out revokes that browser session. The password is never stored in browser storage, Git or logs.
+
+Initial setup requires a short-lived private invitation, cannot overwrite an existing password and disables the legacy dashboard key. There is no public password-reset endpoint; recovery requires owner-authorised VPS administration. The HTTPS endpoint uses sslip.io DNS and automatic certificate renewal. No ChatGPT, GitHub or SSH credential goes into the page or VPS.
 
 Thesis jobs produce investigation briefs, not complete theses. Project jobs produce bounded drafts. **Review ready is not a production release.** The strongest-model/agent review validates results before promoting a demo.
 

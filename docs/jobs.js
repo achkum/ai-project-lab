@@ -3,20 +3,20 @@ const QUEUE_API='https://198.44.116.159.sslip.io';
 const selectedIdeas=new Set();
 let liveJobs=[],workerInfo=null,queueError='',sending=false,lastQueueSignature='';
 let dashboardKey='';
-function saveLogin(token,remember){sessionStorage.removeItem('lab-dashboard-key');localStorage.removeItem('lab-dashboard-key');(remember?localStorage:sessionStorage).setItem('lab-dashboard-key',token);dashboardKey=token;}
+function saveLogin(token,remember){dashboardKey=token;try{sessionStorage.removeItem('lab-dashboard-key');localStorage.removeItem('lab-dashboard-key');(remember?localStorage:sessionStorage).setItem('lab-dashboard-key',token);}catch{queueError='Signed in for this page only; browser storage is unavailable.';}}
 try{
  const incoming=new URLSearchParams(location.hash.slice(1));
- if(incoming.has('session')){saveLogin(incoming.get('session'),incoming.get('remember')==='1');history.replaceState(null,'',location.pathname+'#thesis');showView();}
- dashboardKey=sessionStorage.getItem('lab-dashboard-key')||localStorage.getItem('lab-dashboard-key')||'';
+ if(incoming.has('session')){history.replaceState(null,'',location.pathname+'#thesis');saveLogin(incoming.get('session'),incoming.get('remember')==='1');showView();}
+ dashboardKey=dashboardKey||sessionStorage.getItem('lab-dashboard-key')||localStorage.getItem('lab-dashboard-key')||'';
 }catch{}
 
 function selectionControl(x){
- return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='applied-ai'?'New Â· applied AI':'Earlier option')+'</span></label>';
+ return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='applied-ai'?'New Ã‚Â· applied AI':'Earlier option')+'</span></label>';
 }
 function jobControls(lane){
  const count=data.opportunities.filter(x=>x.lane===lane&&selectedIdeas.has(x.id)).length;
  const jobs=liveJobs.filter(x=>x.lane===lane.toLowerCase());
- return '<section class="job-panel"><div class="job-toolbar"><div><strong>'+count+' selected</strong><p>Select several options; each gets a separate job.</p></div><button class="primary" data-start-lane="'+lane+'" '+(!count||sending?'disabled':'')+'>'+(lane==='Thesis'?'Investigate selected':'Build selected')+'</button><button data-connect-queue>'+(dashboardKey?'Account & sign out':'Sign in')+'</button></div><p class="queue-state" role="status">'+esc(queueError||(dashboardKey?(workerInfo?.online?'Laptop worker online Â· jobs run one at a time.':'VPS queue connected Â· laptop offline or starting. Jobs stay queued.'):'Sign in with your password to start work. Viewing ideas is public.'))+'</p>'+jobs.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' Â· '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.message)+'</p>'+(j.result?.url?'<a href="'+esc(safeLink(j.result.url))+'" target="_blank" rel="noopener noreferrer">Open private review artifacts â†—</a>':'')+'</div><div>'+(['queued','running'].includes(j.state)?'<button data-job-action="pause" data-job-id="'+esc(j.id)+'">Pause</button>':'')+(['paused','needs_attention','quota_wait'].includes(j.state)?'<button data-job-action="resume" data-job-id="'+esc(j.id)+'">Resume</button>':'')+(!['review_ready','cancelled'].includes(j.state)?'<button data-job-action="cancel" data-job-id="'+esc(j.id)+'">Cancel</button>':'')+'</div></article>').join('')+'</section>';
+ return '<section class="job-panel"><div class="job-toolbar"><div><strong>'+count+' selected</strong><p>Select several options; each gets a separate job.</p></div><button class="primary" data-start-lane="'+lane+'" '+(!count||sending?'disabled':'')+'>'+(lane==='Thesis'?'Investigate selected':'Build selected')+'</button><button data-connect-queue>'+(dashboardKey?'Account & sign out':'Sign in')+'</button></div><p class="queue-state" role="status">'+esc(queueError||(dashboardKey?(workerInfo?.online?'Laptop worker online Ã‚Â· jobs run one at a time.':'VPS queue connected Ã‚Â· laptop offline or starting. Jobs stay queued.'):'Sign in with your password to start work. Viewing ideas is public.'))+'</p>'+jobs.map(j=>'<article class="job-row"><div><strong>'+esc(j.candidate)+' Ã‚Â· '+esc(j.state.replaceAll('_',' '))+'</strong><p>'+esc(j.message)+'</p>'+(j.result?.url?'<a href="'+esc(safeLink(j.result.url))+'" target="_blank" rel="noopener noreferrer">Open private review artifacts Ã¢â€ â€”</a>':'')+'</div><div>'+(['queued','running'].includes(j.state)?'<button data-job-action="pause" data-job-id="'+esc(j.id)+'">Pause</button>':'')+(['paused','needs_attention','quota_wait'].includes(j.state)?'<button data-job-action="resume" data-job-id="'+esc(j.id)+'">Resume</button>':'')+(!['review_ready','cancelled'].includes(j.state)?'<button data-job-action="cancel" data-job-id="'+esc(j.id)+'">Cancel</button>':'')+'</div></article>').join('')+'</section>';
 }
 function singleJobAction(x){return '<div class="choice-actions"><strong>Start a bounded '+(x.lane==='Thesis'?'investigation':'build')+'</strong><p>This queues only '+esc(x.id)+'. Other selected ideas are kept. The worker uses your subscription allowance and pauses if it cannot verify availability.</p><button class="primary" data-start-one="'+esc(x.id)+'">'+(x.lane==='Thesis'?'Start investigation':'Start build')+'</button></div>';}
 function redrawJobs(){renderCards('Thesis',$('thesis-search').value);renderCards('Project');}
@@ -34,7 +34,7 @@ async function loadJobs(){
  redrawJobs();
 }
 async function connectQueue(){
- $('detail-content').innerHTML='<span class="tag">PRIVATE OWNER ACCESS</span><h2>Dashboard sign-in</h2><p id="auth-status">Checking password setup…</p><form id="login-form" hidden><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required maxlength="128"><label class="remember-login"><input id="remember-login" type="checkbox"> Remember this browser for 30 days</label><button type="submit" class="primary">Sign in</button></form><button id="sign-out">Sign out of this browser</button><p id="connection-result" role="status"></p>';
+ $('detail-content').innerHTML='<span class="tag">PRIVATE OWNER ACCESS</span><h2>Dashboard sign-in</h2><p id="auth-status">Checking password setupâ€¦</p><form id="login-form" hidden><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required maxlength="128"><label class="remember-login"><input id="remember-login" type="checkbox"> Remember this browser for 30 days</label><button type="submit" class="primary">Sign in</button></form><button id="sign-out">Sign out of this browser</button><p id="connection-result" role="status"></p>';
  $('detail').showModal();
  $('sign-out').onclick=async()=>{
  try{if(dashboardKey)await queueRequest('/auth/logout',{});}catch{}
@@ -52,7 +52,7 @@ function confirmStart(ids){
  if(!dashboardKey){connectQueue();return;}
  const cards=ids.map(id=>data.opportunities.find(x=>x.id===id)).filter(Boolean);
  if(!cards.length)return;
- $('detail-content').innerHTML='<span class="tag">START '+cards.length+' SEPARATE JOB'+(cards.length===1?'':'S')+'</span><h2>Review the selected work</h2><ul>'+cards.map(c=>'<li><strong>'+esc(c.id)+' Â· '+esc(c.title)+'</strong><p>'+esc(c.deliverable)+'</p></li>').join('')+'</ul><p>Thesis jobs produce investigation briefs. Project jobs produce bounded drafts for review. Jobs run one at a time on the laptop; the VPS holds the queue while it is off. No paid model fallback.</p><button id="confirm-start-jobs" class="primary">Confirm & queue '+cards.length+' job'+(cards.length===1?'':'s')+'</button><p id="start-result" role="status"></p>';
+ $('detail-content').innerHTML='<span class="tag">START '+cards.length+' SEPARATE JOB'+(cards.length===1?'':'S')+'</span><h2>Review the selected work</h2><ul>'+cards.map(c=>'<li><strong>'+esc(c.id)+' Ã‚Â· '+esc(c.title)+'</strong><p>'+esc(c.deliverable)+'</p></li>').join('')+'</ul><p>Thesis jobs produce investigation briefs. Project jobs produce bounded drafts for review. Jobs run one at a time on the laptop; the VPS holds the queue while it is off. No paid model fallback.</p><button id="confirm-start-jobs" class="primary">Confirm & queue '+cards.length+' job'+(cards.length===1?'':'s')+'</button><p id="start-result" role="status"></p>';
  $('detail').showModal();
  const requestId=crypto.randomUUID();
  $('confirm-start-jobs').onclick=async()=>{
