@@ -5,7 +5,7 @@
     "thesis",
     "projects"
   ],
-  "selection_mode": "explicit_owner_selection",
+  "selection_mode": "owner_choice_then_recommended_default",
   "shortlist_size_default": {
     "min": 3,
     "max": 5
@@ -48,13 +48,14 @@
     "maintenance_burden",
     "reuse_existing_work_option"
   ],
-  "comparison_rule": "Present a concise comparison and reasoned recommendation, with uncertainties. Recommendation never constitutes selection. Do not fabricate market size, demand or probability of venture success.",
+  "comparison_rule": "Present a concise comparison and reasoned recommendation, with uncertainties. Clearly identify the recommendation and review deadline; absent an owner response, it becomes the selected option under the authorized default policy. Do not fabricate market size, demand or probability of venture success.",
   "owner_actions": [
     "select",
     "request_refinement",
     "request_more_options",
     "save_for_later",
-    "reject"
+    "reject",
+    "hold"
   ],
   "states": [
     "discovered",
@@ -84,28 +85,61 @@
     "candidate_id",
     "candidate_version",
     "approved_scope",
-    "owner_identity",
     "decision_timestamp",
-    "command_id"
+    "command_id",
+    "selection_origin",
+    "actor_identity",
+    "policy_version"
   ],
   "enforcement_requirements": [
-    "Check a persisted valid owner selection before scheduling or executing implementation jobs in either lane.",
-    "No timeout, weekly deadline, daily schedule or high score can auto-select a candidate.",
+    "Check a persisted valid owner choice or authorized recommended-default selection before scheduling or executing implementation jobs.",
+    "After the published 24-hour review window, auto-select the eligible recommendation only if no owner response or hold supersedes it. This is expressly authorized by the owner.",
     "Continue discovery while waiting, within subscription quotas; deduplicate and only notify for meaningful changes.",
     "Thesis selection authorizes the recorded next research step, not an entire solution by default.",
     "Project selection authorizes implementation within the presented bounded scope.",
-    "Material scope changes require a new selection; routine implementation choices inside scope do not.",
+    "Material scope changes require a new versioned proposal and review window; ordinary implementation choices inside selected scope do not.",
     "Record rejection reasons only when voluntarily provided; improve rankings without automatically narrowing global discovery.",
     "Keep private candidate details and decisions in the private repository. Public dashboard exports only approved safe summaries.",
     "GitHub Pages controls must submit to authenticated owner-validated commands, never browser-local pretend approvals.",
-    "Display awaiting_owner_selection and distinguish owner-wait time from build time; retain honest missed seven-day targets."
+    "Display awaiting_owner_selection with the recommendation and deadline, then selected_by_owner or selected_by_recommended_default. Notify on automatic selection and preserve honest release-target status."
   ],
   "acceptance_cases": [
     "Unselected candidate cannot create or run an implementation job.",
     "Selected candidate with matching version and scope can progress.",
     "Changed scope or mismatched version cannot reuse an old selection.",
     "Unauthorized or replayed commands cannot select a candidate twice.",
-    "No reply leaves the lane awaiting selection without an automatic build.",
-    "Discovery continues independently of the selection wait."
-  ]
+    "No response selects the unchanged eligible recommendation exactly once after its published review deadline; never before.",
+    "Discovery continues independently of the selection wait.",
+    "Owner choice wins over automatic selection in an atomic decision transaction.",
+    "Hold, rejection, refinement or more-options request blocks default selection for the pending shortlist.",
+    "Unavailable shortlist, stale version or ineligible recommendation cannot trigger automatic selection.",
+    "Daily refresh and retries do not create duplicate builds or multiple active topics."
+  ],
+  "automatic_selection": {
+    "authorized_by": "owner_instruction",
+    "review_window_hours": 24,
+    "review_window_note": "Configurable implementation default; owner did not specify a duration.",
+    "starts_when": "Versioned shortlist and recommendation are successfully made available on the dashboard/private decision view.",
+    "record_fields": [
+      "shortlist_version",
+      "recommended_candidate_id",
+      "candidate_version",
+      "scope",
+      "published_at",
+      "decision_deadline",
+      "selection_origin",
+      "policy_version"
+    ],
+    "selection_origin": "owner_choice_or_authorized_recommended_default",
+    "conditions": [
+      "Deadline elapsed with no owner decision, hold, refinement or more-options request",
+      "Recommended candidate is eligible, evidence-backed, within explicit interests/exclusions and resource constraints",
+      "Candidate version and proposed bounded scope remain unchanged",
+      "No other active candidate in this lane"
+    ],
+    "on_no_eligible_candidate": "Continue research; explain why no candidate is ready, rather than force a build.",
+    "owner_override": "Owner choice before the deadline wins. After work starts, checkpoint and reconcile a change of direction before switching; do not discard work silently.",
+    "thesis_scope": "Proceed with the recommended bounded research/proposal/evaluation-planning step, not automatic academic commitment or a complete product.",
+    "new_shortlist_rule": "A daily discovery refresh does not reset a pending deadline or replace an active topic. New candidate/scope versions need a fresh visible review window."
+  }
 }
