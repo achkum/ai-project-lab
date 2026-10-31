@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T17:56:57.744716+00:00",
+  "generated_at": "2026-10-31T17:59:56.503785+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -338,7 +338,7 @@
       "version": 1,
       "domain": "Review reliability",
       "summary": "A reviewer approves code but includes a condition in the message. The approval button alone does not tell the team whether that condition was met.",
-      "deliverable": "Produce annotation guidelines, 50 independently checked pilot cases and a baseline confusion matrix. Stop if reviewers cannot agree on labels or rules already solve the task.",
+      "deliverable": "Feasibility report, proposed labels and experiment plan. Data collection and the small pilot remain undone.",
       "contribution": "Our proposed contribution is a bounded comparison of extraction and abstention under wording shift. It is not invention of conditional review or secure approvals.",
       "feasibility": "Applied NLP / custom small model. CPU baselines first; adaptation runtime must be measured before committing.",
       "next": "Produce annotation guidelines, 50 independently checked pilot cases and a baseline confusion matrix. Stop if reviewers cannot agree on labels or rules already solve the task.",
@@ -438,7 +438,7 @@
       "version": 1,
       "domain": "Task-specific model evaluation",
       "summary": "A forecasting model can look accurate on a test without us knowing whether similar or identical data was used to train it.",
-      "deliverable": "Inspect the existing audit implementation, map exactly what it already tests, and time one smallest-model probe. Produce a go/no-go report. No full benchmark or large-model fine-tuning in week one.",
+      "deliverable": "Feasibility report explaining why the original scope should not proceed. No model experiment was run.",
       "contribution": "The proposed test targets known adaptation exposure versus new same-process samples under a small compute budget. Whether this adds anything beyond existing ablations must be established first.",
       "feasibility": "Non-LLM model adaptation / evaluation. Higher feasibility risk than RT1; research-only until the pilot passes.",
       "next": "Inspect the existing audit implementation, map exactly what it already tests, and time one smallest-model probe. Produce a go/no-go report. No full benchmark or large-model fine-tuning in week one.",
