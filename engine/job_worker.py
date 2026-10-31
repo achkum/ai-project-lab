@@ -114,6 +114,7 @@ def publish_web_app(profile,job,workspace):
     if any(f.is_symlink() or f.suffix.lower() not in {'.html','.css','.js','.json','.svg','.csv','.txt'} or f.stat().st_size>1_000_000 for f in files):raise RuntimeError('Site contains unsupported files')
     for f in files:
         target=dest/f.relative_to(site);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target)
+    version_static_assets(dest)
     for root,path in [(public,'docs/projects/'+slug)]:
         subprocess.run(['git','add','--',path],cwd=root,check=True,capture_output=True)
         if subprocess.run(['git','diff','--cached','--quiet','--',path],cwd=root).returncode:
@@ -128,6 +129,19 @@ def publish_web_app(profile,job,workspace):
         if build.get('commit')==commit and build.get('status')=='errored':raise RuntimeError('Pages deployment failed; source and test results preserved')
         time.sleep(5)
     raise RuntimeError('Pages deployment not confirmed within five minutes; inspect deployment status')
+
+
+def version_static_assets(dest):
+    """Make browser caches follow deployed JS/CSS content, including bug fixes."""
+    import hashlib,re
+    for html in dest.rglob('*.html'):
+        def version(match):
+            asset=(html.parent/match[2]).resolve()
+            if not asset.is_relative_to(dest.resolve()) or not asset.is_file():return match[0]
+            digest=hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+            return match[1]+match[2]+'?v='+digest+match[3]
+        content=html.read_text(encoding='utf-8-sig')
+        html.write_text(re.sub(r'''((?:src|href)=["'])([^"'?]+\.(?:js|css))(?:\?v=[^"']*)?(["'])''',version,content),encoding='utf-8')
 
 
 def _publish_review_bundle(profile,job,workspace,response):
