@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T12:51:13.975613+00:00",
+  "generated_at": "2026-10-31T12:55:32.804520+00:00",
   "connected": true,
   "thesis": {
-    "state": "awaiting_owner_selection",
+    "state": "selected",
     "last_success": "2026-10-31T12:48:17.055116+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
   "project": {
-    "state": "awaiting_owner_selection",
-    "stage": "awaiting owner selection",
-    "window_start": null,
-    "target_at": null
+    "state": "in_progress",
+    "stage": "in progress",
+    "window_start": "2026-10-31T12:54:52.504456+00:00",
+    "target_at": "2026-11-07T12:54:52.504456+00:00"
   },
   "releases_last_7_days": 0,
   "usage": {
@@ -273,22 +273,22 @@
     {
       "id": "20261031-project",
       "lane": "project",
-      "state": "awaiting_owner_selection",
+      "state": "in_progress",
       "url": "https://github.com/achkum/ai-thesis-lab/issues/2",
       "deadline": "2026-11-01T12:31:04.361504+00:00",
-      "selection_origin": null,
+      "selection_origin": "owner_choice",
       "recommended": "P1",
-      "selected": null
+      "selected": "P1"
     },
     {
       "id": "20261031-thesis",
       "lane": "thesis",
-      "state": "awaiting_owner_selection",
+      "state": "selected",
       "url": "https://github.com/achkum/ai-thesis-lab/issues/1",
       "deadline": "2026-11-01T12:30:59.552857+00:00",
-      "selection_origin": null,
+      "selection_origin": "owner_choice",
       "recommended": "T1",
-      "selected": null
+      "selected": "T1"
     }
   ],
   "collector_host": "vps",
