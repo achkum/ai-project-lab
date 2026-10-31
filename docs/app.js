@@ -37,7 +37,7 @@ function ideaFlow(x) {
 }
 function sourcePreview(x){
  const s=(x.provenance||[])[0];
- return s?'<div class="source-preview"><span class="label">IDEA STARTING POINT</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(s.kind)+' · Novelty unverified</small></div>':'';
+ return s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(s.kind)+' · Novelty unverified</small></div>':'';
 }
 function provenanceDetails(x){
  return '<section class="provenance-panel"><h3>Where this idea came from</h3>'+(x.provenance||[]).map(s=>'<article><span class="tag">'+esc(s.kind)+'</span><a class="text-link" href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><p>'+esc(s.finding)+'</p></article>').join('')+'<h3>What already exists</h3><p>'+esc(x.baseline||x.alternative)+'</p><h3>What we propose to add or test</h3><p>'+esc(x.proposed_difference||x.question)+'</p><p class="originality-note">'+esc(x.originality||'Novelty has not been established.')+'</p></section>';
@@ -46,7 +46,7 @@ function ideaCard(x) {
  return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge '+(x.selected?'chosen-badge':'')+'">'+(x.selected?'Selected':x.recommended?'Recommended':esc(x.id))+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+sourcePreview(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'A bounded next step')+'</strong>'+(x.contribution!==x.deliverable?'<p>'+esc(x.contribution)+'</p>':'')+'</div><div class="idea-facts"><div><span class="label">FIRST STEP</span><strong>'+esc(x.effort||'To assess')+'</strong></div><div><span class="label">MARKET DEMAND</span><strong>'+esc(x.market||'Unvalidated')+'</strong></div></div><p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">Explore '+esc(x.id)+' · outcomes & trade-offs →</button></article>';
 }
 function comparison(rows) {
- const fields=[['Who it helps','audience'],['First deliverable','deliverable'],['Initial effort','effort'],['Evidence strength','evidence_level'],['Main trade-off','risk']];
+ const fields=[['Who it helps','audience'],['First deliverable','deliverable'],['Customer test','customer_test'],['Initial effort','effort'],['Evidence strength','evidence_level'],['Main trade-off','risk']];
  return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
@@ -130,6 +130,7 @@ document.addEventListener('click',async e=>{
  const x=data.opportunities.find(x=>x.id===b.dataset.detail);if(!x)return;
  $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+sourcePreview(x)+ideaFlow(x)+'<div class="detail-grid">'+[
  ['The question worth testing',x.question||x.summary],
+ ...(x.buyer?[["Who could pay",x.buyer],["One-week product test",x.week_test],["How to test customer demand",x.customer_test],["Path beyond week one",x.growth_path]]:[]),
  ...(x.model_plan?[['Model approach',x.model_plan],['Why ML here?',x.why_ml],['Data access & evaluation inputs',x.data_plan]]:[]),
  ['What success would look like',x.measure||x.contribution],
  ['Who might use it—and why',x.venture],

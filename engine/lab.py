@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 from .discovery import Discovery
 from .workflow import Workflow
 from .github_control import publish, sync
+from .opportunity_quality import validate_card
 
 
 def iso(timestamp):
@@ -49,6 +50,7 @@ def export(profile, workflow, discovery, sources):
     opportunities=[]
     if public_cards.exists():
         for card in json.loads(public_cards.read_text(encoding='utf-8')):
+            validate_card(card)
             if card.get('publication')!='owner_requested_visual_summary':
                 continue
             decision=next((d for d in decisions if d['id']==card.get('shortlist')),None)

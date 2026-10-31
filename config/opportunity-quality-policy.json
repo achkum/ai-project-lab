@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "reject": [
+    "Tutorial or benchmark is the only reason to build",
+    "Generic model demo with no customer decision",
+    "Repository popularity used as demand evidence",
+    "Invented complaints, market size or novelty"
+  ],
+  "required_fields": [
+    "buyer",
+    "customer_test",
+    "week_test",
+    "growth_path",
+    "provenance",
+    "baseline",
+    "proposed_difference",
+    "risk",
+    "evidence_level",
+    "auto_eligible"
+  ],
+  "rules": [
+    "Problem evidence comes before method selection. Tutorials may support implementation only.",
+    "Separate verified pain, vendor assertions, research evidence and our product hypothesis. Record inaccessible sources honestly.",
+    "Find current competing products and counterevidence; explain why a narrow user segment might still be underserved.",
+    "Allow research-only possibilities but label them exploratory, set auto_eligible=false and never recommend for automatic building.",
+    "A weekly release tests a customer decision or risky assumption; it is not an arbitrary ML exercise.",
+    "For thesis: additionally require feasible data, meaningful baselines, research question and closest-work review.",
+    "Keep broad source/domain exploration; the current three projects are not future topic filters.",
+    "Do not fill quotas with weak ideas. Report rejected candidates and missing evidence."
+  ]
+}

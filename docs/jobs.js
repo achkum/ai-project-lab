@@ -11,7 +11,7 @@ try{
 }catch{}
 
 function selectionControl(x){
- return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='applied-ai'?'New Ã‚Â· applied AI':'Earlier option')+'</span></label>';
+ return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='problem-evidence'?(x.auto_eligible===false?'Exploratory · demand unverified':'Problem-led option'):'Research possibility')+'</span></label>';
 }
 function jobControls(lane){
  const count=data.opportunities.filter(x=>x.lane===lane&&selectedIdeas.has(x.id)).length;
