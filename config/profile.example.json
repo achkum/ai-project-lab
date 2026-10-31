@@ -18,13 +18,15 @@
   },
   "thesis": {
     "daily_local_time": "08:00",
-    "source_target_per_7_days": 20
+    "source_target_per_7_days": 20,
+    "selection_mode": "explicit_owner_selection"
   },
   "projects": {
     "max_active": 1,
     "delivery_window_days": 7,
-    "selection_mode": "owner_review",
+    "selection_mode": "explicit_owner_selection",
     "auto_publish_posts": false
   },
-  "setup_complete": false
+  "setup_complete": false,
+  "selection_policy": "config/selection-policy.json"
 }

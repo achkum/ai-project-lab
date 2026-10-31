@@ -14,7 +14,8 @@
     "Source connectors and actual discovery",
     "Authenticated remote worker transport",
     "Isolated build runner and durable release publishing",
-    "Schedulers and live dashboard export"
+    "Schedulers and live dashboard export",
+    "Mandatory owner selection enforcement in both lanes and authenticated dashboard decision controls"
   ],
   "required_owner_inputs": [
     "Interests and exclusions",

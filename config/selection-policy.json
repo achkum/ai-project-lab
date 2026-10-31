@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "implementation_status": "specification_only_runtime_gate_and_dashboard_controls_pending",
+  "applies_to": [
+    "thesis",
+    "projects"
+  ],
+  "selection_mode": "explicit_owner_selection",
+  "shortlist_size_default": {
+    "min": 3,
+    "max": 5
+  },
+  "shortlist_rule": "Fewer well-supported options are preferable to padding. Explain sparse results.",
+  "candidate_card_fields": [
+    "id",
+    "version",
+    "title",
+    "plain_language_intro",
+    "problem_and_affected_people",
+    "evidence_with_links_and_dates",
+    "proposed_outcome",
+    "smallest_useful_scope",
+    "possibilities_and_longer_term_direction",
+    "existing_solutions_and_specific_gap",
+    "market_and_customer_hypothesis",
+    "evidence_of_demand_vs_assumptions",
+    "route_to_first_users",
+    "fit_with_owner_and_possible_mismatch",
+    "effort_compute_data_cost_dependencies",
+    "risks_and_counterevidence",
+    "recommended_next_step"
+  ],
+  "thesis_extra_fields": [
+    "research_question",
+    "closest_prior_work",
+    "possible_applied_contribution",
+    "data_access",
+    "baseline_and_evaluation_metrics",
+    "feasible_masters_scope",
+    "venture_path_hypothesis",
+    "supervisor_validation_needed"
+  ],
+  "project_extra_fields": [
+    "demo_and_acceptance_criteria",
+    "bounded_release_scope",
+    "estimated_time_to_testable_release",
+    "distribution_and_feedback_plan",
+    "maintenance_burden",
+    "reuse_existing_work_option"
+  ],
+  "comparison_rule": "Present a concise comparison and reasoned recommendation, with uncertainties. Recommendation never constitutes selection. Do not fabricate market size, demand or probability of venture success.",
+  "owner_actions": [
+    "select",
+    "request_refinement",
+    "request_more_options",
+    "save_for_later",
+    "reject"
+  ],
+  "states": [
+    "discovered",
+    "evaluating",
+    "awaiting_owner_selection",
+    "selected",
+    "in_progress",
+    "completed",
+    "saved",
+    "rejected"
+  ],
+  "allowed_before_selection": [
+    "bounded_discovery",
+    "source_verification",
+    "prior_work_and_competitor_checks",
+    "feasibility_analysis",
+    "candidate_cards"
+  ],
+  "blocked_before_selection": [
+    "product_scaffolding",
+    "implementation",
+    "model_training",
+    "substantial_experiments",
+    "deployment"
+  ],
+  "selection_record_required": [
+    "candidate_id",
+    "candidate_version",
+    "approved_scope",
+    "owner_identity",
+    "decision_timestamp",
+    "command_id"
+  ],
+  "enforcement_requirements": [
+    "Check a persisted valid owner selection before scheduling or executing implementation jobs in either lane.",
+    "No timeout, weekly deadline, daily schedule or high score can auto-select a candidate.",
+    "Continue discovery while waiting, within subscription quotas; deduplicate and only notify for meaningful changes.",
+    "Thesis selection authorizes the recorded next research step, not an entire solution by default.",
+    "Project selection authorizes implementation within the presented bounded scope.",
+    "Material scope changes require a new selection; routine implementation choices inside scope do not.",
+    "Record rejection reasons only when voluntarily provided; improve rankings without automatically narrowing global discovery.",
+    "Keep private candidate details and decisions in the private repository. Public dashboard exports only approved safe summaries.",
+    "GitHub Pages controls must submit to authenticated owner-validated commands, never browser-local pretend approvals.",
+    "Display awaiting_owner_selection and distinguish owner-wait time from build time; retain honest missed seven-day targets."
+  ],
+  "acceptance_cases": [
+    "Unselected candidate cannot create or run an implementation job.",
+    "Selected candidate with matching version and scope can progress.",
+    "Changed scope or mismatched version cannot reuse an old selection.",
+    "Unauthorized or replayed commands cannot select a candidate twice.",
+    "No reply leaves the lane awaiting selection without an automatic build.",
+    "Discovery continues independently of the selection wait."
+  ]
+}
