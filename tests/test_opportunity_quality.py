@@ -14,3 +14,4 @@ class OpportunityQualityTests(unittest.TestCase):
             with self.assertRaises(ValueError):validate_card(dict(c,buyer=''))
             with self.assertRaises(ValueError):validate_card(dict(c,quality_gate_version=1))
             with self.assertRaises(ValueError):validate_card(dict(c,auto_eligible=False,recommended=True))
+            with self.assertRaises(ValueError):validate_card(dict(c,auto_eligible=True,recommended=True))

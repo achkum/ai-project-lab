@@ -15,3 +15,9 @@ def validate_card(card):
         raise ValueError('Opportunity needs an explicit default-selection decision')
     if card.get('recommended') and not card['auto_eligible']:
         raise ValueError('Exploratory opportunity cannot be the default recommendation')
+    if card['auto_eligible'] and not any(
+        s.get('full_thread_reviewed') is True and s.get('resolution_status')=='unresolved'
+        and s.get('published_at') and s.get('verified_at') and s.get('remaining_gap')
+        for s in sources
+    ):
+        raise ValueError('Default selection requires reviewed, dated evidence of a remaining unresolved gap')

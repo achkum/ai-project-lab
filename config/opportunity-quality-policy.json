@@ -26,6 +26,12 @@
     "A weekly release tests a customer decision or risky assumption; it is not an arbitrary ML exercise.",
     "For thesis: additionally require feasible data, meaningful baselines, research question and closest-work review.",
     "Keep broad source/domain exploration; the current three projects are not future topic filters.",
-    "Do not fill quotas with weak ideas. Report rejected candidates and missing evidence."
+    "Do not fill quotas with weak ideas. Report rejected candidates and missing evidence.",
+    "Read the complete discussion including accepted answer, final author response, closed/solved status and linked fixes before using a complaint as opportunity evidence.",
+    "Record original publication date separately from retrieval date. Search crawl freshness is not evidence of newness or trend.",
+    "Resolved reports and intentional documented behaviour are counterevidence. They cannot justify an unresolved-gap claim without independent current evidence of a remaining problem.",
+    "New/trending claims require dated corroborating signals across time and independent origins; otherwise explicitly say trend not assessed.",
+    "For every auto-eligible recommendation require full_thread_reviewed=true, resolution_status=unresolved, published_at, verified_at and remaining_gap on at least one problem source. These are reviewed facts, never guessed metadata.",
+    "P8 is withdrawn. P9 and P10 remain exploratory and cannot auto-start until a new reviewed version and review window are published. Do not substitute another recommendation to fill the slot."
   ]
 }

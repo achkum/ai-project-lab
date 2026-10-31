@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T14:04:39.468273+00:00",
+  "generated_at": "2026-10-31T14:09:15.342059+00:00",
   "connected": true,
   "thesis": {
-    "state": "running",
+    "state": "review_ready",
     "last_success": "2026-10-31T12:48:17.055116+00:00",
     "next_run": "2026-11-01T08:00:00+01:00"
   },
@@ -310,76 +310,6 @@
   ],
   "opportunities": [
     {
-      "id": "P8",
-      "title": "Stop an approved automation from executing twice",
-      "domain": "Workflow reliability · developer tools",
-      "summary": "A small agency delivers an automation that sends invoices or changes records. After a timeout or approval pause, it repeats the action. Build a testable execution boundary that catches duplicate and changed requests before they reach the tool.",
-      "audience": "Small automation agencies maintaining client workflows",
-      "buyer": "Agency technical lead responsible for production incidents",
-      "flow": [
-        "Replay a failed approval / retry",
-        "Compare approved intent and execution key",
-        "Block duplicate action + show an audit receipt"
-      ],
-      "deliverable": "A runnable simulated invoice workflow, protective adapter and failure-injection demo",
-      "question": "Can an adapter prevent duplicate and stale-approved writes across retries, without blocking legitimate new requests?",
-      "measure": "On a declared fixture suite: count duplicate writes, stale approvals accepted, legitimate actions blocked and adapter latency. No exactly-once claim for arbitrary external APIs.",
-      "baseline": "Framework idempotent-task guidance, durable execution and API idempotency keys. These already solve parts of the problem.",
-      "proposed_difference": "Package a narrow integration test and approval-to-action consistency check for client handover. Whether agencies need a separate product remains untested.",
-      "risk": "Drop the product if the framework or destination API solves the entire workflow with a small configuration change, or agency users reject the added integration work.",
-      "data_plan": "Synthetic invoice records and a fake side-effect API; reproduce the failure on pinned framework versions. No real payments or client systems.",
-      "model_plan": "Deterministic state checks and idempotency storage; no model needed in the enforcement path.",
-      "why_ml": "AI may initiate the workflow, but enforcing approved intent should be deterministic.",
-      "venture": "Start as a reliability audit and integration service; a reusable regression suite could support recurring maintenance. Pricing and demand are hypotheses.",
-      "customer_test": "Owner can show the failure demo to three automation maintainers and ask for an anonymised incident and a trial integration. No outreach is sent automatically.",
-      "week_test": "Deliver replay controls, adapter, failure tests and before/after receipts in 3–5 days. Test whether a maintainer can integrate it into one sandbox workflow.",
-      "growth_path": "One adapter → reusable client acceptance tests → maintained integrations and incident regression coverage.",
-      "evidence": "Two practitioner reports describe replay/interrupt problems. They establish a failure pattern, not market size or willingness to pay. Verify current versions; reported bugs may be fixed.",
-      "evidence_level": "Practitioner problem reports; purchasing demand untested",
-      "market": "Problem reported; buyer unvalidated",
-      "provenance": [
-        {
-          "title": "Practitioner report: pre-interrupt work repeats",
-          "url": "https://forum.langchain.com/t/pre-interrupt-code-re-runs-on-resume-anti-pattern-or-is-there-a-sanctioned-way-to-detect-resume/3809",
-          "kind": "Problem report",
-          "finding": "A practitioner asks how to distinguish resume execution because pre-interrupt code runs again."
-        },
-        {
-          "title": "LangGraph issue #7780",
-          "url": "https://github.com/langchain-ai/langgraph/issues/7780",
-          "kind": "Problem report",
-          "finding": "Reports repeated interrupt/resume behaviour in loops; reproduce before assuming the report applies to a current release."
-        },
-        {
-          "title": "LangGraph interrupt reference",
-          "url": "https://reference.langchain.com/python/langgraph/types/interrupt",
-          "kind": "Existing approach",
-          "finding": "Interrupt values are matched by order within a node. Framework semantics are a baseline, not our invention."
-        }
-      ],
-      "reason": "Best first fit for software reliability and an AI-Org service: a reproducible operational failure, bounded scope and reachable practitioners.",
-      "recommended": true,
-      "lane": "Project",
-      "version": 1,
-      "status": "Possibility",
-      "batch": "problem-evidence",
-      "shortlist": "20261031-problem-project",
-      "publication": "owner_requested_visual_summary",
-      "published_at": 1793455470.3583255,
-      "review_deadline": 1793541870.3583255,
-      "contribution": "A runnable simulated invoice workflow, protective adapter and failure-injection demo",
-      "effort": "3–6 days",
-      "feasibility": "Laptop-first, small fixtures, no paid APIs or compute. Customer validation remains a separate owner-led step.",
-      "next": "Deliver replay controls, adapter, failure tests and before/after receipts in 3–5 days. Test whether a maintainer can integrate it into one sandbox workflow.",
-      "originality": "Not claimed novel. Sources establish the problem or existing methods; the proposed product gap and willingness to pay remain hypotheses.",
-      "evidence_url": "https://forum.langchain.com/t/pre-interrupt-code-re-runs-on-resume-anti-pattern-or-is-there-a-sanctioned-way-to-detect-resume/3809",
-      "alternative": "Framework idempotent-task guidance, durable execution and API idempotency keys. These already solve parts of the problem.",
-      "auto_eligible": true,
-      "quality_gate_version": 2,
-      "selected": false,
-      "decision_url": ""
-    },
-    {
       "id": "P9",
       "title": "Find the invoice mistakes that distort a restaurant’s food costs",
       "domain": "Food operations · document reliability",
@@ -406,7 +336,7 @@
       "growth_path": "Exception inbox → supplier-specific matching learned from corrections → repeatable onboarding for small operators.",
       "evidence": "A vendor feedback report describes duplicated extracted rows (search-index evidence; full page fetch timed out). Vendor material describes line-item and restaurant review problems. These are biased, limited signals, not validated local demand.",
       "evidence_level": "User report + vendor evidence; local demand untested",
-      "market": "Crowded category; narrow gap untested",
+      "market": "Evidence review pending; no automatic build",
       "provenance": [
         {
           "title": "Invoice user reports duplicate rows",
@@ -436,7 +366,7 @@
       "shortlist": "20261031-problem-project",
       "publication": "owner_requested_visual_summary",
       "published_at": 1793455470.3583255,
-      "review_deadline": 1793541870.3583255,
+      "review_deadline": null,
       "contribution": "An interactive invoice exception inbox with an auditable correction history",
       "effort": "3–6 days",
       "feasibility": "Laptop-first, small fixtures, no paid APIs or compute. Customer validation remains a separate owner-led step.",
@@ -444,7 +374,7 @@
       "originality": "Not claimed novel. Sources establish the problem or existing methods; the proposed product gap and willingness to pay remain hypotheses.",
       "evidence_url": "https://mindee.featurebase.app/p/duplicated-extractions-from-invoice",
       "alternative": "Mindee already extracts invoice line items; xtraCHEF already offers restaurant invoice automation. A generic OCR app would duplicate existing products.",
-      "auto_eligible": true,
+      "auto_eligible": false,
       "quality_gate_version": 2,
       "selected": false,
       "decision_url": ""
@@ -476,7 +406,7 @@
       "growth_path": "Feasibility audit → bounded model adaptation pilot → measured maintenance under data changes.",
       "evidence": "Published research establishes that label errors can change model rankings; Cleanlab is an established alternative. Neither establishes that this consultancy report is a missing product.",
       "evidence_level": "Research evidence only; customer pain unverified",
-      "market": "Exploratory; not eligible for default build",
+      "market": "Evidence review pending; no automatic build",
       "provenance": [
         {
           "title": "Label errors can change model rankings",
@@ -500,7 +430,7 @@
       "shortlist": "20261031-problem-project",
       "publication": "owner_requested_visual_summary",
       "published_at": 1793455470.3583255,
-      "review_deadline": 1793541870.3583255,
+      "review_deadline": null,
       "contribution": "A local visual-data audit and reproducible pilot feasibility report",
       "effort": "3–6 days",
       "feasibility": "Laptop-first, small fixtures, no paid APIs or compute. Customer validation remains a separate owner-led step.",
@@ -673,7 +603,7 @@
       "batch": "applied-ai",
       "shortlist": "20261031-applied-thesis",
       "version": 1,
-      "status": "running",
+      "status": "review_ready",
       "publication": "owner_requested_visual_summary",
       "published_at": 1793453416.6248615,
       "review_deadline": 1793539816.6248617,
