@@ -25,7 +25,20 @@ function valid(d) {
 function decisionLink(value) { return /^https:\/\/github\.com\/achkum\/ai-thesis-lab\/issues\/[1-9][0-9]*$/.test(value) ? value : '#'; }
 function renderDecisions(lane) {
  const rows=(data.decisions||[]).filter(x=>!lane||x.lane===lane);
- return rows.length?rows.map(x=>'<article class="panel"><span class="tag">'+esc(x.lane)+' / '+esc(pretty(x.state))+'</span><h2>'+esc(x.id)+'</h2><p>Recommended: '+esc(x.recommended)+'. '+(x.selected?'Selected: '+esc(x.selected)+' ('+esc(pretty(x.selection_origin))+').':'Choose an option or hold the shortlist.')+'</p><p>Review deadline: <strong>'+esc(when(x.deadline,'Not published'))+'</strong> · Stockholm</p><p>No response selects the recommendation on the next successful check after the deadline.</p><a class="button primary" href="'+esc(decisionLink(x.url))+'" target="_blank" rel="noopener noreferrer">Review options & choose privately ↗</a></article>').join(''):'<div class="empty">No shortlist awaiting review. Discovery continues across domains.</div>';
+ return rows.map(d=>{
+ const c=data.opportunities.find(x=>x.id===(d.selected||d.recommended)&&x.shortlist===d.id);
+ return '<article class="decision-summary"><span class="tag">'+esc(d.lane)+' · '+esc(pretty(d.state))+'</span><h3>'+esc(c?.title||d.id)+'</h3><p>'+(d.selected?'Selected for the manual run.': 'Recommendation ready. Review until '+esc(when(d.deadline,'not set'))+'.')+'</p><a class="text-link" href="#'+(d.lane==='project'?'projects':'thesis')+'">See the three options →</a></article>';
+ }).join('')||'<p class="muted">Discovery is collecting the next set of possibilities.</p>';
+}
+function ideaFlow(x) {
+ return '<ol class="idea-flow">'+(x.flow||[]).map((s,i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><p>'+esc(s)+'</p></li>').join('')+'</ol>';
+}
+function ideaCard(x) {
+ return '<article class="idea-card '+(x.selected?'chosen':'')+'"><div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge '+(x.selected?'chosen-badge':'')+'">'+(x.selected?'Selected':x.recommended?'Recommended':esc(x.id))+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'A bounded next step')+'</strong><p>'+esc(x.contribution)+'</p></div><div class="idea-facts"><div><span class="label">FIRST STEP</span><strong>'+esc(x.effort||'To assess')+'</strong></div><div><span class="label">MARKET DEMAND</span><strong>'+esc(x.market||'Unvalidated')+'</strong></div></div><p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">Explore '+esc(x.id)+' · outcomes & trade-offs →</button></article>';
+}
+function comparison(rows) {
+ const fields=[['Who it helps','audience'],['First deliverable','deliverable'],['Initial effort','effort'],['Evidence strength','evidence_level'],['Main trade-off','risk']];
+ return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
 function showView(){
@@ -35,10 +48,31 @@ function showView(){
  const meta={overview:['TWO LANES. ONE WORKSPACE.','A clear view of your next move.','Daily research, continuous building. Progress without opening a terminal.'],thesis:['01 / THESIS DISCOVERY','Follow the evidence.','Achievable Applied AI questions, shaped by your interests.'],projects:['02 / PROJECT STUDIO','Build something worth sharing.','Flexible stages. Small releases. Useful feedback.'],sources:['DISCOVERY NETWORK','Look beyond your usual sources.','Research, communities, engineering and real-world problems.'],setup:['YOUR LAB, YOUR DIRECTION','Set the boundaries.','Choose your interests and prepare the machines for autonomous work.']};
  [$('eyebrow').textContent,$('title').textContent,$('subtitle').textContent]=meta[v];
 }
+function openConversation(mode,lane,id) {
+ const x=data.opportunities.find(c=>c.id===id);
+ const heading=mode==='new'?'Explore different directions':mode==='refine'?'Shape this idea with the agent':'Ask about this idea';
+ const context=x?x.id+' — '+x.title:lane+' possibilities';
+ $('detail-content').innerHTML='<span class="tag">ON DEMAND · NO NEED TO WAIT</span><h2>'+heading+'</h2><p>'+esc(context)+'</p><div class="conversation-note">This prepares a message for our Codex chat. It does not call a model or change your selection from this page.</div><label for="agent-question">What would you like to change or understand?</label><textarea id="agent-question" rows="4" placeholder="'+(mode==='new'?'For example: explore food-industry operations, avoid another generic tracking app.':mode==='refine'?'For example: make the first version useful to a small restaurant.':'For example: who would pay for this, and what already solves it?')+'"></textarea><div class="question-suggestions"><button data-suggest="Who would use this, and what evidence suggests they need it?">Who needs it?</button><button data-suggest="What already exists, and what would make this meaningfully different?">Is this already solved?</button><button data-suggest="Show a concrete example of the user experience.">Show me an example</button></div><label for="preference-duration">How should this affect future discovery?</label><select id="preference-duration"><option value="once">This discussion only</option><option value="persistent">Remember as a discovery preference</option></select><p class="muted">Questions leave the current selection unchanged. A replacement request pauses affected work before the direction changes.</p><button class="primary" id="prepare-agent-message">Prepare message</button><div id="agent-message-area" hidden><label for="agent-message">Message to send in our Codex chat</label><textarea id="agent-message" rows="7" readonly></textarea><button id="copy-agent-message">Copy message</button><p id="agent-copy-status" role="status">Paste it into this chat to start immediately. Nothing has been sent yet.</p></div>';
+ $('prepare-agent-message').onclick=()=>{
+ const q=$('agent-question').value.trim();
+ const persistence=$('preference-duration').value==='persistent'?'Remember my stated interests as editable ranking preferences, while keeping broad discovery.':'Apply this request only to this discussion; do not change my long-term discovery preferences.';
+ const instruction=mode==='new'?'I want a fresh set of '+lane+' options now. Pause work on a currently selected idea in this lane before replacing it. Research 3–5 alternatives and update the visual dashboard before building.':mode==='refine'?'Refine '+context+' now. Preserve existing work and show the revised scope on the dashboard before continuing implementation.':'Explain '+context+' now. This is a question, not a selection change or approval to build.';
+ $('agent-message').value=instruction+'\n\n'+(q||'Help me assess the problem, potential outcome, existing alternatives, feasibility and market uncertainty.')+'\n\n'+persistence;
+ $('agent-message-area').hidden=false;
+ };
+ $('copy-agent-message').onclick=async()=>{
+ try{await navigator.clipboard.writeText($('agent-message').value);$('agent-copy-status').textContent='Copied. Paste into this Codex chat and send to start now.';}catch{$('agent-copy-status').textContent='Select and copy the message above, then paste it into this chat.';}
+ };
+ $('detail').showModal();
+}
 function renderCards(lane,query=''){
- const filtered=data.opportunities.filter(x=>x.lane===lane&&(x.title+' '+x.summary).toLowerCase().includes(query.toLowerCase()));
+ const rows=data.opportunities.filter(x=>x.lane===lane&&(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase()));
  const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
- dest.innerHTML=renderDecisions(lane.toLowerCase())+(filtered.length?filtered.map(x=>'<article class="panel opportunity"><span class="tag">'+esc(x.id)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2><p>'+esc(x.summary)+'</p><button data-detail="'+esc(x.id)+'">Inspect possibility →</button></article>').join(''):(data.mode==='live'?'':'<div class="empty">No matching opportunities. Nothing is generated to fill a quota.</div>'));
+ const chosen=rows.find(x=>x.selected),recommended=rows.find(x=>x.recommended);
+ const focus=chosen||recommended;
+ const intro=focus?'<div class="lane-focus"><div><span class="tag">'+(chosen?'YOUR CURRENT DIRECTION':'OUR RECOMMENDATION')+'</span><p><strong>'+esc(focus.id)+'</strong> · '+esc(focus.reason||focus.title)+'</p></div><span class="pill">'+(chosen?esc(pretty(focus.status)):'Ready to review')+'</span></div>':'';
+ const conversation='<div class="explore-again"><div><strong>Not your direction?</strong><p>Question the recommendation, change the angle or explore a fresh set now.</p></div><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></div>';
+ dest.innerHTML=conversation+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">No matching ideas. Try another search.</div>');
 }
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
@@ -70,10 +104,30 @@ async function refresh(){
  }catch(e){lastError='Snapshot update failed ('+e.message+'). '+(data.mode==='sample'?'Showing labelled sample data; no live connection.':'Retaining the last snapshot; check its age.');}
  finally{render();$('refresh').disabled=false;}
 }
-document.addEventListener('click',e=>{
+document.addEventListener('click',async e=>{
+ const convo=e.target.closest('[data-conversation]');
+ if(convo){openConversation(convo.dataset.conversation,convo.dataset.lane,convo.dataset.idea);return;}
+ const suggestion=e.target.closest('[data-suggest]');
+ if(suggestion){$('agent-question').value=suggestion.dataset.suggest;return;}
+ const copy=e.target.closest('[data-copy-choice]');
+ if(copy){
+  const x=data.opportunities.find(x=>x.id===copy.dataset.copyChoice);if(!x)return;
+  const command='/lab select '+x.shortlist+' v'+x.version+' '+x.id;
+  try{await navigator.clipboard.writeText(command);copy.textContent='Copied — paste in the private decision thread';}
+  catch{copy.textContent='Copy this: '+command;}
+  return;
+ }
  const b=e.target.closest('[data-detail]');if(!b)return;
  const x=data.opportunities.find(x=>x.id===b.dataset.detail);if(!x)return;
- $('detail-content').innerHTML='<span class="tag">'+esc(x.lane)+' / '+esc(x.status)+'</span><h2>'+esc(x.title)+'</h2>'+[['Problem',x.summary],['Possible contribution',x.contribution],['Feasibility',x.feasibility],['Venture hypothesis',x.venture],['Evidence status',x.evidence],['Next investigation',x.next]].map(([k,v])=>'<h3>'+esc(k)+'</h3><p>'+esc(v)+'</p>').join('');
+ $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+ideaFlow(x)+'<div class="detail-grid">'+[
+ ['The question worth testing',x.question||x.summary],
+ ['What success would look like',x.measure||x.contribution],
+ ['Who might use it—and why',x.venture],
+ ['What already exists',x.alternative||'Closest alternatives still need checking'],
+ ['Why consider this option',x.reason||x.feasibility],
+ ['What could make us drop it',x.risk||x.feasibility]
+ ].map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div><div class="next-step"><span class="tag">BOUNDED NEXT STEP · '+esc(x.effort||'TO ASSESS')+'</span><p>'+esc(x.next)+'</p><p class="muted">'+esc(x.feasibility)+'</p></div><details class="evidence-details"><summary>Evidence & uncertainty</summary><p>'+esc(x.evidence)+'</p>'+(x.evidence_url?'<a class="text-link" href="'+esc(safeLink(x.evidence_url))+'" target="_blank" rel="noopener noreferrer">Read the original source ↗</a>':'')+'</details>'+(x.decision_url?'<div class="choice-actions"><strong>'+(x.selected?'This option is already selected.':'Want to choose this direction?')+'</strong><p>Choices are saved through your private GitHub thread. Copy the command, open the thread and paste it as a comment. A change during work pauses at a checkpoint.</p><div><button data-copy-choice="'+esc(x.id)+'">Copy choice: '+esc(x.id)+'</button> <a class="button" href="'+esc(decisionLink(x.decision_url))+'#new_comment_field" target="_blank" rel="noopener noreferrer">Open private decision thread ↗</a></div></div>':'');
+ $('detail-content').insertAdjacentHTML('beforeend','<div class="discussion-actions"><button data-conversation="ask" data-lane="'+x.lane.toLowerCase()+'" data-idea="'+esc(x.id)+'">Ask about this idea</button><button data-conversation="refine" data-lane="'+x.lane.toLowerCase()+'" data-idea="'+esc(x.id)+'">Refine this direction</button></div>');
  $('detail').showModal();
 });
 $('close-detail').onclick=()=>$('detail').close();

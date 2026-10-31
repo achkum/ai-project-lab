@@ -1,12 +1,16 @@
 # Research & Build Lab
 
+**[Open the dashboard →](https://achkum.github.io/ai-project-lab/)**
+
+[Thesis possibilities](https://achkum.github.io/ai-project-lab/#thesis) · [Project possibilities](https://achkum.github.io/ai-project-lab/#projects) · [Source library](https://achkum.github.io/ai-project-lab/#sources)
+
 VPS-backed daily discovery and rolling project delivery, with a public GitHub Pages dashboard and private GitHub decisions.
 
 ## What runs
 - 30 bounded public RSS/Atom/API collectors, metadata deduplication, provenance and honest seven-day coverage.
 - SQLite selection state, immutable candidate scope, one active shortlist per lane, owner-only GitHub commands, and a 24-hour recommended default.
 - Leased workers with checkpoint/finish fencing, isolated workspace preparation, and subscription-backed Codex CLI adapter.
-- Allowlisted public status export; detailed options and evidence stay in the private companion repository.
+- Public status and curated visual idea summaries; full evidence and decision records stay in the private companion repository.
 - Native Codex scheduled runs operate the pipeline while this laptop and the app are awake.
 
 No paid API fallback or credit purchase. GPT-6 Astra for analysis/review; GPT-6.1 Terra for implementation; deterministic code for collection and state transitions. Fresh allowance checks fail closed when credit availability or quotas are unknown. This is not an account billing-settings lock.
@@ -37,3 +41,9 @@ GitHub Pages publishes docs/ from main. Runtime records, credentials, private ca
 
 ## VPS collector
 User-level systemd units are in deploy/. The existing openclaw SSH alias pulls metadata snapshots; collector_host=vps in the ignored local profile enables this transport. No GitHub or model credentials are copied to the VPS. User lingering keeps the timer active after logout. Collection runs at 07:30 Europe/Stockholm; the laptop analysis schedule remains 08:00.
+
+## Discuss or change direction now
+
+Open an idea on the dashboard and use **Ask about this idea** or **Refine this direction**. **Find different ideas** prepares a request for a fresh shortlist. Copy the prepared message into the Codex chat to act immediately; these static-page controls do not send messages or run models themselves. You can also ask directly in chat without opening the dashboard.
+
+Questions preserve the current selection. Replacement requests pause affected work first. Choose whether feedback applies only once or becomes an editable discovery preference. Scheduled runs remain the background fallback.

@@ -43,6 +43,20 @@ def export(profile, workflow, discovery, sources):
         decisions.append({'id': r['id'], 'lane': r['lane'], 'state': r['state'], 'url': r['issue_url'],
                           'deadline': iso(r['deadline']), 'selection_origin': r['origin'],
                           'recommended': json.loads(r['document'])['recommended'], 'selected': r['selected']})
+    # Owner requested visual summaries on GitHub Pages. Only explicitly curated
+    # public cards are exported, never raw candidate documents or owner context.
+    public_cards=Path(profile['public_root'])/'config/public-opportunities.json'
+    opportunities=[]
+    if public_cards.exists():
+        for card in json.loads(public_cards.read_text(encoding='utf-8')):
+            if card.get('publication')!='owner_requested_visual_summary':
+                continue
+            decision=next((d for d in decisions if d['id']==card.get('shortlist')),None)
+            card['recommended']=bool(decision and decision['recommended']==card['id'])
+            card['selected']=bool(decision and decision['selected']==card['id'])
+            card['status']=decision['state'] if card['selected'] else 'Possibility'
+            card['decision_url']=decision['url'] if decision else ''
+            opportunities.append(card)
     snapshot = {
         'schema_version': 1, 'mode': 'live', 'generated_at': iso(now), 'connected': True,
         'thesis': {'state': thesis['state'] if thesis else 'research_collected', 'last_success': iso(success),
@@ -56,7 +70,7 @@ def export(profile, workflow, discovery, sources):
         'usage': {'spent_sek': 0, 'limit_sek': 0},
         'coverage': {k: coverage[k] for k in ('checked','target','registered','blocked','source_families')},
         'sources': [{k: s[k] for k in ('id','name','category','url','access','status')} for s in coverage['rows']],
-        'opportunities': [], 'decisions': decisions,
+        'opportunities': opportunities, 'decisions': decisions,
         'collector_host': profile.get('collector_host','laptop'),
         'events': [
             {'title': 'Collector host', 'detail': 'VPS collects daily at 07:30 Stockholm while the laptop is off. Analysis/builds and dashboard synchronization wait for the laptop.' if profile.get('collector_host')=='vps' else 'Collection runs on the laptop.'},
