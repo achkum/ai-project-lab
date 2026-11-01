@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "base": "relative api/ (health at /health)",
+  "errors": {
+    "error": "human-readable message"
+  },
+  "routes": {
+    "GET api/content": "{scenarios, curriculum}",
+    "GET api/sessions": "{sessions: [session]}",
+    "POST api/sessions": "{scenario_id,framework_id,course,study_path,support:[],context,feeling} -> {session}",
+    "GET api/sessions/{id}": "{session}",
+    "DELETE api/sessions/{id}": "{ok:true}",
+    "DELETE api/sessions": "{ok:true}",
+    "POST api/sessions/{id}/turn": "{text,input_mode:text|voice,help_used:[],request_id} -> {session,reply}; same request_id returns original result",
+    "POST api/sessions/{id}/coach": "{request_id} -> {session,feedback}; transcript-based, persisted, provisional",
+    "POST api/sessions/{id}/evidence": "{activity,response,input_mode:text|voice,help_used:[],request_id} -> {session}; duplicate request_id is idempotent",
+    "POST api/sessions/{id}/phrases": "{sv,en} -> {session}",
+    "POST api/transcribe": "raw recorded audio, <=12MB and <=180s -> {text}",
+    "POST api/speech": "{text,slow} -> audio/wav",
+    "GET api/export": "{version,sessions}"
+  },
+  "session": "id, scenario_id, framework_id, course, study_path, support, context, feeling, created_at, turns, evidence, phrases, coaching and snapshot. Snapshot holds scenario/curriculum content versions, scenario, selected criteria including sources, criterion links. Records retain input mode/help used and practise state, not official assessment. Audio temporary files are deleted on completion or handled error; abrupt termination can leave them."
+}

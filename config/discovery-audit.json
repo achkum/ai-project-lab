@@ -304,10 +304,18 @@
       "BP1": "Keep as a hypothesis",
       "BP2": "Keep as a hypothesis",
       "BP3": "Keep as a hypothesis",
-      "BP4": "More uncertain — compare alternatives first",
-      "BP5": "More uncertain — compare alternatives first"
+      "BP4": "More uncertain â€” compare alternatives first",
+      "BP5": "More uncertain â€” compare alternatives first"
     },
     "demand": "Unverified for all five. Original dates are source assertions with date basis, not discovery timestamps.",
     "delivery": "Selected prototypes have static or private localhost delivery, independently executed checks and automatic strongest-model review. No new selections were enqueued."
+  },
+  "bp5_refinement": {
+    "at": "2026-11-01T14:01:19.677477+00:00",
+    "version": 2,
+    "decision": "Revise to owner-directed role-play product",
+    "standards": "Current SFI and published 2027 transition checked; exact task mappings still need implementation and validation.",
+    "claims": "No proven memory effect, official grade, unique feature or validated customer demand.",
+    "execution": "Owner requested a multi-agent mobile-web build. Register one BP5 v2 selection in an existing managed slot; preserve other jobs, hold and manual allowlist."
   }
 }

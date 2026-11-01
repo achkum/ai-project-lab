@@ -1,0 +1,39 @@
+{
+  "retrieved_at": "2026-11-01",
+  "files": [
+    {
+      "filename": "SKOLFS-2017-91-consolidated.pdf",
+      "url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+      "page_count": 7,
+      "visually_reviewed_pages": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "sha256": "cfe77b2ad39f5a451a9566306e2a439aa78e8060e788f0a902faeaf9e7e621bc",
+      "bytes": 115154
+    },
+    {
+      "filename": "SKOLFS-2026-67.pdf",
+      "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+      "page_count": 28,
+      "visually_reviewed_pages": [
+        1,
+        2,
+        5,
+        7,
+        9,
+        12,
+        15,
+        17,
+        19,
+        20,
+        23,
+        25
+      ],
+      "sha256": "64dd76306e9209388d216aa9be527619d3e3ff7acb8af5f3d5f1ca8278894805",
+      "bytes": 342778
+    }
+  ]
+}

@@ -65,12 +65,17 @@ function comparison(rows) {
  const fields=rows[0]?.lane==='Thesis'?[['Who it helps','audience'],['What we would test','question'],['What you would produce','deliverable'],['Main difficulty','risk']]:[['First customer','audience'],['Working first version','deliverable'],['Why someone would pay','buyer'],['Demand test','customer_test'],['Main risk','risk']];
  return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
+function learningDesign(x){
+ const d=x.learning_design;if(x.id!=='BP5'||!d)return '';
+ const levels=Array.isArray(d.levels)?d.levels:[];
+ return '<section class="learning-design"><h3>How the practice works</h3><p>'+esc(d.intro||'')+'</p><div class="learning-levels">'+levels.map(l=>'<article><span class="tag">'+esc(l.name)+'</span><p>'+esc(l.example)+'</p><p><strong>Goal:</strong> '+esc(l.goal)+'</p><p><strong>Support:</strong> '+esc(l.support)+'</p></article>').join('')+'</div><details class="evidence-details"><summary>SFI progress and evidence</summary><p>'+esc(d.alignment_note||'')+'</p><p>'+esc(d.progress_boundary||'')+'</p><p>'+esc(d.transition_note||'')+'</p><p>'+esc(d.transfer_example||'')+'</p><p><a href="'+esc(safeLink(d.standard_url))+'" target="_blank" rel="noopener noreferrer">Current SFI syllabus ↗</a> · <a href="'+esc(safeLink(d.transition_url))+'" target="_blank" rel="noopener noreferrer">SFI transition ↗</a></p></details></section>';
+}
 function businessDetails(x){
  const b=x.business_case;
  const grid=items=>'<div class="detail-grid">'+items.filter(([,v])=>v).map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>';
  return '<span class="tag">'+esc(x.id)+' / Business hypothesis · '+esc(x.assessment)+'</span><h2>'+esc(x.title)+'</h2>'+grid([
   ['What goes wrong?',x.summary],['Who has this problem?',x.audience],['A concrete example',x.example],['What would we build?',x.proposed_fix],['Why might someone pay?',x.buyer],['Working first version',x.deliverable]
- ])+ideaFlow(x)+'<p class="callout">'+esc(x.evidence_level)+' '+esc(x.risk)+'</p><details class="evidence-details"><summary>The business: alternatives, repeat use and how to test demand</summary>'+grid([
+ ])+ideaFlow(x)+learningDesign(x)+'<p class="callout">'+esc(x.evidence_level)+' '+esc(x.risk)+'</p><details class="evidence-details"><summary>The business: alternatives, repeat use and how to test demand</summary>'+grid([
   ['A specific first customer',b.first_customer],['Why they would return',b.repeat_use],['Existing alternatives',b.current_alternatives],['Our proposed difference',b.proposed_difference],['How to find the first customers',b.first_customer_route],['A cheap reason to stop',b.kill_test],['Beyond the first week',b.next_90_days],['Costs and support',b.costs]
  ])+'</details><details class="evidence-details"><summary>The first build: workflow, acceptance checks and data</summary>'+grid([
   ['Complete first-week workflow',b.week_one],['How we check it works',b.week_one_acceptance],['Data we can actually use',b.data_access],['Model approach',x.model_plan],['Why use a model?',x.why_ml],['Where it runs',x.technical_scope]

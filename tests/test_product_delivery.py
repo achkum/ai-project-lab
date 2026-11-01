@@ -37,6 +37,18 @@ class ProductDeliveryTests(unittest.TestCase):
         with patch('engine.product_delivery.live_instance',return_value=False),patch('engine.product_delivery.sp.Popen') as spawn:
             with self.assertRaisesRegex(RuntimeError,'earlier local version'):start_local({'runtime_root':str(self.runtime)},self.job,self.w,lambda:None)
             spawn.assert_not_called()
+    def test_larger_voice_budget_keeps_a_bounded_shared_admission_limit(self):
+        self.spec['memory_mb']=5120;(self.w/'product.json').write_text(json.dumps(self.spec))
+        contract(self.w,'local_service')
+        self.spec['memory_mb']=5121;(self.w/'product.json').write_text(json.dumps(self.spec))
+        with self.assertRaises(ValueError):contract(self.w,'local_service')
+        self.spec['memory_mb']=2048;(self.w/'product.json').write_text(json.dumps(self.spec))
+        existing={'other':{'job':'other-owner-selected-app','pid':os.getpid(),'url':'http://127.0.0.1:19100/','memory_mb':5120}}
+        (self.runtime/'local-products.json').write_text(json.dumps(existing))
+        with patch('engine.product_delivery.sp.Popen') as spawn:
+            with self.assertRaisesRegex(RuntimeError,'resource budget'):start_local({'runtime_root':str(self.runtime)},self.job,self.w,lambda:None)
+            spawn.assert_not_called()
+        self.assertEqual(existing,json.loads((self.runtime/'local-products.json').read_text()))
     @unittest.skipUnless(os.name=='nt','Windows managed-service smoke check')
     def test_hidden_local_service_health_ui_and_idempotent_reuse(self):
         source='''import os,json,threading

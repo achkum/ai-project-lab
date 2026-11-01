@@ -1,0 +1,17 @@
+COMMAND: node --test C:\Users\achku\Documents\Codex\2026-10-31\i-h\outputs\ai-project-lab\projects\bp5\tests\frontend.test.cjs
+PASS: edited voice, support, retry, frozen snapshot, in-flight guard, cancelled deletion
+✔ C:\Users\achku\Documents\Codex\2026-10-31\i-h\outputs\ai-project-lab\projects\bp5\tests\frontend.test.cjs (79.6909ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.1381
+COMMAND: C:\Users\achku\AppData\Local\Programs\Python\Python314\python.exe -m unittest discover -s tests -p test*.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.607s
+
+OK

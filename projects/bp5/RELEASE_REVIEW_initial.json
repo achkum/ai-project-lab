@@ -1,0 +1,136 @@
+{
+  "ready": false,
+  "reviewed_at": "2026-11-01",
+  "review_scope": "Independent source and isolated JavaScript-state review of BP5 first-week acceptance, mobile web UI, content, persistence and evidence boundaries. No server started, no model inference run, no deployment or product edits performed. Source was still changing; a frozen-source rereview is required.",
+  "snapshot": {
+    "server/app.py_sha256": "765893A6003D9CD94EB73120425A6D885085C5CE73646A0465F615F6E02A55A8",
+    "web/app.js_sha256": "6CAB88FA32EAD072E900BA7E662073C6C1482CD383367B29EDE5FB1C81BB83B5"
+  },
+  "blocking": [
+    {
+      "id": "B1",
+      "priority": "high",
+      "title": "Real Swedish voice and sustained dialogue acceptance is not established",
+      "paths": ["server/README.md", "server/app.py:82", "../../runtime/local-products/bp5/bench3.py", "../../runtime/local-products/bp5/bench35.py", "server/test_api.py"],
+      "evidence": "The reviewed README reports only brief synthetic recognition/synthesis checks, recognition errors, occasional incorrect Swedish from the original 1.5B model, and one short response. Bench scripts exercise single initial turns, not a complete several-minute high-level discussion. API tests replace character generation with a constant response. Parent confirms better-model benchmarking remains underway. This review intentionally did not compete with that work.",
+      "impact": "The central voice product cannot be called complete based on a typed/mock flow or one synthetic utterance. Neither quality across all three scenes nor final selected-model latency/resource use has been demonstrated here.",
+      "required_fix_or_check": "Select and identify the actual runtime, record model/version/hash/license and measured latency/memory, then complete each scene through real transcription, contextual replies and audible Swedish. Include a sustained high scene, a constraint/rephrasing case, and actual mobile-browser voice/device failure checks. Do not present missing teacher validation as a blocker for an honestly labelled prototype."
+    },
+    {
+      "id": "B2",
+      "priority": "high",
+      "title": "Evidence is not stored with its criterion/version/course identity",
+      "paths": ["server/app.py:181", "server/app.py:209", "web/app.js:19", "web/app.js:35", "content/CONTRACT.md"],
+      "evidence": "Sessions save arbitrary bounded framework_id/course strings but no study_path or content version. Evidence saves only activity, response, help_used and time, without an ID, input provenance, criterion/source snapshot, state, reviewer or uncertainty. criterionEvidence derives links from the currently loaded content on every render. The course UI is free text with example 2B even when the current framework is selected; current criteria use B or SFIKUB91/SFIKUB92, so this plausible combination matches nothing. The API test explicitly accepts framework='old' with course='2B', which are not a valid content pair.",
+      "impact": "A future content edit can relabel historical practice; old and new frameworks are not preserved as required. Study-path-specific identification and honest per-area unassessed/practised status are absent, and invalid course input silently loses links.",
+      "required_fix_or_check": "Validate framework/course/study-path combinations against curriculum data; preserve explicit unknowns. Store immutable content/criterion/source snapshots and provenance with each attempt, using practised for ordinary completion and unassessed for unsupported evidence. Render stored snapshots. Test valid current/new profiles, unknown profiles, invalid pairs and the 2026/2027 boundary without rewriting previous records."
+    },
+    {
+      "id": "B3",
+      "priority": "high",
+      "title": "Typed replacements and revealed text can become oral/listening links",
+      "paths": ["web/app.js:29", "web/app.js:32", "web/app.js:38", "web/app.js:44", "web/app.js:46", "server/app.py:202", "server/app.py:210"],
+      "evidence": "transcribePending sets inputMode='voice'; the transcript input handler updates text without changing or qualifying that provenance. An isolated Node VM test replaced recognised words with a wholly typed sentence and inputMode stayed voice. criterionEvidence adds oral dialogue for any such turn. A second VM check confirmed that listening evidence with help_used=['text revealed'] still maps to a listening criterion. listeningPlayed becomes true when audio.play starts rather than on completed listening, and the server does not require audio/text-exposure provenance. Writing evidence has no typed/dictated/unknown provenance field.",
+      "impact": "The progress view can attribute the wrong skill to the available evidence, violating explicit scope boundaries even though it does not issue official grades.",
+      "required_fix_or_check": "Keep original transcript, edit status and input source distinct; a freely replaced transcript cannot establish speaking. Treat text-exposed listening as supported multimodal practice with listening unassessed. Record actual playback/text exposure and writing provenance, leaving unknown provenance unknown. Add regression tests for edited speech, text-revealed listening, no playback and dictation/unknown input."
+    },
+    {
+      "id": "B4",
+      "priority": "high",
+      "title": "Support used is under-recorded across turns and follow-ups",
+      "paths": ["web/app.js:20", "web/app.js:21", "web/app.js:30", "web/app.js:31", "web/app.js:33", "web/app.js:47"],
+      "evidence": "send resets state.support=[] while state.hint and state.english remain true. An isolated VM test produced {hint:true,support:[]} after a send, so the next turn can use visible phrases yet record no help. Listen/Slow clicks never record replay or slow-audio support. The writing starter is continuously visible as a placeholder, but saveFollowup always sends help_used:[]. Previously revealed phrase/translation support is not carried into the connected writing attempt.",
+      "impact": "The user's evidence and coaching omit material aids, undermining the promised distinction between supported practice and independent observations.",
+      "required_fix_or_check": "Track aid exposure by attempt, including still-visible hints, translation, replay/slow counts, starters and notes. Prefer an explicit reveal action for writing starters, and never clear help while its content remains visible. Test a second hinted turn and follow-up after using hints."
+    },
+    {
+      "id": "B5",
+      "priority": "high",
+      "title": "Concurrent mutations can overwrite history or resurrect deleted sessions",
+      "paths": ["server/app.py:26", "server/app.py:31", "server/app.py:178", "server/app.py:196", "server/app.py:198", "server/app.py:205", "server/app.py:212", "server/app.py:216", "web/app.js:26", "web/app.js:33"],
+      "evidence": "ThreadingHTTPServer handlers read an entire session before model work, then save the stale whole object with INSERT OR REPLACE. MODEL_LOCK serializes inference only, not session read-modify-write. A save-evidence or phrase operation during a turn can be overwritten by the later turn save. Deleting a session while a turn is running can be undone by its subsequent INSERT OR REPLACE. No idempotency key or request identity exists; retry after a lost response can add the turn/evidence/phrase again. Several save/coach controls remain enabled during perform().",
+      "impact": "Actual learner work can disappear, duplicated requests can create misleading evidence, and deletion is not reliable while work is running.",
+      "required_fix_or_check": "Add atomic per-session mutations or optimistic revision checks, durable request IDs/idempotency and deletion protection against late saves. Reject or safely queue conflicting mutations. Test simultaneous turn/evidence saves, repeated request IDs, lost-response retry and deletion during generation."
+    },
+    {
+      "id": "B6",
+      "priority": "high",
+      "title": "Cancellation and navigation do not isolate in-flight work",
+      "paths": ["web/app.js:26", "web/app.js:28", "web/app.js:30", "web/app.js:31", "web/app.js:33", "web/app.js:48", "server/app.py:45"],
+      "evidence": "There is no request cancellation control or AbortController, and send/start/transcribe completion writes global state without checking the originating session/operation. Navigation is allowed while busy, so a late response can replace the active session after moving to another scene. Only home/tab navigation checks state.recorder; Continue to reading & writing is still allowed during recording and hides the stop button. Audio playback has no explicit stop control and is not stopped on navigation/sign-out. The README claims browser cancellation stops playback/request consumption, but this is not implemented in this snapshot.",
+      "impact": "A user can lose control of recording/playback, wait through an unwanted inference, or mix one session's response with another scene. The explicit cancellation acceptance case is unmet.",
+      "required_fix_or_check": "Provide cancel/stop controls, stop tracks and playback on exit, and bind asynchronous work to a stable session/operation token. Late responses must not alter another active session. Define whether backend work is canceled or merely detached and communicate that accurately. Test cancellation during capture, transcription, generation and playback, plus navigation while each is active."
+    },
+    {
+      "id": "B7",
+      "priority": "high",
+      "title": "The user cannot export or delete private practice through the UI",
+      "paths": ["web/app.js:24", "web/app.js:33", "server/app.py:177", "server/app.py:178", "server/app.py:198", "server/README.md"],
+      "evidence": "Export and delete endpoints exist, but the complete progress view and click-handler action list expose neither export nor session/all-history deletion. Personal context, feelings, transcripts and writing persist in SQLite. The README documents temporary audio retention after abnormal termination; the current delete endpoint clears only sessions.",
+      "impact": "A normal mobile user lacks the promised private-data controls. Sign-out is not deletion, and claiming export/deletion available solely because APIs exist is insufficient for the working app.",
+      "required_fix_or_check": "Expose accessible export and deletion controls with clear scope and confirmation for destructive deletion. Clear matching UI caches/audio, protect against late resurrection, and disclose or clean abandoned temporary recordings. Verify export contents and deletion from a fresh reload."
+    },
+    {
+      "id": "B8",
+      "priority": "medium",
+      "title": "Final runtime provenance and licence record must follow model selection",
+      "paths": ["server/README.md", "../../runtime/local-products/bp5/download.py", "../../runtime/local-products/bp5/parallel3.py"],
+      "evidence": "Engine release URLs are pinned, but weight URLs resolve mutable main branches and there is no selected-runtime hash/licence manifest. README documents the original 1.5B model under Apache-2.0 while alternative 3B and 4B files are being tested. The official Qwen2.5-3B-Instruct-GGUF card identifies qwen-research, not Apache-2.0. The Swedish voice card states CC0 for its dataset; that should not be expanded into an unverified blanket claim about every packaged component.",
+      "sources": ["https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/raw/main/README.md", "https://huggingface.co/rhasspy/piper-voices/raw/main/sv/sv_SE/nst/medium/MODEL_CARD"],
+      "impact": "A final model change can leave inaccurate licence and measured-runtime claims in the release documentation.",
+      "required_fix_or_check": "Record exact selected file hashes, original URLs/revisions, engine versions and applicable model/binary licences. Update measurements and README for the selected stack. Review the actual 3B terms if selected; do not inherit the 1.5B licence claim."
+    }
+  ],
+  "limitations": [
+    {
+      "id": "L1",
+      "title": "Pedagogical validation remains intentionally limited",
+      "evidence": "Official source/page/course references, transition rules and 56 criteria are present and content integrity validation passes. Scenario mapping is partial and explicitly awaiting SFI educator review; no calibrated score, official grade or course placement is emitted by the authored content.",
+      "release_treatment": "Not a blocker for an honest prototype. Preserve the caveats and unassessed areas; do not claim readiness accuracy, improved retention or validated learner assessment."
+    },
+    {
+      "id": "L2",
+      "title": "Saved phrase transfer exists, but recall is always cued and prior practice cannot resume",
+      "paths": ["web/app.js:21", "web/app.js:34", "server/app.py:208"],
+      "evidence": "Saved phrases and transfer prompts reload from sessions and can save another response. The phrase remains visible during this recall task and is correctly labelled phrase visible; there is no uncued attempt/reveal mode or due-time view. Historical conversation sessions have no resume control. Coach output is returned but not saved, so feedback is lost on restart. Reading/writing responses are stored without content-specific feedback.",
+      "release_treatment": "Do not describe the current cued transfer as an independent memory test or claim coaching is saved. A hide/reveal recall task and stored feedback/resume would make the promised learning loop more complete."
+    },
+    {
+      "id": "L3",
+      "title": "Prompt handling has bounded context but no role-token isolation",
+      "paths": ["server/app.py:82", "server/app.py:108", "server/app.py:116"],
+      "evidence": "The local model has no tools or access to other sessions in the prompt. Context is bounded, but learner context/feeling is concatenated into the system instruction and raw user text enters hand-built ChatML without escaping role delimiters. Coaching considers only a short transcript excerpt and its unsupported-assessment filter is lexical, not a semantic guarantee.",
+      "release_treatment": "Keep user-controlled context as data in a user message and sanitize template delimiters or use the engine's chat template. Continue labelling feedback provisional. Add tests for adversarial role markers and requests for grades; do not claim the regex proves feedback safety."
+    },
+    {
+      "id": "L4",
+      "title": "Private HTTPS deployment is outside this review",
+      "paths": ["server/app.py:157", "server/README.md", "web/app.js:5"],
+      "evidence": "The backend restricts Host/Origin to localhost and has no authentication itself. The frontend conditionally authenticates one configured HTTPS hostname. Parent owns the gateway and final deployment. A correctly configured single-owner gateway may supply the intended boundary; this review has not tested it.",
+      "release_treatment": "Verify authenticated access, logout/expiry, no direct backend bypass and rewritten host/origin behavior in the actual HTTPS topology. Keep the single-owner limitation explicit."
+    },
+    {
+      "id": "L5",
+      "title": "Mobile design intent is present but source inspection is not device acceptance",
+      "paths": ["web/style.css", "web/index.html", "web/design-reference.txt"],
+      "evidence": "The UI uses the referenced Drift-style 480px app shell, warm SubTrack canvas, rounded cards, restrained teal, bottom tabs, viewport/safe-area handling, labelled fields and mostly 44px-plus controls. No external paid fonts or assets are required. This review did not run a real phone, screen reader or mobile microphone.",
+      "release_treatment": "Verify narrow-width overflow, virtual keyboard behavior, focus/status changes, Safari recording MIME handling and explicit audio playback on devices before claiming tested mobile voice compatibility."
+    },
+    {
+      "id": "L6",
+      "title": "Test coverage is narrower than the first-week acceptance",
+      "paths": ["server/test_api.py", "content/validate_content.py"],
+      "evidence": "Inspected API tests cover basic CRUD, selected bounds, host/origin checks and one forbidden coaching string using mocks. They do not cover valid real curriculum combinations, syllabus transition/history immutability, duplicate/conflicting requests, cancellation, deletion during inference, audio/device failures, or actual three-scene voice quality. Tests also assert an invalid framework/course pair succeeds.",
+      "release_treatment": "Add targeted regression tests for repaired blockers and complete the parent-owned final real-flow checks; passing the current small suite alone is not full acceptance."
+    }
+  ],
+  "checks_performed": [
+    {"check": "python content/validate_content.py", "result": "PASS: 56 references; 3 complete scenes; explicit version and evidence boundaries."},
+    {"check": "node --check web/app.js", "result": "PASS syntax."},
+    {"check": "Isolated Node VM: edit recognised transcript", "result": "BUG REPRODUCED: completely typed replacement retains voice provenance."},
+    {"check": "Isolated Node VM: send while hint remains visible", "result": "BUG REPRODUCED: hint true, support empty after send."},
+    {"check": "Isolated Node VM: revealed listening text", "result": "BUG REPRODUCED: text-revealed attempt still renders listening criterion link."},
+    {"check": "API integration suite", "result": "INSPECTED, NOT RUN: starts a local server; reviewer was instructed not to start competing services."},
+    {"check": "Voice/model benchmark", "result": "NOT RUN: backend agent is benchmarking; known quality limitation recorded without competing inference."}
+  ]
+}

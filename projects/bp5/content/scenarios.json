@@ -1,0 +1,1040 @@
+{
+  "schema_version": "1.0",
+  "content_version": "2026-11-01.1",
+  "language": "sv-SE",
+  "help_language": "en",
+  "scenarios": [
+    {
+      "id": "cafe_request",
+      "level": "basic",
+      "title": "Your first café request",
+      "title_sv": "En kaffe, tack",
+      "description": "Ask for something you would actually like. One sentence is enough to start.",
+      "goal": "Make one clear request and understand a useful part of the reply.",
+      "character": {
+        "name": "Alex",
+        "role": "Café worker",
+        "persona": "Friendly, patient and brief. Treat the learner as an adult."
+      },
+      "opening_sv": "Hej! Vad vill du ha?",
+      "opening_en": "Hi! What would you like?",
+      "context_prompt": "What would you like to order, and why does this small moment matter? You can keep the reason private or use a fictional one.",
+      "feeling_options": [
+        "curious",
+        "a little nervous",
+        "ready for a break",
+        "prefer not to say"
+      ],
+      "estimated_minutes": 3,
+      "min_turns": 1,
+      "max_turns": 5,
+      "objectives": [
+        "Ask for one drink or item.",
+        "Respond to a simple choice or ask for repetition.",
+        "Read a short collection note and write a message."
+      ],
+      "phrases": [
+        {
+          "id": "cafe_would_like",
+          "sv": "Jag skulle vilja ha en kaffe, tack.",
+          "en": "I would like a coffee, please.",
+          "usage": "A polite request; replace kaffe with te."
+        },
+        {
+          "id": "cafe_takeaway",
+          "sv": "Att ta med, tack.",
+          "en": "To take away, please.",
+          "usage": "Answer when asked whether you will stay."
+        },
+        {
+          "id": "repeat",
+          "sv": "Kan du säga det igen, tack?",
+          "en": "Could you say that again, please?",
+          "usage": "Ask for repetition instead of guessing."
+        },
+        {
+          "id": "cafe_price",
+          "sv": "Vad kostar det?",
+          "en": "How much does it cost?",
+          "usage": "Ask about the price."
+        }
+      ],
+      "dialogue": {
+        "system_instructions": "Speak simple Swedish as Alex. Ask one short question at a time. Accept an understandable single-sentence request without demanding grammatical perfection. Offer coffee, tea or water; prices are fictional. Ask stay/takeaway only after acknowledging the request. Do not reveal listening-task answers or give grades. Feedback belongs after the scene.",
+        "beats": [
+          "Invite one order.",
+          "Acknowledge the actual item and ask: Vill du sitta här eller ta med?",
+          "Confirm the learner’s choice and close warmly."
+        ],
+        "completion": "Finish once a request is understandable and its useful reply has been offered; allow the learner to stop after one sentence."
+      },
+      "listening": {
+        "prompt_sv": "Ditt te är klart. Du kan hämta det vid dörren.",
+        "question_en": "Where should you collect the tea? Listen before revealing the text.",
+        "answer_ideas_en": [
+          "By the door."
+        ],
+        "delivery": "Play audio with source text hidden until the answer is submitted. The item is deliberately different from the reading task."
+      },
+      "reading": {
+        "text_sv": "Ditt kaffe är klart. Hämta det vid kassan. Tack!",
+        "question_en": "Where should you collect the coffee?",
+        "answer_ideas_en": [
+          "At the till / checkout."
+        ]
+      },
+      "writing": {
+        "prompt_en": "Write a short message to a friend: say what you ordered and where you are waiting. One or two sentences is enough.",
+        "prompt_sv": "Skriv till en vän: Vad beställde du? Var väntar du?",
+        "starter_sv": "Jag beställde … Jag väntar …",
+        "extension_en": "For current course A practice, copy the collection place from the note. Keep this separate from composing a message."
+      },
+      "recall": {
+        "prompt_en": "Later, without looking at your card, ask for your favourite drink. Then reveal the phrase and compare.",
+        "prompt_sv": "Be om din favoritdryck utan att titta på frasen.",
+        "transfer_en": "At a shop, ask for a bag using a request phrase from the café.",
+        "transfer_sv": "Jag skulle vilja ha en påse, tack.",
+        "suggested_delay_hours": 24
+      },
+      "coaching": {
+        "focus": "Whether the request communicates the intended item.",
+        "example_en": "Your request named the drink. If you want a polite ending, add tack. Try once more in your own words.",
+        "retry_en": "Change the drink or choose takeaway."
+      },
+      "supports": [
+        {
+          "id": "phrase_hint",
+          "label": "Phrase hint",
+          "effect": "Shows a Swedish starter with English meaning; record help used."
+        },
+        {
+          "id": "slow_audio",
+          "label": "Slower audio",
+          "effect": "Replay the same Swedish at a slower rate; record help used."
+        },
+        {
+          "id": "replay",
+          "label": "Replay audio",
+          "effect": "Listen again; record replay count."
+        },
+        {
+          "id": "translation",
+          "label": "English help",
+          "effect": "Shows the meaning; this limits independent comprehension evidence."
+        },
+        {
+          "id": "transcript",
+          "label": "Show transcript",
+          "effect": "Visible text means this turn cannot establish listening alone."
+        },
+        {
+          "id": "typed_fallback",
+          "label": "Type instead",
+          "effect": "Continue in chat when voice is unavailable; does not count as spoken evidence."
+        },
+        {
+          "id": "retry",
+          "label": "Try again",
+          "effect": "Keep the first attempt and help record; save the retry separately."
+        }
+      ],
+      "criterion_links": [
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_A_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_A_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_A_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One concrete request or short message only; wider everyday comprehension and interaction remain unassessed."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Only a short personal message; not the wider range or consistency of writing."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_A_writing",
+          "activity": "writing_copy_extension",
+          "coverage": "partial",
+          "limitation": "Only the explicitly labelled copying extension; composing a new café message is not a substitute for the current A copying criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1A_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1A_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1A_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1A_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        }
+      ],
+      "evidence_note": "Completing this activity records practice only. A course link is a partial opportunity, not proof that a criterion is met.",
+      "original_material": true
+    },
+    {
+      "id": "neighbour_favour",
+      "level": "medium",
+      "title": "Ask a neighbour for a favour",
+      "title_sv": "Kan du hjälpa mig?",
+      "description": "You will be away and need someone to water one plant. Explain the need and agree a workable plan.",
+      "goal": "Explain a need, take turns, respond to another option and confirm the details.",
+      "character": {
+        "name": "Samira",
+        "role": "Neighbour",
+        "persona": "Kind but has her own schedule. Can help on Sunday, not Saturday."
+      },
+      "opening_sv": "Hej! Du ville fråga mig om något?",
+      "opening_en": "Hi! You wanted to ask me something?",
+      "context_prompt": "Choose a real or fictional reason for being away. What would make asking for help feel worthwhile?",
+      "feeling_options": [
+        "awkward asking",
+        "grateful",
+        "hopeful",
+        "prefer not to say"
+      ],
+      "estimated_minutes": 6,
+      "min_turns": 4,
+      "max_turns": 10,
+      "objectives": [
+        "Explain the favour and a reason.",
+        "Respond when Saturday is not possible.",
+        "Ask one practical follow-up.",
+        "Confirm the plan by message."
+      ],
+      "phrases": [
+        {
+          "id": "favour_request",
+          "sv": "Skulle du kunna vattna min växt?",
+          "en": "Could you water my plant?",
+          "usage": "Ask a neighbour for a small favour."
+        },
+        {
+          "id": "favour_reason",
+          "sv": "Jag ska resa bort i helgen.",
+          "en": "I am going away this weekend.",
+          "usage": "Give a reason without private details."
+        },
+        {
+          "id": "favour_alternative",
+          "sv": "Skulle söndag passa bättre?",
+          "en": "Would Sunday work better?",
+          "usage": "Offer another time."
+        },
+        {
+          "id": "favour_key",
+          "sv": "När kan jag lämna nyckeln?",
+          "en": "When can I leave the key?",
+          "usage": "Ask a practical follow-up in the fictional scene."
+        },
+        {
+          "id": "favour_thanks",
+          "sv": "Tack, det betyder mycket för mig.",
+          "en": "Thank you, that means a lot to me.",
+          "usage": "Express appreciation if it fits your meaning."
+        }
+      ],
+      "dialogue": {
+        "system_instructions": "Speak Swedish as Samira. Respond to the learner’s actual request. Explain that Saturday is unavailable; Sunday is possible. Ask one practical question about the plant or key. Let the learner negotiate, decline, or suggest another safe fictional arrangement. Do not pretend that a real favour or key exchange has been arranged. Keep replies to one or two short sentences.",
+        "beats": [
+          "Invite the request and hear the reason.",
+          "Say Saturday is unavailable and ask whether another day works.",
+          "Discuss Sunday and one practical detail.",
+          "Ask the learner to confirm the agreed plan.",
+          "Close with a friendly acknowledgement."
+        ],
+        "completion": "The learner has had an opportunity to explain, respond to the constraint, ask a question and confirm or politely decline."
+      },
+      "listening": {
+        "prompt_sv": "Jag kan hjälpa dig på söndag efter lunch, men inte på lördag. Ställ gärna växten i hallen.",
+        "question_en": "When can Samira help, and where should you put the plant? Listen before revealing text.",
+        "answer_ideas_en": [
+          "Sunday after lunch.",
+          "In the hall."
+        ],
+        "delivery": "Hide source text until response. Do not infer listening from the chat transcript."
+      },
+      "reading": {
+        "text_sv": "Hej! Jag kan vattna växten på söndag klockan 15. Kan du lämna nyckeln på fredag efter klockan 18? Skriv gärna hur mycket vatten växten behöver. /Samira",
+        "question_en": "When does Samira ask for the key, and what other information does she need?",
+        "answer_ideas_en": [
+          "Friday after 18:00.",
+          "How much water the plant needs."
+        ]
+      },
+      "writing": {
+        "prompt_en": "Reply to Samira. Confirm or change the key handover time, say how much water to give, and thank her. Invent the details; do not include an address or access code.",
+        "prompt_sv": "Svara Samira. Skriv när du lämnar nyckeln, hur mycket vatten växten behöver och tacka för hjälpen.",
+        "starter_sv": "Hej Samira! Jag kan … Växten behöver … Tack …"
+      },
+      "recall": {
+        "prompt_en": "Tomorrow, ask for the same favour with a different day. Try before opening your phrases.",
+        "prompt_sv": "Be om samma tjänst en annan dag utan att titta på fraserna.",
+        "transfer_en": "Ask a colleague to swap a break time. They cannot do your first suggestion: explain why and offer another time.",
+        "transfer_sv": "Skulle du kunna byta rast med mig?",
+        "suggested_delay_hours": 24
+      },
+      "coaching": {
+        "focus": "How the learner responds to a constraint and makes details clear.",
+        "example_en": "You explained the favour. Next, check the time with a question so you both know the plan.",
+        "retry_en": "Try again: this time Sunday is unavailable, but Monday works."
+      },
+      "supports": [
+        {
+          "id": "phrase_hint",
+          "label": "Phrase hint",
+          "effect": "Shows a Swedish starter with English meaning; record help used."
+        },
+        {
+          "id": "slow_audio",
+          "label": "Slower audio",
+          "effect": "Replay the same Swedish at a slower rate; record help used."
+        },
+        {
+          "id": "replay",
+          "label": "Replay audio",
+          "effect": "Listen again; record replay count."
+        },
+        {
+          "id": "translation",
+          "label": "English help",
+          "effect": "Shows the meaning; this limits independent comprehension evidence."
+        },
+        {
+          "id": "transcript",
+          "label": "Show transcript",
+          "effect": "Visible text means this turn cannot establish listening alone."
+        },
+        {
+          "id": "typed_fallback",
+          "label": "Type instead",
+          "effect": "Continue in chat when voice is unavailable; does not count as spoken evidence."
+        },
+        {
+          "id": "retry",
+          "label": "Try again",
+          "effect": "Keep the first attempt and help record; save the retry separately."
+        }
+      ],
+      "criterion_links": [
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "One informal favour; no broad coverage of settings, text types or repeated independent performance."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2B_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        }
+      ],
+      "evidence_note": "Completing this activity records practice only. A course link is a partial opportunity, not proof that a criterion is met.",
+      "original_material": true
+    },
+    {
+      "id": "friend_problem",
+      "level": "high",
+      "title": "Talk it through with a friend",
+      "title_sv": "Hur kan jag få det att fungera?",
+      "description": "You want time for Swedish practice, but your week feels crowded. Talk with a fictional friend, compare ideas and choose a small next step.",
+      "goal": "Sustain a discussion for several minutes, explain reasons, compare options and adapt to a different view.",
+      "character": {
+        "name": "Robin",
+        "role": "Fictional friend",
+        "persona": "Warm, curious and practical. Offers ideas without deciding for the learner or diagnosing feelings."
+      },
+      "opening_sv": "Hej! Du sa att det är svårt att hitta tid för svenskan. Hur ser en vanlig vecka ut för dig?",
+      "opening_en": "Hi! You said it is hard to find time for Swedish. What does a normal week look like for you?",
+      "context_prompt": "Choose a real or fictional busy week. Which part would you like to change? Share only what you want to practise saying.",
+      "feeling_options": [
+        "frustrated",
+        "uncertain",
+        "hopeful",
+        "prefer not to say"
+      ],
+      "estimated_minutes": 10,
+      "min_turns": 8,
+      "max_turns": 18,
+      "objectives": [
+        "Describe the problem and what matters to you.",
+        "Give an example and explain a cause.",
+        "Suggest two possible approaches.",
+        "Ask for and respond to a different opinion.",
+        "Compare benefits and drawbacks.",
+        "Summarise a small plan with a fallback."
+      ],
+      "phrases": [
+        {
+          "id": "problem_feeling",
+          "sv": "Jag känner mig stressad när jag inte hinner öva.",
+          "en": "I feel stressed when I do not have time to practise.",
+          "usage": "Use only if it matches your chosen character or feeling."
+        },
+        {
+          "id": "problem_reason",
+          "sv": "Det är svårt eftersom mina tider ändras varje vecka.",
+          "en": "It is difficult because my schedule changes every week.",
+          "usage": "Connect a problem and a reason."
+        },
+        {
+          "id": "problem_option",
+          "sv": "Ett alternativ är att öva en kort stund på bussen.",
+          "en": "One option is to practise briefly on the bus.",
+          "usage": "Introduce an option; it is fine to reject it."
+        },
+        {
+          "id": "problem_balance",
+          "sv": "Fördelen är att … men nackdelen är att …",
+          "en": "The advantage is that … but the disadvantage is that …",
+          "usage": "Compare consequences."
+        },
+        {
+          "id": "problem_disagree",
+          "sv": "Jag förstår hur du menar, men det passar inte riktigt för mig.",
+          "en": "I see what you mean, but that does not quite work for me.",
+          "usage": "Disagree and then explain your reason."
+        },
+        {
+          "id": "problem_opinion",
+          "sv": "Vad tycker du skulle fungera bäst?",
+          "en": "What do you think would work best?",
+          "usage": "Invite the other person’s view."
+        },
+        {
+          "id": "problem_plan",
+          "sv": "Jag tänker prova … Om det inte fungerar kan jag …",
+          "en": "I plan to try … If it does not work, I can …",
+          "usage": "Close with a plan and an alternative."
+        }
+      ],
+      "dialogue": {
+        "system_instructions": "Act as fictional friend Robin, speaking natural but accessible Swedish. Sustain a several-minute discussion; do not end after two exchanges or provide all solutions at once. Ask one follow-up at a time and use the learner’s actual details. Invite an example, two ideas, comparison and a plan. Gently challenge one idea, then respect the learner’s response. Do not diagnose stress or claim to know feelings. If they choose a different ordinary problem, keep the same discussion goals. Let them end at any time.",
+        "beats": [
+          "Ask about the week and why the goal matters.",
+          "Ask for one concrete example.",
+          "Explore the main obstacle.",
+          "Invite the learner’s first idea.",
+          "Offer one different option and ask their opinion.",
+          "Ask for an advantage and a drawback.",
+          "Gently challenge one assumption and invite a response.",
+          "Ask what small step they will try and when.",
+          "Ask for a fallback if the plan fails.",
+          "Invite a short summary and close."
+        ],
+        "completion": "A discussion opportunity of roughly 4–7 speaking minutes, with reasons, comparison and a chosen next step. Duration and turn count are practice targets, never language scores."
+      },
+      "listening": {
+        "prompt_sv": "Vi kan öva tillsammans på tisdag i tio minuter. På torsdag arbetar jag sent. Om tisdag inte passar kan vi skicka korta röstmeddelanden till varandra.",
+        "question_en": "What first plan and fallback does Robin suggest? Which day is difficult?",
+        "answer_ideas_en": [
+          "Practise together for ten minutes on Tuesday.",
+          "Exchange short voice messages if Tuesday does not work.",
+          "Thursday is difficult because Robin works late."
+        ],
+        "delivery": "Play with text hidden; asking for a replay is allowed and recorded."
+      },
+      "reading": {
+        "text_sv": "Hej! Jag tänkte på vårt samtal. En kort stund på bussen kan fungera, men det är svårt att prata när andra sitter nära. Vi kan i stället läsa en kort text var för sig och prata om den på söndag. Om veckan blir för full räcker ett kort meddelande. Vad vill du prova först? /Robin",
+        "question_en": "Why might the bus idea be difficult, and what alternative and fallback does Robin offer?",
+        "answer_ideas_en": [
+          "Talking may be difficult near other passengers.",
+          "Read separately and discuss on Sunday.",
+          "Send a short message if the week is too full."
+        ]
+      },
+      "writing": {
+        "prompt_en": "Write Robin a connected reply. Explain your choice, compare it with one alternative, and say when you will try it and what you will do if it fails. Aim for 5–8 sentences if comfortable; length is not a score.",
+        "prompt_sv": "Skriv till Robin. Förklara ditt val, jämför med ett annat förslag och beskriv din plan och ett alternativ om planen inte fungerar.",
+        "starter_sv": "Hej Robin! Jag vill prova … eftersom … Ett annat alternativ är … Om …"
+      },
+      "recall": {
+        "prompt_en": "In two days, explain your plan aloud without your notes. Then say what you would change if you had half as much time.",
+        "prompt_sv": "Förklara din plan utan anteckningar. Vad ändrar du om du har mindre tid?",
+        "transfer_en": "A friend wants to plan an inexpensive weekend together. Compare two activities, respond to a different opinion and agree on a plan and backup.",
+        "transfer_sv": "Fördelen med … är att … men vi skulle också kunna …",
+        "suggested_delay_hours": 48
+      },
+      "coaching": {
+        "focus": "Reasons, connected ideas, responses to the partner and a workable summary; not a global fluency grade.",
+        "example_en": "You gave a reason for your first idea. Try comparing it with the other option, then ask Robin for a view.",
+        "retry_en": "Keep your preferred plan, but respond to a friend who thinks it takes too much time."
+      },
+      "supports": [
+        {
+          "id": "phrase_hint",
+          "label": "Phrase hint",
+          "effect": "Shows a Swedish starter with English meaning; record help used."
+        },
+        {
+          "id": "slow_audio",
+          "label": "Slower audio",
+          "effect": "Replay the same Swedish at a slower rate; record help used."
+        },
+        {
+          "id": "replay",
+          "label": "Replay audio",
+          "effect": "Listen again; record replay count."
+        },
+        {
+          "id": "translation",
+          "label": "English help",
+          "effect": "Shows the meaning; this limits independent comprehension evidence."
+        },
+        {
+          "id": "transcript",
+          "label": "Show transcript",
+          "effect": "Visible text means this turn cannot establish listening alone."
+        },
+        {
+          "id": "typed_fallback",
+          "label": "Type instead",
+          "effect": "Continue in chat when voice is unavailable; does not count as spoken evidence."
+        },
+        {
+          "id": "retry",
+          "label": "Try again",
+          "effect": "Keep the first attempt and help record; save the retry separately."
+        }
+      ],
+      "criterion_links": [
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_spoken_production",
+          "activity": "dialogue_summary",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_D_spoken_interaction",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_D_spoken_production",
+          "activity": "dialogue_summary",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_D_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_D_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2017-91-consolidated",
+          "criterion_id": "old_D_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "One informal familiar problem; excludes formal settings, broad text types and audio-based fluency or pronunciation judgements."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3C_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1D_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1D_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1D_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_1D_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2D_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2D_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2D_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_2D_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3D_speaking_and_conversation",
+          "activity": "dialogue",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3D_listening",
+          "activity": "listening",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3D_reading",
+          "activity": "reading",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        },
+        {
+          "framework_id": "SKOLFS-2026-67",
+          "criterion_id": "new_3D_writing",
+          "activity": "writing",
+          "coverage": "partial",
+          "limitation": "Samples a single familiar situation. Oral criterion combines speaking and conversation; neither a typed turn nor one brief exchange demonstrates the full criterion."
+        }
+      ],
+      "evidence_note": "Completing this activity records practice only. A course link is a partial opportunity, not proof that a criterion is met.",
+      "original_material": true
+    }
+  ]
+}

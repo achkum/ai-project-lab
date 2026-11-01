@@ -53,4 +53,14 @@ class JobsTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.q.finish(b['id'],b['token'],'completed','local',{'demo_url':'http://192.168.1.1:19123/'})
         self.q.finish(b['id'],b['token'],'completed','local',{'demo_url':'http://127.0.0.1:19123/'})
 
+    def test_private_mobile_url_is_bound_to_the_selected_bp5_service(self):
+        url='https://198.44.116.159.sslip.io/apps/bp5/'
+        self.q.enqueue([{'id':'P4','version':1}],'wrong-pilot-url');a=self.q.claim()
+        with self.assertRaises(ValueError):self.q.finish(a['id'],a['token'],'completed','ready',{'demo_url':url})
+        self.q.finish(a['id'],a['token'],'review_ready','retained')
+        self.q.catalog['BP5']={'id':'BP5','version':2,'title':'Practice','lane':'Project','delivery_mode':'working_product','delivery_target':'local_service'}
+        self.q.enqueue([{'id':'BP5','version':2}],'bp5-private-pilot');b=self.q.claim()
+        with self.assertRaises(ValueError):self.q.finish(b['id'],b['token'],'completed','ready',{'demo_url':url+'../other/'})
+        self.q.finish(b['id'],b['token'],'completed','experimental prototype',{'demo_url':url})
+
 if __name__=='__main__':unittest.main()

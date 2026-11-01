@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "selected_model": "qwen3-instruct-4b.gguf",
+  "components": [
+    {
+      "file": "qwen3-instruct-4b.gguf",
+      "source": "https://huggingface.co/gabriellarson/Qwen3-4B-Instruct-2507-GGUF/resolve/11eb710320d468b5297476457839b0a19b6587dc/Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+      "revision": "11eb710320d468b5297476457839b0a19b6587dc",
+      "sha256": "32bd483e4fab860d4afc0edc9a0d86f2be0a1447c30f09d94868b6c54ae3a3df",
+      "license": "Apache-2.0 (Qwen3-4B-Instruct-2507 original model)"
+    },
+    {
+      "file": "llama.zip",
+      "source": "https://github.com/ggml-org/llama.cpp/releases/download/b12032/llama-b12032-bin-win-cpu-x64.zip",
+      "revision": "b12032",
+      "sha256": "5296f5d18bb7d422c7c26f4bb9bc796d9d4f41e1312a8c296cff475bdc60d0d4",
+      "license": "MIT"
+    },
+    {
+      "file": "whisper.zip",
+      "source": "https://github.com/ggml-org/whisper.cpp/releases/download/b5454/whisper-bin-x64.zip",
+      "revision": "b5454",
+      "sha256": "6ba69e3482d7826214f90a6a9c84ca07782aec1e1d0c6a7c30c994fd5d816ccb",
+      "license": "MIT"
+    },
+    {
+      "file": "whisper-base.bin",
+      "source": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin",
+      "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+      "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "license": "MIT (Whisper)"
+    },
+    {
+      "file": "piper.zip",
+      "source": "https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_windows_amd64.zip",
+      "revision": "2023.11.14-2",
+      "sha256": "f3c58906402b24f3a96d92145f58acba6d86c9b5db896d207f78dc80811efcea",
+      "license": "MIT (Piper engine)"
+    },
+    {
+      "file": "sv_SE-nst-medium.onnx",
+      "source": "https://huggingface.co/rhasspy/piper-voices/resolve/b4e358ffcb232591bf73a540e70f7de528e4174a/sv/sv_SE/nst/medium/sv_SE-nst-medium.onnx",
+      "revision": "b4e358ffcb232591bf73a540e70f7de528e4174a",
+      "sha256": "df011f56825a59dd1efc080c38a65a1ef70407e60f63050e9246f43a3d7e471e",
+      "license": "Voice model license not specified in its model card; underlying NST dataset marked CC0. Review before redistribution."
+    },
+    {
+      "file": "sv_SE-nst-medium.onnx.json",
+      "source": "https://huggingface.co/rhasspy/piper-voices/resolve/b4e358ffcb232591bf73a540e70f7de528e4174a/sv/sv_SE/nst/medium/sv_SE-nst-medium.onnx.json",
+      "revision": "b4e358ffcb232591bf73a540e70f7de528e4174a",
+      "sha256": "d45dd74cbb4eca58694bf04a97e243044092476f28a55ae26424f0653086980a",
+      "license": "See voice model card"
+    },
+    {
+      "file": "ffmpeg.exe",
+      "source": "Locally copied from imageio-ffmpeg 0.7.0 bundled binary; FFmpeg 7.1 gyan.dev essentials build",
+      "revision": "7.1",
+      "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+      "license": "GPL version 3 build (--enable-gpl --enable-version3); verify redistribution/source obligations"
+    }
+  ]
+}

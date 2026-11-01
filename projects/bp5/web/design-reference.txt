@@ -1,0 +1,7 @@
+Reference inspection, 2026-11-01
+Drift: achkum/Drift main, b146925d820221e54fce8792daf3a14b8401c205
+Relevant UI: src/app/globals.css, src/components/AppShell.tsx, src/components/screens/Home.tsx
+Visual patterns: centered 480px app column; white background; #f4f4f1 surfaces; #e4e4df borders; #141414 primary; #0f766e accent; rounded cards and pill actions; bottom navigation; system font fallback.
+SubTrack: achkum/subtrack main, 58838ccc222a57243d52b0348b50da0f690a145d; only README present in checkout, no visual sources available there.
+
+Local SubTrack: C:/Users/achku/Documents/Applied AI/SubTrack/SubTrack/packages/ui-tokens/generated/tokens.css and docs/subtrack-prototype.html. Warm #f7f4ee canvas, white raised cards, 20px radius and violet/teal/green aurora accents. Local Drift: C:/Users/achku/Documents/Applied AI/Drift/src/app/globals.css; same core palette as fetched main.

@@ -1,0 +1,1676 @@
+{
+  "schema_version": "1.0",
+  "content_version": "2026-11-01.1",
+  "verified_at": "2026-11-01",
+  "title": "SFI practice evidence",
+  "notice": "These are practice observations, not an official grade, placement or pass prediction. Basic, Medium and High describe role-play challenge, not SFI courses.",
+  "mapping_status": "Official references checked; task mappings are authored starter interpretations awaiting qualified SFI educator review.",
+  "frameworks": [
+    {
+      "id": "SKOLFS-2017-91-consolidated",
+      "label": "Current SFI syllabus (2017:91 consolidated)",
+      "source_url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+      "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+      "domains": [
+        {
+          "id": "listening",
+          "label": "Listen and understand"
+        },
+        {
+          "id": "reading",
+          "label": "Read and understand"
+        },
+        {
+          "id": "spoken_interaction",
+          "label": "Take part in a conversation"
+        },
+        {
+          "id": "spoken_production",
+          "label": "Explain aloud"
+        },
+        {
+          "id": "writing",
+          "label": "Write a useful message"
+        }
+      ],
+      "courses": [
+        {
+          "id": "A",
+          "label": "Course A",
+          "study_paths": [
+            1
+          ],
+          "course_codes": [
+            "SFIKUA91"
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Course B",
+          "study_paths": [
+            1,
+            2
+          ],
+          "course_codes": [
+            "SFIKUB91",
+            "SFIKUB92"
+          ]
+        },
+        {
+          "id": "C",
+          "label": "Course C",
+          "study_paths": [
+            1,
+            2,
+            3
+          ],
+          "course_codes": [
+            "SFIKUC91",
+            "SFIKUC92",
+            "SFIKUC93"
+          ]
+        },
+        {
+          "id": "D",
+          "label": "Course D",
+          "study_paths": [
+            1,
+            2,
+            3
+          ],
+          "course_codes": [
+            "SFIKUD91",
+            "SFIKUD92",
+            "SFIKUD93"
+          ]
+        }
+      ],
+      "assessment_note": "Five knowledge areas support a teacher’s overall judgement; they are not five separate official grades.",
+      "assessment_source": {
+        "url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          4
+        ],
+        "section": "Bedömning"
+      },
+      "applicability": "Retained for courses begun before 2027-01-01; confirm the applicable framework with the school."
+    },
+    {
+      "id": "SKOLFS-2026-67",
+      "label": "SFI course syllabuses (2026:67)",
+      "source_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+      "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+      "published_at": "2026-06-23",
+      "effective_at": "2026-08-15",
+      "applies_to_education_starting_from": "2027-01-01",
+      "domains": [
+        {
+          "id": "listening",
+          "label": "Listen and understand"
+        },
+        {
+          "id": "reading",
+          "label": "Read and understand"
+        },
+        {
+          "id": "speaking_and_conversation",
+          "label": "Speak and take part in a conversation"
+        },
+        {
+          "id": "writing",
+          "label": "Write a useful message"
+        }
+      ],
+      "courses": [
+        {
+          "id": "1A",
+          "label": "Course 1A",
+          "study_paths": [
+            1
+          ],
+          "course_codes": [
+            "VSFI1A0"
+          ]
+        },
+        {
+          "id": "1B",
+          "label": "Course 1B",
+          "study_paths": [
+            1
+          ],
+          "course_codes": [
+            "VSFI1B0"
+          ]
+        },
+        {
+          "id": "1C",
+          "label": "Course 1C",
+          "study_paths": [
+            1
+          ],
+          "course_codes": [
+            "VSFI1C0"
+          ]
+        },
+        {
+          "id": "1D",
+          "label": "Course 1D",
+          "study_paths": [
+            1
+          ],
+          "course_codes": [
+            "VSFI1D0"
+          ]
+        },
+        {
+          "id": "2B",
+          "label": "Course 2B",
+          "study_paths": [
+            2
+          ],
+          "course_codes": [
+            "VSFI2B0"
+          ]
+        },
+        {
+          "id": "2C",
+          "label": "Course 2C",
+          "study_paths": [
+            2
+          ],
+          "course_codes": [
+            "VSFI2C0"
+          ]
+        },
+        {
+          "id": "2D",
+          "label": "Course 2D",
+          "study_paths": [
+            2
+          ],
+          "course_codes": [
+            "VSFI2D0"
+          ]
+        },
+        {
+          "id": "3C",
+          "label": "Course 3C",
+          "study_paths": [
+            3
+          ],
+          "course_codes": [
+            "VSFI3C0"
+          ]
+        },
+        {
+          "id": "3D",
+          "label": "Course 3D",
+          "study_paths": [
+            3
+          ],
+          "course_codes": [
+            "VSFI3D0"
+          ]
+        }
+      ],
+      "assessment_note": "Speaking and conversation share an oral criterion. Do not silently merge old evidence into this criterion.",
+      "applicability": "Applies to education begun after 2026-12-31. Previous rules remain for courses begun before 2027-01-01.",
+      "transition_source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          1,
+          2
+        ],
+        "section": "Commencement and transitional provisions 1–3"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "id": "old_A_listening",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "A",
+      "course_codes": [
+        "SFIKUA91"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Follow supported, clear everyday speech.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          4
+        ],
+        "section": "Kurs A / Betygskriterier / Hörförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_A_reading",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "A",
+      "course_codes": [
+        "SFIKUA91"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand very simple familiar information.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          4
+        ],
+        "section": "Kurs A / Betygskriterier / Läsförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_A_spoken_interaction",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "A",
+      "course_codes": [
+        "SFIKUA91"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "spoken_interaction",
+      "label": "Take part in a conversation",
+      "summary_en": "Exchange basic questions and polite phrases with support.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          4
+        ],
+        "section": "Kurs A / Betygskriterier / Muntlig interaktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_A_spoken_production",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "A",
+      "course_codes": [
+        "SFIKUA91"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "spoken_production",
+      "label": "Explain aloud",
+      "summary_en": "Tell personal details using supported simple phrases.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs A / Betygskriterier / Muntlig produktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_A_writing",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "A",
+      "course_codes": [
+        "SFIKUA91"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write personal details and copy needed information.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs A / Betygskriterier / Skriftlig färdighet"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_B_listening",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "B",
+      "course_codes": [
+        "SFIKUB91",
+        "SFIKUB92"
+      ],
+      "study_paths": [
+        1,
+        2
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear everyday speech and short instructions.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs B / Betygskriterier / Hörförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_B_reading",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "B",
+      "course_codes": [
+        "SFIKUB91",
+        "SFIKUB92"
+      ],
+      "study_paths": [
+        1,
+        2
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Read simple familiar texts and messages.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs B / Betygskriterier / Läsförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_B_spoken_interaction",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "B",
+      "course_codes": [
+        "SFIKUB91",
+        "SFIKUB92"
+      ],
+      "study_paths": [
+        1,
+        2
+      ],
+      "domain": "spoken_interaction",
+      "label": "Take part in a conversation",
+      "summary_en": "Exchange wishes and questions with support.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs B / Betygskriterier / Muntlig interaktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_B_spoken_production",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "B",
+      "course_codes": [
+        "SFIKUB91",
+        "SFIKUB92"
+      ],
+      "study_paths": [
+        1,
+        2
+      ],
+      "domain": "spoken_production",
+      "label": "Explain aloud",
+      "summary_en": "Describe familiar experiences simply with support.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs B / Betygskriterier / Muntlig produktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_B_writing",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "B",
+      "course_codes": [
+        "SFIKUB91",
+        "SFIKUB92"
+      ],
+      "study_paths": [
+        1,
+        2
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write understandable short everyday messages.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Kurs B / Betygskriterier / Skriftlig färdighet"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_C_listening",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "C",
+      "course_codes": [
+        "SFIKUC91",
+        "SFIKUC92",
+        "SFIKUC93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech in familiar settings.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          6
+        ],
+        "section": "Kurs C / Betygskriterier / Hörförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_C_reading",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "C",
+      "course_codes": [
+        "SFIKUC91",
+        "SFIKUC92",
+        "SFIKUC93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Read familiar texts and reason simply about information.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          6
+        ],
+        "section": "Kurs C / Betygskriterier / Läsförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_C_spoken_interaction",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "C",
+      "course_codes": [
+        "SFIKUC91",
+        "SFIKUC92",
+        "SFIKUC93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "spoken_interaction",
+      "label": "Take part in a conversation",
+      "summary_en": "Exchange ideas with some adaptation to the partner.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          6
+        ],
+        "section": "Kurs C / Betygskriterier / Muntlig interaktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_C_spoken_production",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "C",
+      "course_codes": [
+        "SFIKUC91",
+        "SFIKUC92",
+        "SFIKUC93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "spoken_production",
+      "label": "Explain aloud",
+      "summary_en": "Describe experiences and give simple advice coherently.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          6
+        ],
+        "section": "Kurs C / Betygskriterier / Muntlig produktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_C_writing",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "C",
+      "course_codes": [
+        "SFIKUC91",
+        "SFIKUC92",
+        "SFIKUC93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write connected familiar texts with some adaptation.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          6
+        ],
+        "section": "Kurs C / Betygskriterier / Skriftlig färdighet"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_D_listening",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "D",
+      "course_codes": [
+        "SFIKUD91",
+        "SFIKUD92",
+        "SFIKUD93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear speech including detailed instructions.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Kurs D / Betygskriterier / Hörförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_D_reading",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "D",
+      "course_codes": [
+        "SFIKUD91",
+        "SFIKUD92",
+        "SFIKUD93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Read varied familiar texts and reason about information.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Kurs D / Betygskriterier / Läsförståelse"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_D_spoken_interaction",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "D",
+      "course_codes": [
+        "SFIKUD91",
+        "SFIKUD92",
+        "SFIKUD93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "spoken_interaction",
+      "label": "Take part in a conversation",
+      "summary_en": "Discuss and respond to opinions with simple arguments.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Kurs D / Betygskriterier / Muntlig interaktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_D_spoken_production",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "D",
+      "course_codes": [
+        "SFIKUD91",
+        "SFIKUD92",
+        "SFIKUD93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "spoken_production",
+      "label": "Explain aloud",
+      "summary_en": "Explain familiar matters with some fluency and variation.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Kurs D / Betygskriterier / Muntlig produktion"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "old_D_writing",
+      "framework_id": "SKOLFS-2017-91-consolidated",
+      "course": "D",
+      "course_codes": [
+        "SFIKUD91",
+        "SFIKUD92",
+        "SFIKUD93"
+      ],
+      "study_paths": [
+        1,
+        2,
+        3
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write structured varied texts for different purposes.",
+      "source": {
+        "url": "https://syllabuswebb.skolverket.se/syllabuscw/jsp/sfi.htm",
+        "pdf_url": "https://syllabuswebb.skolverket.se/subject/SFI/11/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Kurs D / Betygskriterier / Skriftlig färdighet"
+      },
+      "coverage_limit": "Short summary of one area; consult the complete criterion. One familiar scene cannot demonstrate its breadth, consistency or an official course result."
+    },
+    {
+      "id": "new_1A_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1A",
+      "course_codes": [
+        "VSFI1A0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand slow, clear simple speech on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Bilaga 1 / Kurs 1A / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1A_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1A",
+      "course_codes": [
+        "VSFI1A0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand short simple texts on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Bilaga 1 / Kurs 1A / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1A_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1A",
+      "course_codes": [
+        "VSFI1A0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Communicate understandably with individual words and phrases.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Bilaga 1 / Kurs 1A / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1A_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1A",
+      "course_codes": [
+        "VSFI1A0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write familiar words and phrases in a largely functional way.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          5
+        ],
+        "section": "Bilaga 1 / Kurs 1A / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1B_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1B",
+      "course_codes": [
+        "VSFI1B0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Bilaga 1 / Kurs 1B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1B_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1B",
+      "course_codes": [
+        "VSFI1B0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand simple texts on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Bilaga 1 / Kurs 1B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1B_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1B",
+      "course_codes": [
+        "VSFI1B0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Communicate understandably with phrases and sentences.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Bilaga 1 / Kurs 1B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1B_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1B",
+      "course_codes": [
+        "VSFI1B0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write simple understandable texts on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          7
+        ],
+        "section": "Bilaga 1 / Kurs 1B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1C_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1C",
+      "course_codes": [
+        "VSFI1C0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          9
+        ],
+        "section": "Bilaga 1 / Kurs 1C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1C_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1C",
+      "course_codes": [
+        "VSFI1C0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand simple texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          9
+        ],
+        "section": "Bilaga 1 / Kurs 1C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1C_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1C",
+      "course_codes": [
+        "VSFI1C0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; partly sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          9
+        ],
+        "section": "Bilaga 1 / Kurs 1C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1C_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1C",
+      "course_codes": [
+        "VSFI1C0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write simple structured texts with some coherence, adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          9
+        ],
+        "section": "Bilaga 1 / Kurs 1C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1D_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1D",
+      "course_codes": [
+        "VSFI1D0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          12
+        ],
+        "section": "Bilaga 1 / Kurs 1D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1D_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1D",
+      "course_codes": [
+        "VSFI1D0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          12
+        ],
+        "section": "Bilaga 1 / Kurs 1D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1D_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1D",
+      "course_codes": [
+        "VSFI1D0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; largely sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          12
+        ],
+        "section": "Bilaga 1 / Kurs 1D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_1D_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "1D",
+      "course_codes": [
+        "VSFI1D0"
+      ],
+      "study_paths": [
+        1
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write structured informal and more formal texts with some adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          12
+        ],
+        "section": "Bilaga 1 / Kurs 1D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2B_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2B",
+      "course_codes": [
+        "VSFI2B0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          15
+        ],
+        "section": "Bilaga 2 / Kurs 2B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2B_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2B",
+      "course_codes": [
+        "VSFI2B0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand simple texts on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          15
+        ],
+        "section": "Bilaga 2 / Kurs 2B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2B_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2B",
+      "course_codes": [
+        "VSFI2B0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Communicate understandably with phrases and sentences.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          15
+        ],
+        "section": "Bilaga 2 / Kurs 2B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2B_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2B",
+      "course_codes": [
+        "VSFI2B0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write simple understandable texts on very familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          15
+        ],
+        "section": "Bilaga 2 / Kurs 2B / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2C_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2C",
+      "course_codes": [
+        "VSFI2C0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          17
+        ],
+        "section": "Bilaga 2 / Kurs 2C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2C_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2C",
+      "course_codes": [
+        "VSFI2C0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand simple texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          17
+        ],
+        "section": "Bilaga 2 / Kurs 2C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2C_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2C",
+      "course_codes": [
+        "VSFI2C0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; partly sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          17
+        ],
+        "section": "Bilaga 2 / Kurs 2C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2C_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2C",
+      "course_codes": [
+        "VSFI2C0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write simple structured texts with some coherence, adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          17
+        ],
+        "section": "Bilaga 2 / Kurs 2C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2D_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2D",
+      "course_codes": [
+        "VSFI2D0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          19
+        ],
+        "section": "Bilaga 2 / Kurs 2D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2D_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2D",
+      "course_codes": [
+        "VSFI2D0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          19
+        ],
+        "section": "Bilaga 2 / Kurs 2D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2D_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2D",
+      "course_codes": [
+        "VSFI2D0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; largely sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          19,
+          20
+        ],
+        "section": "Bilaga 2 / Kurs 2D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_2D_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "2D",
+      "course_codes": [
+        "VSFI2D0"
+      ],
+      "study_paths": [
+        2
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write structured informal and more formal texts with some adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          20
+        ],
+        "section": "Bilaga 2 / Kurs 2D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3C_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3C",
+      "course_codes": [
+        "VSFI3C0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear simple speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          23
+        ],
+        "section": "Bilaga 3 / Kurs 3C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3C_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3C",
+      "course_codes": [
+        "VSFI3C0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand simple texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          23
+        ],
+        "section": "Bilaga 3 / Kurs 3C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3C_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3C",
+      "course_codes": [
+        "VSFI3C0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; partly sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          23
+        ],
+        "section": "Bilaga 3 / Kurs 3C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3C_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3C",
+      "course_codes": [
+        "VSFI3C0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write simple structured texts with some coherence, adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          23
+        ],
+        "section": "Bilaga 3 / Kurs 3C / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3D_listening",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3D",
+      "course_codes": [
+        "VSFI3D0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "listening",
+      "label": "Listen and understand",
+      "summary_en": "Understand clear speech on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          25
+        ],
+        "section": "Bilaga 3 / Kurs 3D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3D_reading",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3D",
+      "course_codes": [
+        "VSFI3D0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "reading",
+      "label": "Read and understand",
+      "summary_en": "Understand texts on familiar topics.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          25
+        ],
+        "section": "Bilaga 3 / Kurs 3D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3D_speaking_and_conversation",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3D",
+      "course_codes": [
+        "VSFI3D0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "speaking_and_conversation",
+      "label": "Speak and take part in a conversation",
+      "summary_en": "Speak with some coherence, adaptation and variation; largely sustain conversation.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          25
+        ],
+        "section": "Bilaga 3 / Kurs 3D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    },
+    {
+      "id": "new_3D_writing",
+      "framework_id": "SKOLFS-2026-67",
+      "course": "3D",
+      "course_codes": [
+        "VSFI3D0"
+      ],
+      "study_paths": [
+        3
+      ],
+      "domain": "writing",
+      "label": "Write a useful message",
+      "summary_en": "Write structured informal and more formal texts with some adaptation and grammatical control.",
+      "source": {
+        "url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pdf_url": "https://skolfs.skolverket.se/api/document/GRUNDFORFATTNING/2026:67/pdf",
+        "pages": [
+          25
+        ],
+        "section": "Bilaga 3 / Kurs 3D / Betygskriterier"
+      },
+      "coverage_limit": "Summary, not the complete criterion or an assessment rubric. The task samples one familiar context; course-specific teaching needs and wider evidence remain outside this starter."
+    }
+  ],
+  "selection_rules": {
+    "default_framework_id": null,
+    "default_course": null,
+    "default_study_path": null,
+    "required_for_mapping": [
+      "framework_id",
+      "course",
+      "study_path"
+    ],
+    "unknown_profile_behavior": "Allow all practice, but keep course-specific evidence unassigned until the learner selects their actual course and framework.",
+    "date_rule": "Course start is a transition clue, not automatic placement. Ask for school-confirmed framework when unclear; do not select from today’s date.",
+    "history_rule": "Freeze framework, course, study path, criterion ID, source and content version on every evidence record. A later profile change never rewrites earlier records.",
+    "difficulty_rule": "Never infer course or study path from basic, medium or high.",
+    "unsupported_courses": [
+      "VSFILS0",
+      "VSFILA0"
+    ],
+    "unsupported_course_note": "Foundational literacy and Latinisation courses need a separate teaching design; this text-using starter does not cover them."
+  },
+  "evidence_states": [
+    {
+      "id": "unassessed",
+      "label": "Not assessed",
+      "meaning": "No usable observation for this activity and criterion."
+    },
+    {
+      "id": "practised",
+      "label": "Practised",
+      "meaning": "An attempt exists. It has not established successful performance."
+    },
+    {
+      "id": "observed_with_help",
+      "label": "Observed with help",
+      "meaning": "A specific successful action was reviewed; aids or prompts were used and are recorded."
+    },
+    {
+      "id": "observed_independently",
+      "label": "Observed independently",
+      "meaning": "A specific successful action was reviewed without task-specific aids on this attempt. This is not mastery or course completion."
+    }
+  ],
+  "evidence_rules": {
+    "automatic_completion_state": "practised",
+    "review_required_for_observed_states": true,
+    "review_note": "Save the actual action, evidence excerpt, reviewer type (learner, educator or provisional automated feedback), limitations and help used. Keyword matching alone cannot promote an observation.",
+    "required_record_fields": [
+      "id",
+      "created_at",
+      "scenario_id",
+      "activity",
+      "input_mode",
+      "framework_id",
+      "course",
+      "study_path",
+      "criterion_id",
+      "source",
+      "content_version",
+      "state",
+      "evidence",
+      "hints_used",
+      "reviewer_type",
+      "uncertainty"
+    ],
+    "listening": "Record audio played, text visibility, replay and translation. If the answer or transcript was visible before responding, keep listening unassessed; record supported multimodal practice separately.",
+    "reading": "Require an answer based on the displayed text. Audio reading or translation assistance must be recorded; listening to it alone is not independent reading.",
+    "speaking": "Typed turns are not speaking evidence. Speech transcripts may support limited content observations after correction; they cannot establish pronunciation, prosody, fluency or comprehensibility from audio.",
+    "writing": "Dictation or copied phrase text is not independent writing. Keep input provenance and mark unknown provenance as unknown rather than assuming independence.",
+    "help": "Phrase hints, translation, model answers, notes, transcript visibility, replay and slow audio remain visible with the attempt. With-help is useful evidence, not a failure.",
+    "missing": "Never average missing skills into a score or infer one skill from another. Keep each unmapped or unobserved area unassessed.",
+    "forbidden_outputs": [
+      "official_grade",
+      "placement",
+      "pass_probability",
+      "calibrated_confidence",
+      "overall_pass",
+      "pronunciation_score_from_transcript"
+    ],
+    "progress_example": "In this supported request you explained what you needed. Next, try responding to a follow-up before opening a phrase hint."
+  },
+  "coverage": {
+    "scope": "Three original everyday scenes and linked tasks; all criterion links are partial.",
+    "not_covered": [
+      "national test readiness",
+      "full breadth of any course",
+      "formal workplace discussion",
+      "news and extended narratives",
+      "tables and diagrams",
+      "foundational literacy",
+      "systematic pronunciation assessment",
+      "independent teacher validation"
+    ],
+    "unlinked_rule": "A selected course or domain with no matching task link is shown as not covered, not failed."
+  },
+  "learning_hypothesis": {
+    "claim": "Learner-chosen meaning and feelings may make practice relevant; improved retention is an untested hypothesis.",
+    "method": "Offer optional self-described feelings and fictional alternatives. Compare later phrase recall and transfer, not enjoyment alone.",
+    "privacy": "No emotion inference from voice. A personal reason or feeling is optional; fictional context works equally well."
+  },
+  "provenance": {
+    "scenario_authorship": "Original BP5 fictional material, 2026-11-01; no national test or commercial lesson items.",
+    "source_review": "Current HTML plus linked seven-page consolidated PDF; downloaded 28-page 2026:67 regulation, extracted relevant pages and visually checked transition and criterion pages.",
+    "uncertainties": [
+      "Task difficulty and support have not been calibrated with learners.",
+      "Mappings and feedback need review by a qualified SFI educator.",
+      "No reliability, readiness accuracy or retention improvement has been validated."
+    ]
+  }
+}

@@ -13,8 +13,9 @@ try{
 }catch{}
 
 function isLocalApp(j){return /^http:\/\/127\.0\.0\.1:19[1-9][0-9]{2}\/$/.test(j.result?.demo_url||'');}
-function appLinkLabel(j){return isLocalApp(j)?'Open on this laptop →':'Open app →';}
-function jobLabel(j){return j.state==='review_ready'?(j.lane==='thesis'?'Investigation complete':'Draft available'):j.state==='completed'?(j.lane==='project'?(isLocalApp(j)?'Local prototype ready':j.result?.demo_url?'App live':'Build complete'):'Investigation complete'):j.state.replaceAll('_',' ');}
+function isPrivatePilot(j){return j.result?.demo_url==='https://198.44.116.159.sslip.io/apps/bp5/';}
+function appLinkLabel(j){return isLocalApp(j)?'Open on this laptop →':isPrivatePilot(j)?'Open private prototype →':'Open app →';}
+function jobLabel(j){return j.state==='review_ready'?(j.lane==='thesis'?'Investigation complete':'Draft available'):j.state==='completed'?(j.lane==='project'?(isLocalApp(j)?'Local prototype ready':isPrivatePilot(j)?'Private prototype ready':j.result?.demo_url?'App live':'Build complete'):'Investigation complete'):j.state.replaceAll('_',' ');}
 function manualStartAllowed(x){return !data.audit?.hold || (data.audit.manual_start_ids||[]).includes(x.id);}
 function selectionControl(x){
  if(!manualStartAllowed(x))return '<p class="select-idea">Unverified · audit hold · <a href="audit.html">Read decision</a></p>'; 

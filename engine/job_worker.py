@@ -271,7 +271,7 @@ def run_one(profile):
             prompt=('Build the selected business prototype through its complete first customer workflow. This is an operating product, not a report or a tutorial. '
                 'Use existing files if this is a repair; preserve data and do not shrink the acceptance criteria. Use suitable dependencies and a backend when the scope needs one. '
                 'Write README.md, PRODUCT.md explaining the problem, exact working flow, acceptance, limits and customer test, and product.json. '
-                'product.json must contain delivery matching delivery_target. For local_service also include runtime python or node, entry as a relative .py/.js/.cjs/.mjs file, and memory_mb 128..2048. '
+                'product.json must contain delivery matching delivery_target. For local_service also include runtime python or node, entry as a relative .py/.js/.cjs/.mjs file, and memory_mb 128..5120 based on measured use. The shared local-app admission budget is 6144 MB, not an OS memory cap. '
                 'The entry is launched without CLI arguments, must bind HOST and PORT from environment (HOST=127.0.0.1), serve an actual HTML UI at /, '
                 'and GET /health returning {"ok":true,"instance":the LAB_INSTANCE_ID environment value}. Persist all operator data under LAB_DATA_DIR, never in source files. '
                 'Use one managed server process, no auto-reloader or detached background processes. Reject cross-origin mutations and unsafe paths. Respect operator/staff separation when required. '

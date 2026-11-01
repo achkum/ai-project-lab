@@ -15,6 +15,8 @@ from . import background_process as sp
 from .allowance import clean_env
 
 _LOCAL_PROCESSES={}
+MAX_APP_MEMORY_MB=5120
+TOTAL_APP_MEMORY_MB=6144
 
 
 def reap_local_processes():
@@ -46,8 +48,8 @@ def contract(workspace,target):
         if not entry.is_file() or entry.is_symlink() or not entry.resolve().is_relative_to(workspace):
             raise ValueError('The application entry must be a real file inside its workspace')
         if entry.suffix not in (('.py',) if d['runtime']=='python' else ('.js','.cjs','.mjs')):raise ValueError('Unsupported application entry')
-        if type(d.get('memory_mb')) is not int or not 128<=d['memory_mb']<=2048:
-            raise ValueError('Declare a local prototype memory budget between 128 and 2048 MB')
+        if type(d.get('memory_mb')) is not int or not 128<=d['memory_mb']<=MAX_APP_MEMORY_MB:
+            raise ValueError(f'Declare a local prototype memory budget between 128 and {MAX_APP_MEMORY_MB} MB')
     return d
 
 
@@ -147,7 +149,7 @@ def start_local(profile,job,workspace,checkpoint):
     if slug in active:
         if active[slug]['job']==job['id'] and active[slug].get('source_hash')==source_fingerprint(workspace) and live_instance(active[slug]['url'],job['id']):return active[slug]['url']
         raise RuntimeError('An earlier local version is running; preserve it and complete a managed data migration')
-    if len(active)>=4 or sum(v['memory_mb'] for v in active.values())+d['memory_mb']>4096:
+    if len(active)>=4 or sum(v['memory_mb'] for v in active.values())+d['memory_mb']>TOTAL_APP_MEMORY_MB:
         raise RuntimeError('Local prototype resource budget is in use; preserve existing apps')
     # No service is exposed on a public interface. The app contract consumes HOST/PORT.
     offset=int(hashlib.sha256(slug.encode()).hexdigest()[:8],16)%900

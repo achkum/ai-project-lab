@@ -26,7 +26,7 @@
       "Thesis": "explanations_updated"
     },
     "lane_notes": {
-      "Project": "Five broader business possibilities: workshop inspection, podcast production, cleaning operations, piano practice and tutor-led speaking practice. Each has a first workflow, existing alternatives, costs and a test that could disprove it. These are hypotheses, not validated demand. Select any that interest you; nothing starts automatically.",
+      "Project": "Five broader business possibilities: workshop inspection, podcast production, cleaning operations, piano practice and Swedish voice/chat role-play with SFI-linked progress. Each has a first workflow, existing alternatives, costs and a test that could disprove it. These are hypotheses, not validated demand. Select any that interest you; nothing starts automatically.",
       "Thesis": "All eight visible thesis ideas now start with the problem, a simple example and what the study would test. Technical details are optional. Sources and previous investigation findings are preserved; rewriting an explanation does not establish that a topic is feasible."
     },
     "completed_at": "2026-11-01T13:07:58.244024+00:00",
@@ -98,6 +98,15 @@
         "NP4",
         "NP5"
       ]
+    }
+  ],
+  "refinements": [
+    {
+      "id": "BP5",
+      "from_version": 1,
+      "to_version": 2,
+      "at": "2026-11-01T14:01:19.677477+00:00",
+      "reason": "Owner requested voice/chat role-play, three challenge levels and SFI alignment."
     }
   ]
 }

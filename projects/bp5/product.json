@@ -1,0 +1,9 @@
+{
+  "delivery": "local_service",
+  "runtime": "python",
+  "entry": "server/app.py",
+  "memory_mb": 5120,
+  "name": "Prata",
+  "platform": "mobile-compatible web app",
+  "maturity": "experimental private prototype"
+}
