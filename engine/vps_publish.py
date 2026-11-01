@@ -67,7 +67,9 @@ def main():
         # Heartbeats and credentials never enter either the fingerprint or the public snapshot.
         signals_file=root/'config/discovery-signals.json'
         signals=load(signals_file) if signals_file.exists() else None
-        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals}
+        batch_file=root/'config/discovery-batches.json'
+        batches=load(batch_file) if batch_file.exists() else None
+        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals,'batches':batches}
         fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
         receipt=runtime/'dashboard-publish.json'
         if receipt.exists() and load(receipt).get('fingerprint')==fingerprint:
@@ -80,6 +82,7 @@ def main():
         path=checkout/'docs/data/status.json';seed=load(path)
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
         if signals: snapshot['discovery_signals']=signals
+        if batches: snapshot['discovery_run']=batches['last_run']
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         git('add','--','docs/data/status.json')
         if git('diff','--cached','--name-only'):

@@ -1,0 +1,12 @@
+{
+  "cadence": "rolling",
+  "selection_required": true,
+  "current_project_batch": null,
+  "last_run": {
+    "id": "20261101-broad",
+    "started_at": "2026-11-01T07:59:30Z",
+    "state": "researching",
+    "lanes": ["Thesis", "Project"],
+    "note": "Fresh research for both lanes is running. Collection has completed; the new shortlist has not yet been published. GitHub Trending and public LinkedIn sources are included."
+  }
+}
