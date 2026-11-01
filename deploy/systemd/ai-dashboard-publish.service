@@ -1,0 +1,11 @@
+[Unit]
+Description=Publish changed public lab dashboard data to GitHub
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/openclaw/ai-discovery
+ExecStart=/usr/bin/python3 -m engine.vps_publish
+UMask=0077
+NoNewPrivileges=true
+MemoryMax=128M
+TimeoutStartSec=3min

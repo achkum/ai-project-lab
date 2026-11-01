@@ -74,14 +74,20 @@ def main():
         def git(*args):return subprocess.run(['git',*args],cwd=checkout,env=env,check=True,capture_output=True,text=True,timeout=60).stdout.strip()
         if not checkout.exists():
             subprocess.run(['git','clone','git@github.com:achkum/ai-project-lab.git',str(checkout)],env=env,check=True,capture_output=True,timeout=90)
-        git('pull','--ff-only')
+        git('pull','--rebase')
         path=checkout/'docs/data/status.json';seed=load(path)
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         git('add','--','docs/data/status.json')
         if git('diff','--cached','--name-only'):
             git('-c','user.name=Lab VPS publisher','-c','user.email=achkum@users.noreply.github.com','commit','--only','-m','Refresh public dashboard from VPS','--','docs/data/status.json')
-        git('push','origin','HEAD:main')
+        for attempt in range(3):
+            try:
+                git('push','origin','HEAD:main')
+                break
+            except subprocess.CalledProcessError:
+                if attempt==2:raise
+                git('pull','--rebase')
         receipt.write_text(json.dumps({'fingerprint':fingerprint,'published_at':datetime.now(timezone.utc).isoformat(),'commit':git('rev-parse','HEAD')}))
         print('Public dashboard published.')
 

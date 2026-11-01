@@ -1,0 +1,10 @@
+[Unit]
+Description=Reconcile completed-job dashboard status without laptop SSH polling
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+Unit=ai-dashboard-publish.service
+
+[Install]
+WantedBy=timers.target

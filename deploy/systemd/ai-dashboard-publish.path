@@ -1,0 +1,11 @@
+[Unit]
+Description=Publish dashboard after evidence or curated options change
+
+[Path]
+PathChanged=/home/openclaw/ai-discovery/runtime/collection.json
+PathChanged=/home/openclaw/ai-discovery/config/public-opportunities.json
+PathChanged=/home/openclaw/ai-discovery/config/discovery-audit.json
+Unit=ai-dashboard-publish.service
+
+[Install]
+WantedBy=default.target

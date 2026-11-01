@@ -105,7 +105,8 @@ def export(profile, workflow, discovery, sources):
             if 'manual_start_ids' in snapshot['audit']:
                 snapshot['opportunities']=[c for c in opportunities if c['id'] in snapshot['audit']['manual_start_ids']]
     # Construct an allowlist object; never merge private candidate dictionaries into this output.
-    write_json(Path(profile['public_root'])/'docs/data/status.json', snapshot)
+    if profile.get('dashboard_publisher') != 'vps':
+        write_json(Path(profile['public_root'])/'docs/data/status.json', snapshot)
     return snapshot
 
 

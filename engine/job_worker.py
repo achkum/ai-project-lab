@@ -119,13 +119,24 @@ def publish_web_app(profile,job,workspace):
         subprocess.run(['git','add','--',path],cwd=root,check=True,capture_output=True)
         if subprocess.run(['git','diff','--cached','--quiet','--',path],cwd=root).returncode:
             subprocess.run(['git','commit','--only','-m','Publish tested '+job['scope']['id']+' app','--',path],cwd=root,check=True,capture_output=True)
-            subprocess.run(['git','push'],cwd=root,check=True,capture_output=True,timeout=60)
+            for attempt in range(3):
+                subprocess.run(['git','pull','--rebase','--autostash'],cwd=root,check=True,capture_output=True,timeout=60)
+                try:
+                    subprocess.run(['git','push'],cwd=root,check=True,capture_output=True,timeout=60)
+                    break
+                except subprocess.CalledProcessError:
+                    if attempt==2:raise
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=public,text=True).strip()
     for _ in range(60):
         remote('heartbeat',jid=job['id'],token=job['token'],message='Tests passed; publishing the browser app')
         check=subprocess.run(['gh','api','repos/achkum/ai-project-lab/pages/builds/latest'],capture_output=True,text=True,encoding='utf-8',timeout=20)
         build=json.loads(check.stdout) if check.returncode==0 else {}
         if build.get('commit')==commit and build.get('status')=='built':return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
+        # A VPS data publication may supersede this commit while Pages builds.
+        if build.get('status')=='built' and isinstance(build.get('commit'),str) and len(build['commit'])==40 and all(c in '0123456789abcdef' for c in build['commit']):
+            subprocess.run(['git','fetch','origin'],cwd=public,check=True,capture_output=True,timeout=60)
+            if subprocess.run(['git','merge-base','--is-ancestor',commit,build['commit']],cwd=public,capture_output=True).returncode==0:
+                return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
         if build.get('commit')==commit and build.get('status')=='errored':raise RuntimeError('Pages deployment failed; source and test results preserved')
         time.sleep(5)
     raise RuntimeError('Pages deployment not confirmed within five minutes; inspect deployment status')
