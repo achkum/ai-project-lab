@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T09:57:18.217819+00:00",
+  "generated_at": "2026-11-01T10:07:48.570070+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -1778,12 +1778,39 @@
   },
   "discovery_run": {
     "id": "20261101-business-reset",
-    "state": "researching",
+    "state": "reviewed_no_new_shortlist",
     "lanes": [
       "Project"
     ],
-    "started_at": "2026-11-01T09:49:37.410424+00:00",
-    "note": "The five small project proposals were withdrawn after owner feedback. Business opportunities are being reassessed from the customer and recurring problem first. Thesis ideas now have plain-language explanations; research methods are optional detail."
+    "started_at": "2026-11-01T09:43:42Z",
+    "note": "Five small project proposals were withdrawn after your feedback. The replacement review examined three business directions, but did not establish a strong enough reason for customers to choose a new supplier. No replacement is being recommended yet. Six thesis ideas now explain the problem, example and proposed experiment in plain language; this is a presentation change, not new research.",
+    "completed_at": "2026-11-01T09:55:42Z",
+    "reviewed_directions": [
+      {
+        "title": "Keep online shops working after software updates",
+        "problem": "A web agency maintaining several shops has to check that customers can still place orders after updates. A recurring service could test the shops and repair broken custom code.",
+        "verdict": "Revise — possible service business",
+        "finding": "Maintenance firms already sell testing and repairs. The recent checkout bugs we checked were fixed. We have not identified an agency need these services handle poorly.",
+        "source_url": "https://developerlook.com/services/woocommerce-maintenance-support",
+        "source_label": "Existing maintenance service — checked 1 Nov 2026"
+      },
+      {
+        "title": "Keep a bakery’s daily café orders organised",
+        "problem": "A wholesale bakery needs to combine regular orders and late changes, pack the right quantities, record shortages and send correct totals for billing.",
+        "verdict": "Revise — customer gap unclear",
+        "finding": "Existing bakery systems already cover much of this workflow. We have no recent independent evidence of a specific recurring problem they leave unsolved.",
+        "source_url": "https://bakepilot.com/",
+        "source_label": "Existing bakery system — checked 1 Nov 2026"
+      },
+      {
+        "title": "Run a repair shop’s jobs and customer updates",
+        "problem": "Repair shops need to track devices, quotes, progress and messages to customers.",
+        "verdict": "Withdraw — no supported advantage",
+        "finding": "The reviewed discussion already pointed to tools meeting the requested need. A replacement would add migration work without an established benefit.",
+        "source_url": "https://www.reddit.com/r/smallbusiness/comments/1w5r0sg/service_repair_industry/",
+        "source_label": "Reviewed owner discussion and replies"
+      }
+    ]
   },
   "opportunity_copy": {
     "NT1": {
