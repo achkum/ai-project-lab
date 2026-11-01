@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T19:19:23.537029+00:00",
+  "generated_at": "2026-11-01T19:21:49.810913+00:00",
   "connected": true,
   "thesis": {
     "state": "completed",
@@ -3350,10 +3350,10 @@
       "from_version": 2,
       "to_version": 3,
       "prior_result": "Preserved; dialogue-language quality failed acceptance.",
-      "engineering_delivery": "Hosted guided practice is implemented and tested; 54 tasks, private accounts, voice, saved progress, recovery and encrypted backup restoration.",
+      "engineering_delivery": "Existing hosted app is preserved, but the owner rejected completion because natural-language acceptance failed. The same BP5 v3 job is reopened for language-checker repair; accounts, voice and deployment checks alone cannot satisfy this delivery.",
       "language_quality": "Fresh diagnostic accepted only 2 of 18 valid unseen replies and rejected all 18 uncertain/negative replies. The disclosed regression corpus passing is not evidence of natural-language generalization.",
-      "mitigation": "Explicit learner-selected meaning recovery preserves the original reply and records help; it is not a correct-language judgement.",
-      "release_boundary": "Usable guided application, not validated unrestricted conversation, complete SFI course, official assessment or proven business. No educator review or physical-phone microphone test.",
+      "mitigation": "Explicit learner-selected meaning recovery preserves the original reply and records help; it does not fix failed automatic language recognition and must not be counted as a correct automatic judgement.",
+      "release_boundary": "Repair in progress. A replacement requires independent language acceptance and resource/security checks before completion. Existing app availability does not mean the requested production language quality has passed.",
       "job_id": "7c9b46c3921a498ab8cbba07ed82ae93",
       "app_url": "https://198.44.116.159.sslip.io/apps/bp5/"
     }
