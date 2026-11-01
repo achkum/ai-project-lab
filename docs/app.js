@@ -35,6 +35,14 @@ function renderDecisions(lane) {
 function ideaFlow(x) {
  return '<ol class="idea-flow">'+(x.flow||[]).map((s,i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><p>'+esc(s)+'</p></li>').join('')+'</ol>';
 }
+function presentIdea(x){
+ const copy=data.opportunity_copy?.[x.id];
+ if(!copy)return x;
+ const view={...x,technical:x};
+ const fields=['title','summary','why_it_matters','proposed_fix','example','flow','deliverable','contribution','question','measure','audience','effort','market','feasibility','next','risk','venture','customer_test','week_test','reason'];
+ for(const field of fields)if(copy[field]!==undefined)view[field]=copy[field];
+ return view;
+}
 function sourcePreview(x){
  const s=(x.provenance||[])[0];
  return s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(s.kind)+' · '+esc(s.published_at||'Date unknown')+' · Novelty unverified</small></div>':'';
@@ -47,10 +55,13 @@ function outcomeSummary(x) {
  return pairs.length?'<div class="idea-outcome">'+pairs.map(([k,v])=>'<p><strong>'+esc(k)+': </strong>'+esc(v)+'</p>').join('')+'<a class="text-link" href="'+esc(safeLink(x.artifact_url))+'" target="_blank" rel="noopener noreferrer">Read the full investigation ↗</a></div>':'';
 }
 function ideaCard(x) {
- return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge '+(x.selected?'chosen-badge':'')+'">'+(data.audit?.hold?'Unverified':x.selected?'Selected':x.recommended?'Recommended':esc(x.id))+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+outcomeSummary(x)+sourcePreview(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'A bounded next step')+'</strong>'+(x.contribution!==x.deliverable?'<p>'+esc(x.contribution)+'</p>':'')+'</div><div class="idea-facts"><div><span class="label">FIRST STEP</span><strong>'+esc(x.effort||'To assess')+'</strong></div><div><span class="label">MARKET DEMAND</span><strong>'+esc(x.market||'Unvalidated')+'</strong></div></div><p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">Explore '+esc(x.id)+' · outcomes & trade-offs →</button></article>';
+ const thesis=x.lane==='Thesis';
+ const facts=thesis?[['What we would find out',x.question],['Main difficulty',x.risk]]:[['Who could pay',x.buyer||x.audience],['Why they would return',x.business_case?.repeat_use||x.market||'Not established']];
+ const badge=x.status==='completed'?'Completed prototype':thesis?'Research idea':'Business hypothesis';
+ return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge">'+badge+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+outcomeSummary(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'To assess')+'</strong></div><div class="idea-facts">'+facts.map(([label,value])=>'<div><span class="label">'+esc(label)+'</span><strong>'+esc(value)+'</strong></div>').join('')+'</div>'+sourcePreview(x)+'<p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">'+(thesis?'Explain ':'Explore ')+esc(x.id)+' →</button></article>';
 }
 function comparison(rows) {
- const fields=[['Who it helps','audience'],['First deliverable','deliverable'],['Customer test','customer_test'],['Initial effort','effort'],['Evidence strength','evidence_level'],['Main trade-off','risk']];
+ const fields=rows[0]?.lane==='Thesis'?[['Who it helps','audience'],['What we would test','question'],['What you would produce','deliverable'],['Main difficulty','risk']]:[['First customer','audience'],['Working first version','deliverable'],['Why someone would pay','buyer'],['Demand test','customer_test'],['Main risk','risk']];
  return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
@@ -79,7 +90,7 @@ function openConversation(mode,lane,id) {
  $('detail').showModal();
 }
 function renderCards(lane,query=''){
- const rows=data.opportunities.filter(x=>x.lane===lane&&(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase()));
+ const rows=data.opportunities.map(presentIdea).filter(x=>x.lane===lane&&(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase()));
  const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
  const chosen=rows.find(x=>x.selected),recommended=rows.find(x=>x.recommended);
  const focus=data.audit?.hold?null:chosen||recommended;
@@ -134,7 +145,15 @@ document.addEventListener('click',async e=>{
   return;
  }
  const b=e.target.closest('[data-detail]');if(!b)return;
- const x=data.opportunities.find(x=>x.id===b.dataset.detail);if(!x)return;
+ const original=data.opportunities.find(x=>x.id===b.dataset.detail);if(!original)return;
+ const x=presentIdea(original);
+ if(x.lane==='Thesis'){
+   const sections=[['What goes wrong?',x.summary],['Why does this matter?',x.why_it_matters||x.reason],['A simple example',x.example],['What would we try?',x.proposed_fix],['What would the thesis test?',x.question],['What would you produce?',x.deliverable],['What is the main difficulty?',x.risk]];
+   const details=[['Methods to compare',original.model_plan],['How to measure the result',original.measure],['Data and permission to use it',original.data_plan],['The first experiment',original.week_test],['Closest existing work',original.baseline],['What this study might add',original.proposed_difference]];
+   const grid=items=>'<div class="detail-grid">'+items.filter(([,v])=>v).map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>';
+   $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / Thesis idea</span><h2>'+esc(x.title)+'</h2>'+ideaFlow(x)+grid(sections)+outcomeSummary(x)+'<details class="evidence-details"><summary>Research methods and data — optional detail</summary>'+grid(details)+'</details><details class="evidence-details"><summary>Sources, dates and what already exists</summary>'+provenanceDetails(original)+'</details>'+(typeof singleJobAction==='function'?singleJobAction(x):'')+'<div class="discussion-actions"><button data-conversation="ask" data-lane="thesis" data-idea="'+esc(x.id)+'">Ask about this idea</button></div>';
+   $('detail').showModal();return;
+ }
  $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+outcomeSummary(x)+sourcePreview(x)+ideaFlow(x)+'<div class="detail-grid">'+[
  ['The problem',x.summary],['Why it matters',x.why_it_matters||x.reason],['What we would build',x.proposed_fix||x.deliverable],['A concrete example',x.example||x.flow?.join(' → ')],['The question worth testing',x.question||x.summary],
  ...(x.buyer?[["Who could pay",x.buyer],["One-week product test",x.week_test],["How to test customer demand",x.customer_test],["Path beyond week one",x.growth_path]]:[]),

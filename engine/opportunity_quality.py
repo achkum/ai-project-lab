@@ -1,5 +1,10 @@
 """Publication gate for evidence-led opportunity cards, not a demand scoring model."""
 def validate_card(card):
+    if card.get('quality_gate_version',0)>=3 and card.get('lane')=='Project':
+        case=card.get('business_case',{})
+        fields=('first_customer','repeat_use','who_pays_and_why','current_alternatives','proposed_difference','week_one','week_one_acceptance','next_90_days','first_customer_route','kill_test','data_access','costs','biggest_unknown')
+        if not isinstance(case,dict) or any(not isinstance(case.get(k),str) or not case[k].strip() for k in fields):
+            raise ValueError('Business opportunity needs a customer, repeat use, buying reason, first-week workflow and a testable business case')
     if card.get('quality_gate_version', 0) < 2:
         if card.get('lane') == 'Project':
             raise ValueError('New project publication requires evidence-led quality gate v2')

@@ -9,7 +9,7 @@ class OpportunityQualityTests(unittest.TestCase):
         projects=[c for c in cards if c['lane']=='Project']
         self.assertTrue(projects)
         for c in projects:
-            self.assertEqual(c['quality_gate_version'],2)
+            self.assertGreaterEqual(c['quality_gate_version'],2)
             validate_card(c)
             with self.assertRaises(ValueError):validate_card(dict(c,buyer=''))
             with self.assertRaises(ValueError):validate_card(dict(c,quality_gate_version=1))

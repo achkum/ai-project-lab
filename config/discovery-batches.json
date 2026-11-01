@@ -3,7 +3,7 @@
   "selection_required": true,
   "current_project_batch": {
     "id": "20261101-broad",
-    "state": "awaiting_selection",
+    "state": "rejected_by_owner",
     "project_ids": [
       "NP1",
       "NP2",
@@ -13,18 +13,12 @@
     ]
   },
   "last_run": {
-    "id": "20261101-broad",
-    "started_at": "2026-11-01T07:59:30Z",
-    "state": "complete",
+    "id": "20261101-business-reset",
+    "state": "researching",
     "lanes": [
-      "Thesis",
       "Project"
     ],
-    "note": "1 November discovery complete: 5 new project options and 6 new thesis possibilities. Sources, alternatives and limitations are attached. These are options to choose, not validated ventures or approved thesis topics.",
-    "finished_at": "2026-11-01T08:26:25.267771+00:00",
-    "counts": {
-      "Project": 5,
-      "Thesis": 6
-    }
+    "started_at": "2026-11-01T09:49:37.410424+00:00",
+    "note": "The five small project proposals were withdrawn after owner feedback. Business opportunities are being reassessed from the customer and recurring problem first. Thesis ideas now have plain-language explanations; research methods are optional detail."
   }
 }

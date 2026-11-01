@@ -16,7 +16,7 @@ function jobLabel(j){return j.state==='review_ready'?(j.lane==='thesis'?'Investi
 function manualStartAllowed(x){return !data.audit?.hold || (data.audit.manual_start_ids||[]).includes(x.id);}
 function selectionControl(x){
  if(!manualStartAllowed(x))return '<p class="select-idea">Unverified · audit hold · <a href="audit.html">Read decision</a></p>'; 
- return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.batch==='problem-evidence'?(x.auto_eligible===false?'Exploratory · demand unverified':'Problem-led option'):'Research possibility')+'</span></label>';
+ return '<label class="select-idea"><input type="checkbox" data-select-idea="'+esc(x.id)+'" '+(selectedIdeas.has(x.id)?'checked':'')+'> Select '+esc(x.id)+' <span>'+esc(x.lane==='Thesis'?'Thesis idea':x.status==='completed'?'Previous build':'Business idea')+'</span></label>';
 }
 function jobControls(lane){
  const count=data.opportunities.filter(x=>x.lane===lane&&manualStartAllowed(x)&&selectedIdeas.has(x.id)).length;

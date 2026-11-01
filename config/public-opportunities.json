@@ -75,7 +75,7 @@
     "auto_eligible": false,
     "recommended": false,
     "version": 1,
-    "publication": "owner_requested_visual_summary",
+    "publication": "withdrawn_from_shortlist",
     "quality_gate_version": 2,
     "batch": "20261101-broad",
     "shortlist": "20261101-broad",
@@ -84,7 +84,9 @@
     "domain": "Food operations",
     "delivery_mode": "tested_web_app",
     "status": "Possibility",
-    "evidence_url": "https://www.agentomte.com/blog/batch-code-traceability-software-small-manufacturer"
+    "evidence_url": "https://www.agentomte.com/blog/batch-code-traceability-software-small-manufacturer",
+    "archived": true,
+    "withdrawal_reason": "Owner rejected this as a small utility rather than a credible business direction. Existing evidence remains in the research history."
   },
   {
     "id": "NP2",
@@ -172,7 +174,7 @@
     "auto_eligible": false,
     "recommended": false,
     "version": 1,
-    "publication": "owner_requested_visual_summary",
+    "publication": "withdrawn_from_shortlist",
     "quality_gate_version": 2,
     "batch": "20261101-broad",
     "shortlist": "20261101-broad",
@@ -181,7 +183,9 @@
     "domain": "Accessibility",
     "delivery_mode": "tested_web_app",
     "status": "Possibility",
-    "evidence_url": "https://applevis.com/forum/macos-mac-apps/im-completely-blind-i-built-macos-pdf-reader-because-i-struggle-inaccessible"
+    "evidence_url": "https://applevis.com/forum/macos-mac-apps/im-completely-blind-i-built-macos-pdf-reader-because-i-struggle-inaccessible",
+    "archived": true,
+    "withdrawal_reason": "Owner rejected this as a small utility rather than a credible business direction. Existing evidence remains in the research history."
   },
   {
     "id": "NP3",
@@ -249,7 +253,7 @@
     "auto_eligible": false,
     "recommended": false,
     "version": 1,
-    "publication": "owner_requested_visual_summary",
+    "publication": "withdrawn_from_shortlist",
     "quality_gate_version": 2,
     "batch": "20261101-broad",
     "shortlist": "20261101-broad",
@@ -258,7 +262,9 @@
     "domain": "Consumer support",
     "delivery_mode": "tested_web_app",
     "status": "Possibility",
-    "evidence_url": "https://www.consumercellular.com/blog/ai-isnt-the-problem-bad-customer-service-is/"
+    "evidence_url": "https://www.consumercellular.com/blog/ai-isnt-the-problem-bad-customer-service-is/",
+    "archived": true,
+    "withdrawal_reason": "Owner rejected this as a small utility rather than a credible business direction. Existing evidence remains in the research history."
   },
   {
     "id": "NP4",
@@ -336,7 +342,7 @@
     "auto_eligible": false,
     "recommended": false,
     "version": 1,
-    "publication": "owner_requested_visual_summary",
+    "publication": "withdrawn_from_shortlist",
     "quality_gate_version": 2,
     "batch": "20261101-broad",
     "shortlist": "20261101-broad",
@@ -345,7 +351,9 @@
     "domain": "Household preparedness",
     "delivery_mode": "tested_web_app",
     "status": "Possibility",
-    "evidence_url": "https://www.gov.uk/government/news/households-encouraged-to-take-small-simple-steps-to-stay-prepared-in-an-emergency"
+    "evidence_url": "https://www.gov.uk/government/news/households-encouraged-to-take-small-simple-steps-to-stay-prepared-in-an-emergency",
+    "archived": true,
+    "withdrawal_reason": "Owner rejected this as a small utility rather than a credible business direction. Existing evidence remains in the research history."
   },
   {
     "id": "NP5",
@@ -423,7 +431,7 @@
     "auto_eligible": false,
     "recommended": false,
     "version": 1,
-    "publication": "owner_requested_visual_summary",
+    "publication": "withdrawn_from_shortlist",
     "quality_gate_version": 2,
     "batch": "20261101-broad",
     "shortlist": "20261101-broad",
@@ -432,7 +440,9 @@
     "domain": "Software reliability",
     "delivery_mode": "tested_web_app",
     "status": "Possibility",
-    "evidence_url": "https://github.com/NVIDIA/cuvs/issues/2783"
+    "evidence_url": "https://github.com/NVIDIA/cuvs/issues/2783",
+    "archived": true,
+    "withdrawal_reason": "Owner rejected this as a small utility rather than a credible business direction. Existing evidence remains in the research history."
   },
   {
     "id": "NT1",

@@ -70,7 +70,9 @@ def main(refresh_assets=False):
         signals=load(signals_file) if signals_file.exists() else None
         batch_file=root/'config/discovery-batches.json'
         batches=load(batch_file) if batch_file.exists() else None
-        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals,'batches':batches}
+        copy_file=root/'config/opportunity-copy.json'
+        presentation=load(copy_file) if copy_file.exists() else {}
+        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals,'batches':batches,'presentation':presentation}
         fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
         receipt=runtime/'dashboard-publish.json'
         unchanged=receipt.exists() and load(receipt).get('fingerprint')==fingerprint
@@ -87,6 +89,7 @@ def main(refresh_assets=False):
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
         if signals: snapshot['discovery_signals']=signals
         if batches: snapshot['discovery_run']=batches['last_run']
+        snapshot['opportunity_copy']=presentation
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         git('add','--','docs/data/status.json')
         if git('diff','--cached','--name-only'):
