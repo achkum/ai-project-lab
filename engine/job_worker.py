@@ -226,6 +226,8 @@ def run_one(profile):
         remote('seen',detail='Working on '+job['scope']['id']+'; other jobs remain queued')
     prompt=(
         'Produce a research feasibility brief, not a completed thesis. Write BRIEF.md and evidence.json. '
+        'Begin with plain language: who has the problem, a concrete everyday example, why it matters, what we would try, what the thesis would test and what the student would produce. '
+        'The owner must understand the idea without reading a paper or knowing the method names. Put technical methods and detailed research design in a clearly separate later section. '
         'Include exact source links, source findings, closest prior work, proposed difference, novelty uncertainty, data/licence access, '
         'a simple baseline, model adaptation plan, leakage-safe evaluation, compute budget, risks and go/no-go criteria. '
         'Use web research to check claims. Prioritise events within 30 days and corroboration within 90 days; older sources are background. '
@@ -234,12 +236,13 @@ def run_one(profile):
         'Write an explicit keep/revise/withdraw conclusion and a dashboard-safe audit summary; unsupported scope is a no-go, not a conditional endorsement. '
         'Explicitly separate proposed ideas from established facts. Stop within 12 minutes; report incomplete research rather than infer completion.'
         if job['lane']=='thesis' else
-        'Build the bounded local demo described below. Write runnable source, a README, meaningful checks, a model/data card if relevant, '
+        'Implement the selected working product scope described below. Begin the README with who uses it, their problem and the completed user journey. Write runnable source, meaningful checks, a model/data card if relevant, '
         'limitations and a draft sharing post. Run appropriate checks and report actual results. Do not substitute fake model outputs '
-        'for a working model: label simulation clearly or report a dependency/data blocker. Stop at a reviewable checkpoint within 12 minutes.')
+        'for a working model: label simulation clearly or report a dependency/data blocker. Engineering checks are not customer validation. Preserve incomplete work and report remaining acceptance criteria honestly.')
     try:
         if job['scope'].get('delivery_mode')=='tested_web_app':
             prompt=('Build and finish a usable browser application, not a brief or command-line-only draft. '
+                'This is the existing static-web delivery path for the selected scope; it does not define the limits of future business discovery. '
                 'Read starter/ if present and improve the supplied implementation. All UI assets go in site/ with index.html. '
                 'Use plain browser JS/CSS, no paid services, no CDN, no npm dependencies. Provide local file import, a clearly labelled synthetic sample, '
                 'visual interactive results, useful validation errors, export/download and a link back to ../../#projects. '
@@ -248,7 +251,7 @@ def run_one(profile):
                 'Write meaningful tests/*.test.cjs using node:test and node:assert for correctness, malformed data and relevant edge cases. Test the actual shipped sample.js browser binding, not just a separate fixture file. Bound input sizes before expensive work. '
                 'Run the checks and fix failures. README must describe how to use the app, data provenance and honest limitations. '
                 'The coordinator runs your Node tests again, deploys site/ and verifies Pages. No human approval step is needed. '
-                'Do not push or deploy yourself. Complete a coherent usable slice within 35 minutes; never fake model outputs.')
+                'Do not push or deploy yourself. Meet the selected acceptance criteria without shrinking them to fit this invocation. If incomplete, report the exact remaining work; never fake model outputs or claim customer validation from a synthetic sample.')
         response=execute('analysis' if job['lane']=='thesis' else 'implementation',prompt+'\n\n'+json.dumps(job['scope'],ensure_ascii=False),workspace,workspace.parent/(job['id']+'-result.txt'),checkpoint,timeout=2400 if job['scope'].get('delivery_mode')=='tested_web_app' else 900)
         checkpoint()
         result=publish_review_bundle(profile,job,workspace,response)
