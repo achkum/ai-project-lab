@@ -127,19 +127,25 @@ def publish_web_app(profile,job,workspace):
                 except subprocess.CalledProcessError:
                     if attempt==2:raise
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=public,text=True).strip()
-    for _ in range(60):
+    deadline=time.monotonic()+300
+    while time.monotonic()<deadline:
         remote('heartbeat',jid=job['id'],token=job['token'],message='Tests passed; publishing the browser app')
-        check=subprocess.run(['gh','api','repos/achkum/ai-project-lab/pages/builds/latest'],capture_output=True,text=True,encoding='utf-8',timeout=20)
-        build=json.loads(check.stdout) if check.returncode==0 else {}
-        if build.get('commit')==commit and build.get('status')=='built':return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
-        # A VPS data publication may supersede this commit while Pages builds.
-        if build.get('status')=='built' and isinstance(build.get('commit'),str) and len(build['commit'])==40 and all(c in '0123456789abcdef' for c in build['commit']):
-            subprocess.run(['git','fetch','origin'],cwd=public,check=True,capture_output=True,timeout=60)
-            if subprocess.run(['git','merge-base','--is-ancestor',commit,build['commit']],cwd=public,capture_output=True).returncode==0:
-                return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
-        if build.get('commit')==commit and build.get('status')=='errored':raise RuntimeError('Pages deployment failed; source and test results preserved')
-        time.sleep(5)
+        if pages_workflow_contains(public,commit):
+            return 'https://achkum.github.io/ai-project-lab/projects/'+slug+'/'
+        time.sleep(15)
     raise RuntimeError('Pages deployment not confirmed within five minutes; inspect deployment status')
+
+
+def pages_workflow_contains(public,commit):
+    """A successful deployment must contain this app, including newer VPS snapshots."""
+    check=subprocess.run(['gh','api','repos/achkum/ai-project-lab/actions/workflows/pages.yml/runs?branch=main&per_page=10'],capture_output=True,text=True,encoding='utf-8',timeout=20)
+    runs=json.loads(check.stdout).get('workflow_runs',[]) if check.returncode==0 else []
+    successes=[r['head_sha'] for r in runs if r.get('conclusion')=='success' and isinstance(r.get('head_sha'),str) and len(r['head_sha'])==40 and all(c in '0123456789abcdef' for c in r['head_sha'])]
+    if commit in successes:return True
+    if successes:
+        subprocess.run(['git','fetch','origin'],cwd=public,check=True,capture_output=True,timeout=60)
+        return any(subprocess.run(['git','merge-base','--is-ancestor',commit,sha],cwd=public,capture_output=True).returncode==0 for sha in successes)
+    return False
 
 
 def version_static_assets(dest):
