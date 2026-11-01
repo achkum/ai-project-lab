@@ -6,7 +6,11 @@
     "example": "In a two-column event guide, the reader jumps from the venue address to half a sentence about ticket prices. Someone needs to put those blocks back in order.",
     "proposed_fix": "Train a small model to suggest which parts a person should inspect first. The person still decides how to repair the document.",
     "question": "With the same amount of review time, does the model help someone fix more reading-order mistakes than simple rules do?",
-    "flow": ["Start with documents whose correct reading order is known.", "Compare the model's suggestions with simple rules.", "Count how many mistakes a reviewer can fix."],
+    "flow": [
+      "Start with documents whose correct reading order is known.",
+      "Compare the model's suggestions with simple rules.",
+      "Count how many mistakes a reviewer can fix."
+    ],
     "deliverable": "A tested model that ranks likely mistakes, a small document collection and a report showing when it helps or fails.",
     "contribution": "The research is about where to spend human review time, rather than building another PDF reader.",
     "audience": "People who prepare documents for screen-reader users.",
@@ -22,7 +26,11 @@
     "example": "Someone uses a model trained for their speech on a laptop, then switches to a phone headset. Should the software accept the words or ask, 'Did you mean this?'",
     "proposed_fix": "Compare ways of deciding when an adapted speech model should ask for confirmation. Use recordings already collected for research, if access and permission are suitable.",
     "question": "Can we reduce wrong words that are accepted without making the person confirm almost everything?",
-    "flow": ["Test the same kind of speech across microphones.", "Try different rules for when to ask again.", "Compare mistakes with the number of interruptions."],
+    "flow": [
+      "Test the same kind of speech across microphones.",
+      "Try different rules for when to ask again.",
+      "Compare mistakes with the number of interruptions."
+    ],
     "deliverable": "A comparison showing how often each method makes a mistake or asks for confirmation, plus code to repeat the experiment.",
     "contribution": "The useful result would be a better balance between accuracy and interruption after adapting a speech model.",
     "audience": "Researchers building speech tools for people with speech difficulties.",
@@ -38,7 +46,11 @@
     "example": "A temperature sensor stops recording for ten minutes. The software fills in that gap, then suggests a past overheating incident. Would it suggest something else if the missing readings were different?",
     "proposed_fix": "Compare filling gaps with one guessed value against keeping several plausible values. Make the system say when there is not enough information to choose a reliable match.",
     "question": "Does accounting for missing readings help find the right past incident, and when should the system say it cannot tell?",
-    "flow": ["Hide parts of sensor records with known values.", "Try different ways to find a similar past event.", "Count wrong matches and cases where no match is offered."],
+    "flow": [
+      "Hide parts of sensor records with known values.",
+      "Try different ways to find a similar past event.",
+      "Count wrong matches and cases where no match is offered."
+    ],
     "deliverable": "A repeatable experiment showing which method makes fewer wrong matches and when missing data makes a reliable answer impossible.",
     "contribution": "This tests the effect on the technician's suggested incident, not just how well the missing numbers are guessed.",
     "audience": "Teams building software for equipment maintenance.",
@@ -54,7 +66,11 @@
     "example": "A shop compares 'Basmati rice 500g' with 'Basmati rice 5kg'. Most words match, but treating these as the same pack gives the wrong price comparison.",
     "proposed_fix": "Adapt a small text model and combine it with checks for quantities and units. Compare it with ordinary text matching and stronger existing matching methods.",
     "question": "Can the small model make fewer wrong product matches on new suppliers, and ask for review when the description is unclear?",
-    "flow": ["Collect product pairs labelled same or different.", "Compare text rules with an adapted small model.", "Test on brands or product groups it has not seen."],
+    "flow": [
+      "Collect product pairs labelled same or different.",
+      "Compare text rules with an adapted small model.",
+      "Test on brands or product groups it has not seen."
+    ],
     "deliverable": "A tested product-matching model, a labelled test collection and an explanation of its most important mistakes.",
     "contribution": "The study tests difficult pack-size and variant differences, rather than just recognising similar wording.",
     "audience": "Teams combining supplier lists or comparing product prices.",
@@ -70,7 +86,11 @@
     "example": "A test passes alone but fails after another test runs. Changing the test order might reveal the problem faster than repeating the same run ten times.",
     "proposed_fix": "Use information from earlier failures to choose the next experiment, such as changing test order or resetting shared state. Compare a learned method with simple fixed rules.",
     "question": "With the same number of test runs, does the learned method reproduce more failures than simple rules do?",
-    "flow": ["Start with tests whose failure causes are known.", "Let each method choose what to try next.", "Count how many failures it reproduces within the run limit."],
+    "flow": [
+      "Start with tests whose failure causes are known.",
+      "Let each method choose what to try next.",
+      "Count how many failures it reproduces within the run limit."
+    ],
     "deliverable": "A small experiment-selection tool and a study showing whether its suggestions actually help reproduce failures.",
     "contribution": "The research measures the usefulness of the next suggested action, not merely whether a model can label a test as unreliable.",
     "audience": "Developers and teams maintaining automated tests.",
@@ -86,7 +106,11 @@
     "example": "An AI predicts a machine failure and highlights temperature and vibration. If we erase the numbers but can still guess the prediction just from which columns were highlighted, the explanation score may be misleading.",
     "proposed_fix": "Test explanations three ways: with the highlighted values, with only the pattern of highlights, and with randomly changed highlights. Compare the results on small datasets where we know what should matter.",
     "question": "How much of the explanation score comes from useful values, and how much comes from the pattern of what was highlighted?",
-    "flow": ["Ask a model to predict and explain a result.", "Remove values or change the highlights.", "Check what information still predicts the answer."],
+    "flow": [
+      "Ask a model to predict and explain a result.",
+      "Remove values or change the highlights.",
+      "Check what information still predicts the answer."
+    ],
     "deliverable": "A reproducible test of explanation methods, showing when their scores are useful and when they can overstate what has been explained.",
     "contribution": "A recent paper explicitly did not run one of these checks. That is a specific experiment to investigate, not proof that nobody has studied the issue elsewhere.",
     "audience": "People evaluating and explaining small AI models.",
@@ -94,5 +118,37 @@
     "risk": "The pattern of highlights can contain legitimate information. Finding that pattern does not prove the model is deceptive or that every explanation is wrong.",
     "customer_test": "Does the test distinguish useful highlighted values from a score driven by the highlight pattern?",
     "market": "May support model evaluation work; no standalone product or customer demand is claimed."
+  },
+  "RT1": {
+    "title": "Can a model spot “approved, but only if…”?",
+    "summary": "Someone approves a code change but adds a condition in their message. The green approval button does not tell the team whether that condition was met.",
+    "why_it_matters": "A team might release a change while the reviewer is still expecting a fix.",
+    "example": "A reviewer writes “Looks good, as long as you add the missing permission check.” The system shows the change as approved even though the check has not been added.",
+    "proposed_fix": "Teach a small text model to spot conditions in review comments and point to the words that support its answer. Compare it with simple keyword rules.",
+    "question": "Can the model catch more conditional approvals without sending the team too many false alarms?",
+    "flow": [
+      "Collect review messages and agree which contain a condition.",
+      "Compare simple rules with a small adapted text model.",
+      "Test on different projects and count missed conditions and false alarms."
+    ],
+    "deliverable": "An initial investigation and experiment plan already exist. A labelled set of comments and a tested model would be the next work.",
+    "risk": "People may disagree about what a comment means. The investigation has not secured suitable data or shown that a model improves on simple rules.",
+    "audience": "Software teams reviewing code before release."
+  },
+  "RT2": {
+    "title": "Did the forecast model learn the pattern—or see the answers?",
+    "summary": "A forecasting model can look accurate on a test because it has already seen some of the test data. We may not know what was used to train it.",
+    "why_it_matters": "A company could choose a model that scores well in a test but performs poorly on genuinely new data.",
+    "example": "We test predictions using last year’s sales. If the model already saw those sales during training, the result may exaggerate how well it predicts the future.",
+    "proposed_fix": "In a controlled experiment, deliberately show a small model some series and keep others hidden. Check whether a test can correctly tell the two groups apart.",
+    "question": "Can we detect examples the model has seen without wrongly flagging genuinely new examples?",
+    "flow": [
+      "Train a model with some known examples and keep other examples out.",
+      "Try methods that look for signs the model has seen an example.",
+      "Count correct detections and wrong accusations."
+    ],
+    "deliverable": "The completed investigation explains why this original idea should not proceed as it stands. No model experiment has been run.",
+    "risk": "Similar experiments already exist. We still need a distinct question, usable code and models, and a training run that fits the available laptop.",
+    "audience": "People choosing or evaluating forecasting models."
   }
 }

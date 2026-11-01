@@ -19,7 +19,7 @@
       "Project"
     ],
     "started_at": "2026-11-01T09:43:42Z",
-    "note": "Five small project proposals were withdrawn after your feedback. The replacement review examined three business directions, but did not establish a strong enough reason for customers to choose a new supplier. No replacement is being recommended yet. Six thesis ideas now explain the problem, example and proposed experiment in plain language; this is a presentation change, not new research.",
+    "note": "Five small project proposals were withdrawn after your feedback. The replacement review examined three business directions, but did not establish a strong enough reason for customers to choose a new supplier. No replacement is being recommended yet. All eight visible thesis ideas now explain the problem, example and proposed experiment in plain language; this is a presentation change, not new research.",
     "completed_at": "2026-11-01T09:55:42Z",
     "reviewed_directions": [
       {
@@ -46,6 +46,14 @@
         "source_url": "https://www.reddit.com/r/smallbusiness/comments/1w5r0sg/service_repair_industry/",
         "source_label": "Reviewed owner discussion and replies"
       }
-    ]
+    ],
+    "lane_states": {
+      "Thesis": "explanations_updated",
+      "Project": "reviewed_no_new_shortlist"
+    },
+    "lane_notes": {
+      "Thesis": "All eight visible thesis ideas now start with the problem, a simple example and what the study would test. Technical details are optional. Sources and previous investigation findings are preserved; rewriting an explanation does not establish that a topic is feasible.",
+      "Project": "The five small proposals you rejected are archived. Three replacement business directions were examined, but none became a new shortlist. The review findings are below; previous builds and your controls are preserved."
+    }
   }
 }

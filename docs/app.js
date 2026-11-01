@@ -52,12 +52,12 @@ function provenanceDetails(x){
 }
 function outcomeSummary(x) {
  const pairs=x.investigation_result ? [['Investigation result',x.investigation_result],['What was done',x.completed_work],['What we found',x.finding],['What is still needed',x.remaining_work]] : [];
- return pairs.length?'<div class="idea-outcome">'+pairs.map(([k,v])=>'<p><strong>'+esc(k)+': </strong>'+esc(v)+'</p>').join('')+'<a class="text-link" href="'+esc(safeLink(x.artifact_url))+'" target="_blank" rel="noopener noreferrer">Read the full investigation ↗</a></div>':'';
+ return pairs.length?'<div class="idea-outcome"><p><strong>'+esc(pairs[0][0])+': </strong>'+esc(pairs[0][1])+'</p><details><summary>What the investigation found</summary>'+pairs.slice(1).map(([k,v])=>'<p><strong>'+esc(k)+': </strong>'+esc(v)+'</p>').join('')+'<a class="text-link" href="'+esc(safeLink(x.artifact_url))+'" target="_blank" rel="noopener noreferrer">Read the full investigation ↗</a></details></div>':'';
 }
 function ideaCard(x) {
  const thesis=x.lane==='Thesis';
  const facts=thesis?[['What we would find out',x.question],['Main difficulty',x.risk]]:[['Who could pay',x.buyer||x.audience],['Why they would return',x.business_case?.repeat_use||x.market||'Not established']];
- const badge=x.status==='completed'?'Completed prototype':thesis?'Research idea':'Business hypothesis';
+ const badge=x.status==='completed'?'Completed prototype':x.investigation_result?'Investigated — see findings':thesis?'Research idea':'Business hypothesis';
  return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge">'+badge+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+outcomeSummary(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'To assess')+'</strong></div><div class="idea-facts">'+facts.map(([label,value])=>'<div><span class="label">'+esc(label)+'</span><strong>'+esc(value)+'</strong></div>').join('')+'</div>'+sourcePreview(x)+'<p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">'+(thesis?'Explain ':'Explore ')+esc(x.id)+' →</button></article>';
 }
 function comparison(rows) {
@@ -99,7 +99,7 @@ function renderCards(lane,query=''){
  const signals=data.discovery_signals;
  const radar=signals?'<details class="provenance-panel"><summary><strong>What is getting attention now · GitHub & LinkedIn · '+esc(signals.checked_at)+'</strong></summary><p>'+esc(signals.scope)+'</p><div class="detail-grid">'+signals.items.map(s=>'<section><span class="tag">'+esc(s.source)+'</span><h3><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a></h3><p>'+esc(s.signal)+'</p><p><strong>Possible direction: </strong>'+esc(s.possibility)+'</p><p><strong>Still unknown: </strong>'+esc(s.limit)+'</p></section>').join('')+'</div></details>':'';
  const run=data.discovery_run;
- const research=run?'<div class="lane-focus"><div><span class="tag">DISCOVERY · '+esc(pretty(run.state))+'</span><p>'+esc(run.note)+'</p></div></div>':'';
+ const research=run?'<div class="lane-focus"><div><span class="tag">DISCOVERY · '+esc(pretty(run.lane_states?.[lane]||run.state))+'</span><p>'+esc(run.lane_notes?.[lane]||run.note)+'</p></div></div>':'';
  const reviewed=lane==='Project'&&run?.reviewed_directions?.length?'<details class="provenance-panel"><summary><strong>What the replacement review found</strong></summary><p>These are research findings, not a new build shortlist. Existing competitors do not rule out a business; we still need a concrete reason a customer would choose us.</p><div class="detail-grid">'+run.reviewed_directions.map(r=>'<section><span class="tag">'+esc(r.verdict)+'</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.problem)+'</p><p><strong>Why it was not shortlisted: </strong>'+esc(r.finding)+'</p><a class="text-link" href="'+esc(safeLink(r.source_url))+'" target="_blank" rel="noopener noreferrer">'+esc(r.source_label)+' ↗</a></section>').join('')+'</div></details>':'';
  const empty=lane==='Project'&&!query?'No replacement business shortlist is ready. The rejected small tools are archived; previous builds and their files remain available.':'No matching ideas. Try another search.';
  dest.innerHTML=research+(typeof jobControls==='function'?jobControls(lane):'')+conversation+reviewed+radar+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">'+empty+'</div>');
