@@ -6,7 +6,7 @@ This cannot toggle account billing settings; paid-credit availability fails clos
 import json
 import os
 import shutil
-import subprocess
+from . import background_process as subprocess
 import time
 from pathlib import Path
 

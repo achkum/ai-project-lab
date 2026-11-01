@@ -1,7 +1,7 @@
 """Import metadata via existing pinned SSH; never share a live SQLite file."""
 import json
 import math
-import subprocess
+from . import background_process as subprocess
 import time
 from urllib.parse import urlsplit
 

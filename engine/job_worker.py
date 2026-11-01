@@ -3,7 +3,7 @@ import argparse
 import json
 import os
 import shutil
-import subprocess
+from . import background_process as subprocess
 import time
 from pathlib import Path
 from contextlib import contextmanager

@@ -3,7 +3,7 @@ import json
 import os
 import queue
 import shutil
-import subprocess
+from . import background_process as subprocess
 import threading
 import time
 from .subscription import validate_allowance

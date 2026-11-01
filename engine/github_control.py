@@ -1,7 +1,7 @@
 """Private GitHub issue decision transport via the owner's existing gh login."""
 import json
 import re
-import subprocess
+from . import background_process as subprocess
 from datetime import datetime, timezone
 
 
