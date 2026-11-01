@@ -3,6 +3,8 @@ import hashlib
 import hmac
 import json
 import time
+import mimetypes
+from urllib.parse import unquote
 from collections import defaultdict,deque
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
@@ -10,9 +12,21 @@ from .jobs import Jobs
 from .password_auth import Auth
 
 ROOT=Path(__file__).resolve().parents[1]
+PUBLIC_DOCS=ROOT.parent/'ai-dashboard-publish/docs'
 ORIGIN='https://achkum.github.io'
 ORIGINS={ORIGIN,'https://198.44.116.159.sslip.io'}
 LIMITS=defaultdict(deque)
+
+def dashboard_file(relative):
+    """Only already-public static files, never the checkout or queue runtime."""
+    try:
+        base=PUBLIC_DOCS.resolve()
+        target=(base/unquote(relative)).resolve()
+        if target.is_dir():target=(target/'index.html').resolve()
+        if not target.is_relative_to(base) or target.suffix.lower() not in {'.html','.css','.js','.json','.svg','.csv','.txt','.png','.jpg','.webp','.ico'}:
+            return None
+        return target if target.is_file() and target.stat().st_size<=5_000_000 else None
+    except (OSError,ValueError):return None
 
 class Handler(BaseHTTPRequestHandler):
     server_version='LabQueue'
@@ -53,6 +67,18 @@ class Handler(BaseHTTPRequestHandler):
         return value
     def do_GET(self):
         self.path=self.path.split('?',1)[0]
+        if self.path=='/dashboard':
+            self.send_response(302);self.send_header('Location','/dashboard/');self.end_headers();return
+        if self.path.startswith('/dashboard/'):
+            path=dashboard_file(self.path[len('/dashboard/'):])
+            if path is None:return self.send(404,{'error':'Not found'})
+            raw=path.read_bytes();self.send_response(200)
+            self.send_header('Content-Type',mimetypes.guess_type(path.name)[0] or 'application/octet-stream')
+            self.send_header('Content-Length',str(len(raw)))
+            self.send_header('Cache-Control','no-store')
+            self.send_header('X-Content-Type-Options','nosniff')
+            self.send_header('Referrer-Policy','strict-origin-when-cross-origin')
+            self.end_headers();self.wfile.write(raw);return
         if self.path in ('/password','/password.js'):
             path=ROOT/'deploy'/('password.html' if self.path=='/password' else 'password.js')
             raw=path.read_bytes();self.send_response(200)

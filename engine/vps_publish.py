@@ -5,6 +5,7 @@ import json
 import os
 import sqlite3
 import subprocess
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -53,13 +54,13 @@ def compose(seed, catalog, audit, collection, jobs, sources, now):
     return out
 
 
-def main():
+def main(refresh_assets=False):
     root=Path(__file__).resolve().parents[1]
     checkout=Path('/home/openclaw/ai-dashboard-publish')
     runtime=root/'runtime'
     import fcntl
     with (runtime/'dashboard-publish.lock').open('w') as lock:
-        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        try:fcntl.flock(lock,fcntl.LOCK_EX if refresh_assets else fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return
         load=lambda p:json.loads(p.read_text(encoding='utf-8'))
         catalog=load(root/'config/public-opportunities.json');audit=load(root/'config/discovery-audit.json')
@@ -72,13 +73,16 @@ def main():
         inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals,'batches':batches}
         fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
         receipt=runtime/'dashboard-publish.json'
-        if receipt.exists() and load(receipt).get('fingerprint')==fingerprint:
+        unchanged=receipt.exists() and load(receipt).get('fingerprint')==fingerprint
+        if unchanged and not refresh_assets:
             print('No public changes; no GitHub request.');return
         env={**os.environ,'GIT_SSH_COMMAND':'ssh -i /home/openclaw/.ssh/ai_dashboard_publish -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/openclaw/.ssh/ai_dashboard_known_hosts'}
         def git(*args):return subprocess.run(['git',*args],cwd=checkout,env=env,check=True,capture_output=True,text=True,timeout=60).stdout.strip()
         if not checkout.exists():
             subprocess.run(['git','clone','git@github.com:achkum/ai-project-lab.git',str(checkout)],env=env,check=True,capture_output=True,timeout=90)
         git('pull','--rebase')
+        if unchanged:
+            print('Published assets refreshed; no snapshot commit needed.');return
         path=checkout/'docs/data/status.json';seed=load(path)
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
         if signals: snapshot['discovery_signals']=signals
@@ -98,4 +102,4 @@ def main():
         print('Public dashboard published.')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':main('--refresh-assets' in sys.argv)

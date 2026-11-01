@@ -150,7 +150,7 @@ class Jobs:
             demo=result.get('demo_url','')
             if demo:
                 import re
-                if not re.fullmatch(r'https://achkum\.github\.io/ai-project-lab/projects/[a-z0-9-]+/',demo):raise ValueError('Invalid demo URL')
+                if not re.fullmatch(r'https://(?:achkum\.github\.io/ai-project-lab|198\.44\.116\.159\.sslip\.io/dashboard)/projects/[a-z0-9-]+/',demo):raise ValueError('Invalid demo URL')
             url=result.get('url','')
             if url and not url.startswith('https://github.com/achkum/ai-thesis-lab/tree/main/research/jobs/'): raise ValueError('Invalid artifact URL')
         with self.transaction():

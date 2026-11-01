@@ -8,6 +8,16 @@ from unittest.mock import patch
 from subprocess import CompletedProcess
 
 class DeliveryTests(unittest.TestCase):
+    def test_vps_deployment_url_is_narrowly_allowed(self):
+        with tempfile.TemporaryDirectory() as d:
+            q=Jobs(Path(d)/'jobs.sqlite',[dict(id='NP1',version=1,title='App',lane='Project')])
+            q.enqueue([dict(id='NP1',version=1)],'vps-delivery');j=q.claim()
+            for url in ('https://198.44.116.159.sslip.io.evil.invalid/dashboard/projects/np1/','https://198.44.116.159.sslip.io/password','https://198.44.116.159.sslip.io/dashboard/projects/../'):
+                with self.assertRaises(ValueError):q.finish(j['id'],j['token'],'completed','done',{'demo_url':url})
+            url='https://198.44.116.159.sslip.io/dashboard/projects/np1/'
+            q.finish(j['id'],j['token'],'completed','App deployed',{'demo_url':url})
+            self.assertEqual(q.snapshot()['jobs'][0]['result']['demo_url'],url)
+            q.close()
     def test_deployment_must_include_the_app_commit(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)

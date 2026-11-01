@@ -8,6 +8,8 @@ Daily broad discovery and independently queued research/build jobs. Visual cards
 
 The VPS publishes changed collection status, job summaries and curated options directly to GitHub. A dedicated deploy key can write only this repository; personal GitHub tokens and model credentials stay off the VPS. Systemd watches collection/catalog changes and reconciles job status every 15 minutes. Unchanged inputs do not contact GitHub. See `deploy/systemd/` and `engine/vps_publish.py`.
 
+The same dashboard is also available at [the VPS mirror](https://198.44.116.159.sslip.io/dashboard/), with the existing password and start controls. It serves only the public `docs/` directory, so GitHub Pages deployment delays do not block viewing new options. Selected builds refresh these public assets and verify the served HTML before reporting deployment. `--refresh-assets` explicitly fetches a newly pushed build; unchanged scheduled runs still make no GitHub request.
+
 Project batches roll forward when selected builds finish: there is no weekly waiting period. One week is the target per project. A fresh batch waits for selection before any builds start. Thesis discovery remains daily. `config/discovery-batches.json` distinguishes research in progress from completed collection and records the current batch. GitHub Trending and public LinkedIn are research inputs alongside papers and problem communities, with popularity, publication dates and customer evidence kept distinct.
 
 ## Start work from the dashboard
@@ -59,7 +61,7 @@ The scheduled worker starts at Windows sign-in. Keep the laptop awake for model 
     python -m unittest discover -s tests -q
     node tests/status.test.cjs
 
-GitHub Pages publishes docs/ from main. Never commit runtime databases, private keys, account proofs or employer data. Private review bundles live in the companion thesis repo.
+GitHub Pages publishes docs/ from main through `.github/workflows/pages.yml` (Pages source: GitHub Actions). Deployments share one concurrency group and do not cancel an active publication. Never commit runtime databases, private keys, account proofs or employer data. Private review bundles live in the companion thesis repo.
 
 ## Discuss or change direction now
 

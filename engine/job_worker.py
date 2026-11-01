@@ -127,6 +127,18 @@ def publish_web_app(profile,job,workspace):
                 except subprocess.CalledProcessError:
                     if attempt==2:raise
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=public,text=True).strip()
+    # The same public files are also served over the VPS's existing HTTPS origin.
+    # Verify actual bytes so a stale checkout cannot be reported as a deployment.
+    mirror='https://198.44.116.159.sslip.io/dashboard/projects/'+slug+'/'
+    remote('heartbeat',jid=job['id'],token=job['token'],message='Tests passed; verifying the deployed browser app')
+    try:
+        subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=10','openclaw','cd /home/openclaw/ai-discovery && python3 -m engine.vps_publish --refresh-assets'],check=True,capture_output=True,timeout=90)
+        from urllib.request import urlopen
+        expected=(dest/'index.html').read_bytes()
+        with urlopen(mirror+'?v='+commit,timeout=20) as response:
+            if response.read(len(expected)+1)==expected:return mirror
+    except (OSError,subprocess.CalledProcessError,subprocess.TimeoutExpired):
+        pass  # GitHub Pages remains a second independently checked deployment route.
     deadline=time.monotonic()+300
     while time.monotonic()<deadline:
         remote('heartbeat',jid=job['id'],token=job['token'],message='Tests passed; publishing the browser app')
