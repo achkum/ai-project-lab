@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T10:07:48.570070+00:00",
+  "generated_at": "2026-11-01T10:10:39.234091+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -1783,7 +1783,7 @@
       "Project"
     ],
     "started_at": "2026-11-01T09:43:42Z",
-    "note": "Five small project proposals were withdrawn after your feedback. The replacement review examined three business directions, but did not establish a strong enough reason for customers to choose a new supplier. No replacement is being recommended yet. Six thesis ideas now explain the problem, example and proposed experiment in plain language; this is a presentation change, not new research.",
+    "note": "Five small project proposals were withdrawn after your feedback. The replacement review examined three business directions, but did not establish a strong enough reason for customers to choose a new supplier. No replacement is being recommended yet. All eight visible thesis ideas now explain the problem, example and proposed experiment in plain language; this is a presentation change, not new research.",
     "completed_at": "2026-11-01T09:55:42Z",
     "reviewed_directions": [
       {
@@ -1810,7 +1810,15 @@
         "source_url": "https://www.reddit.com/r/smallbusiness/comments/1w5r0sg/service_repair_industry/",
         "source_label": "Reviewed owner discussion and replies"
       }
-    ]
+    ],
+    "lane_states": {
+      "Thesis": "explanations_updated",
+      "Project": "reviewed_no_new_shortlist"
+    },
+    "lane_notes": {
+      "Thesis": "All eight visible thesis ideas now start with the problem, a simple example and what the study would test. Technical details are optional. Sources and previous investigation findings are preserved; rewriting an explanation does not establish that a topic is feasible.",
+      "Project": "The five small proposals you rejected are archived. Three replacement business directions were examined, but none became a new shortlist. The review findings are below; previous builds and your controls are preserved."
+    }
   },
   "opportunity_copy": {
     "NT1": {
@@ -1932,6 +1940,38 @@
       "risk": "The pattern of highlights can contain legitimate information. Finding that pattern does not prove the model is deceptive or that every explanation is wrong.",
       "customer_test": "Does the test distinguish useful highlighted values from a score driven by the highlight pattern?",
       "market": "May support model evaluation work; no standalone product or customer demand is claimed."
+    },
+    "RT1": {
+      "title": "Can a model spot “approved, but only if…”?",
+      "summary": "Someone approves a code change but adds a condition in their message. The green approval button does not tell the team whether that condition was met.",
+      "why_it_matters": "A team might release a change while the reviewer is still expecting a fix.",
+      "example": "A reviewer writes “Looks good, as long as you add the missing permission check.” The system shows the change as approved even though the check has not been added.",
+      "proposed_fix": "Teach a small text model to spot conditions in review comments and point to the words that support its answer. Compare it with simple keyword rules.",
+      "question": "Can the model catch more conditional approvals without sending the team too many false alarms?",
+      "flow": [
+        "Collect review messages and agree which contain a condition.",
+        "Compare simple rules with a small adapted text model.",
+        "Test on different projects and count missed conditions and false alarms."
+      ],
+      "deliverable": "An initial investigation and experiment plan already exist. A labelled set of comments and a tested model would be the next work.",
+      "risk": "People may disagree about what a comment means. The investigation has not secured suitable data or shown that a model improves on simple rules.",
+      "audience": "Software teams reviewing code before release."
+    },
+    "RT2": {
+      "title": "Did the forecast model learn the pattern—or see the answers?",
+      "summary": "A forecasting model can look accurate on a test because it has already seen some of the test data. We may not know what was used to train it.",
+      "why_it_matters": "A company could choose a model that scores well in a test but performs poorly on genuinely new data.",
+      "example": "We test predictions using last year’s sales. If the model already saw those sales during training, the result may exaggerate how well it predicts the future.",
+      "proposed_fix": "In a controlled experiment, deliberately show a small model some series and keep others hidden. Check whether a test can correctly tell the two groups apart.",
+      "question": "Can we detect examples the model has seen without wrongly flagging genuinely new examples?",
+      "flow": [
+        "Train a model with some known examples and keep other examples out.",
+        "Try methods that look for signs the model has seen an example.",
+        "Count correct detections and wrong accusations."
+      ],
+      "deliverable": "The completed investigation explains why this original idea should not proceed as it stands. No model experiment has been run.",
+      "risk": "Similar experiments already exist. We still need a distinct question, usable code and models, and a training run that fits the available laptop.",
+      "audience": "People choosing or evaluating forecasting models."
     }
   }
 }
