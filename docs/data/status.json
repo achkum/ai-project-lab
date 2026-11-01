@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T13:22:01.198033+00:00",
+  "generated_at": "2026-11-01T13:53:23.551243+00:00",
   "connected": true,
   "thesis": {
-    "state": "review_ready",
+    "state": "completed",
     "last_success": "2026-11-01T06:31:15.802076+00:00",
     "next_run": "2026-11-02T08:00:00+01:00"
   },
@@ -859,9 +859,9 @@
       "published_at": 1793521585.2646148,
       "review_deadline": null,
       "domain": "Software testing",
-      "status": "Possibility",
+      "status": "completed",
       "evidence_url": "https://github.com/NVIDIA/cuvs/issues/2783",
-      "selected": false
+      "selected": true
     },
     {
       "id": "NT6",
@@ -960,9 +960,9 @@
       "published_at": 1793521585.2646148,
       "review_deadline": null,
       "domain": "Explainable tabular ML",
-      "status": "Possibility",
+      "status": "completed",
       "evidence_url": "https://arxiv.org/html/2610.39506v1",
-      "selected": false
+      "selected": true
     },
     {
       "id": "RT1",
