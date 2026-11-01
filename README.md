@@ -6,6 +6,10 @@
 
 Daily broad discovery and independently queued research/build jobs. Visual cards show their sources, existing work, proposed contribution, model/data choices and uncertainty.
 
+The VPS publishes changed collection status, job summaries and curated options directly to GitHub. A dedicated deploy key can write only this repository; personal GitHub tokens and model credentials stay off the VPS. Systemd watches collection/catalog changes and reconciles job status every 15 minutes. Unchanged inputs do not contact GitHub. See `deploy/systemd/` and `engine/vps_publish.py`.
+
+Project batches roll forward when selected builds finish: there is no weekly waiting period. One week is the target per project. A fresh batch waits for selection before any builds start. Thesis discovery remains daily. `config/discovery-batches.json` distinguishes research in progress from completed collection and records the current batch. GitHub Trending and public LinkedIn are research inputs alongside papers and problem communities, with popularity, publication dates and customer evidence kept distinct.
+
 ## Start work from the dashboard
 
 1. Set your own password using the private, one-hour setup invitation opened by the agent. Then use **Sign in** on the dashboard and optionally **Remember this browser**.
@@ -15,7 +19,7 @@ Daily broad discovery and independently queued research/build jobs. Visual cards
 
 Password authentication uses a salted PBKDF2-HMAC-SHA256 hash (600,000 iterations) and persistent sign-in rate limits. Session tokens are stored hashed on the VPS. Remembered sessions last 30 days; normal sessions last up to 12 hours and use tab session storage. Sign out revokes that browser session. The password is never stored in browser storage, Git or logs.
 
-Initial setup requires a short-lived private invitation, cannot overwrite an existing password and disables the legacy dashboard key. There is no public password-reset endpoint; recovery requires owner-authorised VPS administration. The HTTPS endpoint uses sslip.io DNS and automatic certificate renewal. No ChatGPT, GitHub or SSH credential goes into the page or VPS.
+Initial setup requires a short-lived private invitation, cannot overwrite an existing password and disables the legacy dashboard key. There is no public password-reset endpoint; recovery requires owner-authorised VPS administration. The HTTPS endpoint uses sslip.io DNS and automatic certificate renewal. No credentials go into the public page. The VPS holds its repository-only publishing key, not the laptop's personal GitHub or model credentials.
 
 Thesis jobs produce feasibility investigations, not complete theses. Current cards show the investigation decision, completed work and unresolved requirements directly. Project jobs continue through implementation, checks and deployment. A deployed prototype is not evidence of customer demand or production readiness.
 
