@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-10-31T17:59:56.503785+00:00",
+  "generated_at": "2026-11-01T08:01:46.118853+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
-    "last_success": "2026-10-31T14:17:30.666583+00:00",
-    "next_run": "2026-11-01T08:00:00+01:00"
+    "last_success": "2026-11-01T06:31:15.802076+00:00",
+    "next_run": "2026-11-02T08:00:00+01:00"
   },
   "project": {
     "state": "completed",
@@ -14,17 +14,17 @@
     "window_start": "2026-10-31T12:54:52.504456+00:00",
     "target_at": "2026-11-07T12:54:52.504456+00:00"
   },
-  "releases_last_7_days": 0,
+  "releases_last_7_days": 2,
   "usage": {
     "spent_sek": 0,
     "limit_sek": 0
   },
   "coverage": {
-    "checked": 27,
+    "checked": 26,
     "target": 20,
     "registered": 35,
     "blocked": 0,
-    "source_families": 13
+    "source_families": 3
   },
   "sources": [
     {
@@ -33,7 +33,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.AI/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-hci",
@@ -404,8 +404,7 @@
       "remaining_work": "Secure reusable review data and two independent annotators; test whether they agree on the labels; then compare rules, a basic classifier and an adapted small encoder.",
       "finding": "Related work already classifies review comments. The potential contribution is testing unresolved conditions and when the model should admit uncertainty, not inventing review classification.",
       "artifact_url": "https://github.com/achkum/ai-thesis-lab/blob/main/research/jobs/7ea46cffc5214981a08c2e0c80e4bc8d/BRIEF.md",
-      "selected": true,
-      "decision_url": ""
+      "selected": true
     },
     {
       "id": "RT2",
@@ -522,8 +521,7 @@
       "remaining_work": "Find a genuinely distinct experiment, resolve code and model reuse terms, and measure the smallest local training run before considering this topic again.",
       "finding": "Existing work already includes controlled-exposure experiments. Originality remains unresolved; the inspected audit code and proposed weights also have access or licence obstacles.",
       "artifact_url": "https://github.com/achkum/ai-thesis-lab/blob/main/research/jobs/c12f6f207a52484296c2ef79c34b6c21/BRIEF.md",
-      "selected": true,
-      "decision_url": ""
+      "selected": true
     },
     {
       "id": "RP1",
@@ -618,8 +616,7 @@
       "proposed_fix": "Paste a public GitHub PR link. Read current reviews and checks, highlight mismatches, and link back to the evidence.",
       "example": "A reviewer approved yesterday’s code. Today’s push has no matching approval: the report points you to that review.",
       "completed_work": "Working public-PR lookup plus local event analysis. This is a record checker, not an autonomous release decision.",
-      "selected": true,
-      "decision_url": ""
+      "selected": true
     },
     {
       "id": "RP2",
@@ -734,8 +731,7 @@
       "proposed_fix": "Upload daily units sold for one item, choose a simple rule, adjust the quantity and compare historical excess and shortfalls with a fixed daily plan.",
       "example": "Upload daily sandwich sales. Get a quantity for the next date, change your expected uplift, and export the plan.",
       "completed_work": "Working local planner with transparent rules. No pretrained model, live POS connection or validated customer savings.",
-      "selected": true,
-      "decision_url": ""
+      "selected": true
     }
   ],
   "decisions": [
@@ -763,20 +759,16 @@
   "collector_host": "vps",
   "events": [
     {
-      "title": "Collector host",
-      "detail": "VPS collects daily at 07:30 Stockholm while the laptop is off. Analysis/builds and dashboard synchronization wait for the laptop."
+      "title": "VPS publishes directly",
+      "detail": "Collection and curated dashboard updates publish to GitHub without the laptop. Only changed public data is committed."
     },
     {
-      "title": "Public collection connected",
-      "detail": "27 channels returned records across 13 source families in seven days. Counts are not validated market opportunities."
+      "title": "Rolling project batches",
+      "detail": "When selected builds finish, prepare fresh options without waiting for next week. New builds require selection; automatic defaults remain paused."
     },
     {
-      "title": "Local subscription workflow",
-      "detail": "Daily discovery and recurring project checks scheduled."
-    },
-    {
-      "title": "Multiple independent jobs",
-      "detail": "Select cards and start investigations/builds on the dashboard. The VPS keeps requests while the laptop is off. Authenticated live status appears above each lane."
+      "title": "Subscription analysis",
+      "detail": "AI research and builds run on the laptop when available. Collection success is not completed research."
     }
   ],
   "audit": {
