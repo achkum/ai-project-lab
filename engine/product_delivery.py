@@ -184,8 +184,9 @@ def start_local(profile,job,workspace,checkpoint):
                     if 'text/html' not in page.headers.get('Content-Type','') or not page.read(512):
                         raise RuntimeError('Local app did not serve its user interface')
                 checkpoint()
-                active[slug]={'job':job['id'],'pid':proc.pid,'url':url,'workspace':str(workspace),'source_hash':source_fingerprint(workspace),'memory_mb':d['memory_mb'],'started_at':time.time()}
-                temp=registry.with_suffix('.next');temp.write_text(json.dumps(active,indent=2)+'\n',encoding='utf-8');os.replace(temp,registry)
+                saved[slug]={'job':job['id'],'pid':proc.pid,'url':url,'workspace':str(workspace),'source_hash':source_fingerprint(workspace),'memory_mb':d['memory_mb'],'started_at':time.time()}
+                # Keep stopped apps' restart information and data ownership records.
+                temp=registry.with_suffix('.next');temp.write_text(json.dumps(saved,indent=2)+'\n',encoding='utf-8');os.replace(temp,registry)
                 _LOCAL_PROCESSES[slug]=proc
                 return url
             time.sleep(1)

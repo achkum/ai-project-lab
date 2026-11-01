@@ -51,11 +51,14 @@ server=ThreadingHTTPServer((os.environ['HOST'],int(os.environ['PORT'])),Handler)
 server.serve_forever();server.server_close()
 '''
         (self.w/'server.py').write_text(source)
+        stopped={'job':'old-fixture','pid':0,'url':'http://127.0.0.1:19100/','memory_mb':128,'workspace':'retained-record'}
+        (self.runtime/'local-products.json').write_text(json.dumps({'stopped':stopped}))
         url=start_local({'runtime_root':str(self.runtime)},self.job,self.w,lambda:None)
         record=json.loads((self.runtime/'local-products.json').read_text())['fixture']
         try:
             self.assertTrue(url.startswith('http://127.0.0.1:19'))
             self.assertTrue(process_alive(record['pid']))
+            self.assertEqual(stopped,json.loads((self.runtime/'local-products.json').read_text())['stopped'])
             with patch('engine.product_delivery.sp.Popen') as spawn:
                 self.assertEqual(url,start_local({'runtime_root':str(self.runtime)},self.job,self.w,lambda:None));spawn.assert_not_called()
         finally:
