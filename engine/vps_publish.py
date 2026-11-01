@@ -1,0 +1,89 @@
+"""Publish curated public dashboard data from the VPS, without model credentials."""
+import copy
+import hashlib
+import json
+import os
+import sqlite3
+import subprocess
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+
+def iso(t):
+    return datetime.fromtimestamp(t, timezone.utc).isoformat() if t else None
+
+
+def read_jobs(path):
+    with sqlite3.connect(f'file:{path}?mode=ro', uri=True) as db:
+        db.row_factory=sqlite3.Row
+        return [dict(r) for r in db.execute('SELECT candidate,version,lane,state,updated FROM jobs ORDER BY created')]
+
+
+def compose(seed, catalog, audit, collection, jobs, sources, now):
+    out=copy.deepcopy(seed)
+    visible=set(audit.get('manual_start_ids',[]))
+    cards=[copy.deepcopy(c) for c in catalog if c.get('publication')=='owner_requested_visual_summary' and (not audit.get('hold') or c['id'] in visible)]
+    for c in cards:
+        job=next((j for j in jobs if j['candidate']==c['id'] and j['version']==c['version']),None)
+        c.update(recommended=False,selected=bool(job and job['state']!='cancelled'),status=job['state'] if job else 'Possibility')
+    out.update(opportunities=cards,audit=audit,connected=True,mode='live',collector_host='vps',generated_at=iso(now))
+    latest={}
+    for check in collection['checks']:
+        if check['checked']>latest.get(check['source'],{}).get('checked',0):latest[check['source']]=check
+    source_rows=[]
+    for s in sources:
+        r={k:s[k] for k in ('id','name','category','url','access')}
+        r['status']=latest.get(s['id'],{}).get('status','unavailable');source_rows.append(r)
+    out['sources']=source_rows
+    out['coverage'].update(registered=len(sources),checked=sum(r['status']=='checked' for r in source_rows),blocked=sum(r['status']=='unavailable' for r in source_rows),source_families=len({r['category'] for r in source_rows if r['status']=='checked'}))
+    local=datetime.fromtimestamp(now,ZoneInfo('Europe/Stockholm'));nxt=local.replace(hour=8,minute=0,second=0,microsecond=0)
+    if nxt<=local:nxt+=timedelta(days=1)
+    out['thesis'].update(last_success=iso(collection['generated_at']),next_run=nxt.isoformat())
+    for lane in ('thesis','project'):
+        current=[j for j in jobs if any(c['id']==j['candidate'] and c['version']==j['version'] for c in cards) and j['lane']==lane]
+        states={j['state'] for j in current}
+        state=next((s for s in ('running','needs_attention','quota_wait','queued','paused','completed','review_ready') if s in states),'awaiting_selection')
+        out[lane]['state']=state
+        if lane=='project':out[lane]['stage']=state.replace('_',' ')
+    out['releases_last_7_days']=sum(j['lane']=='project' and j['state']=='completed' and j['updated']>=now-7*86400 for j in jobs)
+    out['events']=[{'title':'VPS publishes directly','detail':'Collection and curated dashboard updates publish to GitHub without the laptop. Only changed public data is committed.'},
+      {'title':'Rolling project batches','detail':'When selected builds finish, prepare fresh options without waiting for next week. New builds require selection; automatic defaults remain paused.'},
+      {'title':'Subscription analysis','detail':'AI research and builds run on the laptop when available. Collection success is not completed research.'}]
+    return out
+
+
+def main():
+    root=Path(__file__).resolve().parents[1]
+    checkout=Path('/home/openclaw/ai-dashboard-publish')
+    runtime=root/'runtime'
+    import fcntl
+    with (runtime/'dashboard-publish.lock').open('w') as lock:
+        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:return
+        load=lambda p:json.loads(p.read_text(encoding='utf-8'))
+        catalog=load(root/'config/public-opportunities.json');audit=load(root/'config/discovery-audit.json')
+        collection=load(runtime/'collection.json');sources=load(root/'config/collectors.json');jobs=read_jobs(runtime/'jobs.sqlite')
+        # Heartbeats and credentials never enter either the fingerprint or the public snapshot.
+        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources}
+        fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
+        receipt=runtime/'dashboard-publish.json'
+        if receipt.exists() and load(receipt).get('fingerprint')==fingerprint:
+            print('No public changes; no GitHub request.');return
+        env={**os.environ,'GIT_SSH_COMMAND':'ssh -i /home/openclaw/.ssh/ai_dashboard_publish -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/openclaw/.ssh/ai_dashboard_known_hosts'}
+        def git(*args):return subprocess.run(['git',*args],cwd=checkout,env=env,check=True,capture_output=True,text=True,timeout=60).stdout.strip()
+        if not checkout.exists():
+            subprocess.run(['git','clone','git@github.com:achkum/ai-project-lab.git',str(checkout)],env=env,check=True,capture_output=True,timeout=90)
+        git('pull','--ff-only')
+        path=checkout/'docs/data/status.json';seed=load(path)
+        snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
+        path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        git('add','--','docs/data/status.json')
+        if git('diff','--cached','--name-only'):
+            git('-c','user.name=Lab VPS publisher','-c','user.email=achkum@users.noreply.github.com','commit','--only','-m','Refresh public dashboard from VPS','--','docs/data/status.json')
+        git('push','origin','HEAD:main')
+        receipt.write_text(json.dumps({'fingerprint':fingerprint,'published_at':datetime.now(timezone.utc).isoformat(),'commit':git('rev-parse','HEAD')}))
+        print('Public dashboard published.')
+
+
+if __name__=='__main__':main()
