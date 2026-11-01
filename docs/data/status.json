@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T08:07:55.392023+00:00",
+  "generated_at": "2026-11-01T08:09:19.039310+00:00",
   "connected": true,
   "thesis": {
     "state": "review_ready",
@@ -1109,5 +1109,15 @@
         "limit": "A method lead, not a validated thesis or market need. Exact post date and suitable local model costs remain unverified."
       }
     ]
+  },
+  "discovery_run": {
+    "id": "20261101-broad",
+    "started_at": "2026-11-01T07:59:30Z",
+    "state": "researching",
+    "lanes": [
+      "Thesis",
+      "Project"
+    ],
+    "note": "Fresh research for both lanes is running. Collection has completed; the new shortlist has not yet been published. GitHub Trending and public LinkedIn sources are included."
   }
 }
