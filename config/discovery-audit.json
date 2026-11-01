@@ -291,6 +291,23 @@
     "NT3",
     "NT4",
     "NT5",
-    "NT6"
-  ]
+    "NT6",
+    "BP1",
+    "BP2",
+    "BP3",
+    "BP4",
+    "BP5"
+  ],
+  "business_followup": {
+    "checked_at": "2026-11-01T13:07:58.244024+00:00",
+    "verdicts": {
+      "BP1": "Keep as a hypothesis",
+      "BP2": "Keep as a hypothesis",
+      "BP3": "Keep as a hypothesis",
+      "BP4": "More uncertain — compare alternatives first",
+      "BP5": "More uncertain — compare alternatives first"
+    },
+    "demand": "Unverified for all five. Original dates are source assertions with date basis, not discovery timestamps.",
+    "delivery": "Selected prototypes have static or private localhost delivery, independently executed checks and automatic strongest-model review. No new selections were enqueued."
+  }
 }

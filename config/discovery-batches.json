@@ -2,31 +2,43 @@
   "cadence": "rolling",
   "selection_required": true,
   "current_project_batch": {
-    "id": "20261101-broad",
-    "state": "rejected_by_owner",
+    "id": "20261101-business-followup",
+    "state": "awaiting_selection",
     "project_ids": [
-      "NP1",
-      "NP2",
-      "NP3",
-      "NP4",
-      "NP5"
-    ]
+      "BP1",
+      "BP2",
+      "BP3",
+      "BP4",
+      "BP5"
+    ],
+    "published_at": "2026-11-01T13:07:58.244024+00:00"
   },
   "last_run": {
     "id": "20261101-business-followup",
-    "state": "researching",
+    "state": "completed",
     "lanes": [
       "Project"
     ],
     "started_at": "2026-11-01T12:19:54.060397+00:00",
-    "note": "A broader business review is running because the previous review produced no replacement shortlist. Existing thesis choices and all selected work are preserved.",
+    "note": "Five business hypotheses are ready to explore. No new builds have started.",
     "lane_states": {
-      "Project": "researching_business_options",
+      "Project": "five_possibilities_awaiting_selection",
       "Thesis": "explanations_updated"
     },
     "lane_notes": {
-      "Project": "Researching a broader range of customer problems and existing products. New options will be shown here after their evidence and working scope are checked. No unselected builds have started.",
+      "Project": "Five broader business possibilities: workshop inspection, podcast production, cleaning operations, piano practice and tutor-led speaking practice. Each has a first workflow, existing alternatives, costs and a test that could disprove it. These are hypotheses, not validated demand. Select any that interest you; nothing starts automatically.",
       "Thesis": "All eight visible thesis ideas now start with the problem, a simple example and what the study would test. Technical details are optional. Sources and previous investigation findings are preserved; rewriting an explanation does not establish that a topic is feasible."
+    },
+    "completed_at": "2026-11-01T13:07:58.244024+00:00",
+    "evidence_counts": {
+      "reviewed_problem_areas": 10,
+      "business_options": 5,
+      "search_queries": 34,
+      "reviewed_source_records": 51,
+      "search_and_retrieval_leads_logged": 572,
+      "unique_source_urls_with_page_excerpts": 50,
+      "distinct_reviewed_hostnames": 26,
+      "note": "The lead ledger includes URLs surfaced by both search and page retrieval, not 572 independently researched search results. Bounded page excerpts are not all full reads. Search-only leads and failed requests are not counted as read pages. Host count is not demand corroboration."
     }
   },
   "previous_runs": [
@@ -73,6 +85,19 @@
         "Thesis": "All eight visible thesis ideas now start with the problem, a simple example and what the study would test. Technical details are optional. Sources and previous investigation findings are preserved; rewriting an explanation does not establish that a topic is feasible.",
         "Project": "The five small proposals you rejected are archived. Three replacement business directions were examined, but none became a new shortlist. The review findings are below; previous builds and your controls are preserved."
       }
+    }
+  ],
+  "previous_project_batches": [
+    {
+      "id": "20261101-broad",
+      "state": "rejected_by_owner",
+      "project_ids": [
+        "NP1",
+        "NP2",
+        "NP3",
+        "NP4",
+        "NP5"
+      ]
     }
   ]
 }

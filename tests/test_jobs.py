@@ -44,5 +44,13 @@ class JobsTests(unittest.TestCase):
     def test_result_url_cannot_escape_private_artifact_directory(self):
         self.q.enqueue([{'id':'T4','version':1}],'request-123');a=self.q.claim()
         with self.assertRaises(ValueError):self.q.finish(a['id'],a['token'],'review_ready','done',{'url':'javascript:alert(1)'})
+    def test_local_app_requires_explicit_selected_delivery_scope(self):
+        self.q.enqueue([{'id':'T4','version':1}],'request-123');a=self.q.claim()
+        with self.assertRaises(ValueError):self.q.finish(a['id'],a['token'],'completed','local',{'demo_url':'http://127.0.0.1:19123/'})
+        self.q.finish(a['id'],a['token'],'review_ready','findings')
+        self.q.catalog['P4'].update(delivery_mode='working_product',delivery_target='local_service')
+        self.q.enqueue([{'id':'P4','version':1}],'request-456');b=self.q.claim()
+        with self.assertRaises(ValueError):self.q.finish(b['id'],b['token'],'completed','local',{'demo_url':'http://192.168.1.1:19123/'})
+        self.q.finish(b['id'],b['token'],'completed','local',{'demo_url':'http://127.0.0.1:19123/'})
 
 if __name__=='__main__':unittest.main()

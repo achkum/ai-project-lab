@@ -64,6 +64,17 @@ function comparison(rows) {
  const fields=rows[0]?.lane==='Thesis'?[['Who it helps','audience'],['What we would test','question'],['What you would produce','deliverable'],['Main difficulty','risk']]:[['First customer','audience'],['Working first version','deliverable'],['Why someone would pay','buyer'],['Demand test','customer_test'],['Main risk','risk']];
  return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
+function businessDetails(x){
+ const b=x.business_case;
+ const grid=items=>'<div class="detail-grid">'+items.filter(([,v])=>v).map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>';
+ return '<span class="tag">'+esc(x.id)+' / Business hypothesis · '+esc(x.assessment)+'</span><h2>'+esc(x.title)+'</h2>'+grid([
+  ['What goes wrong?',x.summary],['Who has this problem?',x.audience],['A concrete example',x.example],['What would we build?',x.proposed_fix],['Why might someone pay?',x.buyer],['Working first version',x.deliverable]
+ ])+ideaFlow(x)+'<p class="callout">'+esc(x.evidence_level)+' '+esc(x.risk)+'</p><details class="evidence-details"><summary>The business: alternatives, repeat use and how to test demand</summary>'+grid([
+  ['A specific first customer',b.first_customer],['Why they would return',b.repeat_use],['Existing alternatives',b.current_alternatives],['Our proposed difference',b.proposed_difference],['How to find the first customers',b.first_customer_route],['A cheap reason to stop',b.kill_test],['Beyond the first week',b.next_90_days],['Costs and support',b.costs]
+ ])+'</details><details class="evidence-details"><summary>The first build: workflow, acceptance checks and data</summary>'+grid([
+  ['Complete first-week workflow',b.week_one],['How we check it works',b.week_one_acceptance],['Data we can actually use',b.data_access],['Model approach',x.model_plan],['Why use a model?',x.why_ml],['Where it runs',x.technical_scope]
+ ])+'</details><details class="evidence-details"><summary>Sources, dates and what is still unproven</summary>'+provenanceDetails(x)+'<p>'+esc(x.evidence)+'</p></details>'+(typeof singleJobAction==='function'?singleJobAction(x):'')+'<div class="discussion-actions"><button data-conversation="ask" data-lane="project" data-idea="'+esc(x.id)+'">Ask about this idea</button><button data-conversation="refine" data-lane="project" data-idea="'+esc(x.id)+'">Refine this direction</button></div>';
+}
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
 function showView(){
  const key=location.hash.slice(1);const v=['overview','thesis','projects','sources','setup'].includes(key)?key:'overview';
@@ -150,6 +161,7 @@ document.addEventListener('click',async e=>{
  const b=e.target.closest('[data-detail]');if(!b)return;
  const original=data.opportunities.find(x=>x.id===b.dataset.detail);if(!original)return;
  const x=presentIdea(original);
+ if(x.lane==='Project'&&x.business_case){$('detail-content').innerHTML=businessDetails(x);$('detail').showModal();return;}
  if(x.lane==='Thesis'){
    const sections=[['What goes wrong?',x.summary],['Why does this matter?',x.why_it_matters||x.reason],['A simple example',x.example],['What would we try?',x.proposed_fix],['What would the thesis test?',x.question],['What would you produce?',x.deliverable],['What is the main difficulty?',x.risk]];
    const details=[['Methods to compare',original.model_plan],['How to measure the result',original.measure],['Data and permission to use it',original.data_plan],['The first experiment',original.week_test],['Closest existing work',original.baseline],['What this study might add',original.proposed_difference]];

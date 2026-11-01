@@ -1,12 +1,86 @@
 {
   "checked_at": "2026-11-01",
-  "scope": "GitHub weekly Trending was read directly in the browser. LinkedIn public posts were read without signing in; absolute post dates were not established. Popularity and author claims are leads, not customer demand or novelty.",
+  "scope": "GitHub daily and weekly lists were fetched directly without login on 1 November, with HTTP response dates saved. Earlier search-tool snapshots had unknown dates and were not treated as current growth. LinkedIn entries below remain public author claims; original post dates are unverified. Popularity is separate from problem evidence.",
   "items": [
-    {"title":"Cloudflare security-audit-skill","url":"https://github.com/cloudflare/security-audit-skill","source":"GitHub weekly Trending","signal":"11,908 stars this week shown at observation. The repository describes multi-stage audits and independently verified findings.","possibility":"Investigate whether a small team can distinguish actionable findings from duplicates or unsupported reports.","limit":"Another security scanner would duplicate existing work. A remaining user problem and safe evaluation data still need verification."},
-    {"title":"claude-mem","url":"https://github.com/thedotmack/claude-mem","source":"GitHub weekly Trending","signal":"4,575 stars this week shown at observation. The project stores and retrieves context across agent sessions.","possibility":"Study when remembered instructions become stale and should stop influencing an agent.","limit":"Memory retrieval already exists. No unresolved defect, dataset or research gap is established by this snapshot."},
-    {"title":"Impeccable","url":"https://github.com/pbakaus/impeccable","source":"GitHub weekly Trending","signal":"12,031 stars this week shown at observation. The listing focuses on improving and reviewing agent-generated interfaces.","possibility":"Explore task-based usability evaluation of AI-built interfaces instead of judging screenshots alone.","limit":"Human task performance needs real evaluation. Stars do not establish a paying customer or prove that design tools fail."},
-    {"title":"Superpowers","url":"https://github.com/obra/superpowers","source":"GitHub weekly Trending","signal":"5,636 stars this week shown at observation. The listing describes a skills framework and development methodology.","possibility":"Compare which workflow steps prevent real regressions and which only add review effort.","limit":"A framework clone is not proposed. Any thesis needs a distinct measurable experiment and closest-work review."},
-    {"title":"Manufacturing AI without a large IT team","url":"https://www.linkedin.com/posts/paul-steel-714bb52_nationalforum2026-australianindustrygroup-activity-7512009308625117184-_P1G","source":"LinkedIn · public first-person post","signal":"An operator describes AI adoption with a small IT budget and the need for accountable outputs, around an October 12 industry event.","possibility":"Find a specific factory-office task where a small model and review process beat a broad agent platform.","limit":"Self-reported results, no independent validation. Event date is not the post publication date; exact post date remains unverified."},
-    {"title":"Specialised adapters in one deployable model","url":"https://www.linkedin.com/posts/aakritiaggarwal13_opensourceindia2026-activity-7508023380642590720-DmLN","source":"LinkedIn · public researcher post","signal":"An IBM researcher describes modular adapters and activated LoRA for a session at an October 7–8 event.","possibility":"Explore interference and routing between task-specific adaptations, with small feasible models rather than pretraining from scratch.","limit":"A method lead, not a validated thesis or market need. Exact post date and suitable local model costs remain unverified."}
+    {
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub daily Trending · direct public response",
+      "signal": "1,527 stars today displayed. Observed 2026-11-01 13:09 UTC. Retains and retrieves context for later coding-agent sessions.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "lightpanda-io/browser",
+      "url": "https://github.com/lightpanda-io/browser",
+      "source": "GitHub daily Trending · direct public response",
+      "signal": "827 stars today displayed. Observed 2026-11-01 13:09 UTC. A browser engine intended for automated use.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "shiyu-coder/Kronos",
+      "url": "https://github.com/shiyu-coder/Kronos",
+      "source": "GitHub daily Trending · direct public response",
+      "signal": "611 stars today displayed. Observed 2026-11-01 13:09 UTC. A pretrained-model project focused on financial-market sequences.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub daily Trending · direct public response",
+      "signal": "3,100 stars today displayed. Observed 2026-11-01 13:09 UTC. No description was supplied in the observed listing.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "source": "GitHub weekly Trending · direct public response",
+      "signal": "12,062 stars this week displayed. Observed 2026-11-01 13:09 UTC. Design guidance packaged for coding agents.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "source": "GitHub weekly Trending · direct public response",
+      "signal": "12,031 stars this week displayed. Observed 2026-11-01 13:09 UTC. Tools and vocabulary for shaping and reviewing generated interfaces.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "AgriciDaniel/claude-seo",
+      "url": "https://github.com/AgriciDaniel/claude-seo",
+      "source": "GitHub weekly Trending · direct public response",
+      "signal": "4,814 stars this week displayed. Observed 2026-11-01 13:09 UTC. A collection of search-optimisation workflows for coding agents.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub weekly Trending · direct public response",
+      "signal": "4,575 stars this week displayed. Observed 2026-11-01 13:09 UTC. Retains and retrieves context for later coding-agent sessions.",
+      "possibility": "A current capability lead to inspect against real user problems; not a new build recommendation.",
+      "limit": "Listing read only. Repository launch date and unresolved need are not established. Stars are not willingness to pay."
+    },
+    {
+      "title": "Manufacturing AI without a large IT team",
+      "url": "https://www.linkedin.com/posts/paul-steel-714bb52_nationalforum2026-australianindustrygroup-activity-7512009308625117184-_P1G",
+      "source": "LinkedIn · public first-person post",
+      "signal": "An operator describes AI adoption with a small IT budget and the need for accountable outputs, around an October 12 industry event.",
+      "possibility": "Find a specific factory-office task where a small model and review process beat a broad agent platform.",
+      "limit": "Self-reported results, no independent validation. Event date is not the post publication date; exact post date remains unverified."
+    },
+    {
+      "title": "Specialised adapters in one deployable model",
+      "url": "https://www.linkedin.com/posts/aakritiaggarwal13_opensourceindia2026-activity-7508023380642590720-DmLN",
+      "source": "LinkedIn · public researcher post",
+      "signal": "An IBM researcher describes modular adapters and activated LoRA for a session at an October 7–8 event.",
+      "possibility": "Explore interference and routing between task-specific adaptations, with small feasible models rather than pretraining from scratch.",
+      "limit": "A method lead, not a validated thesis or market need. Exact post date and suitable local model costs remain unverified."
+    }
   ]
 }

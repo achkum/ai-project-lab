@@ -88,17 +88,40 @@ def publication_lock(profile,job):
 
 
 def publish_review_bundle(profile,job,workspace,response):
+    product=job['lane']=='project' and job['scope'].get('delivery_mode')=='working_product'
+    if product:
+        from .product_delivery import check_product,source_fingerprint
+        check_product(workspace,job['scope']['delivery_target'],lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Running the implemented workflow checks'))
+        checked_source=source_fingerprint(workspace)
+        review=workspace/('RELEASE_REVIEW_'+str(time.time_ns())+'.json')
+        execute('analysis',
+            'Independently review this implemented owner-selected prototype and VALIDATION.txt against the supplied scope. '
+            'Read source and meaningful tests; identify missing workflow steps, fake outputs, unsafe data handling, licence issues and unsupported claims. '
+            'Check actual dependencies and model/data permissions. Use primary documentation if verification is needed. '
+            'A local service must use HOST=127.0.0.1 and PORT, persist under LAB_DATA_DIR, expose GET /health with {ok:true,instance:LAB_INSTANCE_ID}, '
+            'reject cross-origin mutations, have appropriate role separation, and serve a usable UI. Do not use a paid customer or human draft approval as a release gate. '
+            'Do not build, launch or deploy. Write only '+review.name+' with {"ready":boolean,"blocking":[],"limitations":[]}. '
+            'Ready means a working, honestly limited prototype, not production or market validation.\n'+json.dumps(job['scope'],ensure_ascii=False),
+            workspace,workspace/(review.stem+'-result.txt'),
+            lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Checking the implemented product and data handling'),timeout=1200)
+        verdict=json.loads(review.read_text(encoding='utf-8-sig'))
+        if source_fingerprint(workspace)!=checked_source:raise RuntimeError('Source changed after checks; repeat validation before delivery')
+        if verdict.get('ready') is not True or verdict.get('blocking'):
+            raise RuntimeError('Automatic product review found issues; continue repairs from the private release-review file')
     with publication_lock(profile,job):
         demo=None
-        if job['lane']=='project' and job['scope'].get('delivery_mode')=='tested_web_app':
-            demo=publish_web_app(profile,job,workspace)
+        if job['lane']=='project' and (job['scope'].get('delivery_mode')=='tested_web_app' or product and job['scope']['delivery_target']=='static'):
+            demo=publish_web_app(profile,job,workspace,checks_verified=product)
         result=_publish_review_bundle(profile,job,workspace,response)
-        if demo:result.update(demo_url=demo,summary='Working browser prototype deployed after automated checks.',validation='See VALIDATION.txt for the independently executed Node test results.')
+        if product and job['scope']['delivery_target']=='local_service':
+            from .product_delivery import start_local
+            demo=start_local(profile,job,workspace,lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Starting the tested local prototype'))
+        if demo:result.update(demo_url=demo,summary='Working local prototype; open on this laptop.' if demo.startswith('http://127.0.0.1:') else 'Working browser prototype deployed after automated checks.',validation='See VALIDATION.txt for independently executed checks; working products also have an automatic release review.')
         elif job['lane']=='thesis':result['summary']='Investigation complete; read the findings and limitations. No further approval is required to view the result.'
         return result
 
 
-def publish_web_app(profile,job,workspace):
+def publish_web_app(profile,job,workspace,checks_verified=False):
     """Publish a selected project's tested static app, without an owner approval stop."""
     import re
     slug=job['scope']['id'].lower()
@@ -106,12 +129,16 @@ def publish_web_app(profile,job,workspace):
     site=workspace/'site'
     tests=list((workspace/'tests').glob('*.test.cjs'))
     if not (site/'index.html').is_file() or not tests:raise RuntimeError('A runnable site/index.html and meaningful tests/*.test.cjs are required')
-    run=subprocess.run(['node','--test',*[str(p.resolve()) for p in tests]],cwd=workspace,capture_output=True,text=True,encoding='utf-8',timeout=120)
-    (workspace/'VALIDATION.txt').write_text(run.stdout+'\n'+run.stderr,encoding='utf-8')
-    if run.returncode:raise RuntimeError('Automated app checks failed; implementation remains available for repair')
+    if not checks_verified:
+        run=subprocess.run(['node','--test',*[str(p.resolve()) for p in tests]],cwd=workspace,capture_output=True,text=True,encoding='utf-8',timeout=120)
+        (workspace/'VALIDATION.txt').write_text(run.stdout+'\n'+run.stderr,encoding='utf-8')
+        if run.returncode:raise RuntimeError('Automated app checks failed; implementation remains available for repair')
     public=Path(profile['public_root']);dest=public/'docs/projects'/slug
     files=[f for f in site.rglob('*') if f.is_file()]
-    if any(f.is_symlink() or f.suffix.lower() not in {'.html','.css','.js','.json','.svg','.csv','.txt'} or f.stat().st_size>1_000_000 for f in files):raise RuntimeError('Site contains unsupported files')
+    extended=job['scope'].get('delivery_mode')=='working_product'
+    suffixes={'.html','.css','.js','.json','.svg','.csv','.txt'}
+    if extended:suffixes|={'.mjs','.png','.jpg','.jpeg','.webp','.woff','.woff2','.ttf','.wav','.mp3','.ogg','.mid','.midi','.musicxml','.wasm'}
+    if sum(f.stat().st_size for f in files)>80_000_000 or any(f.is_symlink() or not f.resolve().is_relative_to(site.resolve()) or f.suffix.lower() not in suffixes or f.stat().st_size>(20_000_000 if extended else 1_000_000) for f in files):raise RuntimeError('Site contains unsupported or oversized files')
     for f in files:
         target=dest/f.relative_to(site);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target)
     version_static_assets(dest)
@@ -178,7 +205,7 @@ def _publish_review_bundle(profile,job,workspace,response):
     root=Path(profile['private_root']);dest=root/'research/jobs'/job['id']
     dest.mkdir(parents=True,exist_ok=True)
     copied=[]
-    allowed={'.py','.html','.css','.js','.cjs','.json','.txt','.md','.csv','.toml','.yaml','.yml'}
+    allowed={'.py','.html','.css','.js','.cjs','.mjs','.ts','.tsx','.jsx','.vue','.svelte','.json','.txt','.md','.csv','.toml','.yaml','.yml','.svg','.png','.jpg','.jpeg','.webp','.musicxml','.mid','.midi','.wav'}
     for f in workspace.rglob('*'):
         if not f.is_file() or f.is_symlink() or f.suffix.lower() not in allowed or f.stat().st_size>1_000_000:continue
         rel=f.relative_to(workspace)
@@ -222,7 +249,7 @@ def run_one(profile):
         source=Path(profile['private_root'])/'research/jobs'/starter
         if source.is_dir():shutil.copytree(source,workspace/'starter',dirs_exist_ok=True)
     def checkpoint():
-        remote('heartbeat',jid=job['id'],token=job['token'],message='Investigating' if job['lane']=='thesis' else 'Building and testing browser app')
+        remote('heartbeat',jid=job['id'],token=job['token'],message='Investigating' if job['lane']=='thesis' else 'Building and testing the selected product')
         remote('seen',detail='Working on '+job['scope']['id']+'; other jobs remain queued')
     prompt=(
         'Produce a research feasibility brief, not a completed thesis. Write BRIEF.md and evidence.json. '
@@ -240,6 +267,21 @@ def run_one(profile):
         'limitations and a draft sharing post. Run appropriate checks and report actual results. Do not substitute fake model outputs '
         'for a working model: label simulation clearly or report a dependency/data blocker. Engineering checks are not customer validation. Preserve incomplete work and report remaining acceptance criteria honestly.')
     try:
+        if job['scope'].get('delivery_mode')=='working_product':
+            prompt=('Build the selected business prototype through its complete first customer workflow. This is an operating product, not a report or a tutorial. '
+                'Use existing files if this is a repair; preserve data and do not shrink the acceptance criteria. Use suitable dependencies and a backend when the scope needs one. '
+                'Write README.md, PRODUCT.md explaining the problem, exact working flow, acceptance, limits and customer test, and product.json. '
+                'product.json must contain delivery matching delivery_target. For local_service also include runtime python or node, entry as a relative .py/.js/.cjs/.mjs file, and memory_mb 128..2048. '
+                'The entry is launched without CLI arguments, must bind HOST and PORT from environment (HOST=127.0.0.1), serve an actual HTML UI at /, '
+                'and GET /health returning {"ok":true,"instance":the LAB_INSTANCE_ID environment value}. Persist all operator data under LAB_DATA_DIR, never in source files. '
+                'Use one managed server process, no auto-reloader or detached background processes. Reject cross-origin mutations and unsafe paths. Respect operator/staff separation when required. '
+                'For static delivery put ready-to-serve assets in site/index.html and site/, and include meaningful tests/*.test.cjs using node:test. IndexedDB and suitable bundled dependencies are allowed. '
+                'Write meaningful tests/test*.py using unittest for Python and/or tests/*.test.cjs using node:test for JS. Test actual shipped code, persistence, malformed input, duplicate actions and the stated complete journey. '
+                'Use a workspace .venv for Python dependencies if needed. Keep dependencies pinned and document licences; no credentials, paid APIs or production-inference subscription assumptions. '
+                'Record model versions, real inference results and data rights where used. Do not fake models or claim customer validation from synthetic inputs. '
+                'Keep samples small and clearly labelled. Do not record people or require outreach. Generate synthetic engineering fixtures where real recordings/photos are unavailable and explicitly preserve that customer-validation limitation. '
+                'Run checks and fix actual failures. The coordinator repeats checks, obtains an independent strongest-model review, then publishes the static app or starts the local service hidden on this laptop. '
+                'No owner draft approval is required. Do not push/deploy yourself or leave background processes running. Completion means the selected supported user-data flow works. ')
         if job['scope'].get('delivery_mode')=='tested_web_app':
             prompt=('Build and finish a usable browser application, not a brief or command-line-only draft. '
                 'This is the existing static-web delivery path for the selected scope; it does not define the limits of future business discovery. '
@@ -252,11 +294,11 @@ def run_one(profile):
                 'Run the checks and fix failures. README must describe how to use the app, data provenance and honest limitations. '
                 'The coordinator runs your Node tests again, deploys site/ and verifies Pages. No human approval step is needed. '
                 'Do not push or deploy yourself. Meet the selected acceptance criteria without shrinking them to fit this invocation. If incomplete, report the exact remaining work; never fake model outputs or claim customer validation from a synthetic sample.')
-        response=execute('analysis' if job['lane']=='thesis' else 'implementation',prompt+'\n\n'+json.dumps(job['scope'],ensure_ascii=False),workspace,workspace.parent/(job['id']+'-result.txt'),checkpoint,timeout=2400 if job['scope'].get('delivery_mode')=='tested_web_app' else 900)
+        response=execute('analysis' if job['lane']=='thesis' else 'implementation',prompt+'\n\n'+json.dumps(job['scope'],ensure_ascii=False),workspace,workspace.parent/(job['id']+'-result.txt'),checkpoint,timeout=2400 if job['lane']=='project' else 900)
         checkpoint()
         result=publish_review_bundle(profile,job,workspace,response)
         checkpoint()
-        remote('finish',jid=job['id'],token=job['token'],state='completed',message='App tested and deployed' if result.get('demo_url') else 'Investigation complete; findings available',result=result)
+        remote('finish',jid=job['id'],token=job['token'],state='completed',message=('Local app tested and running on this laptop' if result.get('demo_url','').startswith('http://127.0.0.1:') else 'App tested and deployed') if result.get('demo_url') else 'Investigation complete; findings available',result=result)
     except Exception as e:
         # A pause/cancel revokes the lease; never overwrite the owner's newer decision.
         try:remote('finish',jid=job['id'],token=job['token'],state='needs_attention',message=str(e)[:350])
