@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
   "hold": true,
-  "review_state": "Owner-initiated starts enabled for the current options. Automatic starts remain paused.",
+  "review_state": "Manual selection enabled for reviewed possibilities. Automatic recommendations and starts remain paused.",
   "findings": [
     "Collector fetches public metadata, not full papers or discussion resolutions. This is suitable for leads, not recommendations.",
     "Old digest sorted by first_seen and sampled six rows/source. It did not enforce publication-age windows.",
@@ -280,6 +280,17 @@
     "RT1",
     "RT2",
     "RP1",
-    "RP2"
+    "RP2",
+    "NP1",
+    "NP2",
+    "NP3",
+    "NP4",
+    "NP5",
+    "NT1",
+    "NT2",
+    "NT3",
+    "NT4",
+    "NT5",
+    "NT6"
   ]
 }
