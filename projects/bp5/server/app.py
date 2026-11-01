@@ -105,6 +105,34 @@ def scene(sid):
         if s.get('id')==sid:return s
     raise ValueError('Unknown scenario')
 
+def normalize_selection(curriculum, framework, course_input, study_path):
+    """Return a source-backed selection; unknowns remain unknown, never inferred by date."""
+    if study_path not in ('','1','2','3'): raise ValueError('Invalid study path')
+    entered=course_input.strip().upper()
+    selection={'framework_id':framework,'course_input':course_input,'study_path_input':study_path,
+               'course':'','study_path':study_path,'status':'unverified' if entered and not framework else 'incomplete'}
+    if not framework: return selection
+    frame=next((x for x in curriculum.get('frameworks',[]) if x.get('id')==framework),None)
+    if not frame: raise ValueError('Unknown SFI framework')
+    if not entered: return selection
+    courses=frame.get('courses',[]); alias_path=''; is_old_code=False
+    item=next((x for x in courses if str(x.get('id','')).upper()==entered),None)
+    if not item and framework=='SKOLFS-2017-91-consolidated' and re.fullmatch(r'[123][ABCD]',entered):
+        alias_path=entered[0]; item=next((x for x in courses if str(x.get('id','')).upper()==entered[1:]),None)
+    if not item:
+        item=next((x for x in courses if entered in [str(code).upper() for code in x.get('course_codes',[])]),None)
+        is_old_code=bool(item) and framework=='SKOLFS-2017-91-consolidated'
+    if not item: raise ValueError('Course is not valid for this framework')
+    allowed=[str(x) for x in item.get('study_paths',[])]
+    if is_old_code and study_path:
+        raise ValueError('For this course code, choose the course letter to specify a study path')
+    if alias_path and study_path and alias_path!=study_path: raise ValueError('Course and study path do not match')
+    resolved=alias_path or study_path
+    if not resolved and len(allowed)==1: resolved=allowed[0]
+    if resolved and resolved not in allowed: raise ValueError('Course and study path do not match')
+    selection.update(course=item['id'],study_path=resolved,status='validated')
+    return selection
+
 def character(s):
     sc=s.get('snapshot',{}).get('scenario') or scene(s['scenario_id'])
     system=('Du spelar en person i ett svenskt rollspel. Svara med en eller två korta, naturliga svenska meningar. Hitta inte på namn på eleven. Rätta inte och ge inga råd om språket. '
@@ -184,18 +212,12 @@ class Handler(BaseHTTPRequestHandler):
         if method=='POST' and path=='/api/sessions':
             o=self.obj(); sc=scene(bounded(o.get('scenario_id',''),100)); now=time.time()
             co=content(); scenario_data=json.loads((BASE/'content'/'scenarios.json').read_text(encoding='utf-8')); curr=co['curriculum']
-            framework=bounded(o.get('framework_id',''),100); course=bounded(o.get('course',''),80); study_path=bounded(str(o.get('study_path','')),20)
-            if study_path not in ('','1','2','3'): raise ValueError('Invalid study path')
-            def matches_criterion(x):
-                if x.get('framework_id')!=framework or not course: return False
-                entered=course.lower(); official=str(x.get('course','')).lower(); codes=[str(v).lower() for v in x.get('course_codes',[])]
-                exact=entered==official or entered in codes
-                old_path_course=framework=='SKOLFS-2017-91-consolidated' and len(entered)==2 and entered[0] in '123' and entered[1:]==official and int(entered[0]) in x.get('study_paths',[]) and (not study_path or study_path==entered[0])
-                if study_path and study_path.isdigit() and int(study_path) not in x.get('study_paths',[]): return False
-                return exact or old_path_course
-            criteria=[x for x in curr.get('criteria',[]) if matches_criterion(x)] if framework and course else []
+            framework=bounded(o.get('framework_id',''),100); course_input=bounded(o.get('course',''),80); study_path=bounded(str(o.get('study_path','')),20)
+            selection=normalize_selection(curr,framework,course_input,study_path)
+            course=selection['course']; study_path=selection['study_path']
+            criteria=[x for x in curr.get('criteria',[]) if x.get('framework_id')==framework and str(x.get('course','')).upper()==course.upper() and (not study_path or int(study_path) in x.get('study_paths',[]))] if framework and course else []
             ids={x['id'] for x in criteria}; links=[x for x in sc.get('criterion_links',[]) if x.get('criterion_id') in ids and x.get('framework_id')==framework]
-            s={'id':uuid.uuid4().hex,'scenario_id':sc['id'],'framework_id':framework,'course':course,'study_path':study_path,'support':o.get('support',[]),'context':bounded(o.get('context',''),500),'feeling':bounded(o.get('feeling',''),100),'created_at':now,'turns':[{'role':'assistant','text':sc.get('opening_sv',''),'created_at':now}],'evidence':[],'phrases':[],'coaching':[],'snapshot':{'scenario_content_version':scenario_data.get('content_version'),'curriculum_content_version':curr.get('content_version'),'scenario':sc,'criteria':criteria,'criterion_links':links}}
+            s={'id':uuid.uuid4().hex,'scenario_id':sc['id'],'framework_id':framework,'course':course,'study_path':study_path,'support':o.get('support',[]),'context':bounded(o.get('context',''),500),'feeling':bounded(o.get('feeling',''),100),'created_at':now,'turns':[{'role':'assistant','text':sc.get('opening_sv',''),'created_at':now}],'evidence':[],'phrases':[],'coaching':[],'snapshot':{'scenario_content_version':scenario_data.get('content_version'),'curriculum_content_version':curr.get('content_version'),'selection':selection,'scenario':sc,'criteria':criteria,'criterion_links':links}}
             if not isinstance(s['support'],list) or len(s['support'])>20: raise ValueError('Invalid support')
             save(s); return self.send(201,{'session':s})
         if method=='POST' and path=='/api/transcribe':

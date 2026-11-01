@@ -1,0 +1,153 @@
+{
+  "ready": false,
+  "reviewed_at": "2026-11-01",
+  "readiness_meaning": "ready refers to delivering the accepted voice-learning product, not whether the owner may inspect an experimental preview.",
+  "preview": {
+    "supportable": true,
+    "audience": "Owner engineering inspection only",
+    "conditions": [
+      "Retain the visible warnings about incorrect Swedish and fallible transcription.",
+      "Describe this as a private experimental preview, not a finished tutor or validated assessment.",
+      "Do not claim physical-phone voice compatibility, human-speaker accuracy or complete advanced-scene acceptance.",
+      "Keep the single-owner authenticated access boundary and local-data limitations explicit."
+    ],
+    "not_authorized_by_this_review": [
+      "Public learner release",
+      "Production or tutoring endorsement",
+      "Claim that BP5 is complete",
+      "Replacing the accepted advanced conversation scope with a guided-only product"
+    ]
+  },
+  "hashes": {
+    "server/app.py": "8cf2500413a3c72aeffcd1eea3f0681f4b06854c6882ffc8161888119ed799ba",
+    "web/app.js": "5513c39d2348089a2f4803f186e55a77a8e445a4c38ef9bc325d346ed935f747",
+    "server/test_api.py": "fb5b85ddf80c3624db889ce41bbf4a511f0bc6ccc32fb7a32f85b43301e622bc",
+    "server/RUNTIME-MANIFEST.json": "a62f6f70e5daaa8a3245b45c73b2ad3233b94995c51ad8c387cbfe2f9b7df37c",
+    "server/README.md": "b26783755507281781fb32ba09508d90787e3f193ea2343530735b0d5bd292e9",
+    "README.md": "79c9c786d12acb981e2507ffe81c71769156fb622d8985f28b2fc0970e9f99f1",
+    "PRODUCT.md": "3153df90f635d558dafc6fe595f9654b7b0465d512f1ae954b42801caeb0bb46",
+    "content/curriculum.json": "f81bc3b20df1c8e44a9707929cf7a7482866c3b1e4c0f2396d8ec0f2bf5e95bc",
+    "content/scenarios.json": "e2917b906df644aa140eaa15cf9e36431f467c4b49d625038266b6e6e3225365",
+    "web/tests/frontend.test.cjs": "8e09430c901121ad8050a837698961fce80f1938c1981abcd9da369c0940b7db"
+  },
+  "blocking": [
+    {
+      "id": "B1",
+      "status": "unresolved",
+      "priority": "high",
+      "title": "Swedish dialogue quality and full real-voice acceptance remain insufficient",
+      "paths": [
+        "server/README.md",
+        "server/app.py:8",
+        "PRODUCT.md"
+      ],
+      "evidence": "The selected model is Qwen3-4B-Instruct-2507 Q4_K_M. README records 8.55–13.06-second warm replies, two unnatural replies in a three-scene sample, an earlier nonsensical café option and an empty response. Parent's browser observation reports a correct first café reply followed by: En kaffe kostar 60 kronor när du tar med. Vill du ha det med en smak? That is not reliable natural Swedish tutoring. No full human-speaker or physical-phone recording acceptance is available. This reviewer did not run additional inference.",
+      "consequence": "A working inference connection and a better model do not establish a useful sustained Swedish learning dialogue. Complete real-voice exchanges across all three scenes, including the several-minute advanced discussion, remain unproven.",
+      "required_for_full_product": "Improve or replace the dialogue approach within authorized scope and verify contextual, natural Swedish over complete scenes, actual speaking/listening round trips, measured latency/resources and mobile recording. Preserve the distinction between synthetic integration tests and human-speaker/device validation."
+    }
+  ],
+  "initial_issue_verification": [
+    {
+      "id": "B2",
+      "result": "Core issue resolved on targeted rereview: canonical selection normalizes current path/course aliases and new official codes; invalid framework/course/path combinations reject. Input spelling and unknown paths are preserved in the selection snapshot. UI consumes frozen criteria without a conflicting course comparison. Date never selects the framework."
+    },
+    {
+      "id": "B3",
+      "result": "Core issue resolved on targeted rereview: text-revealed listening and edited/unknown-edit voice stay in activity history but their listening/oral domains are explicitly unassessed. Clean unedited voice with hints is supported partial practice. No claim of observed success or official grade is added. New-session start now clears original transcript, edit state and pending audio; its cross-scene regression passes. Playback-start limitation remains listed below."
+    },
+    {
+      "id": "B4",
+      "result": "Substantially fixed for preview: still-visible phrase/English aids are recorded on each spoken turn, replay/slow flags are tracked, writing records starter availability. Counters and all prior aid exposure are not a calibrated independence measure."
+    },
+    {
+      "id": "B5",
+      "result": "Core data-loss/deletion race fixed: MUTATION_LOCK covers entire session mutation including inference and delete. Turn/evidence/coaching request IDs support retries. Phrase saves and session creation still lack idempotency; known limited duplicate risk remains."
+    },
+    {
+      "id": "B6",
+      "result": "Core fix present: busy navigation guard, AbortController and late-response checks, explicit Stop waiting and Stop audio, capture/playback cleanup on navigation/sign-out. Backend completion after cancellation is accurately disclosed. Pending microphone-permission navigation is not covered by the provided tests."
+    },
+    {
+      "id": "B7",
+      "result": "UI export, single-session deletion and delete-all with confirmation are present. Serialized mutations prevent the earlier late-save resurrection. Abandoned temporary audio after abnormal process exit remains documented rather than deleted by history deletion."
+    },
+    {
+      "id": "B8",
+      "result": "Selected runtime now has pinned revisions, SHA-256 values and explicit component licences/caveats. README reflects selected Qwen3-4B and measured memory/latency. This review inspected the manifest, not a fresh rehash of multi-gigabyte binaries."
+    }
+  ],
+  "limitations": [
+    {
+      "id": "L1",
+      "title": "Pedagogical validation",
+      "detail": "Source-linked partial mappings remain authored interpretations awaiting SFI educator review. Difficulty calibration, learner assessment reliability and retention benefit are unvalidated. These are not release gates for a clearly limited owner prototype, but no readiness or effectiveness claims are supported."
+    },
+    {
+      "id": "L2",
+      "title": "Prompt and feedback limitations",
+      "detail": "Learner context is still concatenated into system instructions and hand-built ChatML does not isolate role delimiters. The model has no tools or cross-session prompt data, so this is primarily a persona/feedback reliability issue here. The expanded lexical coaching filter is not a semantic guarantee."
+    },
+    {
+      "id": "L3",
+      "title": "Recall remains cued",
+      "detail": "Saved transfer prompts survive restart, but the source phrase remains visible and its help is labelled. This is supported reuse, not an independent delayed-memory measurement. Feedback now persists and sessions resume; reading/writing answers still receive no task-specific evaluation."
+    },
+    {
+      "id": "L4",
+      "title": "Privacy and deployment boundary",
+      "detail": "Review covers app source, not independent penetration testing of the parent-managed HTTPS gateway. It is a single-owner service with shared instance data. History deletion does not securely erase SQLite media or automatically remove abandoned temporary files after abnormal termination. Runtime binaries are outside published source; voice model card does not explicitly specify a trained-model licence, and ffmpeg is a GPL-enabled build."
+    },
+    {
+      "id": "L5",
+      "title": "Phone and microphone lifecycle",
+      "detail": "Responsive styling, safe areas and mobile controls are present. Physical-phone recording and human-speaker recognition remain untested. A pending getUserMedia permission request is not bound to a page/session operation, so navigation before permission resolves deserves a targeted lifecycle test before mobile-readiness claims."
+    },
+    {
+      "id": "L6",
+      "title": "Test scope",
+      "detail": "Updated frontend regression suite and content validator pass. Parent reports eight controlled backend tests passed. Reviewer independently executed the actual normalize_selection function in isolation against real curriculum data, testing valid aliases, official codes, invalid pairs and unknown profiles. No new server or model benchmark was started. Mocked tests establish mechanics, not natural Swedish quality."
+    },
+    {
+      "id": "L7",
+      "title": "Architecture question does not revise scope",
+      "detail": "The user's question about needing an LLM is not authorization to replace current requirements. Curated adaptive scenes plus speech/intent models, with an optional LLM for genuinely open advanced conversation, is a prospective design direction. This review evaluates the current implementation and does not claim a replacement has been built or accepted."
+    },
+    {
+      "id": "L8",
+      "title": "Remaining practice-provenance limits",
+      "detail": "Listening playback is recorded when audio starts, not when it completes. Treat these as practice records, not reviewed independent skill observations. Unknown current-course study paths remain explicit and must not be interpreted as school-confirmed placement."
+    }
+  ],
+  "checks": [
+    {
+      "name": "Base source identity",
+      "result": "Base HEAD c32540bbe9b9f9d3b6b238d584eab1a6fd1fe419; residual frontend/backend changes reviewed as a diff; hashes identify final reviewed bytes."
+    },
+    {
+      "name": "Updated frontend regression tests",
+      "result": "PASS on reviewer rerun: aliases, edited/revealed exclusions, clean hinted voice, cancellation and frozen snapshots."
+    },
+    {
+      "name": "Content integrity",
+      "result": "PASS unchanged: 56 criterion references and three complete authored scenes."
+    },
+    {
+      "name": "Actual normalization function, isolated",
+      "result": "PASS on real curriculum: old 2B->B/path2, new VSFI2B0->2B/path2, current code preserves unknown path, invalid pairs reject, course without framework remains unverified."
+    },
+    {
+      "name": "Parent-controlled API tests",
+      "result": "Parent reports 8 tests pass, including profile validation; reviewer inspected changed assertions but did not start another server."
+    },
+    {
+      "name": "Parent browser QA",
+      "result": "Parent reports two typed cafe turns, actual Piper playback, connected reading/writing save, saved phrase and history. Course C correctly has no cafe B criterion links. This is not human microphone or physical-phone acceptance."
+    },
+    {
+      "name": "Targeted new-session provenance reset",
+      "result": "PASS: start clears originalTranscript, voiceEdited and pendingAudio; cross-scene test proves the first newly typed message uses text provenance without inherited transcript edits. Updated frontend regression rerun passes."
+    }
+  ],
+  "reviewed_base_commit": "c32540bbe9b9f9d3b6b238d584eab1a6fd1fe419",
+  "source_state": "Base commit plus frozen residual-fix diff; exact reviewed bytes are identified by hashes."
+}

@@ -19,5 +19,5 @@
     "POST api/speech": "{text,slow} -> audio/wav",
     "GET api/export": "{version,sessions}"
   },
-  "session": "id, scenario_id, framework_id, course, study_path, support, context, feeling, created_at, turns, evidence, phrases, coaching and snapshot. Snapshot holds scenario/curriculum content versions, scenario, selected criteria including sources, criterion links. Records retain input mode/help used and practise state, not official assessment. Audio temporary files are deleted on completion or handled error; abrupt termination can leave them."
+  "session": "id, scenario_id, framework_id, course, study_path, support, context, feeling, created_at, turns, evidence, phrases, coaching and snapshot. Snapshot holds scenario/curriculum content versions, scenario, selected criteria including sources, criterion links. Records retain input mode/help used and practise state, not official assessment. Audio temporary files are deleted on completion or handled error; abrupt termination can leave them. snapshot.selection freezes canonical framework/course/study_path, raw course and study-path inputs, and validated/incomplete/unverified status. Known invalid combinations return 400; a course without a framework stays unverified and has no criterion links."
 }

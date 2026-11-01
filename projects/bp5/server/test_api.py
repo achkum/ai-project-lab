@@ -21,9 +21,9 @@ class BoundaryTest(unittest.TestCase):
   except urllib.error.HTTPError as e:
    with e: return e.code,json.load(e)
  def test_session_roundtrip_and_delete(self):
-  status,r=self.req('/api/sessions','POST',{'scenario_id':'cafe','framework_id':'old','course':'2B','support':['hint']}); self.assertEqual(status,201); sid=r['session']['id']
+  status,r=self.req('/api/sessions','POST',{'scenario_id':'cafe','framework_id':'SKOLFS-2017-91-consolidated','course':'2B','support':['hint']}); self.assertEqual(status,201); sid=r['session']['id']
   status,r=self.req('/api/sessions/'+sid+'/turn','POST',{'text':'En kaffe tack','input_mode':'voice','help_used':['hint']}); self.assertEqual(status,200); self.assertEqual(r['session']['turns'][1]['input_mode'],'voice'); self.assertEqual(r['session']['turns'][1]['help_used'],['hint'])
-  status,r=self.req('/api/sessions/'+sid+'/evidence','POST',{'activity':'writing','response':'Tack','help_used':[]});self.assertEqual(status,200);self.assertEqual(r['session']['framework_id'],'old');self.assertEqual(r['session']['evidence'][0]['response'],'Tack')
+  status,r=self.req('/api/sessions/'+sid+'/evidence','POST',{'activity':'writing','response':'Tack','help_used':[]});self.assertEqual(status,200);self.assertEqual(r['session']['framework_id'],'SKOLFS-2017-91-consolidated');self.assertEqual(r['session']['course'],'B');self.assertEqual(r['session']['study_path'],'2');self.assertEqual(r['session']['evidence'][0]['response'],'Tack')
   self.assertEqual(self.req('/api/export')[1]['sessions'][0]['id'],sid);self.assertEqual(self.req('/api/sessions/'+sid,'DELETE')[0],200);self.assertEqual(self.req('/api/sessions/'+sid)[0],400)
  def test_idempotent_turn_and_evidence(self):
   sid=self.req('/api/sessions','POST',{'scenario_id':'cafe'})[1]['session']['id']
@@ -43,6 +43,13 @@ class BoundaryTest(unittest.TestCase):
   for unsafe in ['Your pronunciation grade is A', 'Your Swedish is well-pronounced', 'You sound fluent']:
    with patch.object(app,'generate',return_value=unsafe):
     with self.assertRaises(RuntimeError): app.coach({'turns':[{'role':'user','text':'Hej'}]})
+ def test_course_selection_validation_and_snapshots(self):
+  old='SKOLFS-2017-91-consolidated'; new='SKOLFS-2026-67'
+  for profile in [{'framework_id':'wrong','course':'B'},{'framework_id':old,'course':'3B'},{'framework_id':old,'course':'2B','study_path':'1'},{'framework_id':new,'course':'2B','study_path':'1'},{'framework_id':new,'course':'A'},{'framework_id':old,'course':'SFIKUB92','study_path':'2'}]:
+   before=len(self.req('/api/sessions')[1]['sessions']); status,_=self.req('/api/sessions','POST',{'scenario_id':'cafe',**profile}); self.assertEqual(status,400,profile);self.assertEqual(len(self.req('/api/sessions')[1]['sessions']),before)
+  for profile,expected in [({'framework_id':old,'course':'2B'},('B','2')),({'framework_id':old,'course':'SFIKUB92'},('B','')),({'framework_id':new,'course':'VSFI2B0'},('2B','2')),({'framework_id':old,'course':'A'},('A','1'))]:
+   status,r=self.req('/api/sessions','POST',{'scenario_id':'cafe',**profile});self.assertEqual(status,201);s=r['session'];self.assertEqual((s['course'],s['study_path']),expected);self.assertEqual(s['snapshot']['selection']['course_input'],profile['course']);self.assertTrue(s['snapshot']['criteria']);self.assertTrue(all(c['course']==expected[0] for c in s['snapshot']['criteria']))
+  status,r=self.req('/api/sessions','POST',{'scenario_id':'cafe','course':'2B'});self.assertEqual(status,201);self.assertEqual(r['session']['course'],'');self.assertEqual(r['session']['snapshot']['selection']['status'],'unverified');self.assertEqual(r['session']['snapshot']['criteria'],[])
  def test_model_output_preserves_swedish_after_invalid_byte(self):
   with patch.object(app,'execute',return_value=b'\x82\xac L\xc3\xb6rdag'):
    self.assertEqual(app.generate('system',[{'role':'user','text':'Hej'}]),'Lördag')
