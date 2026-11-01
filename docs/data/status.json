@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T18:18:23.554222+00:00",
+  "generated_at": "2026-11-01T18:32:20.094448+00:00",
   "connected": true,
   "thesis": {
     "state": "completed",
@@ -2668,7 +2668,7 @@
       "audience": "Adults practising Swedish for life in Sweden, including SFI learners.",
       "buyer": "A learner could pay for useful, repeatable Swedish practice and trustworthy feedback tied to their course goals.",
       "proposed_fix": "An AI role-play partner that speaks and listens, with connected reading and writing in chat. Move from a one-sentence request to a social exchange and then a sustained discussion; revisit useful language later.",
-      "deliverable": "A working local voice-and-chat app with three challenge levels, connected four-skill practice, saved learning history and an evidence-based SFI progress view.",
+      "deliverable": "A hosted mobile web app with a continuing library of guided Swedish role-plays, real speech input/output, connected reading and writing, private accounts and saved practice evidence.",
       "flow": [
         "Choose a meaningful situation and challenge",
         "Practise by voice and connected chat",
@@ -2687,18 +2687,18 @@
         "next_90_days": "Days 8–30: compare the pilot with existing practice, measure return use, feedback mistakes and delayed recall; get educator review. Days 31–60: improve Swedish voice quality and conversation latency, extend reviewed scenarios and validate provisional progress estimates against educator judgement. Days 61–90: test a paid learner offer or small provider pilot, with explicit infrastructure, support and content costs. Expand only if repeated use and reliable learning feedback justify it.",
         "first_customer_route": "The owner can later arrange a small test with consenting adult learners and an SFI educator through their own networks. No outreach or learner recruitment is performed by this update.",
         "kill_test": "Compare three sessions against an existing voice/role-play option. Stop or redesign if learners do not return, feedback is misleading, Swedish audio is too slow to sustain a conversation, or learners cannot reuse target phrases later. Test whether the proposed SFI progress view is actually useful; do not use enjoyment alone as proof of learning.",
-        "data_access": "Use original fictional scenarios and clearly labelled synthetic engineering fixtures. Link and version the official criteria. Do not copy protected national tests or commercial lesson content. Personal learning history and recordings stay private; saving audio is optional, with deletion/export. No emotion inference from voice and no training on learner data without separate permission. An educator-marked evaluation set does not yet exist.",
-        "costs": "Prototype: zero new paid APIs or cloud compute, using this laptop and licensed local speech/dialogue models. Benchmark actual Swedish quality, latency and memory before selecting the stack; no paid fallback or assumed production API access from subscriptions. Production: reliable voice inference, hosting, storage, support and reviewed learning content have real costs. The 4GB VPS is the coordinator, not assumed to run simultaneous voice sessions.",
+        "data_access": "Original fictional scenarios, linked official criteria and clearly labelled engineering fixtures. Do not copy protected national tests or commercial lessons. Temporary audio is removed after processing; private transcripts/history can be exported and deleted. No emotion inference or model training on learner data. An educator-marked evaluation set does not yet exist.",
+        "costs": "The current app uses the existing VPS and downloaded speech models, with no new paid API or cloud service. One speech job runs at a time. More users, reviewed educational content, support and future inference capacity have real operating costs; personal chat subscriptions are not a production inference API.",
         "biggest_unknown": "Will this complete learning loop help learners enough to choose it over established role-play apps, and can its feedback and SFI progress estimates be made trustworthy?"
       },
-      "technical_scope": "Local browser UI plus a managed localhost service on this laptop. Use licensed local multilingual speech recognition, a dialogue model and Swedish speech synthesis; select them after measured quality and resource checks. Persist learning history under LAB_DATA_DIR. No subscription-account scraping or paid inference fallback. Typed fallback is accessibility support, not a substitute for a working voice mode. Curriculum mappings are versioned data with source links. Mobile web access uses HTTPS and owner authentication for the private pilot. No native mobile app.",
+      "technical_scope": "An authenticated responsive web service on the existing 4GB VPS over HTTPS, with isolated SQLite accounts, small Swedish speech-recognition and speech-synthesis models, authored conversation branches and explicit response matching. No general-purpose dialogue model or paid inference API. Speech jobs are bounded and serialized. Recordings are temporary; transcripts and chosen practice evidence are private. Mobile browser access uses the same app; no native app.",
       "model_plan": "Use small pretrained Swedish speech-recognition and speech-synthesis models, authored scenario branches and explicit response matching. Core practice does not call a general-purpose LLM or require learner API keys. Guided advanced tasks are explicitly guided; preserve experimental old histories without treating them as validated teaching.",
       "why_ml": "Speech models turn spoken Swedish into reviewable text and provide spoken practice. Authored content and transparent task logic control the conversation; a large generative model is not needed for these bounded learning workflows.",
       "contribution": "A complete reusable practice journey with source-linked learning evidence, rather than a general chat screen or a tutor assignment tracker.",
-      "feasibility": "Start as a private local prototype using existing hardware. Full voice quality and latency remain to be measured. Teacher validation is needed for educational effectiveness claims, not another approval gate for building the prototype.",
+      "feasibility": "The guided app is hosted with private accounts, speech, saved progress and tested backup restoration. Automatic reply checking still misses valid wording; learners can explicitly choose their intended meaning. Physical-phone, educator and learning-effectiveness checks remain outstanding.",
       "venture": "A learner might pay for reliable Swedish practice, useful feedback and a clear connection to their SFI goals. Later, teachers or providers might buy a reviewed course version. Pricing and willingness to pay are unverified; a subscription alone is not the business case.",
       "market": "Will this complete learning loop help learners enough to choose it over established role-play apps, and can its feedback and SFI progress estimates be made trustworthy?",
-      "next": "Owner requested production implementation: a useful learning library, progression, isolated accounts and VPS hosting. Build and verify the selected scope without another draft approval.",
+      "next": "Open Prata, create an invited account and practise across 54 tasks. Compare the guided experience with existing alternatives before claiming learning benefit or commercial demand.",
       "effort": "One week is the first working milestone; continue only when evidence supports the business.",
       "evidence": "Owner-proposed direction. Official SFI sources and the 2027 transition were checked on 1 November 2026. Existing vendors already advertise related voice and role-play features. No demand, memory benefit or assessment accuracy is established.",
       "evidence_level": "Owner-proposed business hypothesis; SFI mapping, learning benefit and willingness to pay remain unvalidated.",
@@ -2832,8 +2832,8 @@
           "next_90_days": "Days 8–30: compare the pilot with existing practice, measure return use, feedback mistakes and delayed recall; get educator review. Days 31–60: improve Swedish voice quality and conversation latency, extend reviewed scenarios and validate provisional progress estimates against educator judgement. Days 61–90: test a paid learner offer or small provider pilot, with explicit infrastructure, support and content costs. Expand only if repeated use and reliable learning feedback justify it.",
           "first_customer_route": "The owner can later arrange a small test with consenting adult learners and an SFI educator through their own networks. No outreach or learner recruitment is performed by this update.",
           "kill_test": "Compare three sessions against an existing voice/role-play option. Stop or redesign if learners do not return, feedback is misleading, Swedish audio is too slow to sustain a conversation, or learners cannot reuse target phrases later. Test whether the proposed SFI progress view is actually useful; do not use enjoyment alone as proof of learning.",
-          "data_access": "Use original fictional scenarios and clearly labelled synthetic engineering fixtures. Link and version the official criteria. Do not copy protected national tests or commercial lesson content. Personal learning history and recordings stay private; saving audio is optional, with deletion/export. No emotion inference from voice and no training on learner data without separate permission. An educator-marked evaluation set does not yet exist.",
-          "costs": "Prototype: zero new paid APIs or cloud compute, using this laptop and licensed local speech/dialogue models. Benchmark actual Swedish quality, latency and memory before selecting the stack; no paid fallback or assumed production API access from subscriptions. Production: reliable voice inference, hosting, storage, support and reviewed learning content have real costs. The 4GB VPS is the coordinator, not assumed to run simultaneous voice sessions.",
+          "data_access": "Original fictional scenarios, linked official criteria and clearly labelled engineering fixtures. Do not copy protected national tests or commercial lessons. Temporary audio is removed after processing; private transcripts/history can be exported and deleted. No emotion inference or model training on learner data. An educator-marked evaluation set does not yet exist.",
+          "costs": "The current app uses the existing VPS and downloaded speech models, with no new paid API or cloud service. One speech job runs at a time. More users, reviewed educational content, support and future inference capacity have real operating costs; personal chat subscriptions are not a production inference API.",
           "biggest_unknown": "Will this complete learning loop help learners enough to choose it over established role-play apps, and can its feedback and SFI progress estimates be made trustworthy?"
         },
         "acceptance": {
@@ -2842,9 +2842,9 @@
           "learning_progress": "Every exercise and observation records its source-linked SFI criterion, course/study-path identifier, syllabus version, evidence, hints used and uncertainty. Exercise difficulty is stored separately. Do not infer pronunciation from a transcript, listening from reading subtitles, or independent writing from dictated text. Show unassessed skills and limited coverage. Test the 2026/2027 boundary and preserve older evidence under its original framework.",
           "customer_value": "Later compare repeat use, helpfulness and delayed phrase use with an existing role-play app and a neutral conversation condition. Have a qualified SFI educator review task mappings and a sample of feedback before claiming validated alignment or readiness accuracy. This does not block an honestly labelled working prototype."
         },
-        "delivery_target": "local_service",
-        "runtime_scope": "Local browser UI plus a managed localhost service on this laptop. Use licensed local multilingual speech recognition, a dialogue model and Swedish speech synthesis; select them after measured quality and resource checks. Persist learning history under LAB_DATA_DIR. No subscription-account scraping or paid inference fallback. Typed fallback is accessibility support, not a substitute for a working voice mode. Curriculum mappings are versioned data with source links.",
-        "model_plan": "Use a compact local dialogue model with authored scene goals, source-linked SFI guidance and bounded learner context; separate character replies from coaching. Combine real speech recognition and Swedish speech output. Benchmark a small stack before claiming interactive performance. Assess only evidence the relevant input supports. Model feedback is provisional; do not manufacture calibrated confidence, pronunciation grades or official course results.",
+        "delivery_target": "vps_service",
+        "runtime_scope": "An authenticated responsive web service on the existing 4GB VPS over HTTPS, with isolated SQLite accounts, small Swedish speech-recognition and speech-synthesis models, authored conversation branches and explicit response matching. No general-purpose dialogue model or paid inference API. Speech jobs are bounded and serialized. Recordings are temporary; transcripts and chosen practice evidence are private. Mobile browser access uses the same app; no native app.",
+        "model_plan": "Use small pretrained Swedish speech-recognition and speech-synthesis models, authored scenario branches and explicit response matching. Core practice does not call a general-purpose LLM or require learner API keys. Guided advanced tasks are explicitly guided; preserve experimental old histories without treating them as validated teaching.",
         "curriculum": {
           "as_of": "2026-11-01",
           "current": {
@@ -2937,13 +2937,14 @@
         "collaboration": "Owner-requested multi-agent development: voice/backend, interface and curriculum/checks; coordinator integrates, verifies and deploys. Deliver a working end-to-end scene before expanding.",
         "design_reference": "Use the owner’s existing Drift and SubTrack visual language: warm off-white, rounded white cards, dark primary controls, restrained teal/aurora accents and mobile bottom navigation.",
         "production_target": true,
-        "learning_library": "Target 18 distinct situations across Basic, Medium and High, with three meaningfully different tasks per situation. Counts do not substitute for coherent conversations and useful next actions.",
+        "learning_library": "18 situations and 54 authored tasks: eight Basic situations, six Medium and four High, with three tasks in each.",
         "progression": "Persist individual mission progress, allow resume and replay, recommend a different next task after completion, and distinguish practice completion from SFI achievement.",
         "account_security": "Account-isolated sessions, invitations for initial real-user access, secure password hashing and cookie sessions, CSRF and origin checks, bounded rate limits, single-use recovery, per-user export/deletion and tested restart/backup recovery.",
         "production_operations": "Dedicated restricted service on the existing 4GB VPS, bounded speech concurrency and input sizes, HTTPS, health checks, automatic restart, database backups and a tested restore. No new paid services or API calls.",
-        "release_acceptance": "Exercise the full real backend learning path, finish a basic task and continue to another, reload/resume, isolate two accounts, recover access, delete/export only own data, test adversarial/off-topic replies, and run real speech on the VPS. Clearly distinguish untested devices and content validation limits. Do not call a draft production-ready."
+        "release_acceptance": "Exercise the full real backend learning path, finish a basic task and continue to another, reload/resume, isolate two accounts, recover access, delete/export only own data, test adversarial/off-topic replies, and run real speech on the VPS. Clearly distinguish untested devices and content validation limits. Do not call a draft production-ready.",
+        "implementation_boundary": "Authored guided practice, including longer structured discussions. Previously unseen valid wording often requires an explicit meaning choice. Preserve the original reply and record learner confirmation as help, not automatic correctness. No unrestricted conversation, pronunciation score, official SFI grade or validated learning benefit."
       },
-      "updated_at": "2026-11-01T14:01:19.677477+00:00",
+      "updated_at": "2026-11-01T18:25:12.581533+00:00",
       "concept_origin": "Owner-directed refinement on 1 November 2026: voice/chat role-play, three challenge levels, meaningful feelings/context and SFI alignment. Sources are standards and alternatives, not a claim that the owner’s idea was discovered in a forum.",
       "learning_design": {
         "intro": "Practise something you want to say, with a person to say it to and a reason it matters. Move between voice and chat in the same situation.",
@@ -2963,7 +2964,7 @@
           {
             "name": "High",
             "example": "Explain a problem to a fictional friend for several minutes, compare possible solutions and agree what to try.",
-            "support": "Optional notes; natural follow-up questions; feedback at the end.",
+            "support": "Optional notes, authored follow-up questions and feedback at the end.",
             "goal": "Keep a discussion going, explain reasons and adapt when the other person disagrees."
           }
         ],
@@ -3343,12 +3344,18 @@
       "execution": "Owner requested a multi-agent mobile-web build. Register one BP5 v2 selection in an existing managed slot; preserve other jobs, hold and manual allowlist."
     },
     "bp5_production": {
-      "at": "2026-11-01T15:23:22.090430+00:00",
+      "at": "2026-11-01T18:25:12.581533+00:00",
       "verdict": "revise",
       "reason": "Owner rejected the three-scene engineering preview and explicitly requested production readiness and continuing practice. This is an owner scope refinement, not newly discovered demand or an endorsed release.",
       "from_version": 2,
       "to_version": 3,
-      "prior_result": "Preserved; dialogue-language quality failed acceptance."
+      "prior_result": "Preserved; dialogue-language quality failed acceptance.",
+      "engineering_delivery": "Hosted guided practice is implemented and tested; 54 tasks, private accounts, voice, saved progress, recovery and encrypted backup restoration.",
+      "language_quality": "Fresh diagnostic accepted only 2 of 18 valid unseen replies and rejected all 18 uncertain/negative replies. The disclosed regression corpus passing is not evidence of natural-language generalization.",
+      "mitigation": "Explicit learner-selected meaning recovery preserves the original reply and records help; it is not a correct-language judgement.",
+      "release_boundary": "Usable guided application, not validated unrestricted conversation, complete SFI course, official assessment or proven business. No educator review or physical-phone microphone test.",
+      "job_id": "7c9b46c3921a498ab8cbba07ed82ae93",
+      "app_url": "https://198.44.116.159.sslip.io/apps/bp5/"
     }
   },
   "discovery_signals": {
