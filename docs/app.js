@@ -45,7 +45,8 @@ function presentIdea(x){
 }
 function sourcePreview(x){
  const s=(x.provenance||[])[0];
- return s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(s.kind)+' · '+esc(s.published_at||'Date unknown')+' · Novelty unverified</small></div>':'';
+ const note=x.business_case?'<p class="muted">'+esc(x.evidence_level)+'</p>':'';
+ return note+(s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(pretty(s.kind))+' · '+esc(s.published_at||'Date unknown')+' · Novelty unverified</small></div>':'');
 }
 function provenanceDetails(x){
  return '<section class="provenance-panel"><h3>Where this idea came from</h3>'+(x.provenance||[]).map(s=>'<article><span class="tag">'+esc(s.kind)+'</span><a class="text-link" href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><p>'+esc(s.finding)+'</p><small>Published: '+esc(s.published_at||'Unknown')+' · Checked: '+esc(s.verified_at||'Not recorded')+'</small><p>Read scope: '+esc(s.read_scope||'Not recorded')+'</p></article>').join('')+'<h3>What already exists</h3><p>'+esc(x.baseline||x.alternative)+'</p><h3>What we propose to add or test</h3><p>'+esc(x.proposed_difference||x.question)+'</p><p class="originality-note">'+esc(x.originality||'Novelty has not been established.')+'</p></section>';
@@ -57,7 +58,7 @@ function outcomeSummary(x) {
 function ideaCard(x) {
  const thesis=x.lane==='Thesis';
  const facts=thesis?[['What we would find out',x.question],['Main difficulty',x.risk]]:[['Who could pay',x.buyer||x.audience],['Why they would return',x.business_case?.repeat_use||x.market||'Not established']];
- const badge=x.status==='completed'?'Completed prototype':x.investigation_result?'Investigated — see findings':thesis?'Research idea':'Business hypothesis';
+ const badge=x.status==='completed'?'Completed prototype':x.investigation_result?'Investigated — see findings':thesis?'Research idea':x.assessment?.startsWith('More uncertain')?'Exploratory business hypothesis':'Business hypothesis';
  return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge">'+badge+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+outcomeSummary(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'To assess')+'</strong></div><div class="idea-facts">'+facts.map(([label,value])=>'<div><span class="label">'+esc(label)+'</span><strong>'+esc(value)+'</strong></div>').join('')+'</div>'+sourcePreview(x)+'<p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">'+(thesis?'Explain ':'Explore ')+esc(x.id)+' →</button></article>';
 }
 function comparison(rows) {
@@ -102,6 +103,7 @@ function openConversation(mode,lane,id) {
 }
 function renderCards(lane,query=''){
  const rows=data.opportunities.map(presentIdea).filter(x=>x.lane===lane&&(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase()));
+ if(lane==='Project')rows.sort((a,b)=>Number(a.status==='completed')-Number(b.status==='completed'));
  const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
  const chosen=rows.find(x=>x.selected),recommended=rows.find(x=>x.recommended);
  const focus=data.audit?.hold?null:chosen||recommended;
