@@ -65,7 +65,9 @@ def main():
         catalog=load(root/'config/public-opportunities.json');audit=load(root/'config/discovery-audit.json')
         collection=load(runtime/'collection.json');sources=load(root/'config/collectors.json');jobs=read_jobs(runtime/'jobs.sqlite')
         # Heartbeats and credentials never enter either the fingerprint or the public snapshot.
-        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources}
+        signals_file=root/'config/discovery-signals.json'
+        signals=load(signals_file) if signals_file.exists() else None
+        inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals}
         fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
         receipt=runtime/'dashboard-publish.json'
         if receipt.exists() and load(receipt).get('fingerprint')==fingerprint:
@@ -77,6 +79,7 @@ def main():
         git('pull','--rebase')
         path=checkout/'docs/data/status.json';seed=load(path)
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp())
+        if signals: snapshot['discovery_signals']=signals
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         git('add','--','docs/data/status.json')
         if git('diff','--cached','--name-only'):

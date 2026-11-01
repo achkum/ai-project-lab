@@ -85,7 +85,9 @@ function renderCards(lane,query=''){
  const focus=data.audit?.hold?null:chosen||recommended;
  const intro=focus?'<div class="lane-focus"><div><span class="tag">'+(chosen?'YOUR CURRENT DIRECTION':'OUR RECOMMENDATION')+'</span><p><strong>'+esc(focus.id)+'</strong> · '+esc(focus.reason||focus.title)+'</p></div><span class="pill">'+(chosen?esc(pretty(focus.status)):'Ready to review')+'</span></div>':'';
  const conversation='<div class="explore-again"><div><strong>Not your direction?</strong><p>Question the recommendation, change the angle or explore a fresh set now.</p></div><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></div>';
- dest.innerHTML=(typeof jobControls==='function'?jobControls(lane):'')+conversation+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">No matching ideas. Try another search.</div>');
+ const signals=data.discovery_signals;
+ const radar=signals?'<details class="provenance-panel"><summary><strong>What is getting attention now · GitHub & LinkedIn · '+esc(signals.checked_at)+'</strong></summary><p>'+esc(signals.scope)+'</p><div class="detail-grid">'+signals.items.map(s=>'<section><span class="tag">'+esc(s.source)+'</span><h3><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a></h3><p>'+esc(s.signal)+'</p><p><strong>Possible direction: </strong>'+esc(s.possibility)+'</p><p><strong>Still unknown: </strong>'+esc(s.limit)+'</p></section>').join('')+'</div></details>':'';
+ dest.innerHTML=(typeof jobControls==='function'?jobControls(lane):'')+conversation+radar+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">No matching ideas. Try another search.</div>');
 }
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
