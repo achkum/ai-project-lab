@@ -1,9 +1,10 @@
 {
-  "delivery": "local_service",
+  "delivery": "vps_service",
   "runtime": "python",
-  "entry": "server/app.py",
-  "memory_mb": 5120,
+  "entry": "server/run.py",
+  "memory_mb": 1536,
   "name": "Prata",
   "platform": "mobile-compatible web app",
-  "maturity": "experimental private prototype"
+  "maturity": "invite-only hosted application",
+  "version": 3
 }

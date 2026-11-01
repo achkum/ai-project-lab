@@ -1,0 +1,26 @@
+198.44.116.159.sslip.io {
+    encode gzip
+    header {
+        Strict-Transport-Security "max-age=31536000"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
+    @prata_exact path /apps/bp5
+    redir @prata_exact /apps/bp5/ 308
+    handle_path /apps/bp5/* {
+        request_body {
+            max_size 12582912
+        }
+        reverse_proxy 127.0.0.1:8788 {
+            header_up Host 127.0.0.1:8788
+            header_up X-Forwarded-For {remote_host}
+            transport http {
+                dial_timeout 5s
+                response_header_timeout 210s
+            }
+        }
+    }
+    handle {
+        reverse_proxy 127.0.0.1:8787
+    }
+}

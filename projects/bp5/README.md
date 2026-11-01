@@ -1,25 +1,29 @@
 # Prata — Swedish practice for real situations
 
-An adult learning Swedish can rehearse a conversation before trying it in everyday life: order a coffee, ask a neighbour for help, or talk through a problem with a friend. Voice practice connects to a short reading/writing follow-up, saved phrases and later reuse. This is a responsive web app; no Android or iOS installation is required.
+**[Open Prata](https://198.44.116.159.sslip.io/apps/bp5/)**
 
-This private prototype uses local AI. **It can mishear speech and generate incorrect or unnatural Swedish.** Review the transcript before sending it. Coaching is experimental. SFI progress records practice evidence, support and source-linked goals; it is not an official grade or course placement. Educator review and human-speaker testing remain necessary before educational-effectiveness claims.
+Practise before a real interaction: buy the right ticket, explain a wrong order, ask a colleague for help or discuss a problem. The mobile web app has **18 situations and 54 different guided tasks**: eight Basic situations, six Medium and four High, with three tasks in each. Finishing one offers a different task. It runs on the existing VPS; the laptop can be off.
 
-## Use
+Speak or type, listen to the character, then practise related listening, reading and writing. Save phrases, return to a session and revisit earlier work. Speech transcripts are editable before sending. Conversations use authored responses and bounded matching. If the app misses a valid reply, choose the meaning you intended to continue; your original reply is preserved and this help is recorded. This is guided practice, not unrestricted conversation or automatic grammar assessment. [Language checks and their limits](content/language_quality_report.json) include the poor coverage of previously unseen wording.
 
-Choose a situation and difficulty, optionally select your actual SFI framework/course, then speak or type. Listen to the character, use help if needed and review any transcript edits. Continue to listening, reading and writing, save useful phrases and revisit them later. Progress lets you resume, export or delete practice. Difficulty settings do not correspond automatically to SFI courses.
+## Your account
 
-The deployed private pilot uses the owner's existing lab password. The laptop runs inference and must remain on; the VPS provides the HTTPS access path. This is single-owner access, not a public multi-tenant learning service. No new paid API or cloud inference is used.
+Create an account using an invitation and your own password. Save the one-use recovery codes shown at signup. Accounts have separate history, SFI settings and exports. Recovery invalidates earlier sessions; recovery codes can be regenerated. Export and account deletion are available in Settings. No email address or Google/API account is required.
 
-## Run locally
+Recordings are deleted after processing. Transcripts and practice history stay in your account until deleted. The daily VPS backup schedule retains encrypted copies for at most seven days. Offline laptop copies are pruned on the next successful sync, so an unavailable laptop delays their removal. The decryption key is kept separately from the VPS. There is no ad tracking or paid cloud inference.
 
-Use Python 3.14 and the separately installed runtime listed in [the runtime manifest](server/RUNTIME-MANIFEST.json). Model weights, binaries, recordings and databases are excluded from Git. See [backend setup and measurements](server/README.md).
+## SFI and learning claims
 
-Set `HOST=127.0.0.1`, `PORT`, `LAB_DATA_DIR` to a private data directory, `LAB_INSTANCE_ID`, and `BP5_RUNTIME` to the installed model directory. Start `python server/app.py` from this project. The default runtime path assumes this checkout remains under `ai-project-lab/projects/bp5`.
+The app records practice against selected, source-linked SFI components; it does not award grades, decide placement or infer mastery from completion. Basic/Medium/High are task difficulty, not SFI A/B/C. The current consolidated syllabus and the framework applying to education beginning after 31 December 2026 remain separate. Existing sessions retain their original content and criterion snapshots.
 
-The selected local dialogue model's measured child-process peak was about 4.36 GiB; the service declares 5 GiB admission. This is not an OS memory limit or a promise of low latency. Model calls are serialized on this laptop.
+The 54 tasks are original authored examples. Official syllabus sources establish the criteria, not validation of these mappings. Remembering through meaningful situations and feelings is a design hypothesis, not a measured learning benefit. Educator review and learner-effectiveness trials remain outstanding.
 
-## Check
+## Operate and verify
 
-Run `python -m unittest discover -s tests -p test*.py`, `node --test tests/*.test.cjs`, and `python content/validate_content.py` from this directory. Automated API tests use controlled inference fixtures for determinism; actual runtime measurements and end-to-end checks must be reported separately. Synthetic speech checks are not human-speaker accuracy validation.
+Production uses `server/run.py` → `server/production.py`, an isolated SQLite volume, and local Swedish speech models. **Do not expose the historical `server/app.py` service.** See [the production runbook](server/PRODUCTION-RUNBOOK.md), [deployment operations](deploy/OPERATIONS.md), and [third-party credits](THIRD-PARTY-NOTICES.md).
 
-Visual patterns come from the owner's Drift and SubTrack projects. Sources and versions for the SFI criteria are in `content/`. The current and January 2027 frameworks remain separate, including earlier-course continuation rules.
+The container is limited to 1536 MiB, 1.8 CPUs and one speech job at a time. This is a small-server installation, not an unlimited-concurrency promise. The service uses secure cookies, CSRF/origin checks, invitation-only signup, password hashing and account-scoped APIs. Start with invited users; public registration is not enabled.
+
+Checks: `python -m unittest discover -s tests -p "test*.py"`, `node --test tests/frontend.test.cjs`, `python content/validate_library.py`. Install the pinned `server/requirements.txt` in a virtual environment first. Actual Linux voice, HTTPS, restart and backup checks are recorded separately from deterministic fixtures. Public read-speech samples do not establish accuracy for SFI learners, accents or real phone microphones.
+
+Historical local progress is preserved separately. An operator can import it only into an explicitly named account using `server/manage.py import-legacy`; it is never assigned automatically to the first registrant.

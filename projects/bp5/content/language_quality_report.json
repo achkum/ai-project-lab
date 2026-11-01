@@ -1,0 +1,52 @@
+{
+  "content_version": "2026-11-01.7",
+  "library_sha256": "e2317c4172296a8377775f09866db9d4fe6b8995759c48fda6c1cc6efcc9a609",
+  "matching_rules_sha256": "eebd5616c7fe4985e03bc2a4d4e46c4e5266a31d26c10e28fe2dec297ada2982",
+  "matching_identical_to_version": "2026-11-01.6",
+  "latest_change": "Plain specific English meanings for all216confirmation choices; contextual Swedish meaning metadata for previously generic labels; translated confirmation questions; intended-meaning selection is primary recovery. No aliases, matching rules, paths, objective IDs or evidence rules changed.",
+  "broad_natural_language_supported": false,
+  "explicit_supported_meaning_recovery_required": true,
+  "own_repair_corpus": {
+    "engine": "Independent content contract checker",
+    "case_contexts": 1862,
+    "distinct_texts": 683,
+    "valid_replies_before": 285,
+    "valid_replies_after": 1212,
+    "valid_reply_total": 1212,
+    "rejects_before": 610,
+    "rejects_after": 650,
+    "reject_total": 650,
+    "status": "Known authoring/regression set. Approved complete meanings deliberately incorporated into authored reply inventory. Not unseen validation."
+  },
+  "independent_108": {
+    "engine": "Actual production matcher, independently executed",
+    "v2_total_correct": 39,
+    "v3_first_blind_total_correct": 56,
+    "v5_after_disclosure_total_correct": 108,
+    "total": 108,
+    "status": "Originally independent; now disclosed regression cases. Seven intended negative refusals are in the original36negative-suite cases, so expected outcomes are79acceptances and29clarifications."
+  },
+  "fresh_36": {
+    "engine": "Actual production matcher, independently executed against v5",
+    "correct": 20,
+    "total": 36,
+    "valid_accepted": 2,
+    "valid_total": 18,
+    "unsafe_or_uncertain_rejected": 18,
+    "unsafe_or_uncertain_total": 18,
+    "status": "Independent fresh diagnostic frozen before reading new matcher rules. Not used for repairs; demonstrates poor unseen-paraphrase coverage.",
+    "original_result": "outputs/ai-thesis-lab/research/discovery/2026-11-01-bp5-production/natural-reply-runs/20261101T172759066658Z/results.json"
+  },
+  "limits": [
+    "This is engineering coverage, not learner assessment or an SFI grade.",
+    "A correct Swedish reply may need explicit meaning clarification; preserve the original response and record supported practice.",
+    "No independent Swedish educator review, calibrated score, pronunciation assessment or learner-effectiveness study."
+  ],
+  "copy_validation": {
+    "confirmation_steps": 108,
+    "confirmation_choices": 216,
+    "technical_meaning_labels_remaining": 0,
+    "v6_snapshot_sha256": "140cf72e8d1a7f524b18aca15c97ffc324cfe72b22b58aefabbdba38b9451b6a",
+    "matcher_fingerprint_unchanged": true
+  }
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Prata encrypted backup and retention
+
+[Timer]
+OnCalendar=*-*-* 02:17:00 UTC
+Persistent=true
+Unit=prata-backup.service
+
+[Install]
+WantedBy=timers.target

@@ -100,8 +100,10 @@ def publish_review_bundle(profile,job,workspace,response):
             'Check actual dependencies and model/data permissions. Use primary documentation if verification is needed. '
             'A local service must use HOST=127.0.0.1 and PORT, persist under LAB_DATA_DIR, expose GET /health with {ok:true,instance:LAB_INSTANCE_ID}, '
             'reject cross-origin mutations, have appropriate role separation, and serve a usable UI. Do not use a paid customer or human draft approval as a release gate. '
-            'Do not build, launch or deploy. Write only '+review.name+' with {"ready":boolean,"blocking":[],"limitations":[]}. '
-            'Ready means a working, honestly limited prototype, not production or market validation.\n'+json.dumps(job['scope'],ensure_ascii=False),
+            'Do not build, launch or deploy. Write only '+review.name+' with {"ready":boolean,"blocking":[],"limitations":[]}. '+
+            ('For vps_service, inspect deploy/ code, enforced resource limits, account isolation, recovery, backups and rollback. '
+             'Ready means the selected working workflow meets its acceptance criteria and deployment boundaries; do not claim market or learning-effectiveness validation.\n'
+             if job['scope']['delivery_target']=='vps_service' else 'Ready means a working, honestly limited prototype, not production or market validation.\n')+json.dumps(job['scope'],ensure_ascii=False),
             workspace,workspace/(review.stem+'-result.txt'),
             lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Checking the implemented product and data handling'),timeout=1200)
         verdict=json.loads(review.read_text(encoding='utf-8-sig'))
@@ -116,7 +118,11 @@ def publish_review_bundle(profile,job,workspace,response):
         if product and job['scope']['delivery_target']=='local_service':
             from .product_delivery import start_local
             demo=start_local(profile,job,workspace,lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Starting the tested local prototype'))
+        if product and job['scope']['delivery_target']=='vps_service':
+            from .vps_product_delivery import deploy
+            demo=deploy(profile,job,workspace,lambda:remote('heartbeat',jid=job['id'],token=job['token'],message='Deploying and checking the selected VPS application'))
         if demo:result.update(demo_url=demo,summary='Working local prototype; open on this laptop.' if demo.startswith('http://127.0.0.1:') else 'Working browser prototype deployed after automated checks.',validation='See VALIDATION.txt for independently executed checks; working products also have an automatic release review.')
+        if demo and product and job['scope']['delivery_target']=='vps_service':result['summary']='Account-based web app running on the VPS; open the app to practise.'
         elif job['lane']=='thesis':result['summary']='Investigation complete; read the findings and limitations. No further approval is required to view the result.'
         return result
 
@@ -272,6 +278,7 @@ def run_one(profile):
                 'Use existing files if this is a repair; preserve data and do not shrink the acceptance criteria. Use suitable dependencies and a backend when the scope needs one. '
                 'Write README.md, PRODUCT.md explaining the problem, exact working flow, acceptance, limits and customer test, and product.json. '
                 'product.json must contain delivery matching delivery_target. For local_service also include runtime python or node, entry as a relative .py/.js/.cjs/.mjs file, and memory_mb 128..5120 based on measured use. The shared local-app admission budget is 6144 MB, not an OS memory cap. '
+                'For the allowlisted BP5 vps_service, preserve the existing production service, server/run.py, deploy scripts and enforced 1536 MB container limit. Customer account data belongs on the VPS volume, never in Git. '
                 'The entry is launched without CLI arguments, must bind HOST and PORT from environment (HOST=127.0.0.1), serve an actual HTML UI at /, '
                 'and GET /health returning {"ok":true,"instance":the LAB_INSTANCE_ID environment value}. Persist all operator data under LAB_DATA_DIR, never in source files. '
                 'Use one managed server process, no auto-reloader or detached background processes. Reject cross-origin mutations and unsafe paths. Respect operator/staff separation when required. '

@@ -157,8 +157,10 @@ class Jobs:
             row=self.check(jid,token)
             if result and result.get('demo_url')=='https://198.44.116.159.sslip.io/apps/bp5/':
                 scope=json.loads(row['scope'])
-                if scope.get('id')!='BP5' or scope.get('delivery_mode')!='working_product' or scope.get('delivery_target')!='local_service':
-                    raise ValueError('Private BP5 hosting must match its selected local-service scope')
+                if scope.get('id')!='BP5' or scope.get('delivery_mode')!='working_product' or scope.get('delivery_target') not in ('local_service','vps_service'):
+                    raise ValueError('BP5 hosting must match its selected service scope')
+                if scope.get('delivery_target')=='vps_service' and scope.get('version',0)<3:
+                    raise ValueError('VPS delivery requires the selected BP5 account-service version')
             if result and result.get('demo_url','').startswith('http://127.0.0.1:'):
                 scope=json.loads(row['scope'])
                 if scope.get('delivery_mode')!='working_product' or scope.get('delivery_target')!='local_service':

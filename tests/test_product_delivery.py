@@ -31,6 +31,19 @@ class ProductDeliveryTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):check_product(self.w,'local_service')
         p.write_text('import unittest\nclass Flow(unittest.TestCase):\n def test_real_result(self): self.assertEqual(2+2,4)\n')
         check_product(self.w,'local_service')
+    def test_vps_contract_preserves_checked_entry_and_enforced_budget(self):
+        (self.w/'server').mkdir();(self.w/'server/run.py').write_text('pass\n')
+        (self.w/'deploy').mkdir();(self.w/'deploy/Dockerfile').write_text('FROM fixture\n')
+        self.spec.update(delivery='vps_service',name='Prata',entry='server/run.py',memory_mb=1536)
+        (self.w/'product.json').write_text(json.dumps(self.spec));contract(self.w,'vps_service')
+        before=source_fingerprint(self.w)
+        (self.w/'deploy/Dockerfile').write_text('FROM changed-fixture\n')
+        self.assertNotEqual(before,source_fingerprint(self.w))
+        before=source_fingerprint(self.w);(self.w/'server/requirements.txt').write_text('changed-dependency\n')
+        self.assertNotEqual(before,source_fingerprint(self.w))
+        for field,value in [('memory_mb',5120),('entry','server.py'),('name','Unselected product')]:
+            bad=dict(self.spec);bad[field]=value;(self.w/'product.json').write_text(json.dumps(bad))
+            with self.assertRaises(ValueError):contract(self.w,'vps_service')
     def test_unresponsive_managed_process_is_preserved_not_duplicated(self):
         old={'fixture':{'job':self.job['id'],'pid':os.getpid(),'url':'http://127.0.0.1:19100/','memory_mb':128,'source_hash':source_fingerprint(self.w)}}
         (self.runtime/'local-products.json').write_text(json.dumps(old))

@@ -1,4 +1,10 @@
-# BP5 local backend
+# Prata backend
+
+The deployed account-based service uses `run.py` and `production.py`. Follow [PRODUCTION-RUNBOOK.md](PRODUCTION-RUNBOOK.md), the [API contract](PRODUCTION-API-CONTRACT.json) and [VPS operations](../deploy/OPERATIONS.md). The authenticated service has isolated learner accounts, guided missions and small speech models; it does not expose the older dialogue-model API.
+
+The notes below describe the preserved **v2 local experiment**. Do not use `app.py` as an internet-facing entry point or treat its historical measurements as validation of the production service.
+
+## Historical v2 local backend
 
 Run from the lab root with `python projects/bp5/server/app.py`. Set `HOST` (default 127.0.0.1), `PORT` (default 8000), `LAB_DATA_DIR`, and `LAB_INSTANCE_ID`. The runtime defaults to `runtime/local-products/bp5`, override with `BP5_RUNTIME`. The runtime includes a local `ffmpeg.exe` decoder; alternatively Python can use `imageio-ffmpeg` or a local `ffmpeg` executable. Never publish the runtime or data directory as static files. The service expects an authenticated access layer if exposed outside localhost; history is shared by everyone who can access the same instance.
 

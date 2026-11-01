@@ -1,7 +1,4 @@
-"""Checks and managed localhost delivery for owner-selected operating prototypes.
-
-Model and customer data stay on the laptop. This is not a production-hosting claim.
-"""
+"""Product checks and managed local delivery; VPS rollout is separately allowlisted."""
 import hashlib
 import json
 import os
@@ -36,11 +33,11 @@ def product_env():
 def contract(workspace,target):
     workspace=Path(workspace).resolve()
     d=json.loads((workspace/'product.json').read_text(encoding='utf-8-sig'))
-    if target not in ('static','local_service') or d.get('delivery')!=target:
+    if target not in ('static','local_service','vps_service') or d.get('delivery')!=target:
         raise ValueError('Product delivery does not match the selected scope')
     if not (workspace/'README.md').is_file() or not (workspace/'PRODUCT.md').is_file():
         raise ValueError('Runnable instructions and the selected workflow acceptance record are required')
-    if target=='local_service':
+    if target in ('local_service','vps_service'):
         if d.get('runtime') not in ('python','node'):raise ValueError('Supported local runtimes are Python and Node')
         relative=Path(str(d.get('entry','')))
         if relative.is_absolute():raise ValueError('Application entry must be relative')
@@ -50,6 +47,10 @@ def contract(workspace,target):
         if entry.suffix not in (('.py',) if d['runtime']=='python' else ('.js','.cjs','.mjs')):raise ValueError('Unsupported application entry')
         if type(d.get('memory_mb')) is not int or not 128<=d['memory_mb']<=MAX_APP_MEMORY_MB:
             raise ValueError(f'Declare a local prototype memory budget between 128 and {MAX_APP_MEMORY_MB} MB')
+        if target=='vps_service':
+            if d.get('name')!='Prata' or d.get('entry')!='server/run.py' or d['runtime']!='python' or d['memory_mb']!=1536:
+                raise ValueError('VPS hosting is configured only for the reviewed Prata service and its enforced resource limit')
+            if not (workspace/'deploy/Dockerfile').is_file():raise ValueError('VPS deployment requires its checked container build')
     return d
 
 
@@ -127,9 +128,9 @@ def source_fingerprint(workspace):
     for p in sorted(Path(workspace).rglob('*')):
         rel=p.relative_to(workspace)
         if p.name.startswith('RELEASE_REVIEW_'):continue
-        if any(part.startswith('.') or part in ('node_modules','__pycache__','starter') for part in rel.parts):continue
-        if p.is_file() and not p.is_symlink() and p.suffix in ('.py','.js','.cjs','.mjs','.html','.css','.json'):
-            digest.update(str(rel).encode());digest.update(p.read_bytes())
+        if any((part.startswith('.') and part!='.dockerignore') or part in ('node_modules','__pycache__','starter','data','runtime') for part in rel.parts):continue
+        if p.is_file() and not p.is_symlink() and (p.suffix in ('.py','.js','.cjs','.mjs','.html','.css','.json','.lock') or p.name in ('Dockerfile','.dockerignore','requirements.txt')):
+            digest.update(rel.as_posix().encode());digest.update(p.read_bytes())
     return digest.hexdigest()
 
 

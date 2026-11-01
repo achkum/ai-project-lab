@@ -27,6 +27,7 @@ Thesis jobs produce feasibility investigations, not complete theses. Current car
 
 ## What you can use now
 
+- [Prata: Swedish role-play](https://198.44.116.159.sslip.io/apps/bp5/): 18 situations and 54 guided tasks, voice and text, reading/writing follow-ups, personal progress and account recovery. Runs on the VPS with invitation-based accounts; the laptop can be off. [App and operating details](projects/bp5/README.md).
 - [Public PR checkup](https://achkum.github.io/ai-project-lab/projects/rp1/): paste a public GitHub pull request URL; inspect older-revision approvals, possible conditions and failed/pending current-head checks; follow source links and download findings. Read-only requests go to GitHub, with no token. It does not verify branch rules or authorize merging. Endpoint reference: [GitHub review API](https://docs.github.com/en/rest/pulls/reviews).
 - [Next-day preparation planner](https://achkum.github.io/ai-project-lab/projects/rp2/#planning): load daily sales for one item, set quantity and cost assumptions, calculate a next-day preparation quantity, compare historical excess/shortfalls against fixed daily preparation and download the plan. Start with the sample above the planning section. Rules only; no trained model or measured customer savings. Sold quantities can understate demand during stockouts.
 - [Thesis findings](https://achkum.github.io/ai-project-lab/#thesis): RT1 is a small-pilot possibility with data/annotation gaps; RT2 is no-go in its original scope. Neither has experimental results.
@@ -40,9 +41,9 @@ Every option distinguishes the source finding, existing solution, proposed exten
 ## Runtime
 
 - VPS: daily collector plus authenticated SQLite job API behind Caddy HTTPS.
-- Laptop: serial worker, explicit scoped Windows sandbox, fresh subscription checks before every model call.
+- Laptop: four managed worker slots, explicit scoped Windows sandbox, fresh subscription checks before every model call.
 - GPT-6 Astra: investigation and review. GPT-6.1 Terra: implementation. No paid API fallback, purchases or quota resets.
-- Scheduled Codex research/review follows the private RUNBOOK.txt. A published 24-hour recommendation policy remains the fallback when there is no owner selection or hold.
+- Scheduled Codex research/review follows the private RUNBOOK.txt. Automatic recommendations and 24-hour defaults remain paused; owner-selected work continues without a draft-approval gate.
 
 The old single-choice workflow database and GitHub issues remain history. The VPS multi-job queue is authoritative for execution.
 

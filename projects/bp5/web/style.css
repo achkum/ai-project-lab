@@ -3,3 +3,15 @@
 .hero { background: linear-gradient(135deg,#17191d,#203a38); }
 
 dialog {width:min(calc(100% - 32px),420px);border:1px solid #e4e4df;border-radius:20px;padding:22px;box-shadow:0 20px 60px #0003}dialog::backdrop{background:#14141499}dialog form{display:flex;flex-direction:column;gap:14px}
+
+.objectives{margin:0;padding-left:1.2rem;color:#5c5c57;font-size:14px;line-height:1.6}
+
+.task-details{border:1px solid #e4e4df;border-radius:14px;padding:10px 14px}.task-details summary{min-height:32px;cursor:pointer;font-size:14px;font-weight:700}.task-details[open] summary{margin-bottom:8px}.task-details p{margin-bottom:8px}.composer{display:flex;flex-direction:column;gap:10px;scroll-margin-bottom:calc(100px + env(safe-area-inset-bottom))}.composer .mic-wrap{padding:4px}.composer .mic{width:64px;height:64px}
+
+.saved-review{display:flex;flex-direction:column;gap:5px;border-top:1px solid #e4e4df;padding-top:10px}.saved-review ul{margin:0;padding-left:20px}.saved-answer{white-space:pre-wrap}
+
+.suggested-phrase{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px}.suggested-phrase span{min-width:0;overflow-wrap:anywhere}.suggested-phrase button{flex:none}
+
+.meaning-choice{padding:12px;min-height:48px}.meaning-choice strong{margin:0 0 3px}
+
+.composer .mic-wrap{display:flex;align-items:center;gap:12px;text-align:left}.composer .mic{width:52px;height:52px;flex:none}.composer .mic-label{margin:0}.composer .field textarea{min-height:64px}.composer .btn{min-height:48px}#latest-reply{scroll-margin-top:calc(12px + env(safe-area-inset-top))}

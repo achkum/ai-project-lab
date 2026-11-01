@@ -1,0 +1,13 @@
+[Unit]
+Description=Prata consistent encrypted account backup
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -B /home/openclaw/prata/backup_runner.py
+UMask=0077
+NoNewPrivileges=true
+Nice=10
+MemoryMax=256M
+CPUQuota=50%
+TasksMax=32
+TimeoutStartSec=330

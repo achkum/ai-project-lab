@@ -1,0 +1,1140 @@
+{
+  "schema_version": "1.0",
+  "status": "Authored separately from demonstration examples; engineering evaluation, not an external learner-validation set. After running, these become regression cases; keep new unseen cases for later evaluation.",
+  "cases": [
+    {
+      "mission_id": "lib_cafe_m1",
+      "step_id": "request",
+      "text_sv": "Hej! Kan jag få en kaffe, tack?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_cafe_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ha kaffe.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_cafe_m1",
+      "step_id": "request",
+      "text_sv": "Jag dricker kaffe hemma.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_cafe_m2",
+      "step_id": "request",
+      "text_sv": "Hur mycket kostar smörgåsen här?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_cafe_m2",
+      "step_id": "request",
+      "text_sv": "Jag undrar inte vad en smörgås kostar.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_cafe_m2",
+      "step_id": "request",
+      "text_sv": "Smörgåsen ser god ut.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_cafe_m3",
+      "step_id": "request",
+      "text_sv": "Ursäkta, jag bad om te.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_cafe_m3",
+      "step_id": "request",
+      "text_sv": "Jag beställde inte te.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_cafe_m3",
+      "step_id": "request",
+      "text_sv": "Jag tycker om att dricka te hemma.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_groceries_m1",
+      "step_id": "request",
+      "text_sv": "Ursäkta, var hittar jag riset?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_groceries_m1",
+      "step_id": "request",
+      "text_sv": "Jag frågar inte var riset finns.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_groceries_m1",
+      "step_id": "request",
+      "text_sv": "Jag köpte ris i går.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_groceries_m2",
+      "step_id": "request",
+      "text_sv": "Kan jag få 200 gram ost, tack?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_groceries_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ha 200 gram ost.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_groceries_m2",
+      "step_id": "request",
+      "text_sv": "Osten kostar tjugo kronor.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_groceries_m3",
+      "step_id": "request",
+      "text_sv": "Hej, jag söker havredryck.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_groceries_m3",
+      "step_id": "request",
+      "text_sv": "Jag söker inte havredryck.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_groceries_m3",
+      "step_id": "request",
+      "text_sv": "Min vän drack havredryck i går.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_transport_m1",
+      "step_id": "request",
+      "text_sv": "Vilken tid går bussen till centrum?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_transport_m1",
+      "step_id": "request",
+      "text_sv": "Jag undrar inte när nästa buss till centrum går.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_transport_m1",
+      "step_id": "request",
+      "text_sv": "Bussen till centrum är blå.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_transport_m2",
+      "step_id": "request",
+      "text_sv": "Kan jag köpa en biljett till stationen här?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_transport_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte köpa en biljett till stationen.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_transport_m2",
+      "step_id": "request",
+      "text_sv": "Stationen ligger nära mitt hem.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_transport_m3",
+      "step_id": "request",
+      "text_sv": "Åker bussen till torget?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_transport_m3",
+      "step_id": "request",
+      "text_sv": "Går bussen inte till torget?",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_transport_m3",
+      "step_id": "request",
+      "text_sv": "Torget har många butiker.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_library_m1",
+      "step_id": "request",
+      "text_sv": "Jag letar efter lättlästa böcker, tack.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_library_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ha lättlästa böcker.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_library_m1",
+      "step_id": "request",
+      "text_sv": "Biblioteket är fint.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_library_m2",
+      "step_id": "request",
+      "text_sv": "Går det att förlänga lånet?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_library_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte förlänga lånet.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_library_m2",
+      "step_id": "request",
+      "text_sv": "Boken är intressant.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_library_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver hjälp med en utskrift av min fil.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_library_m3",
+      "step_id": "request",
+      "text_sv": "Jag ska inte skriva ut dokumentet.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_library_m3",
+      "step_id": "request",
+      "text_sv": "Jag läser ett dokument.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_clothes_m1",
+      "step_id": "request",
+      "text_sv": "Finns tröjan i storlek M?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_clothes_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ha tröjan i medium.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_clothes_m1",
+      "step_id": "request",
+      "text_sv": "Tröjan är mjuk.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_clothes_m2",
+      "step_id": "request",
+      "text_sv": "Ursäkta, var finns provrummet?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_clothes_m2",
+      "step_id": "request",
+      "text_sv": "Jag undrar inte var provrummet är.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_clothes_m2",
+      "step_id": "request",
+      "text_sv": "Byxorna är svarta.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_clothes_m3",
+      "step_id": "request",
+      "text_sv": "Här fattas en knapp.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_clothes_m3",
+      "step_id": "request",
+      "text_sv": "Det saknas inte någon knapp.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_clothes_m3",
+      "step_id": "request",
+      "text_sv": "Jag tycker om knapparna.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_reception_m1",
+      "step_id": "request",
+      "text_sv": "Hej, jag har bokat en tid klockan tio.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_reception_m1",
+      "step_id": "request",
+      "text_sv": "Jag har ingen tid klockan tio.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_reception_m1",
+      "step_id": "request",
+      "text_sv": "Klockan är tio nu.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_reception_m2",
+      "step_id": "request",
+      "text_sv": "Mitt namn är Kim.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_reception_m2",
+      "step_id": "request",
+      "text_sv": "Jag heter inte Kim.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_reception_m2",
+      "step_id": "request",
+      "text_sv": "Kim är min vän.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_reception_m3",
+      "step_id": "request",
+      "text_sv": "Var kan jag vänta tills mötet börjar?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_reception_m3",
+      "step_id": "request",
+      "text_sv": "Jag frågar inte var jag ska vänta.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_reception_m3",
+      "step_id": "request",
+      "text_sv": "Jag tycker om den här stolen.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_parcel_m1",
+      "step_id": "request",
+      "text_sv": "Hej, ska hämta ett paket.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_parcel_m1",
+      "step_id": "request",
+      "text_sv": "Jag ska inte hämta något paket.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_parcel_m1",
+      "step_id": "request",
+      "text_sv": "Paketet är stort.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_parcel_m2",
+      "step_id": "request",
+      "text_sv": "Kan jag skicka ett paket här?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_parcel_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte skicka paketet.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_parcel_m2",
+      "step_id": "request",
+      "text_sv": "Paketet kom i går.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_parcel_m3",
+      "step_id": "request",
+      "text_sv": "Kan du hjälpa mig att hitta koden?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_parcel_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver inte hjälp att hitta koden.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_parcel_m3",
+      "step_id": "request",
+      "text_sv": "Meddelandet finns på min telefon.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "request",
+      "text_sv": "Vilken tid börjar språkcaféet här?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "request",
+      "text_sv": "Jag undrar inte när språkcaféet börjar.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "request",
+      "text_sv": "Språkcaféet verkar trevligt.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "request",
+      "text_sv": "Får jag låna en boll en stund?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte låna en boll.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "request",
+      "text_sv": "Bollen ligger på golvet.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver avboka min plats på målning.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte avboka min plats.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "request",
+      "text_sv": "Målningen var rolig förra veckan.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "request",
+      "text_sv": "Skulle du kunna vattna blommor åt mig?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "request",
+      "text_sv": "Kan du inte vattna min växt?",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "request",
+      "text_sv": "Min växt är grön.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "request",
+      "text_sv": "Kan jag låna skruvmejseln?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte låna din skruvmejsel.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "request",
+      "text_sv": "Skruvmejseln är röd.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "request",
+      "text_sv": "Vi behöver tala om musiken.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte prata om musiken.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "request",
+      "text_sv": "Musiken är från en film.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "request",
+      "text_sv": "Skulle vi kunna byta pass på fredag?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte byta pass på fredag.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "request",
+      "text_sv": "På fredag går jag hem tidigt.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "request",
+      "text_sv": "Skulle du kunna hjälpa mig med en tabell?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "request",
+      "text_sv": "Jag behöver inte hjälp med tabellen.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "request",
+      "text_sv": "Tabellen har tre kolumner.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "request",
+      "text_sv": "Vad ska jag göra först?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "request",
+      "text_sv": "Jag frågar inte vilken uppgift jag ska börja med.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "request",
+      "text_sv": "Listan är lång.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_housing_m1",
+      "step_id": "request",
+      "text_sv": "Det droppar från kranen i köket.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_housing_m1",
+      "step_id": "request",
+      "text_sv": "Kranen i köket läcker inte.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_housing_m1",
+      "step_id": "request",
+      "text_sv": "Kranen i köket är ny.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_housing_m2",
+      "step_id": "request",
+      "text_sv": "Nu stannar maskinen igen.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_housing_m2",
+      "step_id": "request",
+      "text_sv": "Tvättmaskinen stannar inte igen.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_housing_m2",
+      "step_id": "request",
+      "text_sv": "Tvättmaskinen är vit.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_housing_m3",
+      "step_id": "request",
+      "text_sv": "Kan vi boka om tiden för besöket?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_housing_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ändra tiden för besöket.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_housing_m3",
+      "step_id": "request",
+      "text_sv": "Besöket var trevligt.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "request",
+      "text_sv": "Det kom fel storlek på skorna.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "request",
+      "text_sv": "Jag fick inte fel storlek.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "request",
+      "text_sv": "Skorna är fina.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "request",
+      "text_sv": "Jag undrar var mitt paket finns.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte veta var paketet är.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "request",
+      "text_sv": "Paketet väger två kilo.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver avsluta abonnemanget.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte avsluta abonnemanget.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "request",
+      "text_sv": "Abonnemanget kostar mycket.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "request",
+      "text_sv": "Hur gör jag för att komma ikapp undervisningen?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ta igen lektionen.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "request",
+      "text_sv": "Lektionen är på tisdag.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "request",
+      "text_sv": "Jag behöver öva på att ställa frågor.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte träna på att ställa frågor.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "request",
+      "text_sv": "Frågorna är på svenska.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "request",
+      "text_sv": "Kan jag byta gruppen?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte byta till en annan grupp.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "request",
+      "text_sv": "Gruppen har tolv elever.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "request",
+      "text_sv": "Tack för din inbjudan, kan vi välja en annan dag?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "request",
+      "text_sv": "Tack för inbjudan, jag vill inte föreslå en annan dag.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "request",
+      "text_sv": "Jag gillar att träffa vänner.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "request",
+      "text_sv": "Jag föredrar vegetariskt.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte ha vegetarisk mat.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "request",
+      "text_sv": "Maten luktar gott.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "request",
+      "text_sv": "Hur kan vi dela kostnaderna?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "request",
+      "text_sv": "Jag undrar inte hur vi ska dela kostnaden.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "request",
+      "text_sv": "Festen är på lördag.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "request",
+      "text_sv": "Jag behöver få tid att träna svenska.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte hitta tid för att öva svenska.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "request",
+      "text_sv": "Svenska är ett språk.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "request",
+      "text_sv": "Notiser stör mig när jag läser på kvällen.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "request",
+      "text_sv": "Meddelanden stör mig inte när jag läser.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "request",
+      "text_sv": "Min mobil är ny.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "request",
+      "text_sv": "Jag missade några pass och vill börja igen nu.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "request",
+      "text_sv": "Jag missade pass men vill inte börja igen.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "request",
+      "text_sv": "Övningen börjar klockan fem.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "request",
+      "text_sv": "Vi behöver dela städningen rättvist.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte dela städningen jämnare.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "request",
+      "text_sv": "Köket har vita väggar.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "request",
+      "text_sv": "Kan vi meddela varandra innan gäster kommer?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte att vi säger till innan gäster kommer.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "request",
+      "text_sv": "Gästerna kommer från en annan stad.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver tyst för att plugga när du har möten.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver inte lugn för att studera under möten.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "request",
+      "text_sv": "Rummet har ett stort fönster.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_project_m1",
+      "step_id": "request",
+      "text_sv": "Jag hoppas att alla kan delta.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_project_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte att alla ska kunna delta.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_project_m1",
+      "step_id": "request",
+      "text_sv": "Parken ligger vid ån.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_project_m2",
+      "step_id": "request",
+      "text_sv": "Jag kan hjälpa till, men vill begränsa min uppgift.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_project_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte hjälpa till eller begränsa någon uppgift.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_project_m2",
+      "step_id": "request",
+      "text_sv": "Skyltarna är blå.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_community_project_m3",
+      "step_id": "request",
+      "text_sv": "Vi behöver förstå varför det var få deltagare och vad vi kan ändra.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_community_project_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte förstå varför få kom eller vad vi kan ändra.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_community_project_m3",
+      "step_id": "request",
+      "text_sv": "Det regnade i går.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "request",
+      "text_sv": "Kan vi jämföra kvällskurs med att studera själv?",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "request",
+      "text_sv": "Jag vill inte jämföra kvällskurs med att studera själv.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "request",
+      "text_sv": "Skolan ligger nära stationen.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "request",
+      "text_sv": "Jag behöver förklara en styrka genom ett konkret exempel.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "request",
+      "text_sv": "Jag vill inte förklara mina styrkor med ett konkret exempel.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "request",
+      "text_sv": "Intervjun börjar på måndag.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    },
+    {
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "request",
+      "text_sv": "Jag behöver jämföra restid och chansen att lära mig mer.",
+      "expected_intent": "request_answer",
+      "kind": "heldout_positive"
+    },
+    {
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "request",
+      "text_sv": "Jag vill inte jämföra restiden med att lära mig mer.",
+      "expected_intent": null,
+      "kind": "heldout_negation"
+    },
+    {
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "request",
+      "text_sv": "Bussen är röd.",
+      "expected_intent": null,
+      "kind": "heldout_nearby_topic"
+    }
+  ]
+}

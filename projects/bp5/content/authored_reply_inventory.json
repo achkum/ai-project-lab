@@ -1,0 +1,2826 @@
+{
+  "version": "2026-11-01.3",
+  "provenance": "Explicit complete replies reviewed from the natural-reply repair corpus. They are training/authoring inventory, not held-out validation. Independent review cases are not included here.",
+  "missions": {
+    "cafe_m1": {
+      "request": {
+        "request_answer": [
+          "En kaffe skulle jag vilja ha, tack."
+        ]
+      },
+      "choice": {
+        "choose_stay": [
+          "Jag sitter gärna här.",
+          "Här, tack.",
+          "Jag dricker kaffet här."
+        ],
+        "choose_takeaway": [
+          "Jag tar med kaffet.",
+          "Ta med, tack.",
+          "Jag vill ha kaffet med mig."
+        ]
+      },
+      "confirm_stay": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_takeaway": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "cafe_m2": {
+      "request": {
+        "request_answer": [
+          "Hur mycket får jag betala för smörgåsen?"
+        ]
+      },
+      "choice": {
+        "choose_sandwich": [
+          "En smörgås, tack.",
+          "Jag skulle vilja ha smörgåsen.",
+          "Jag väljer smörgåsen."
+        ],
+        "choose_bun": [
+          "En bulle, tack.",
+          "Jag skulle vilja ha en bulle.",
+          "Bullen blir bra."
+        ]
+      },
+      "confirm_sandwich": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_bun": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "cafe_m3": {
+      "request": {
+        "request_answer": [
+          "Ursäkta, det var te jag beställde."
+        ]
+      },
+      "choice": {
+        "choose_black": [
+          "Svart, tack.",
+          "Jag tar svart te.",
+          "Det svarta teet, tack."
+        ],
+        "choose_green": [
+          "Grönt, tack.",
+          "Jag tar grönt te.",
+          "Det gröna teet, tack."
+        ]
+      },
+      "confirm_black": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_green": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "groceries_m1": {
+      "request": {
+        "request_answer": [
+          "Ursäkta, var har ni ris?"
+        ]
+      },
+      "choice": {
+        "choose_white": [
+          "Vanligt ris, tack.",
+          "Jag tar det vanliga riset.",
+          "Jag vill ha vanligt ris."
+        ],
+        "choose_wholegrain": [
+          "Fullkornsris, tack.",
+          "Jag tar fullkornsriset.",
+          "Jag skulle vilja ha fullkornsris."
+        ]
+      },
+      "confirm_white": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_wholegrain": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "groceries_m2": {
+      "request": {
+        "request_answer": [
+          "Tvåhundra gram ost, tack."
+        ]
+      },
+      "choice": {
+        "choose_slices": [
+          "Skivad, tack.",
+          "Kan du skiva den?",
+          "Jag vill gärna ha osten skivad."
+        ],
+        "choose_piece": [
+          "En bit, tack.",
+          "Jag tar osten i en hel bit.",
+          "Kan jag få den i en bit?"
+        ]
+      },
+      "confirm_slices": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_piece": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "groceries_m3": {
+      "request": {
+        "request_answer": [
+          "Har ni någon havredryck?"
+        ]
+      },
+      "choice": {
+        "choose_substitute": [
+          "Sojadryck går bra.",
+          "Jag kan ta sojadrycken.",
+          "Sojadryck, tack."
+        ],
+        "choose_wait": [
+          "Jag kommer tillbaka imorgon.",
+          "Då väntar jag till i morgon.",
+          "I morgon passar bättre."
+        ]
+      },
+      "confirm_substitute": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_wait": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "transport_m1": {
+      "request": {
+        "request_answer": [
+          "När kommer nästa buss mot centrum?"
+        ]
+      },
+      "choice": {
+        "choose_wait": [
+          "Jag kan vänta här.",
+          "Då stannar jag här och väntar.",
+          "Jag sitter kvar här."
+        ],
+        "choose_go": [
+          "Jag går dit nu.",
+          "Då går jag till hållplatsen.",
+          "Jag går till busshållplatsen nu."
+        ]
+      },
+      "confirm_wait": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_go": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "transport_m2": {
+      "request": {
+        "request_answer": [
+          "En biljett till stationen, tack."
+        ]
+      },
+      "choice": {
+        "choose_single": [
+          "En enkelbiljett, tack.",
+          "Bara dit, tack.",
+          "Jag behöver bara åka till stationen."
+        ],
+        "choose_return": [
+          "Tur och retur, tack.",
+          "Jag åker tillbaka idag.",
+          "Jag ska hem igen i dag."
+        ]
+      },
+      "confirm_single": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_return": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "transport_m3": {
+      "request": {
+        "request_answer": [
+          "Kommer jag till torget med den här bussen?"
+        ]
+      },
+      "choice": {
+        "choose_park": [
+          "Via parken blir bra.",
+          "Jag tar bussen via parken.",
+          "Via parken, tack."
+        ],
+        "choose_direct": [
+          "Direktbussen, tack.",
+          "Jag vill åka direkt.",
+          "Jag väljer den direkta bussen."
+        ]
+      },
+      "confirm_park": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_direct": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "library_m1": {
+      "request": {
+        "request_answer": [
+          "Kan du hjälpa mig hitta en lättläst svensk bok?"
+        ]
+      },
+      "choice": {
+        "choose_story": [
+          "En berättelse, tack.",
+          "Jag läser gärna en kort berättelse.",
+          "Jag vill ha en roman."
+        ],
+        "choose_nature": [
+          "En naturbok, tack.",
+          "Jag läser gärna om naturen.",
+          "En bok om naturen blir bra."
+        ]
+      },
+      "confirm_story": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_nature": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "library_m2": {
+      "request": {
+        "request_answer": [
+          "Kan jag få behålla boken lite längre?"
+        ]
+      },
+      "choice": {
+        "choose_paper": [
+          "På papper, tack.",
+          "Kan du skriva ut datumet?",
+          "Jag tar gärna en lapp med datumet."
+        ],
+        "choose_screen": [
+          "På skärmen går bra.",
+          "Jag kan läsa det på skärmen.",
+          "Jag tittar på skärmen."
+        ]
+      },
+      "confirm_paper": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_screen": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "library_m3": {
+      "request": {
+        "request_answer": [
+          "Kan du hjälpa mig att skriva ut min fil?"
+        ]
+      },
+      "choice": {
+        "choose_colour": [
+          "I färg, tack.",
+          "Jag väljer färgutskrift.",
+          "Skriv gärna ut i färg."
+        ],
+        "choose_bw": [
+          "Svartvitt, tack.",
+          "Jag väljer svartvit utskrift.",
+          "Det räcker med svartvitt."
+        ]
+      },
+      "confirm_colour": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_bw": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "clothes_m1": {
+      "request": {
+        "request_answer": [
+          "Finns den här tröjan i storlek M?"
+        ]
+      },
+      "choice": {
+        "choose_blue": [
+          "Den blå, tack.",
+          "Jag skulle gärna prova den blåa.",
+          "Blått blir bra."
+        ],
+        "choose_green": [
+          "Den gröna, tack.",
+          "Jag skulle gärna prova den gröna.",
+          "Grönt blir bra."
+        ]
+      },
+      "confirm_blue": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_green": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "clothes_m2": {
+      "request": {
+        "request_answer": [
+          "Var får jag prova byxorna?"
+        ]
+      },
+      "choice": {
+        "choose_wait": [
+          "Jag kan vänta här.",
+          "Då väntar jag vid spegeln.",
+          "Jag stannar här så länge."
+        ],
+        "choose_return": [
+          "Jag kommer om fem minuter.",
+          "Då kommer jag tillbaka om 5 minuter.",
+          "Om fem minuter blir bra."
+        ]
+      },
+      "confirm_wait": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_return": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "clothes_m3": {
+      "request": {
+        "request_answer": [
+          "Här fattas det en knapp på skjortan."
+        ]
+      },
+      "choice": {
+        "choose_same": [
+          "En annan skjorta, tack.",
+          "Kan du hämta en likadan skjorta?",
+          "Jag tar gärna en annan skjorta."
+        ],
+        "choose_other": [
+          "Jag vill hellre se något annat.",
+          "Visa gärna en annan modell.",
+          "Något annat, tack."
+        ]
+      },
+      "confirm_same": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_other": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "reception_m1": {
+      "request": {
+        "request_answer": [
+          "Jag har bokat ett möte till klockan tio."
+        ]
+      },
+      "choice": {
+        "choose_teacher": [
+          "Läraren, tack.",
+          "Jag har bokat tid med läraren.",
+          "Det är läraren jag ska träffa."
+        ],
+        "choose_adviser": [
+          "Vägledaren, tack.",
+          "Jag har en tid med vägledaren.",
+          "Det är vägledaren jag ska träffa."
+        ]
+      },
+      "confirm_teacher": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_adviser": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "reception_m2": {
+      "request": {
+        "request_answer": [
+          "Kim heter jag."
+        ]
+      },
+      "choice": {
+        "choose_spell": [
+          "Det stavas K I M.",
+          "K, I, M.",
+          "Namnet stavas K I M."
+        ],
+        "choose_write": [
+          "Jag skriver det gärna.",
+          "Jag kan skriva det åt dig.",
+          "Jag skriver namnet på lappen."
+        ]
+      },
+      "confirm_spell": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_write": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "reception_m3": {
+      "request": {
+        "request_answer": [
+          "Var vill du att jag väntar?"
+        ]
+      },
+      "choice": {
+        "choose_upstairs": [
+          "På plan två, tack.",
+          "Jag går upp till andra våningen.",
+          "Jag väntar där uppe."
+        ],
+        "choose_downstairs": [
+          "Här nere blir bra.",
+          "Jag stannar i receptionen.",
+          "På bottenvåningen, tack."
+        ]
+      },
+      "confirm_upstairs": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_downstairs": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "parcel_m1": {
+      "request": {
+        "request_answer": [
+          "Jag kommer för att hämta ett paket."
+        ]
+      },
+      "choice": {
+        "choose_phone": [
+          "I mobilen.",
+          "Koden finns i min telefon.",
+          "Jag visar koden på mobilen."
+        ],
+        "choose_paper": [
+          "På en lapp.",
+          "Jag har skrivit koden på papper.",
+          "Koden står på lappen."
+        ]
+      },
+      "confirm_phone": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_paper": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "parcel_m2": {
+      "request": {
+        "request_answer": [
+          "Kan ni hjälpa mig skicka ett paket?"
+        ]
+      },
+      "choice": {
+        "choose_box": [
+          "En kartong, tack.",
+          "Kan jag få en kartong?",
+          "Jag skulle behöva en kartong."
+        ],
+        "choose_packed": [
+          "Det är redan packat.",
+          "Paketet är färdigpackat.",
+          "Jag har packat det hemma."
+        ]
+      },
+      "confirm_box": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_packed": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "parcel_m3": {
+      "request": {
+        "request_answer": [
+          "Kan du hjälpa mig leta fram koden?"
+        ]
+      },
+      "choice": {
+        "choose_search": [
+          "Jag kollar i meddelandet.",
+          "Jag kan leta i mitt sms.",
+          "Jag tittar i sms:et."
+        ],
+        "choose_later": [
+          "Jag får komma tillbaka senare.",
+          "Då återkommer jag med koden.",
+          "Jag kommer senare med koden."
+        ]
+      },
+      "confirm_search": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_later": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_centre_m1": {
+      "request": {
+        "request_answer": [
+          "Vilken tid är det språkcafé?"
+        ]
+      },
+      "choice": {
+        "choose_monday": [
+          "På måndag, tack.",
+          "Jag kommer gärna på måndag.",
+          "Måndagen blir bra."
+        ],
+        "choose_thursday": [
+          "På torsdag, tack.",
+          "Jag kommer gärna på torsdag.",
+          "Torsdagen blir bra."
+        ]
+      },
+      "confirm_monday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_thursday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_centre_m2": {
+      "request": {
+        "request_answer": [
+          "Får jag låna en boll?"
+        ]
+      },
+      "choice": {
+        "choose_hour": [
+          "Om en timme, tack.",
+          "Jag kan lämna tillbaka den om en timme.",
+          "Jag kommer tillbaka med den om 1 timme."
+        ],
+        "choose_closing": [
+          "Före stängning, tack.",
+          "Jag lämnar den innan ni stänger.",
+          "Jag kommer tillbaka innan stängning."
+        ]
+      },
+      "confirm_hour": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_closing": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_centre_m3": {
+      "request": {
+        "request_answer": [
+          "Jag skulle behöva avboka min plats."
+        ]
+      },
+      "choice": {
+        "choose_rebook": [
+          "Jag bokar gärna en ny dag.",
+          "Kan vi boka om till en annan dag?",
+          "Boka om, tack."
+        ],
+        "choose_cancel": [
+          "Jag avbokar bara.",
+          "Bara avbokning, tack.",
+          "Jag vill avboka utan att boka något nytt."
+        ]
+      },
+      "confirm_rebook": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_cancel": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "neighbours_m1": {
+      "request": {
+        "request_answer": [
+          "Skulle du vilja vattna min blomma?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag åker bort över helgen."
+        ]
+      },
+      "choice": {
+        "choose_friday": [
+          "På fredag, tack.",
+          "Jag kan lämna nyckeln på fredag.",
+          "Fredag blir bra för nyckeln."
+        ],
+        "choose_saturday": [
+          "På lördag morgon, tack.",
+          "Jag kommer med nyckeln lördag morgon.",
+          "Lördag morgon passar mig."
+        ]
+      },
+      "confirm_friday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_saturday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "neighbours_m2": {
+      "request": {
+        "request_answer": [
+          "Får jag låna skruvmejseln av dig?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag behöver sätta fast ett handtag."
+        ]
+      },
+      "choice": {
+        "choose_tonight": [
+          "Ikväll, tack.",
+          "Du får tillbaka den i kväll.",
+          "Jag kan lämna tillbaka den ikväll."
+        ],
+        "choose_tomorrow": [
+          "Imorgon, tack.",
+          "Du får tillbaka den i morgon.",
+          "Jag kan lämna tillbaka den imorgon."
+        ]
+      },
+      "confirm_tonight": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_tomorrow": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "neighbours_m3": {
+      "request": {
+        "request_answer": [
+          "Jag skulle vilja prata om musiken."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag börjar arbeta klockan sex och behöver lägga mig tidigt."
+        ]
+      },
+      "choice": {
+        "choose_lower": [
+          "Kan du sänka ljudet?",
+          "Sänk gärna volymen.",
+          "Lägre volym skulle hjälpa."
+        ],
+        "choose_headphones": [
+          "Använd gärna hörlurar.",
+          "Hörlurar blir bäst.",
+          "Det vore bra om du tog hörlurar."
+        ]
+      },
+      "confirm_lower": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_headphones": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "colleagues_m1": {
+      "request": {
+        "request_answer": [
+          "Skulle vi kunna byta pass på fredag?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "På fredag kväll ska jag på ett viktigt möte."
+        ]
+      },
+      "choice": {
+        "choose_swap": [
+          "Jag tar torsdag kväll.",
+          "Torsdag kväll fungerar för mig.",
+          "Jag kan jobba på torsdag kväll."
+        ],
+        "choose_ask": [
+          "Vi frågar någon annan på jobbet.",
+          "Kan vi fråga en annan kollega?",
+          "Låt oss fråga en kollega till."
+        ]
+      },
+      "confirm_swap": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_ask": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "colleagues_m2": {
+      "request": {
+        "request_answer": [
+          "Har du möjlighet att hjälpa mig med tabellen?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag förstår inte riktigt hur jag ska räkna ut summan."
+        ]
+      },
+      "choice": {
+        "choose_now": [
+          "Tio minuter nu blir bra.",
+          "Vi tar tio minuter nu.",
+          "10 minuter direkt räcker."
+        ],
+        "choose_later": [
+          "En halvtimme efter lunch, tack.",
+          "Vi tar 30 minuter efter lunch.",
+          "Efter lunch kan vi ta en halvtimme."
+        ]
+      },
+      "confirm_now": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_later": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "colleagues_m3": {
+      "request": {
+        "request_answer": [
+          "Vad ska jag prioritera, listan eller lagret?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Vilken tid behöver listan vara färdig?"
+        ]
+      },
+      "choice": {
+        "choose_alone": [
+          "Jag kan göra listan själv.",
+          "Jag gör den på egen hand.",
+          "Jag tar hand om listan själv."
+        ],
+        "choose_together": [
+          "Vi tittar på första raden ihop.",
+          "Vi kan gå igenom första raden tillsammans.",
+          "Låt oss börja med första raden ihop."
+        ]
+      },
+      "confirm_alone": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_together": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "housing_m1": {
+      "request": {
+        "request_answer": [
+          "Min kran i köket läcker."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Det har droppat sedan igår kväll."
+        ]
+      },
+      "choice": {
+        "choose_tuesday": [
+          "På tisdag förmiddag, tack.",
+          "Jag kan vara hemma tisdag förmiddag.",
+          "Tisdagsförmiddagen passar."
+        ],
+        "choose_wednesday": [
+          "På onsdag eftermiddag, tack.",
+          "Jag kan vara hemma onsdag eftermiddag.",
+          "Onsdagseftermiddagen passar."
+        ]
+      },
+      "confirm_tuesday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_wednesday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "housing_m2": {
+      "request": {
+        "request_answer": [
+          "Tvättmaskinen stannar fortfarande."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Efter ungefär tio minuter stannar maskinen."
+        ]
+      },
+      "choice": {
+        "choose_call": [
+          "Ring mig gärna.",
+          "Ett telefonsamtal blir bra.",
+          "Jag vill gärna bli uppringd."
+        ],
+        "choose_visit": [
+          "Ett besök, tack.",
+          "Jag bokar gärna ett besök.",
+          "Kan någon komma och titta på den?"
+        ]
+      },
+      "confirm_call": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_visit": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "housing_m3": {
+      "request": {
+        "request_answer": [
+          "Går det att boka om besöket på torsdag?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "På torsdag förmiddag är jag på jobbet."
+        ]
+      },
+      "choice": {
+        "choose_thursday": [
+          "Efter tre på torsdag passar.",
+          "Torsdag efter klockan tre blir bra.",
+          "Torsdag efter 15 går bra."
+        ],
+        "choose_friday": [
+          "På fredag morgon, tack.",
+          "Jag kan på fredag morgon.",
+          "Fredagsmorgonen passar."
+        ]
+      },
+      "confirm_thursday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_friday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "customer_service_m1": {
+      "request": {
+        "request_answer": [
+          "Skorna jag fick är i fel storlek."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag skulle ha storlek 39 men fick 41."
+        ]
+      },
+      "choice": {
+        "choose_exchange": [
+          "Jag byter gärna till rätt storlek.",
+          "Ett byte till rätt storlek, tack.",
+          "Kan jag få rätt storlek i stället?"
+        ],
+        "choose_refund": [
+          "Jag undrar om jag kan få pengarna tillbaka.",
+          "Kan jag få en återbetalning?",
+          "Återbetalning, tack."
+        ]
+      },
+      "confirm_exchange": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_refund": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "customer_service_m2": {
+      "request": {
+        "request_answer": [
+          "Min beställning är sen, var är den?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Presenten behövs till en fest på lördag."
+        ]
+      },
+      "choice": {
+        "choose_today": [
+          "En uppdatering idag, tack.",
+          "Jag vill gärna få besked i dag.",
+          "Kan ni uppdatera mig idag?"
+        ],
+        "choose_investigate": [
+          "Fråga lagret och återkom imorgon.",
+          "Ni får gärna kontakta lagret och svara i morgon.",
+          "Kontrollera med lagret till imorgon, tack."
+        ]
+      },
+      "confirm_today": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_investigate": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "customer_service_m3": {
+      "request": {
+        "request_answer": [
+          "Jag skulle vilja avsluta abonnemanget."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "När är sista dagen för abonnemanget?"
+        ]
+      },
+      "choice": {
+        "choose_written": [
+          "Jag kan läsa villkoren på egen hand.",
+          "Skicka villkoren så läser jag själv.",
+          "Jag läser dem gärna själv."
+        ],
+        "choose_explain": [
+          "Förklara gärna villkoren för mig.",
+          "Vi går igenom dem ihop.",
+          "Jag vill gärna ha hjälp att förstå villkoren."
+        ]
+      },
+      "confirm_written": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_explain": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "course_planning_m1": {
+      "request": {
+        "request_answer": [
+          "Kan du hjälpa mig ta igen det jag missade?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Mitt pass på jobbet blev ändrat samma dag."
+        ]
+      },
+      "choice": {
+        "choose_alone": [
+          "Jag kan läsa sammanfattningen själv.",
+          "Jag läser den på egen hand.",
+          "Jag börjar med att läsa själv."
+        ],
+        "choose_peer": [
+          "Jag tar hjälp av en klasskamrat.",
+          "Jag går gärna igenom den med någon i klassen.",
+          "Med en klasskamrat blir bra."
+        ]
+      },
+      "confirm_alone": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_peer": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "course_planning_m2": {
+      "request": {
+        "request_answer": [
+          "Jag skulle vilja öva på hur man ställer frågor."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "När folk talar fort blir jag osäker."
+        ]
+      },
+      "choice": {
+        "choose_shop": [
+          "Vi tar frågor i en butik först.",
+          "En affär, tack.",
+          "Vi kan börja med att fråga i affären."
+        ],
+        "choose_neighbour": [
+          "Vi tar frågor till en granne först.",
+          "En granne, tack.",
+          "Vi kan börja med frågor till grannen."
+        ]
+      },
+      "confirm_shop": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_neighbour": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "course_planning_m3": {
+      "request": {
+        "request_answer": [
+          "Finns det en annan grupp jag kan byta till?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag jobbar kvällstid."
+        ]
+      },
+      "choice": {
+        "choose_morning": [
+          "Morgongruppen, tack.",
+          "Jag är intresserad av gruppen på morgonen.",
+          "Jag vill veta mer om morgongruppen."
+        ],
+        "choose_afternoon": [
+          "Eftermiddagsgruppen, tack.",
+          "Jag är intresserad av gruppen på eftermiddagen.",
+          "Jag vill veta mer om eftermiddagsgruppen."
+        ]
+      },
+      "confirm_morning": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_afternoon": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "social_plans_m1": {
+      "request": {
+        "request_answer": [
+          "Jag kan inte komma på fredag, men vill gärna ses en annan dag."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "På fredag hjälper jag familjen."
+        ]
+      },
+      "choice": {
+        "choose_sunday": [
+          "På söndag kan jag.",
+          "Söndag blir bra.",
+          "Jag kommer gärna på söndag."
+        ],
+        "choose_nextweek": [
+          "Vi ses över en fika nästa vecka.",
+          "Nästa vecka passar för en fika.",
+          "Vi kan fika nästa vecka."
+        ]
+      },
+      "confirm_sunday": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_nextweek": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "social_plans_m2": {
+      "request": {
+        "request_answer": [
+          "Kan vi laga något vegetariskt?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag kan köpa grönsaker på vägen dit."
+        ]
+      },
+      "choice": {
+        "choose_soup": [
+          "Grönsakssoppa blir gott.",
+          "Vi lagar gärna soppa med grönsaker.",
+          "Grönsakssoppa, tack."
+        ],
+        "choose_pasta": [
+          "En pastarätt blir bra.",
+          "Vi lagar pasta.",
+          "Pasta låter gott."
+        ]
+      },
+      "confirm_soup": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_pasta": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "social_plans_m3": {
+      "request": {
+        "request_answer": [
+          "Kan vi prata om hur vi delar på utgifterna för festen?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag tycker att alla ska ha möjlighet att vara med."
+        ]
+      },
+      "choice": {
+        "choose_limit": [
+          "Vi bestämmer en högsta summa.",
+          "Vi kan ha ett tak för kostnaden.",
+          "Ett maxbelopp blir bra."
+        ],
+        "choose_contribute": [
+          "Var och en bidrar efter förmåga.",
+          "Alla får bidra på det sätt som passar.",
+          "Vi låter alla hjälpa till på sitt sätt."
+        ]
+      },
+      "confirm_limit": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_contribute": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "time_balance_m1": {
+      "request": {
+        "request_answer": [
+          "Jag behöver få in mer svenskövning i min vardag."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Mitt jobbschema är olika från vecka till vecka."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Jag kan träna en liten stund varje morgon."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det är lugnt, vilket är bra, men jag är också trött då."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Om morgonen kör ihop sig skriver jag ett meddelande på kvällen."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad tror du passar bäst?"
+        ]
+      },
+      "choice": {
+        "choose_morning": [
+          "Tio minuter varje morgon låter bra.",
+          "Jag testar 10 minuter på morgonen.",
+          "Tio minuter på morgonen, tack."
+        ],
+        "choose_twice": [
+          "Två längre pass varje vecka blir bra.",
+          "Jag testar två lite längre stunder i veckan.",
+          "Två längre stunder per vecka, tack."
+        ]
+      },
+      "confirm_morning": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_twice": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "time_balance_m2": {
+      "request": {
+        "request_answer": [
+          "Notiserna i mobilen stör mig när jag läser."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "När jag svarar glömmer jag var i texten jag var."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Jag skulle kunna lämna telefonen i ett annat rum."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det hjälper mig att koncentrera mig, men jag riskerar att missa samtal."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "När jag väntar på ett viktigt samtal stänger jag bara av gruppnotiserna."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Tycker du att tre dagar är lagom att testa?"
+        ]
+      },
+      "choice": {
+        "choose_room": [
+          "Jag lägger telefonen i ett annat rum.",
+          "Mobilen får ligga i ett annat rum.",
+          "Ett annat rum för mobilen blir bra."
+        ],
+        "choose_notifications": [
+          "Jag stänger av aviseringarna när jag läser.",
+          "Notiserna får vara av under läsningen.",
+          "Jag tar bort notiserna medan jag läser."
+        ]
+      },
+      "confirm_room": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_notifications": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "time_balance_m3": {
+      "request": {
+        "request_answer": [
+          "Jag vill ta nya tag efter att ha missat övningen."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Det tog längre tid än jag trodde."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Jag kan testa fem minuter åt gången."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det är bra att komma igång, men jag får mindre gjort."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Missar jag ett tillfälle så fortsätter jag dagen efter."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Kan du höra hur det går för mig på söndag?"
+        ]
+      },
+      "choice": {
+        "choose_message": [
+          "Jag skriver ett meddelande varje dag.",
+          "Ett meddelande om dagen blir bra.",
+          "Jag börjar med ett dagligt meddelande."
+        ],
+        "choose_partner": [
+          "Vi övar tillsammans en gång i veckan.",
+          "Jag tränar med dig varje vecka.",
+          "En gång i veckan med dig blir bra."
+        ]
+      },
+      "confirm_message": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_partner": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "shared_home_m1": {
+      "request": {
+        "request_answer": [
+          "Kan vi dela upp städningen lite mer rättvist?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Den här veckan har jag gjort rent i köket tre gånger."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Vi kan göra ett enkelt schema."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det blir tydligare, men också mindre flexibelt."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Jobbar någon sent kan vi byta dagar."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad känns mest rättvist för dig?"
+        ]
+      },
+      "choice": {
+        "choose_schedule": [
+          "Vi testar ett schema för veckan.",
+          "Ett veckoschema blir bra.",
+          "Vi kan prova veckoschemat."
+        ],
+        "choose_fixed": [
+          "Vi tar en fast uppgift var.",
+          "Varsin bestämd uppgift blir bra.",
+          "Vi väljer en uppgift var som alltid är vår."
+        ]
+      },
+      "confirm_schedule": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_fixed": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "shared_home_m2": {
+      "request": {
+        "request_answer": [
+          "Kan vi meddela varandra innan det kommer gäster?"
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Ibland tänker jag plugga i vardagsrummet."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Vi kan meddela varandra kort dagen före."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Vi kan planera bättre, men det blir mindre spontant."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Vid ett spontant besök frågar vi varandra först."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad skulle du behöva för att få det att fungera?"
+        ]
+      },
+      "choice": {
+        "choose_message": [
+          "Vi meddelar varandra dagen innan.",
+          "Ett meddelande dagen före blir bra.",
+          "Vi skickar ett sms dagen innan."
+        ],
+        "choose_weekly": [
+          "Vi pratar ihop oss på söndagar.",
+          "Vi stämmer av varje söndag.",
+          "En avstämning på söndag varje vecka blir bra."
+        ]
+      },
+      "confirm_message": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_weekly": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "shared_home_m3": {
+      "request": {
+        "request_answer": [
+          "Jag behöver få läsa i lugn och ro när du har möten."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "På förmiddagarna läser jag texter som kräver koncentration."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Vi kan bestämma olika tider för att använda rummet."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Tydliga tider är bra, men mötestiderna kan flyttas."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Ändras tiden kan jag gå till biblioteket och läsa en stund."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad passar bäst med dina möten?"
+        ]
+      },
+      "choice": {
+        "choose_time": [
+          "Vi turas om att använda rummet.",
+          "Vi kan dela upp tiden i rummet.",
+          "Olika tider i samma rum blir bra."
+        ],
+        "choose_places": [
+          "Vi testar att sitta på olika ställen.",
+          "Vi sitter på olika platser.",
+          "Vi väljer varsin plats."
+        ]
+      },
+      "confirm_time": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_places": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_project_m1": {
+      "request": {
+        "request_answer": [
+          "Jag hoppas att alla ska ha möjlighet att komma."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "En del har svårt att gå långt, så det behöver vi tänka på."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Vi kan titta på parken vid busshållplatsen."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det kostar inget där, men vi vet inte hur vädret blir."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Vid regn kan vi flytta till en lokal som vi har i reserv."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad är lättast att ta sig till, tycker du?"
+        ]
+      },
+      "choice": {
+        "choose_park": [
+          "Vi träffas i parken och har en lokal i reserv.",
+          "Parken med reservlokal blir bra.",
+          "Vi testar en parkträff med en reservlokal."
+        ],
+        "choose_indoors": [
+          "Vi bokar rummet i föreningen direkt.",
+          "Föreningsrummet blir bra.",
+          "Jag tycker vi ska boka föreningsrummet."
+        ]
+      },
+      "confirm_park": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_indoors": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_project_m2": {
+      "request": {
+        "request_answer": [
+          "Jag vill hjälpa till, men jag har begränsat med tid."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "På lördag har jag en timme att hjälpa till."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Jag kan stå vid ingången och hälsa besökarna välkomna."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Jag kan göra nytta direkt, men någon måste ta över efter mig."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Om jag får svårt på lördag kan jag göra skyltar hemma."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad behöver ni mest hjälp med av de här uppgifterna?"
+        ]
+      },
+      "choice": {
+        "choose_welcome": [
+          "Jag hälsar besökarna välkomna den första timmen.",
+          "Första timmen tar jag emot folk.",
+          "Jag kan välkomna besökare under första timmen."
+        ],
+        "choose_signs": [
+          "Jag gör skyltarna hemma.",
+          "Jag kan förbereda skyltar hemma.",
+          "Skyltarna hemma blir min uppgift."
+        ]
+      },
+      "confirm_welcome": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_signs": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "community_project_m3": {
+      "request": {
+        "request_answer": [
+          "Jag vill förstå varför det kom så få till träffen."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Tolv anmälde sig men bara fem dök upp."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Tiden kanske fungerade dåligt för flera av dem."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Vi får en chans till, men vet fortfarande inte säkert vad problemet var."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Vi kan be deltagarna berätta vad som passar dem bättre."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad tycker du är ett lagom första steg?"
+        ]
+      },
+      "choice": {
+        "choose_survey": [
+          "Vi gör en liten enkät först.",
+          "En kort enkät blir en bra början.",
+          "Jag tycker vi ska börja med en kort enkät."
+        ],
+        "choose_calls": [
+          "Vi ringer dem som gärna vill prata.",
+          "Vi kan ringa deltagare som vill berätta.",
+          "Vi pratar i telefon med frivilliga deltagare."
+        ]
+      },
+      "confirm_survey": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_calls": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "next_steps_m1": {
+      "request": {
+        "request_answer": [
+          "Jag funderar på kvällskurs eller att plugga själv."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag behöver öva mer på att prata med andra."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "På en kurs får jag prata regelbundet och få feedback."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Det ger struktur, men gör tiderna mindre flexibla."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Krockar tiderna kan jag öva med en språkkompis."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad tror du ger mig mest övning i samtal?"
+        ]
+      },
+      "choice": {
+        "choose_class": [
+          "Jag frågar om en lektion på prov.",
+          "En provlektion låter bra.",
+          "Jag vill undersöka möjligheten att prova en lektion."
+        ],
+        "choose_selfstudy": [
+          "Jag börjar med en egen plan för studierna.",
+          "Jag testar att planera mina studier själv först.",
+          "En egen studieplan blir bra till att börja med."
+        ]
+      },
+      "confirm_class": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_selfstudy": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "next_steps_m2": {
+      "request": {
+        "request_answer": [
+          "Jag vill träna på att ge ett konkret exempel under intervjun."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Jag vill visa att jag lyssnar och samarbetar bra."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "När vi gjorde en gruppuppgift hjälpte jag till att fördela arbetet."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Detaljer gör det tydligt, men svaret riskerar att bli för långt."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Tappar jag tråden kan jag säga det viktigaste i en kort sammanfattning."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Är det lätt att hänga med i mitt exempel?"
+        ]
+      },
+      "choice": {
+        "choose_aloud": [
+          "Jag börjar med att säga det högt.",
+          "Högt först, tack.",
+          "Jag övar gärna muntligt först."
+        ],
+        "choose_notes": [
+          "Jag börjar med att skriva några stödord.",
+          "Stödord först, tack.",
+          "Jag skriver gärna stödord innan jag pratar."
+        ]
+      },
+      "confirm_aloud": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_notes": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    },
+    "next_steps_m3": {
+      "request": {
+        "request_answer": [
+          "Jag behöver fundera på om aktiviteten är värd restiden."
+        ]
+      },
+      "detail_1": {
+        "detail_1_answer": [
+          "Det ser ut att ta 40 minuter i vardera riktningen."
+        ]
+      },
+      "detail_2": {
+        "detail_2_answer": [
+          "Jag skulle kunna möta andra och träna i praktiken."
+        ]
+      },
+      "detail_3": {
+        "detail_3_answer": [
+          "Jag får gemenskap, men mindre tid att vara hemma."
+        ]
+      },
+      "detail_4": {
+        "detail_4_answer": [
+          "Tar resan för lång tid kan jag fråga om att vara med på distans."
+        ]
+      },
+      "detail_5": {
+        "detail_5_answer": [
+          "Vad bör jag ta reda på först, tycker du?"
+        ]
+      },
+      "choice": {
+        "choose_journey": [
+          "Jag testar att åka dit en gång.",
+          "Jag provar att resa dit först.",
+          "En provresa blir bra."
+        ],
+        "choose_digital": [
+          "Jag frågar om jag kan delta digitalt.",
+          "Ett alternativ på distans vill jag fråga om.",
+          "Jag undersöker om det går att vara med digitalt."
+        ]
+      },
+      "confirm_journey": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      },
+      "confirm_digital": {
+        "confirm": [
+          "Ja tack.",
+          "Absolut, det passar.",
+          "Det fungerar fint.",
+          "Gärna."
+        ],
+        "decline": [
+          "Nej tack.",
+          "Det passar tyvärr inte.",
+          "Jag vill helst inte."
+        ]
+      }
+    }
+  }
+}

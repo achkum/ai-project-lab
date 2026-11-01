@@ -1,0 +1,1380 @@
+{
+  "v2": {
+    "version": "2026-11-01.2",
+    "sha256": "bb6184fa9d3b8f7e3281d2eb2ed3fcfa4e09b42ce853bda422c55c9f811ae9be",
+    "case_count": 108,
+    "distinct_utterances": 108,
+    "valid_replies": {
+      "total": 79,
+      "accepted_correctly": 23
+    },
+    "unsafe_or_offtopic": {
+      "total": 29,
+      "rejected_correctly": 16
+    },
+    "by_kind": {
+      "independent_valid_reply": {
+        "total": 79,
+        "passed": 23,
+        "failed": 56
+      },
+      "independent_reject": {
+        "total": 29,
+        "passed": 16,
+        "failed": 13
+      }
+    },
+    "failures": [
+      {
+        "mission_id": "lib_cafe_m1",
+        "step_id": "choice",
+        "text_sv": "Jag tar med kaffet.",
+        "expected_intent": "choose_takeaway",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-001",
+        "reason": "Finite verb directly selects takeaway; known live diagnostic supplied by root.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m2",
+        "step_id": "choice",
+        "text_sv": "Det får bli en bulle.",
+        "expected_intent": "choose_bun",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-002",
+        "reason": "Natural short selection of the cheaper item.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m3",
+        "step_id": "choice",
+        "text_sv": "Jag föredrar det gröna teet.",
+        "expected_intent": "choose_green",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-003",
+        "reason": "Definite adjective and finite preference verb select green tea.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m1",
+        "step_id": "choice",
+        "text_sv": "Jag tar fullkornsriset.",
+        "expected_intent": "choose_wholegrain",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-004",
+        "reason": "Definite noun selects wholegrain.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m2",
+        "step_id": "choice",
+        "text_sv": "Kan du skiva den åt mig?",
+        "expected_intent": "choose_slices",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-005",
+        "reason": "Request for slicing selects slices.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m3",
+        "step_id": "choice",
+        "text_sv": "Då kommer jag tillbaka i morgon.",
+        "expected_intent": "choose_wait",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-006",
+        "reason": "Returning tomorrow selects waiting rather than substitute.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_transport_m2",
+        "step_id": "choice",
+        "text_sv": "Jag ska hem igen senare i dag också.",
+        "expected_intent": "choose_return",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-008",
+        "reason": "Contextual return journey paraphrase.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_transport_m3",
+        "step_id": "choice",
+        "text_sv": "Jag tar bussen som går direkt.",
+        "expected_intent": "choose_direct",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-009",
+        "reason": "Relative clause selects direct route.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_library_m2",
+        "step_id": "choice",
+        "text_sv": "Skriv gärna ut datumet åt mig.",
+        "expected_intent": "choose_paper",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-011",
+        "reason": "Request for printed date selects paper.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_clothes_m3",
+        "step_id": "choice",
+        "text_sv": "Har ni en likadan där alla knappar sitter kvar?",
+        "expected_intent": "choose_same",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-015",
+        "reason": "Replacement of same shirt rather than another product.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_parcel_m3",
+        "step_id": "choice",
+        "text_sv": "Jag kollar i meddelandet nu.",
+        "expected_intent": "choose_search",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-021",
+        "reason": "Ordinary verb for checking message selects search.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_centre_m3",
+        "step_id": "choice",
+        "text_sv": "Avboka bara, jag vill inte boka något nytt.",
+        "expected_intent": "choose_cancel",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-024",
+        "reason": "Clear cancellation with negated alternative.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_neighbours_m2",
+        "step_id": "choice",
+        "text_sv": "Du får tillbaka den i morgon.",
+        "expected_intent": "choose_tomorrow",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-026",
+        "reason": "Natural return promise selects tomorrow.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m1",
+        "step_id": "choice",
+        "text_sv": "Jag tar torsdagskvällen, så tar du fredagen.",
+        "expected_intent": "choose_swap",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-028",
+        "reason": "Explicit shift swap in finite verbs.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m2",
+        "step_id": "choice",
+        "text_sv": "Efter lunch passar mig bättre.",
+        "expected_intent": "choose_later",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-029",
+        "reason": "Finite preference selects later.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m3",
+        "step_id": "choice",
+        "text_sv": "Vi kan titta på första raden ihop.",
+        "expected_intent": "choose_together",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-030",
+        "reason": "Synonym ihop selects collaborative review.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m2",
+        "step_id": "choice",
+        "text_sv": "Jag vill att någon kommer hit och tittar.",
+        "expected_intent": "choose_visit",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-032",
+        "reason": "Paraphrase of a home visit.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m1",
+        "step_id": "choice",
+        "text_sv": "Jag går gärna igenom den med en klasskompis.",
+        "expected_intent": "choose_peer",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-037",
+        "reason": "Synonym for classmate and finite verb.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m2",
+        "step_id": "choice",
+        "text_sv": "Vi börjar i affären.",
+        "expected_intent": "choose_shop",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-038",
+        "reason": "Short finite selection of shop setting.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m3",
+        "step_id": "choice",
+        "text_sv": "Jag vill veta mer om gruppen på morgonen.",
+        "expected_intent": "choose_morning",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-039",
+        "reason": "Paraphrase selecting morning group.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m2",
+        "step_id": "choice",
+        "text_sv": "Jag röstar på grönsakssoppan.",
+        "expected_intent": "choose_soup",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-041",
+        "reason": "Ordinary preference expression selects soup.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m3",
+        "step_id": "choice",
+        "text_sv": "Alla kan hjälpa till på sitt eget sätt.",
+        "expected_intent": "choose_contribute",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-042",
+        "reason": "Paraphrase of flexible contributions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m1",
+        "step_id": "choice",
+        "text_sv": "Jag satsar på två längre pass varje vecka.",
+        "expected_intent": "choose_twice",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-043",
+        "reason": "Finite plan selects twice weekly.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m2",
+        "step_id": "choice",
+        "text_sv": "Jag stänger av notiserna medan jag läser.",
+        "expected_intent": "choose_notifications",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-044",
+        "reason": "Finite verb selects disabling notifications.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m1",
+        "step_id": "choice",
+        "text_sv": "Vi tar varsin uppgift och behåller den.",
+        "expected_intent": "choose_fixed",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-046",
+        "reason": "Paraphrase of fixed individual tasks.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m2",
+        "step_id": "choice",
+        "text_sv": "Vi pratar om veckans besök på söndagar.",
+        "expected_intent": "choose_weekly",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-047",
+        "reason": "Paraphrase of weekly coordination.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m3",
+        "step_id": "choice",
+        "text_sv": "Vi provar att sitta på olika ställen.",
+        "expected_intent": "choose_places",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-048",
+        "reason": "Natural synonym for separate places.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_project_m3",
+        "step_id": "choice",
+        "text_sv": "Jag ringer några som vill berätta.",
+        "expected_intent": "choose_calls",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-051",
+        "reason": "Paraphrase of voluntary participant calls.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m1",
+        "step_id": "choice",
+        "text_sv": "Jag vill testa en lektion innan jag bestämmer mig.",
+        "expected_intent": "choose_class",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-052",
+        "reason": "Paraphrase of trial class.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m2",
+        "step_id": "choice",
+        "text_sv": "Jag skriver några stödord först.",
+        "expected_intent": "choose_notes",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-053",
+        "reason": "Finite verb selects notes.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m3",
+        "step_id": "choice",
+        "text_sv": "Jag frågar om jag kan vara med på distans.",
+        "expected_intent": "choose_digital",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-054",
+        "reason": "Paraphrase selecting digital participation.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m1",
+        "step_id": "confirm_takeaway",
+        "text_sv": "Jag hämtar det där.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-055",
+        "reason": "Contextual finite acceptance of pickup at counter.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m1",
+        "step_id": "confirm_white",
+        "text_sv": "Jag behöver hjälp att hitta dit.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-056",
+        "reason": "Implicit inability to go alone requests help.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_transport_m1",
+        "step_id": "confirm_go",
+        "text_sv": "Det behövs inte, jag hittar själv.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-057",
+        "reason": "Natural decline of map assistance.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_library_m1",
+        "step_id": "confirm_story",
+        "text_sv": "Den lånar jag gärna.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-058",
+        "reason": "Finite acceptance of borrowing.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_clothes_m1",
+        "step_id": "confirm_blue",
+        "text_sv": "Inte nu, jag har bråttom.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-059",
+        "reason": "Contextual refusal to try it now.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_reception_m1",
+        "step_id": "confirm_teacher",
+        "text_sv": "Jag väntar här.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-060",
+        "reason": "Finite acceptance of waiting.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_parcel_m1",
+        "step_id": "confirm_phone",
+        "text_sv": "Det går tyvärr inte.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-061",
+        "reason": "Clear inability to accept proposed action.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_centre_m1",
+        "step_id": "confirm_thursday",
+        "text_sv": "Jag kommer då.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-062",
+        "reason": "Finite acceptance of offered day.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_neighbours_m1",
+        "step_id": "confirm_friday",
+        "text_sv": "Den tiden fungerar inte för mig.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-063",
+        "reason": "Clear rejection of proposed time.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m1",
+        "step_id": "confirm_swap",
+        "text_sv": "Vi går och frågar tillsammans.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-064",
+        "reason": "Finite acceptance of joint request.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m1",
+        "step_id": "confirm_wednesday",
+        "text_sv": "Jag är inte hemma då.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-065",
+        "reason": "Direct inability to be home at proposed time.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_customer_service_m1",
+        "step_id": "confirm_refund",
+        "text_sv": "Skicka dem gärna skriftligt.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-066",
+        "reason": "Imperative acceptance of written instructions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m1",
+        "step_id": "confirm_peer",
+        "text_sv": "Jag hinner inte skicka något innan dess.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-067",
+        "reason": "Clear inability to send question before next lesson.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m1",
+        "step_id": "confirm_sunday",
+        "text_sv": "Klockan sex fungerar fint.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-068",
+        "reason": "Contextual time acceptance.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m1",
+        "step_id": "confirm_twice",
+        "text_sv": "Fredag går inte för mig.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-069",
+        "reason": "Rejects Friday followup.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m1",
+        "step_id": "confirm_fixed",
+        "text_sv": "Vi testar i två veckor.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-070",
+        "reason": "Finite acceptance of trial duration.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_project_m1",
+        "step_id": "confirm_indoors",
+        "text_sv": "Vi delar upp frågorna mellan oss.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-071",
+        "reason": "Finite acceptance of shared questions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m1",
+        "step_id": "confirm_class",
+        "text_sv": "Jag vill inte skriva ner dem.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-072",
+        "reason": "Explicit decline of writing questions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m2",
+        "step_id": "confirm_bun",
+        "text_sv": "Ja, min cykel är röd.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-074",
+        "reason": "Affirmative token unrelated to paying by card.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_groceries_m2",
+        "step_id": "confirm_slices",
+        "text_sv": "Ja, osten ligger i min kyl hemma.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-076",
+        "reason": "Affirmative with unrelated statement, no packaging acceptance.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_transport_m3",
+        "step_id": "confirm_direct",
+        "text_sv": "Ja, min bror bor vid torget.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-078",
+        "reason": "Off-topic affirmative does not accept walking there.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_library_m3",
+        "step_id": "confirm_bw",
+        "text_sv": "Ja, hunden sover i köket.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-080",
+        "reason": "Unrelated affirmative does not approve printing one page.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_clothes_m2",
+        "step_id": "confirm_wait",
+        "text_sv": "Ja, tröjan kostar tvåhundra kronor.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-082",
+        "reason": "Off-topic price statement is not waiting agreement.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_reception_m2",
+        "step_id": "confirm_write",
+        "text_sv": "Ja, men jag heter inte Kim.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-084",
+        "reason": "Explicit contradiction of name confirmation despite initial ja. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_parcel_m2",
+        "step_id": "confirm_box",
+        "text_sv": "Ja, paketet skickades förra året.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-086",
+        "reason": "Off-topic affirmative does not select small box.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_community_centre_m2",
+        "step_id": "confirm_closing",
+        "text_sv": "Ja, men jag kan inte lämna den före sju.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-088",
+        "reason": "Contradicts the requested return deadline. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_neighbours_m2",
+        "step_id": "confirm_tomorrow",
+        "text_sv": "Ja, skruvmejslar finns i järnaffären.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-090",
+        "reason": "Off-topic affirmative does not accept timing.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_colleagues_m3",
+        "step_id": "confirm_alone",
+        "text_sv": "Ja, men klockan två går inte.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-092",
+        "reason": "Contradictory affirmative cannot confirm two o'clock. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m2",
+        "step_id": "confirm_visit",
+        "text_sv": "Ja, tvättmaskiner är ofta vita.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-094",
+        "reason": "Off-topic affirmative does not accept Friday visit.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_customer_service_m1",
+        "step_id": "choice",
+        "text_sv": "Jag vill varken byta skorna eller ha pengarna tillbaka.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-095",
+        "reason": "Both remedies rejected.",
+        "actual_intent": "choose_refund"
+      },
+      {
+        "mission_id": "lib_customer_service_m2",
+        "step_id": "confirm_investigate",
+        "text_sv": "Ja, men jag kan inte vänta till i morgon.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-096",
+        "reason": "Directly contradicts waiting acceptance. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m3",
+        "step_id": "confirm_morning",
+        "text_sv": "Ja, kursböckerna är blå.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-098",
+        "reason": "Off-topic affirmative does not authorize investigation.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_social_plans_m1",
+        "step_id": "confirm_sunday",
+        "text_sv": "Ja, men sex passar inte alls.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-100",
+        "reason": "Contradictory response cannot accept six o'clock. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m2",
+        "step_id": "confirm_room",
+        "text_sv": "Ja, min telefon har ett grönt skal.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-102",
+        "reason": "Off-topic affirmative does not agree to report tomorrow.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_shared_home_m1",
+        "step_id": "choice",
+        "text_sv": "Jag vill varken ha ett veckoschema eller en fast uppgift.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-103",
+        "reason": "Both cleaning arrangements rejected.",
+        "actual_intent": "choose_schedule"
+      },
+      {
+        "mission_id": "lib_shared_home_m3",
+        "step_id": "confirm_time",
+        "text_sv": "Ja, men jag vill inte prova det.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-104",
+        "reason": "Explicit contradiction of trial acceptance. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_project_m3",
+        "step_id": "confirm_calls",
+        "text_sv": "Ja, jag tycker om att laga soppa.",
+        "expected_intent": null,
+        "kind": "independent_reject",
+        "case_id": "natural-106",
+        "reason": "Off-topic affirmative does not accept anonymous summary.",
+        "actual_intent": "confirm"
+      },
+      {
+        "mission_id": "lib_next_steps_m3",
+        "step_id": "confirm_digital",
+        "text_sv": "Ja, men jag tänker inte skriva frågan i dag.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-108",
+        "reason": "Contradicts writing the question today. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      }
+    ]
+  },
+  "v3_first_blind": {
+    "version": "2026-11-01.3",
+    "sha256": "b146ae39f50d1ce97790ed8b953849a0e3e017ff734e8df559d8d7a082a02f23",
+    "case_count": 108,
+    "distinct_utterances": 108,
+    "valid_replies": {
+      "total": 79,
+      "accepted_correctly": 27
+    },
+    "unsafe_or_offtopic": {
+      "total": 29,
+      "rejected_correctly": 29
+    },
+    "by_kind": {
+      "independent_valid_reply": {
+        "total": 79,
+        "passed": 27,
+        "failed": 52
+      },
+      "independent_reject": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      }
+    },
+    "failures": [
+      {
+        "mission_id": "lib_cafe_m2",
+        "step_id": "choice",
+        "text_sv": "Det får bli en bulle.",
+        "expected_intent": "choose_bun",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-002",
+        "reason": "Natural short selection of the cheaper item.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m3",
+        "step_id": "choice",
+        "text_sv": "Jag föredrar det gröna teet.",
+        "expected_intent": "choose_green",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-003",
+        "reason": "Definite adjective and finite preference verb select green tea.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m2",
+        "step_id": "choice",
+        "text_sv": "Kan du skiva den åt mig?",
+        "expected_intent": "choose_slices",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-005",
+        "reason": "Request for slicing selects slices.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_groceries_m3",
+        "step_id": "choice",
+        "text_sv": "Då kommer jag tillbaka i morgon.",
+        "expected_intent": "choose_wait",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-006",
+        "reason": "Returning tomorrow selects waiting rather than substitute.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_transport_m2",
+        "step_id": "choice",
+        "text_sv": "Jag ska hem igen senare i dag också.",
+        "expected_intent": "choose_return",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-008",
+        "reason": "Contextual return journey paraphrase.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_transport_m3",
+        "step_id": "choice",
+        "text_sv": "Jag tar bussen som går direkt.",
+        "expected_intent": "choose_direct",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-009",
+        "reason": "Relative clause selects direct route.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_library_m2",
+        "step_id": "choice",
+        "text_sv": "Skriv gärna ut datumet åt mig.",
+        "expected_intent": "choose_paper",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-011",
+        "reason": "Request for printed date selects paper.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_library_m3",
+        "step_id": "choice",
+        "text_sv": "Svartvitt räcker för mig.",
+        "expected_intent": "choose_bw",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-012",
+        "reason": "Short finite statement selects monochrome.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_clothes_m3",
+        "step_id": "choice",
+        "text_sv": "Har ni en likadan där alla knappar sitter kvar?",
+        "expected_intent": "choose_same",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-015",
+        "reason": "Replacement of same shirt rather than another product.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_parcel_m3",
+        "step_id": "choice",
+        "text_sv": "Jag kollar i meddelandet nu.",
+        "expected_intent": "choose_search",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-021",
+        "reason": "Ordinary verb for checking message selects search.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_centre_m1",
+        "step_id": "choice",
+        "text_sv": "På torsdag kan jag komma.",
+        "expected_intent": "choose_thursday",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-022",
+        "reason": "Finite availability statement selects Thursday.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_centre_m3",
+        "step_id": "choice",
+        "text_sv": "Avboka bara, jag vill inte boka något nytt.",
+        "expected_intent": "choose_cancel",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-024",
+        "reason": "Clear cancellation with negated alternative.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_neighbours_m3",
+        "step_id": "choice",
+        "text_sv": "Det vore bäst om du använde hörlurar.",
+        "expected_intent": "choose_headphones",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-027",
+        "reason": "Conditional paraphrase selects headphones.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m1",
+        "step_id": "choice",
+        "text_sv": "Jag tar torsdagskvällen, så tar du fredagen.",
+        "expected_intent": "choose_swap",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-028",
+        "reason": "Explicit shift swap in finite verbs.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m2",
+        "step_id": "choice",
+        "text_sv": "Efter lunch passar mig bättre.",
+        "expected_intent": "choose_later",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-029",
+        "reason": "Finite preference selects later.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m2",
+        "step_id": "choice",
+        "text_sv": "Jag vill att någon kommer hit och tittar.",
+        "expected_intent": "choose_visit",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-032",
+        "reason": "Paraphrase of a home visit.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m3",
+        "step_id": "choice",
+        "text_sv": "Kom gärna på torsdag efter tre.",
+        "expected_intent": "choose_thursday",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-033",
+        "reason": "Imperative accepts offered Thursday slot.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m1",
+        "step_id": "choice",
+        "text_sv": "Jag går gärna igenom den med en klasskompis.",
+        "expected_intent": "choose_peer",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-037",
+        "reason": "Synonym for classmate and finite verb.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m2",
+        "step_id": "choice",
+        "text_sv": "Vi börjar i affären.",
+        "expected_intent": "choose_shop",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-038",
+        "reason": "Short finite selection of shop setting.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m3",
+        "step_id": "choice",
+        "text_sv": "Jag vill veta mer om gruppen på morgonen.",
+        "expected_intent": "choose_morning",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-039",
+        "reason": "Paraphrase selecting morning group.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m2",
+        "step_id": "choice",
+        "text_sv": "Jag röstar på grönsakssoppan.",
+        "expected_intent": "choose_soup",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-041",
+        "reason": "Ordinary preference expression selects soup.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m3",
+        "step_id": "choice",
+        "text_sv": "Alla kan hjälpa till på sitt eget sätt.",
+        "expected_intent": "choose_contribute",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-042",
+        "reason": "Paraphrase of flexible contributions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m1",
+        "step_id": "choice",
+        "text_sv": "Jag satsar på två längre pass varje vecka.",
+        "expected_intent": "choose_twice",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-043",
+        "reason": "Finite plan selects twice weekly.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m2",
+        "step_id": "choice",
+        "text_sv": "Jag stänger av notiserna medan jag läser.",
+        "expected_intent": "choose_notifications",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-044",
+        "reason": "Finite verb selects disabling notifications.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m1",
+        "step_id": "choice",
+        "text_sv": "Vi tar varsin uppgift och behåller den.",
+        "expected_intent": "choose_fixed",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-046",
+        "reason": "Paraphrase of fixed individual tasks.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m2",
+        "step_id": "choice",
+        "text_sv": "Vi pratar om veckans besök på söndagar.",
+        "expected_intent": "choose_weekly",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-047",
+        "reason": "Paraphrase of weekly coordination.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m3",
+        "step_id": "choice",
+        "text_sv": "Vi provar att sitta på olika ställen.",
+        "expected_intent": "choose_places",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-048",
+        "reason": "Natural synonym for separate places.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_project_m3",
+        "step_id": "choice",
+        "text_sv": "Jag ringer några som vill berätta.",
+        "expected_intent": "choose_calls",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-051",
+        "reason": "Paraphrase of voluntary participant calls.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m1",
+        "step_id": "choice",
+        "text_sv": "Jag vill testa en lektion innan jag bestämmer mig.",
+        "expected_intent": "choose_class",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-052",
+        "reason": "Paraphrase of trial class.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m2",
+        "step_id": "choice",
+        "text_sv": "Jag skriver några stödord först.",
+        "expected_intent": "choose_notes",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-053",
+        "reason": "Finite verb selects notes.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m3",
+        "step_id": "choice",
+        "text_sv": "Jag frågar om jag kan vara med på distans.",
+        "expected_intent": "choose_digital",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-054",
+        "reason": "Paraphrase selecting digital participation.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_cafe_m1",
+        "step_id": "confirm_takeaway",
+        "text_sv": "Jag hämtar det där.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-055",
+        "reason": "Contextual finite acceptance of pickup at counter.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_library_m1",
+        "step_id": "confirm_story",
+        "text_sv": "Den lånar jag gärna.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-058",
+        "reason": "Finite acceptance of borrowing.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_clothes_m1",
+        "step_id": "confirm_blue",
+        "text_sv": "Inte nu, jag har bråttom.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-059",
+        "reason": "Contextual refusal to try it now.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_reception_m1",
+        "step_id": "confirm_teacher",
+        "text_sv": "Jag väntar här.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-060",
+        "reason": "Finite acceptance of waiting.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_centre_m1",
+        "step_id": "confirm_thursday",
+        "text_sv": "Jag kommer då.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-062",
+        "reason": "Finite acceptance of offered day.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_neighbours_m1",
+        "step_id": "confirm_friday",
+        "text_sv": "Den tiden fungerar inte för mig.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-063",
+        "reason": "Clear rejection of proposed time.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m1",
+        "step_id": "confirm_swap",
+        "text_sv": "Vi går och frågar tillsammans.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-064",
+        "reason": "Finite acceptance of joint request.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m1",
+        "step_id": "confirm_wednesday",
+        "text_sv": "Jag är inte hemma då.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-065",
+        "reason": "Direct inability to be home at proposed time.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_customer_service_m1",
+        "step_id": "confirm_refund",
+        "text_sv": "Skicka dem gärna skriftligt.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-066",
+        "reason": "Imperative acceptance of written instructions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_course_planning_m1",
+        "step_id": "confirm_peer",
+        "text_sv": "Jag hinner inte skicka något innan dess.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-067",
+        "reason": "Clear inability to send question before next lesson.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m1",
+        "step_id": "confirm_sunday",
+        "text_sv": "Klockan sex fungerar fint.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-068",
+        "reason": "Contextual time acceptance.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_time_balance_m1",
+        "step_id": "confirm_twice",
+        "text_sv": "Fredag går inte för mig.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-069",
+        "reason": "Rejects Friday followup.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m1",
+        "step_id": "confirm_fixed",
+        "text_sv": "Vi testar i två veckor.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-070",
+        "reason": "Finite acceptance of trial duration.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_community_project_m1",
+        "step_id": "confirm_indoors",
+        "text_sv": "Vi delar upp frågorna mellan oss.",
+        "expected_intent": "confirm",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-071",
+        "reason": "Finite acceptance of shared questions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m1",
+        "step_id": "confirm_class",
+        "text_sv": "Jag vill inte skriva ner dem.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-072",
+        "reason": "Explicit decline of writing questions.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_reception_m2",
+        "step_id": "confirm_write",
+        "text_sv": "Ja, men jag heter inte Kim.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-084",
+        "reason": "Explicit contradiction of name confirmation despite initial ja. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m3",
+        "step_id": "confirm_alone",
+        "text_sv": "Ja, men klockan två går inte.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-092",
+        "reason": "Contradictory affirmative cannot confirm two o'clock. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_customer_service_m2",
+        "step_id": "confirm_investigate",
+        "text_sv": "Ja, men jag kan inte vänta till i morgon.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-096",
+        "reason": "Directly contradicts waiting acceptance. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_social_plans_m1",
+        "step_id": "confirm_sunday",
+        "text_sv": "Ja, men sex passar inte alls.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-100",
+        "reason": "Contradictory response cannot accept six o'clock. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_shared_home_m3",
+        "step_id": "confirm_time",
+        "text_sv": "Ja, men jag vill inte prova det.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-104",
+        "reason": "Explicit contradiction of trial acceptance. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_next_steps_m3",
+        "step_id": "confirm_digital",
+        "text_sv": "Ja, men jag tänker inte skriva frågan i dag.",
+        "expected_intent": "decline",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-108",
+        "reason": "Contradicts writing the question today. Final explicit refusal determines decline despite initial discourse marker ja.",
+        "actual_intent": null
+      }
+    ]
+  },
+  "v4_first_repair": {
+    "version": "2026-11-01.4",
+    "sha256": "58622f6efc53ba4870e6c53cc15ea881f422a5433e3e0dbe3bb688b0bf4ecd99",
+    "case_count": 108,
+    "distinct_utterances": 108,
+    "valid_replies": {
+      "total": 79,
+      "accepted_correctly": 76
+    },
+    "unsafe_or_offtopic": {
+      "total": 29,
+      "rejected_correctly": 29
+    },
+    "by_kind": {
+      "independent_valid_reply": {
+        "total": 79,
+        "passed": 76,
+        "failed": 3
+      },
+      "independent_reject": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      }
+    },
+    "failures": [
+      {
+        "mission_id": "lib_groceries_m3",
+        "step_id": "choice",
+        "text_sv": "Då kommer jag tillbaka i morgon.",
+        "expected_intent": "choose_wait",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-006",
+        "reason": "Returning tomorrow selects waiting rather than substitute.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_colleagues_m2",
+        "step_id": "choice",
+        "text_sv": "Efter lunch passar mig bättre.",
+        "expected_intent": "choose_later",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-029",
+        "reason": "Finite preference selects later.",
+        "actual_intent": null
+      },
+      {
+        "mission_id": "lib_housing_m2",
+        "step_id": "choice",
+        "text_sv": "Jag vill att någon kommer hit och tittar.",
+        "expected_intent": "choose_visit",
+        "kind": "independent_valid_reply",
+        "case_id": "natural-032",
+        "reason": "Paraphrase of a home visit.",
+        "actual_intent": null
+      }
+    ]
+  },
+  "current_after_disclosure": {
+    "version": "2026-11-01.7",
+    "sha256": "e2317c4172296a8377775f09866db9d4fe6b8995759c48fda6c1cc6efcc9a609",
+    "case_count": 108,
+    "distinct_utterances": 108,
+    "valid_replies": {
+      "total": 79,
+      "accepted_correctly": 79
+    },
+    "unsafe_or_offtopic": {
+      "total": 29,
+      "rejected_correctly": 29
+    },
+    "by_kind": {
+      "independent_valid_reply": {
+        "total": 79,
+        "passed": 79,
+        "failed": 0
+      },
+      "independent_reject": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      }
+    },
+    "failures": []
+  },
+  "2026-11-01.5_after_disclosure": {
+    "version": "2026-11-01.5",
+    "sha256": "70b8e9604d96c27fc8b5536062fcab244f4dd3c1002899897a3b6cf7eb8d42b1",
+    "case_count": 108,
+    "distinct_utterances": 108,
+    "valid_replies": {
+      "total": 79,
+      "accepted_correctly": 79
+    },
+    "unsafe_or_offtopic": {
+      "total": 29,
+      "rejected_correctly": 29
+    },
+    "by_kind": {
+      "independent_valid_reply": {
+        "total": 79,
+        "passed": 79,
+        "failed": 0
+      },
+      "independent_reject": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      }
+    },
+    "failures": []
+  }
+}

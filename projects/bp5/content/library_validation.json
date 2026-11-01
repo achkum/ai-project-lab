@@ -1,0 +1,25 @@
+{
+  "content_version": "2026-11-01.7",
+  "passed": true,
+  "situations": 18,
+  "missions": 54,
+  "terminal_paths": 216,
+  "authored_examples": 456,
+  "approved_exact_reply_contexts": 5610,
+  "contradictory_exact_suffix_checks": 5610,
+  "rejected_term_checks": 2952,
+  "separately_authored_regression_cases": 162,
+  "additional_common_phrase_cases": 4,
+  "hashes": {
+    "library.json": "e2317c4172296a8377775f09866db9d4fe6b8995759c48fda6c1cc6efcc9a609",
+    "library_evaluation.json": "dd7f25438a7b198b184a21d438a6c14ff7360db6badd67f3bfa0391040d1ae02",
+    "curriculum.json": "f81bc3b20df1c8e44a9707929cf7a7482866c3b1e4c0f2396d8ec0f2bf5e95bc",
+    "scenarios.json": "e2917b906df644aa140eaa15cf9e36431f467c4b49d625038266b6e6e3225365"
+  },
+  "limits": [
+    "Engineering checks only; production backend must verify the same fixtures with its own matcher.",
+    "The 162 separate cases were authored without importing the canonical examples; first execution revealed three failures which were fixed. They are now regression cases.",
+    "No independent Swedish educator review or learner-effectiveness study.",
+    "Exact pattern matching deliberately rejects unsupported paraphrases; completion is practice, not mastery."
+  ]
+}

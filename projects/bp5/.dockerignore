@@ -1,0 +1,9 @@
+.git
+.venv
+data
+**/__pycache__
+**/*.sqlite*
+**/*.pyc
+**/*.gguf
+**/*.onnx
+runtime

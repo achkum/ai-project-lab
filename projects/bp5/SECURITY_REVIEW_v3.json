@@ -1,0 +1,272 @@
+{
+  "review_version": 3,
+  "review_date": "2026-11-01",
+  "reviewer": "Independent BP5 security/reliability agent",
+  "status": "all_observed_code_security_findings_fixed_and_verified",
+  "scope": [
+    "projects/bp5/server/production.py",
+    "projects/bp5/server/production_store.py",
+    "projects/bp5/server/manage.py",
+    "projects/bp5/server/test_production.py",
+    "projects/bp5/server/PRODUCTION-RUNBOOK.md",
+    "projects/bp5/server/PRODUCTION-API-CONTRACT.json",
+    "projects/bp5/web/app.js",
+    "projects/bp5/deploy/activate.py",
+    "projects/bp5/deploy/backup.py",
+    "engine/vps_product_delivery.py",
+    "projects/bp5/tests/test_deploy_ops.py"
+  ],
+  "constraints": {
+    "credentials_accessed": false,
+    "real_user_data_accessed": false,
+    "implementation_modified_by_reviewer": true,
+    "deployed_or_pushed": false,
+    "proof_data": "Isolated TemporaryDirectory fixture; synthetic accounts only",
+    "authorized_implementation_changes": [
+      "projects/bp5/deploy/activate.py",
+      "projects/bp5/deploy/backup.py",
+      "engine/vps_product_delivery.py"
+    ]
+  },
+  "findings": [
+    {
+      "id": "BP5-SR3-01",
+      "severity": "high",
+      "status": "fixed_verified",
+      "title": "Old-password login could survive concurrent account recovery",
+      "location": "production.py: login",
+      "reproduction": "Pause password_verify immediately after successful old-password derivation; complete recovery in a second client; resume login. Original implementation inserted a new valid session after recovery had revoked all sessions.",
+      "fix": "After password verification, BEGIN IMMEDIATE and re-fetch current password hash. Compare exact verified encoding; reject if changed before inserting session.",
+      "check": "test_login_cannot_survive_concurrent_password_recovery passed independently; stale login returns401 and no session cookie."
+    },
+    {
+      "id": "BP5-SR3-02",
+      "severity": "high",
+      "status": "fixed_verified",
+      "title": "Signing in as another account after expiry displayed previous owner's private browser state",
+      "location": "web/app.js: request, auth submit, loadData, clearAccount",
+      "reproduction": "Execute real auth submit handler with Alice's expired user=null, page=practice, private session/transcript/legacy state, then successful Bob login. security_review_v3_browser.cjs printed user=Bob with Alice's conversation, draft and legacy records still retained.",
+      "fix": "Clear all owner-scoped UI state, drafts, request IDs, microphone/audio work and pending async operations on account transition. Compare immutable user.id rather than reusable username; clear on missing identity. Same-account reauthentication preserves drafts but invalidates old async operations; ownerEpoch rejects late responses.",
+      "check": "Independent security_review_v3_browser.cjs rerun now prints Bob with session:null, transcript:'', legacySessions:[], page:library. web/tests/account-boundary.test.cjs and tests/frontend.test.cjs pass, including same-name/different-ID and missing-ID cases."
+    },
+    {
+      "id": "BP5-SR3-03",
+      "severity": "medium",
+      "status": "fixed_verified",
+      "title": "Rate-limited anonymous requests still grew persistent attempt records",
+      "location": "production.py: login, recover, record_rate; production_store.py: attempts indexes",
+      "reproduction": "After login-ip quota is exhausted, POST different valid-format unknown usernames. Original username limiter ran before IP limiter, inserting a new row on every blocked request; cleanup scanned an unindexed timestamp.",
+      "fix": "Check IP quota first; cap attempt table at50000 rows; index occurred; fail closed at capacity.",
+      "check": "security_review_v3_proof.py: first40 requests401, next15 requests429, final10 denied requests add0 records (80→80). Existing blocked-IP/cap regression independently passed."
+    },
+    {
+      "id": "BP5-SR3-04",
+      "severity": "high",
+      "status": "fixed_verified",
+      "title": "Concurrent recovery did not stop an already verified old-password account deletion",
+      "location": "production.py: delete_account",
+      "reproduction": "Pause delete-account password verification after success; recover account with one-use code; release deletion. Original code deleted account without checking that session/password remained current.",
+      "fix": "Revalidate live session and exact verified password hash inside BEGIN IMMEDIATE before deletion.",
+      "check": "test_account_deletion_cannot_survive_concurrent_recovery passed independently; account survives stale deletion."
+    },
+    {
+      "id": "BP5-SR3-05",
+      "severity": "medium",
+      "status": "fixed_verified",
+      "title": "Audio admission could race account deletion, and commit failure could leak global audio permit",
+      "location": "production.py: begin_audio, delete_account",
+      "reproduction": "Authenticate audio before account deletion, then delay begin_audio until deletion finishes; original admission trusted stale auth and registered work. A DB COMMIT failure after acquiring AUDIO_LOCK also lacked cleanup.",
+      "fix": "Admission rechecks live session transactionally; both paths take database write lock then AUDIO_JOBS_LOCK; deletion holds jobs lock through commit. Failed admission commit removes registry entry and releases semaphore.",
+      "check": "test_audio_cannot_start_after_account_deletion passed independently. Synthetic SQLite COMMIT failure probe confirmed registry entry removal and audio semaphore availability. Consistent lock ordering inspected in source; cross-account cancellation test passed."
+    },
+    {
+      "id": "BP5-SR3-06",
+      "severity": "medium",
+      "status": "fixed_verified",
+      "title": "Deleted mission retries and expired logins could accumulate unbounded metadata",
+      "location": "production.py: start_mission, new_session",
+      "reproduction": "Repeat new mission request IDs followed by deletion to bypass the200-active-mission cap while retaining creation_requests forever. Repeated successful logins retained expired auth_sessions indefinitely.",
+      "fix": "Cap creation markers at10000/account, new creation at60/hour/account after deduplication, purge expired sessions and retain at most10 active sessions/account. Preserve tombstones so deletion cannot be undone by stale retry.",
+      "check": "test_creation_tombstones_are_bounded, test_new_mission_rate_excludes_retries, test_sessions_expire_and_are_capped all passed independently."
+    },
+    {
+      "id": "BP5-SR3-07",
+      "severity": "low",
+      "status": "fixed_verified",
+      "title": "Legacy import accepted non-standard numeric JSON before raw streaming",
+      "location": "manage.py: import-legacy validation",
+      "reproduction": "Python json.loads accepts object payloads containing NaN or Infinity; raw history streaming would send those tokens as invalid browser JSON. Overflow numbers such as1e999 also become nonfinite in the parser.",
+      "fix": "Reject parse_constant values and validate decoded object with json.dumps(...,allow_nan=False) before insertion. Reject non-object, malformed, oversize and over-count inputs atomically.",
+      "check": "Independent targeted legacy-import tests passed: trusted import plus all-or-nothing rejection cases. Source caps200 records/account,128KiB UTF-8 bytes/record,128-character IDs and validates all input before the write transaction."
+    }
+  ],
+  "reliability_improvements_verified": [
+    "Password-confirmed authenticated recovery-code regeneration atomically replaces all old codes; CSRF/current session/current password checks and old-code rejection regression pass.",
+    "Cross-account get/delete/turn/reset/evidence/phrases return404; another account's delete-all preserves owner mission; export and legacy history remain owner scoped.",
+    "Parameterized SQL and strict bounded Pydantic schemas; invitation one-use/expiry; generic credential errors; unknown usernames incur scrypt.",
+    "Cookie HttpOnly/Secure/Strict, exact Origin on mutations, CSRF session binding, configured cookie path and strict host allowlist are present.",
+    "Audio input formats are forced to an allowlist; ffmpeg protocols restricted to file,pipe; no network URL supplied from user input; size/duration/time/concurrency bounds present.",
+    "Scoped audio workspace lock cleanup preserves live workspaces; no arbitrary file-serving route or path interpolation from user IDs found.",
+    "No request-body/credential/transcript logging statements found in reviewed application code.",
+    "Idempotent payload hashes reject changed input and deleted-mission replay remains409.",
+    "History, legacy and export responses stream owner-filtered SQLite records from a read transaction, at most two simultaneous streams, with180-second deadline. Attachment disposition on export. Both synthetic disconnect and cancellation release permits; no cross-owner SQL predicate was lost.",
+    "Cached generated audio is paused/revoked on changed-account login, same-account reauthentication and mission/resume transitions; owner epoch rejects late synthesis/play completion. Same-owner text drafts remain. Latest five frontend test entry points pass."
+  ],
+  "verification": {
+    "command": "runtime/local-products/bp5/venv/Scripts/python.exe -m unittest discover -s projects/bp5/server -p test_production.py -v",
+    "result": "Latest independent full run:22 tests,21 passed,1 optional Windows audio test skipped. After strict import follow-up,2 targeted legacy-import tests passed, including the newly added atomic-rejection test (23 distinct production tests covered).",
+    "additional_proofs": [
+      "tests/security_review_v3_proof.py",
+      "tests/security_review_v3_browser.cjs",
+      "Independent two-account HTTP probes covering all mission mutation families",
+      "web/tests/account-boundary.test.cjs: passed",
+      "tests/frontend.test.cjs: passed",
+      "Synthetic audio-admission COMMIT failure: no leaked job or semaphore permit",
+      "tests/security_review_v3_identity.py: register/session/login stable immutable ID; deleted/recreated username gets distinct ID; passed",
+      "Streaming disconnect/cap regression passed in full suite",
+      "Synthetic blocked-send task cancellation: both history permits available afterward",
+      "Targeted strict legacy import atomic-rejection suite passed",
+      "node --test projects/bp5/tests/frontend.test.cjs projects/bp5/web/tests/*.test.cjs:5 passed; includes blocked autoplay cache and reauth/mission lifecycle checks"
+    ]
+  },
+  "boundaries_not_code_security_blockers": [
+    "Linux voice execution, backup/restore, TLS/proxy host/origin/forwarded-IP behavior and load limits require deployment verification by root; this review did not deploy or inspect credentials.",
+    "History/export responses now stream records instead of materializing the full account payload in server memory; two-stream admission and180-second deadline bound this surface. Deployment load and slow-client behavior still require root verification.",
+    "Legacy import is privileged local administration only, explicitly names/confirm-matches owner, reads source SQLite read-only, never reassigns existing IDs, and validates/caps incoming records before any insertion.",
+    "Private DATA permissions/restrictive umask, no access logs, nonroot read-only container, capability drop and reliable media executable/model provenance remain deployment assumptions.",
+    "Human device/microphone performance, Swedish content accuracy and pedagogical suitability are validation limitations, not missing authentication/security gates.",
+    "Core is authored deterministic role-play; transcript evidence does not establish pronunciation, official SFI grades or mastery.",
+    "Support/privacy contacts intentionally omitted per owner; no invented contact or approval gate added."
+  ],
+  "source_sha256": {
+    "projects/bp5/server/production.py": "2eb97dc024af8dc41a0a5679c5cf215879699fe7ce10a98d4961a4c0bc72bab9",
+    "projects/bp5/server/production_store.py": "0d4dc79f37c6d729e88d0111848b14b591b133791815081e377d7ec7330b4df5",
+    "projects/bp5/server/manage.py": "7607909417b9abf1bba1efd5cc10a4cd787ecff25904da412130eaf5b04af699",
+    "projects/bp5/server/test_production.py": "cc0a3680d63848d991d67402b580905ff5283ba6566b6abe7e97ee0b775888ea",
+    "projects/bp5/server/PRODUCTION-RUNBOOK.md": "0359195f91854e1431a6139ba02e94bc32a8b6beebfae42756668d3126bc2a7d",
+    "projects/bp5/server/PRODUCTION-API-CONTRACT.json": "0041e891e90c35abbba4dedca6e179a398184cfcd40879eef50c91f798d37708",
+    "projects/bp5/web/app.js": "93c3c329042f7d246e51ce76f80e7e252651f59b9fc2804dd0c496c8d80cbc71",
+    "projects/bp5/deploy/activate.py": "a4f9592046c51600a1281810854ab26f9941a6aef03a9d3bfbe487a38d647f6e",
+    "projects/bp5/deploy/backup.py": "d6c21f1fd801ac92850794a823687b808120f786cacf74f75e6b49550e8d8ec1",
+    "engine/vps_product_delivery.py": "6282ee5f632ce519fe0a74e1b64a4b5b22257f8bfc4df820186c2d5f083fdc7a",
+    "projects/bp5/tests/test_deploy_ops.py": "84cd400419d8476f4183a085fc81089eaff97d753b7a5656a1890b6018477074",
+    "projects/bp5/web/tests/meaning-confirmation.test.cjs": "785fa279c08602716ab8f72b132f4e1dd27da14fa36517e168b58725b89f9d6b",
+    "projects/bp5/web/tests/guided-recovery.test.cjs": "5c3c38d270f18316772066eb486da48211bb2fe0e6badc510d3e5482bb529adb",
+    "projects/bp5/content/library.json": "e2317c4172296a8377775f09866db9d4fe6b8995759c48fda6c1cc6efcc9a609",
+    "projects/bp5/tests/security_review_clarify_proof.py": "425f2bb0e31d1058320a20784b6c55ef505fe1b1a4e659ed6a732b4413deb0ad",
+    "projects/bp5/web/style.css": "0ca5f9a406bfcd09614310f6f533c7878f2b676bcfacc55f1c7c62777b757c56",
+    "projects/bp5/web/tests/progress.test.cjs": "a6440741b35b1d676a34cc8bbc38082760f48144fea544921c1b81fdd7b9b527",
+    "projects/bp5/web/tests/full-library.test.cjs": "17a436f3ae5eef55c405c164f5831c12f08f9c10eca81b6047301b7d3cdc88a2"
+  },
+  "operational_review": {
+    "status": "hardened_and_offline_fault_tests_passed; real_host_verification_owned_by_root",
+    "operator": "Managed SSH operator uid996 with Docker permission; not an arbitrary root login. Container remains uid996:987,1536MiB,1.8CPU,read-only rootfs,capabilities dropped.",
+    "changes": [
+      {
+        "id": "BP5-OPS-01",
+        "severity": "high",
+        "status": "fixed_verified_offline",
+        "problem": "Stopping/renaming the old container and copying rollback data outside recovery handling could leave the service down.",
+        "fix": "Fsynced operation journal before cutover; recover by immutable old container ID after update/stop/rename/backup/start failure. Retry recovers interrupted operations; completed operation cleanup never rolls back a healthy committed service.",
+        "evidence": "Fault tests cover update, stop, rename, encrypted snapshot and startup failures; original container restarts with previous restart policy."
+      },
+      {
+        "id": "BP5-OPS-02",
+        "severity": "high",
+        "status": "fixed_verified_offline",
+        "problem": "Restoring a pre-release SQLite copy could erase requests accepted by the new release before a late rollout failure.",
+        "fix": "Never overwrite the active database. Take encrypted ordinary recovery backup while old service is stopped; restart old container against preserved active data. No new plaintext rollback.sqlite3.",
+        "evidence": "Synthetic new-user write survives failed new startup and old-container recovery. Legacy fixed-name snapshot is never replayed."
+      },
+      {
+        "id": "BP5-OPS-03",
+        "severity": "medium",
+        "status": "fixed_verified_offline",
+        "problem": "Old source fingerprint omitted build inputs and broad archive scanning admitted unrelated job outputs; extraction and source path boundaries were weak.",
+        "fix": "Exact runtime allowlist, bounded bytes, manifest hash for every uploaded file, pre/post source comparison, symlink/junction/hardlink rejection, bounded tar member validation, immutable verified release directory and activation-time revalidation.",
+        "evidence": "Scope exclusion, Dockerfile hash change, mid-package change, remote tamper and path traversal tests pass. Source-mode preparation preserves nonroot Docker COPY readability inside private release parent."
+      },
+      {
+        "id": "BP5-OPS-04",
+        "severity": "medium",
+        "status": "fixed_verified_offline",
+        "problem": "Resolving backup path before checking links hid symlinks; backup location could target other managed files; partial encryption and failed backup retention were not handled.",
+        "fix": "Validate lexical path components and SQLite sidecars before opening; allow only active data directory; serialize backups; clean abandoned plaintext; encrypt to unique partial file then atomically publish; prune expired encrypted files even when new encryption fails; publish failed backup status.",
+        "evidence": "Atomic success/failure, no leftover plaintext/partial output, active data preservation, incorrect-target rejection and failure-time retention tests pass. Actual Linux symlink test awaits root."
+      },
+      {
+        "id": "BP5-OPS-05",
+        "severity": "medium",
+        "status": "fixed_verified_offline",
+        "problem": "Cancelled SSH/builds could leave unmanaged children and uncertain remote rollout state.",
+        "fix": "Terminate and reap local SSH child, request per-operation remote cancellation marker, check cancellation around bounded subprocesses, terminate build process group, journal recovery. Network checkpoint every30seconds; initial/final checks remain.",
+        "evidence": "Offline cancelled-transfer and cancelled-build child cleanup tests pass. Network outage cannot guarantee remote receipt; retry/operator must inspect journal."
+      },
+      {
+        "id": "BP5-OPS-06",
+        "severity": "medium",
+        "status": "fixed_verified_offline",
+        "problem": "Failed or interrupted candidate clones could retain account copies beyond the backup policy.",
+        "fix": "Clean candidate copies independently of old-service recovery once unused. Daily backup invokes six-day expiry under nonblocking deployment lock, checks all active container mounts, rejects links, expires only known private clone/recovery namespaces, retains expiry metadata. Active data is never a cleanup target.",
+        "evidence": "Old inactive clone expires; active mounted clone and production database remain; operation journal and maintenance history record expiry."
+      }
+    ],
+    "tests": {
+      "command": "python -m unittest discover -s projects/bp5/tests -p test_deploy_ops.py -v",
+      "result": "17 tests:15 passed,2 skipped because Windows symlink creation is unavailable. No SSH or Docker daemon contacted; synthetic database fixtures only."
+    },
+    "remaining_limits": [
+      "Root must verify Linux fcntl/symlink behavior, uid996 ownership, Docker lifecycle, Caddy route, actual age encryption/decryption/restore and timer execution; offline mocks do not establish these.",
+      "Automatic container rollback requires backward-compatible database migrations. No automatic database restoration can discard accepted writes; an incompatible migration requires operator recovery using the encrypted backup and off-server key.",
+      "Hard kill, host failure or complete SSH loss may leave an interrupted journal until next activation. The deploy lock serializes recovery; cancellation cannot be guaranteed when the host is unreachable.",
+      "The <=7-day policy relies on a functioning daily timer using the six-day cutoff. Maintenance retains artifacts with active container mounts, unsafe paths, missing modern journals or unavailable Docker inventory and reports the reason; operator monitoring must address those conditions.",
+      "Release source/image caches and stopped previous containers are metadata/software artifacts, not automatically pruned here. Operator disk-capacity maintenance remains necessary.",
+      "No public-anonymous launch claim: the reviewed service remains invitation-only real accounts on the existing VPS."
+    ]
+  },
+  "followup_review_2026_11_01": {
+    "reviewed_at_utc": "2026-11-01T17:20:43.573536+00:00",
+    "matcher": "Exact-token branch independently checked: full-token equality, no stemming, extra contradictions do not exact-match, duplicate intent ambiguity returns null, malformed exact spec ignored, group fallback retains rejection. Seven checks passed.",
+    "frontend": "Saved response/comparison/context rendering uses HTML escaping and current account session; async response epoch checks retained. Persisted prior listening attempt marks later attempts as answer-key-supported. Six frontend test entries pass.",
+    "pending_reliability": null,
+    "operational_evidence_from_root": "Root reports Linux operational17/17 including symlinks, actual Docker/age backup restore tested with isolated HTTP account login/history/reading, HTTP54mission/240turn/isolation/recovery/voice/cancel smoke. These were root-run, not independently executed by this reviewer.",
+    "separate_language_audit": "Language quality findings and frozen-case metrics remain in private ai-thesis-lab research audit; security report does not assert natural-language understanding or human validation.",
+    "draft_race_resolution": "Fixed and independently verified: saveEvidence/history recall/send clear only the exact submitted raw draft, preserving newer text typed during pending request; delayed frontend regression passes."
+  },
+  "learner_confirmation_final_review": {
+    "at_utc": "2026-11-01T17:37:42.601748+00:00",
+    "status": "no_actual_remaining_security_or_behavior_blocker_found_in_reviewed_change",
+    "scope": [
+      "server production clarify route and transaction",
+      "production_store stable legacy turn identity",
+      "web meaning choices, delayed drafts, provenance and evidence display"
+    ],
+    "authorization": "Clarify calls shared auth(request,True) for session, origin and CSRF; owner-filtered mission lookup under BEGIN IMMEDIATE; no cross-account access found. Wrong origin and missing CSRF rejected; another owner receives404.",
+    "staleness_and_replay": "Request ID binds serialized payload hash; replay returns saved result without reapplying. Clarification requires current step, latest unmatched user/assistant pair, unique turn ID and matching index. Distinct concurrent choices produce one200 and one409. Reset reuses index but not turn identity. Independent races confirm reset remains reset and deleted mission cannot be resurrected; retry after reset cannot advance current run.",
+    "provenance": "Original text/input mode/transcript edit state/intent_id=None retained. Server appends learner_confirmation help, clarified/confirmed_intent_id/match_source; response matched=false. Only authored mission branch is advanced. Frontend displays learner-selected meaning and supported practice; clarified-only evidence does not display Independent. No automatic language correctness claim found.",
+    "frontend": "Meaning controls bind owner epoch, mission/session, current step, turn index and unique turn_id. Late response after account switch rejected. HTML escaping retained. Editable phrase suggestions are separate from confirming meaning.",
+    "independent_checks": {
+      "backend": "31 production tests ran:30passed,1optional local Windows audio-runtime test skipped. Includes five clarification tests, exact matcher tests, account isolation and full authored library HTTP flow.",
+      "frontend": "8 Node test entry points passed (root aggregate plus7 child suites).",
+      "additional_proof": "projects/bp5/tests/security_review_clarify_proof.py passed: wrong-origin403, concurrent clarify/reset, concurrent clarify/delete, idempotent replay after reset, no resurrection after deletion; isolated synthetic accounts and temp DB only."
+    },
+    "limits": [
+      "Independent .6 rerun confirms disclosed108/108 regression and fresh-diagnostic20/36 (2/18valid,18/18negative or uncertain), unchanged from .5. Learner selection provides transparent recovery, not unrestricted conversation understanding.",
+      "This review does not validate learner efficacy, physical-phone behavior or learner accents. Root owns actual HTTPS recovery-flow rollout validation.",
+      "No semantic model integration is present in this reviewed clarification path."
+    ]
+  },
+  "progress_final_review": {
+    "at_utc": "2026-11-01T17:57:48.109692+00:00",
+    "status": "no_actual_remaining_blocker_found_in_reviewed_change",
+    "backend": "GET /api/progress authenticates and uses bound user_id in owner-filtered SQLite query. Projects only id, mission_id, status, updated_at; returns at most200rows ordered by updated time. No transcript, answer, profile or snapshot fields are serialized. SQL JSON extraction uses fixed paths, no caller-controlled SQL.",
+    "frontend": "Snapshot merge uses local mutation revision and fetch sequence. Later local upserts/deletion markers override older snapshots; clear-all revision suppresses old snapshot; out-of-order fetch completion cannot replace newer progress. Owner epoch prevents pending response crossing account changes, clearAccount resets all progress state. Start/resume/send/clarify update progress; successful deletions remove it.",
+    "presentation": "Latest assistant reply scrolls only when no transcript draft has focus; focused draft and selection restored after render. Added labels and context remain HTML escaped. Sampled first mission in every18situations: English meanings align with canonical Swedish and immediate branch context; no material mismatch found. No human linguistic validation claim.",
+    "tests": "Independently reran backend progress owner-isolation/reset/delete/minimal-field test and3frontend entries: progress, full-library/focus-scroll, account-boundary. All passed. Did not rerun unchanged ops/audio.",
+    "content": "Independently compared every mission/step intent ID,required_groups,exact_replies_sv,reject_terms against .6: unchanged. Prior language generalization limits still apply.",
+    "limits": [
+      "Next-task suggestion uses the200most recently updated session summaries. Older completions outside this window can be recommended again; full history/export remain available. This is a recommendation-memory bound, not deletion or account-isolation failure.",
+      "Root owns final live combined-rollout progress reload and physical-phone checks."
+    ]
+  }
+}
