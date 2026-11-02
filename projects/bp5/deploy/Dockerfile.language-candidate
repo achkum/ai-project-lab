@@ -1,0 +1,21 @@
+# Experimental candidate image. Build only from a pinned BP5 base image digest
+# and an operator-provided, hash-locked offline wheelhouse. No model is included.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+USER root
+COPY language-wheelhouse/ /tmp/language-wheelhouse/
+COPY language-linux.lock /tmp/language-linux.lock
+RUN python -m pip install --no-cache-dir --disable-pip-version-check --no-index --ignore-installed --require-hashes --find-links=/tmp/language-wheelhouse -r /tmp/language-linux.lock \
+ && python -m pip check \
+ && python -c "import importlib.metadata as m; p={'onnxruntime':'1.31.1','tokenizers':'0.23.3','numpy':'1.26.4','fasttext-wheel':'0.9.2'}; assert all(m.version(k)==v for k,v in p.items())" \
+ && rm -rf /tmp/language-wheelhouse /tmp/language-linux.lock
+ENV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
+COPY server /app/server
+COPY content /app/content
+COPY web /app/web
+COPY deploy/language_runtime_inventory.py /app/deploy/language_runtime_inventory.py
+COPY deploy/language_resource_probe.py /app/deploy/language_resource_probe.py
+COPY deploy/language_runtime_parity.py /app/deploy/language_runtime_parity.py
+RUN install -m 0444 /dev/null /app/LANGUAGE_CHECKER_MANIFEST.json
+USER 996:987
+CMD ["python", "server/run.py"]

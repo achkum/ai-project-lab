@@ -1,0 +1,14 @@
+{
+  "library_sha256": "c8142f993e390f90234d651c515e0d1c708bf78070e8361d2039b133c0ceb3e8",
+  "source_sha256": "d1f0371122a1b5b88e65def921d0d9d1d50a93a32766f572fef315874decb481",
+  "case_contexts": 1314,
+  "distinct_texts": 572,
+  "matched_expected": 1314,
+  "failures": [],
+  "limitations": [
+    "These are previously disclosed, retained development regressions.",
+    "Retaining a historical label is not new independent gold validation.",
+    "Repeated generic replies across contexts are not diverse natural-language comprehension.",
+    "No learner assessment or model qualification was performed."
+  ]
+}

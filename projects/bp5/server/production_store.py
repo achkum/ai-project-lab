@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS recovery_codes(code_hash TEXT PRIMARY KEY, user_id TE
 CREATE TABLE IF NOT EXISTS missions(id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, payload TEXT NOT NULL, updated REAL NOT NULL);
 CREATE TABLE IF NOT EXISTS creation_requests(user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, request_id TEXT NOT NULL, mission_id TEXT NOT NULL, payload_hash TEXT NOT NULL, PRIMARY KEY(user_id,request_id));
 CREATE TABLE IF NOT EXISTS attempts(key TEXT NOT NULL, occurred REAL NOT NULL, subject TEXT);
+CREATE TABLE IF NOT EXISTS semantic_budgets(user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, available REAL NOT NULL CHECK(available>=0), updated REAL NOT NULL, blocked_until REAL NOT NULL DEFAULT 0);
 CREATE TABLE IF NOT EXISTS legacy_imports(id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, payload TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS auth_sessions_expiry ON auth_sessions(expires);
 CREATE INDEX IF NOT EXISTS auth_sessions_user_expiry ON auth_sessions(user_id,expires);
@@ -34,6 +35,7 @@ CREATE INDEX IF NOT EXISTS attempts_occurred ON attempts(occurred);
 CREATE INDEX IF NOT EXISTS missions_owner ON missions(user_id,updated);
 ''')
   if 'subject' not in {r['name'] for r in c.execute('PRAGMA table_info(attempts)')}:c.execute('ALTER TABLE attempts ADD COLUMN subject TEXT')
+  if 'blocked_until' not in {r['name'] for r in c.execute('PRAGMA table_info(semantic_budgets)')}:c.execute('ALTER TABLE semantic_budgets ADD COLUMN blocked_until REAL NOT NULL DEFAULT 0')
   if 'payload_hash' not in {r['name'] for r in c.execute('PRAGMA table_info(creation_requests)')}:c.execute("ALTER TABLE creation_requests ADD COLUMN payload_hash TEXT NOT NULL DEFAULT ''")
 
 def digest(s): return hashlib.sha256(s.encode('utf-8')).hexdigest()
@@ -106,6 +108,16 @@ def mission_lookup(mid):
   for mission in sit.get('missions',[]):
    if mission.get('id')==mid:return lib,sit,mission
  raise ValueError('Mission not found')
+
+def mission_content_status(session):
+ """Compare the saved authored mission itself, never a client/version claim."""
+ saved=session.get('snapshot',{}).get('mission');mid=session.get('mission_id')
+ if not isinstance(saved,dict) or not isinstance(mid,str) or saved.get('id')!=mid:
+  return {'current':False,'can_start_updated':False}
+ lib=get_library();matches=[m for sit in lib.get('situations',[]) for m in sit.get('missions',[]) if m.get('id')==mid]
+ if len(matches)!=1:return {'current':False,'can_start_updated':False}
+ def canonical(value):return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)
+ return {'current':canonical(saved)==canonical(matches[0]),'can_start_updated':True}
 
 def owner_session(c,uid,sid):
  row=c.execute('SELECT payload FROM missions WHERE id=? AND user_id=?',(sid,uid)).fetchone()

@@ -1,11 +1,12 @@
 """BP5 authenticated, authored-mission service. Run with uvicorn, single worker."""
-import asyncio, hmac, json, os, re, secrets, shutil, subprocess, tempfile, threading, time, uuid, wave
+import asyncio, hmac, json, math, os, re, secrets, shutil, subprocess, tempfile, threading, time, uuid, wave
 from pathlib import Path
 from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 import production_store as st
+import language_checker
 from app import normalize_selection
 
 st.init()
@@ -23,6 +24,15 @@ AUDIO_LOCK=threading.BoundedSemaphore(1)
 AUDIO_UPLOAD_LOCK=threading.BoundedSemaphore(1)
 HISTORY_STREAM_LOCK=threading.BoundedSemaphore(2)
 PASSWORD_LOCK=threading.BoundedSemaphore(2)
+LANGUAGE_CHECK_LOCK=threading.BoundedSemaphore(1)
+def semantic_budget_setting(name,default,minimum,maximum):
+ try:value=int(os.getenv(name,str(default)))
+ except ValueError:raise RuntimeError('Invalid semantic inference budget configuration')
+ if not minimum<=value<=maximum:raise RuntimeError('Invalid semantic inference budget configuration')
+ return value
+SEMANTIC_BURST_UNITS=semantic_budget_setting('BP5_SEMANTIC_BURST_UNITS',48,48,240)
+SEMANTIC_REFILL_UNITS_PER_MINUTE=semantic_budget_setting('BP5_SEMANTIC_REFILL_UNITS_PER_MINUTE',24,1,120)
+SEMANTIC_COOLDOWN_PERCENT=semantic_budget_setting('BP5_SEMANTIC_COOLDOWN_PERCENT',100,25,200)
 MAX_RATE_ROWS=50000
 MAX_CREATION_REQUESTS=10000
 MAX_AUTH_SESSIONS=10
@@ -51,6 +61,16 @@ class Clarify(Action): step_id:StrictStr=Field(min_length=1,max_length=120); int
 class Evidence(SupportAction): activity:StrictStr=Field(pattern='^(listening|reading|writing|recall)$'); response:StrictStr=Field(min_length=1,max_length=4000)
 class Phrase(Action): sv:StrictStr=Field(min_length=1,max_length=500); en:StrictStr=Field(default='',max_length=500)
 class Speech(Model): text:StrictStr=Field(min_length=1,max_length=1000); slow:StrictBool=False
+
+class ExerciseUpdated(Exception):
+ def __init__(self,status):self.status=status
+
+def session_view(session):
+ return {**session,'content_status':st.mission_content_status(session)}
+
+def require_current_mission(session):
+ status=st.mission_content_status(session)
+ if not status['current']:raise ExerciseUpdated(status)
 
 @app.middleware('http')
 async def protection(request:Request, call_next):
@@ -88,8 +108,10 @@ async def protection(request:Request, call_next):
 
 @app.exception_handler(RequestValidationError)
 async def invalid_schema(request,exc):return JSONResponse({'error':'Invalid request'},status_code=400)
+@app.exception_handler(ExerciseUpdated)
+async def exercise_updated(request,exc):return JSONResponse({'error':'This exercise has been updated. Review this history or start the updated exercise. Your draft is still here.','code':'exercise_updated','content_status':exc.status},status_code=409)
 @app.exception_handler(HTTPException)
-async def http_error(request,exc):return JSONResponse({'error':str(exc.detail)},status_code=exc.status_code)
+async def http_error(request,exc):return JSONResponse({'error':str(exc.detail)},status_code=exc.status_code,headers=exc.headers)
 @app.exception_handler(ValueError)
 async def bad_value(request,exc):return JSONResponse({'error':str(exc) or 'Invalid request'},status_code=400)
 @app.exception_handler(LookupError)
@@ -150,7 +172,11 @@ def readiness():
  def model(name,default):return Path(os.getenv(name,default)).is_file()
  voice_model=os.getenv('BP5_PIPER_MODEL','sv_SE-nst-medium.onnx')
  audio_ok=exe('BP5_FFMPEG','ffmpeg') and exe('BP5_WHISPER_BIN','whisper-cli') and model('BP5_WHISPER_MODEL','whisper-base.bin') and exe('BP5_PIPER_BIN','piper') and Path(voice_model).is_file() and Path(voice_model+'.json').is_file()
- return JSONResponse({'ok':bool(library_ok and audio_ok),'library':library_ok,'audio':audio_ok},status_code=200 if library_ok and audio_ok else 503)
+ semantic_required=os.getenv('BP5_SEMANTIC_REQUIRED','0')=='1'
+ try:semantic_ok=bool(language_checker.ready()) if semantic_required else True
+ except Exception:semantic_ok=False
+ ok=bool(library_ok and audio_ok and semantic_ok)
+ return JSONResponse({'ok':ok,'library':library_ok,'audio':audio_ok,'semantic_required':semantic_required,'semantic':semantic_ok},status_code=200 if ok else 503)
 @app.get('/api/config')
 def public_config():
  return {'support_contact':os.getenv('BP5_SUPPORT_CONTACT','')[:300],'privacy_contact':os.getenv('BP5_PRIVACY_CONTACT','')[:300]}
@@ -261,13 +287,13 @@ def start_mission(body:Start,request:Request):
    if previous['payload_hash']!=st.digest(body.model_dump_json()):c.execute('ROLLBACK');raise HTTPException(409,'Request ID was already used for different input')
    try: existing=st.owner_session(c,a['user_id'],previous['mission_id'])
    except LookupError:c.execute('ROLLBACK');raise HTTPException(409,'This request was already used for a deleted mission')
-   c.execute('COMMIT');return {'session':existing}
+   c.execute('COMMIT');return {'session':session_view(existing)}
   try:record_rate(c,'mission-create:'+a['user_id'],MAX_MISSION_CREATIONS_PER_HOUR,3600,subject=a['user_id'])
   except BaseException:c.execute('ROLLBACK');raise
   if c.execute('SELECT count(*) FROM creation_requests WHERE user_id=?',(a['user_id'],)).fetchone()[0]>=MAX_CREATION_REQUESTS:c.execute('ROLLBACK');raise HTTPException(409,'Account request limit reached')
   if c.execute('SELECT count(*) FROM missions WHERE user_id=?',(a['user_id'],)).fetchone()[0]>=200:c.execute('ROLLBACK');raise HTTPException(409,'Practice history limit reached; export and remove old sessions')
   c.execute('INSERT INTO missions VALUES(?,?,?,?)',(sid,a['user_id'],json.dumps(s,ensure_ascii=False),now));c.execute('INSERT INTO creation_requests VALUES(?,?,?,?)',(a['user_id'],st.digest(body.request_id),sid,st.digest(body.model_dump_json())));c.execute('COMMIT')
- return {'session':s}
+ return {'session':session_view(s)}
 class BoundedHistoryResponse(StreamingResponse):
  async def __call__(self,scope,receive,send):
   try:
@@ -317,7 +343,7 @@ def list_missions(request:Request):
 def get_mission(sid:str,request:Request):
  a=auth(request)
  with st.connect() as c:s=st.owner_session(c,a['user_id'],sid)
- return {'session':s}
+ return {'session':session_view(s)}
 @app.delete('/api/missions')
 def delete_all(request:Request):
  a=auth(request,True)
@@ -348,18 +374,116 @@ def advance_intent(s,mission,steps,step,intent,now):
  elif next_step not in steps:raise RuntimeError('Invalid mission')
  else:s['current_step']=next_step
 
-def perform(sid,request,body,operation):
+def semantic_cost(text,step):
+ # A bounded proxy for batch/sequence work, not a claim about actual CPU time.
+ # Ordinary short replies with one/two choices cost one unit; longer replies
+ # remain possible without treating every character as a new request.
+ candidates=step.get('intents')
+ if not isinstance(candidates,list) or not 1<=len(candidates)<=6:raise RuntimeError('Invalid mission')
+ return min(48,max(1,(len(text.strip().encode('utf8'))+511)//512)**2*((len(candidates)+1)//2))
+
+def semantic_capacity_retry(seconds):
+ return HTTPException(429,'Language checking is temporarily at capacity. Keep your draft and try again shortly.',headers={'Retry-After':str(max(1,min(3600,math.ceil(seconds))))})
+
+def admit_semantic(sid,request,body,a,revision,cost):
+ """Called only while holding the inference permit; never holds DB during work."""
+ with st.connect() as c:
+  c.execute('BEGIN IMMEDIATE')
+  try:
+   now=time.time();token=request.cookies.get(COOKIE,'')
+   live=c.execute('SELECT user_id,csrf_hash FROM auth_sessions WHERE token_hash=? AND expires>?',(st.digest(token),now)).fetchone()
+   if not live or live['user_id']!=a['user_id'] or not hmac.compare_digest(live['csrf_hash'],st.digest(request.headers.get('x-csrf-token',''))):raise HTTPException(401,'Sign in required')
+   s=st.owner_session(c,a['user_id'],sid);key='turn:'+body.request_id
+   if key in s['request_results']:
+    previous=s['request_results'][key]
+    if previous['payload_hash']!=st.digest(body.model_dump_json()):raise HTTPException(409,'Request ID was already used for different input')
+    view=session_view(s);c.execute('COMMIT');return {'session':view,**previous['result']}
+   require_current_mission(s)
+   current=c.execute('SELECT payload FROM missions WHERE id=? AND user_id=?',(sid,a['user_id'])).fetchone()
+   if not current or st.digest(current['payload'])!=revision:raise HTTPException(409,'Mission changed; try again')
+   budget=c.execute('SELECT available,updated,blocked_until FROM semantic_budgets WHERE user_id=?',(a['user_id'],)).fetchone()
+   available=float(SEMANTIC_BURST_UNITS);updated=now
+   if budget:
+    if budget['blocked_until']>now:raise semantic_capacity_retry(budget['blocked_until']-now)
+    # A backward wall-clock change never grants credit, including after restart.
+    updated=max(now,budget['updated'])
+    available=min(available,budget['available']+max(0,now-budget['updated'])*SEMANTIC_REFILL_UNITS_PER_MINUTE/60)
+   if available<cost:raise semantic_capacity_retry((cost-available)*60/SEMANTIC_REFILL_UNITS_PER_MINUTE)
+   c.execute('INSERT INTO semantic_budgets(user_id,available,updated) VALUES(?,?,?) ON CONFLICT(user_id) DO UPDATE SET available=excluded.available,updated=excluded.updated',(a['user_id'],available-cost,updated))
+   c.execute('COMMIT')
+  except BaseException:
+   if c.in_transaction:c.execute('ROLLBACK')
+   raise
+ return None
+
+def complete_semantic(uid,elapsed):
+ # UPDATE only: account deletion cascades the row, and completion must never
+ # recreate it. No sleeping: this affects only the account's next admission.
+ delay=min(300,max(0,elapsed)*SEMANTIC_COOLDOWN_PERCENT/100)
+ with st.connect() as c:
+  c.execute('UPDATE semantic_budgets SET blocked_until=MAX(blocked_until,?) WHERE user_id=?',(time.time()+delay,uid))
+
+def semantic_turn(sid,request,body):
+ a=auth(request,True)
+ if not re.fullmatch(r'[A-Za-z0-9_.:-]{1,100}',body.request_id):raise ValueError('Invalid request ID')
+ if not body.text.strip():raise ValueError('Enter an answer')
+ with st.connect() as c:
+  c.execute('BEGIN')
+  try:
+   row=c.execute('SELECT payload FROM missions WHERE id=? AND user_id=?',(sid,a['user_id'])).fetchone()
+   if not row:raise LookupError()
+   revision=st.digest(row['payload']);s=st.owner_session(c,a['user_id'],sid);key='turn:'+body.request_id
+   if key in s['request_results']:
+    previous=s['request_results'][key]
+    if previous['payload_hash']!=st.digest(body.model_dump_json()):raise HTTPException(409,'Request ID was already used for different input')
+    view=session_view(s);c.execute('COMMIT');return {'session':view,**previous['result']}
+   require_current_mission(s)
+   if s['status']!='in_progress':raise ValueError('Mission already complete; revisit it to practise again')
+   if len(s['turns'])>=200 or len(s['request_results'])>=500:raise ValueError('Mission history limit reached')
+   mission=s['snapshot']['mission'];step=next((x for x in mission['steps'] if x['id']==s['current_step']),None)
+   if not step:raise RuntimeError('Invalid mission')
+   context=s['turns'][-8:];c.execute('COMMIT')
+  except BaseException:c.execute('ROLLBACK');raise
+ if not LANGUAGE_CHECK_LOCK.acquire(blocking=False):raise semantic_capacity_retry(1)
+ slot_started=time.monotonic();started=None
+ try:
+  cached=admit_semantic(sid,request,body,a,revision,semantic_cost(body.text,step))
+  if cached is not None:return cached
+  started=slot_started
+  try:decision=language_checker.check(mission,step,context,body.text.strip())
+  except language_checker.CheckerInputTooLong:raise HTTPException(413,'Try a shorter reply for this turn. Your draft is still here.')
+  except Exception:raise HTTPException(503,'Language checker is unavailable; try again')
+ finally:
+  try:
+   if started is not None:complete_semantic(a['user_id'],time.monotonic()-started)
+  finally:LANGUAGE_CHECK_LOCK.release()
+ if not isinstance(decision,dict) or set(decision)!={'intent_id','confidence','source','language','language_supported','language_evidence','checker_revision'} or decision.get('source')!='semantic':raise HTTPException(503,'Language checker is unavailable; try again')
+ intent_id=decision.get('intent_id');confidence=decision.get('confidence');language=decision.get('language');supported=decision.get('language_supported');language_evidence=decision.get('language_evidence');checker_revision=decision.get('checker_revision')
+ if intent_id is not None and (not isinstance(intent_id,str) or len([i for i in step.get('intents',[]) if i.get('id')==intent_id])!=1):raise HTTPException(503,'Language checker is unavailable; try again')
+ if not isinstance(confidence,(int,float)) or isinstance(confidence,bool) or not math.isfinite(confidence) or not 0<=confidence<=1:raise HTTPException(503,'Language checker is unavailable; try again')
+ if not isinstance(language,str) or not re.fullmatch('[a-z]{2,3}',language) or type(supported) is not bool or language_evidence not in ('shared_confirmation','lexical_support','detector','foreign_veto','unresolved') or not isinstance(checker_revision,str) or not re.fullmatch(r'[A-Za-z0-9_.:-]{1,120}',checker_revision):raise HTTPException(503,'Language checker is unavailable; try again')
+ if not supported:intent_id=None
+ return perform(sid,request,body,'turn',semantic={'revision':revision,'intent_id':intent_id,'confidence':float(confidence),'language':language,'language_supported':supported,'language_evidence':language_evidence,'checker_revision':checker_revision})
+
+def perform(sid,request,body,operation,semantic=None):
  a=auth(request,True)
  if not re.fullmatch(r'[A-Za-z0-9_.:-]{1,100}',body.request_id):raise ValueError('Invalid request ID')
  with st.connect() as c:
   c.execute('BEGIN IMMEDIATE')
   try:
    s=st.owner_session(c,a['user_id'],sid);key=operation+':'+body.request_id
+   if semantic is not None:
+    token=request.cookies.get(COOKIE,'');live=c.execute('SELECT user_id,csrf_hash FROM auth_sessions WHERE token_hash=? AND expires>?',(st.digest(token),time.time())).fetchone()
+    if not live or live['user_id']!=a['user_id'] or not hmac.compare_digest(live['csrf_hash'],st.digest(request.headers.get('x-csrf-token',''))):raise HTTPException(401,'Sign in required')
    if key in s['request_results']:
     previous=s['request_results'][key]
     if previous['payload_hash']!=st.digest(body.model_dump_json()):raise HTTPException(409,'Request ID was already used for different input')
-    c.execute('COMMIT');return {'session':s,**previous['result']}
+    view=session_view(s);c.execute('COMMIT');return {'session':view,**previous['result']}
    if len(s['request_results'])>=500:raise ValueError('Mission history limit reached')
+   if semantic is not None:
+    current=c.execute('SELECT payload FROM missions WHERE id=? AND user_id=?',(sid,a['user_id'])).fetchone()
+    if not current or st.digest(current['payload'])!=semantic['revision']:raise HTTPException(409,'Mission changed; try again')
+   if operation in ('turn','clarify','reset'):require_current_mission(s)
    now=time.time();result={}
    if operation=='turn':
     if s['status']=='completed':raise ValueError('Mission already complete; revisit it to practise again')
@@ -367,14 +491,16 @@ def perform(sid,request,body,operation):
     if len(s['turns'])>=200:raise ValueError('Mission turn limit reached')
     mission=s['snapshot']['mission'];steps={x['id']:x for x in mission['steps']};step=steps.get(s['current_step'])
     if not step:raise RuntimeError('Invalid mission')
-    intent=st.match_step(step,body.text)
+    intent=next((i for i in step['intents'] if i.get('id')==semantic['intent_id']),None) if semantic is not None else st.match_step(step,body.text)
     reply=intent.get('reply_sv','') if intent else step.get('unknown_reply_sv','')
     feedback=intent.get('feedback_en','') if intent else step.get('unknown_feedback_en','')
     if not reply:raise RuntimeError('Invalid mission')
     s['turns'].append({'role':'user','turn_id':uuid.uuid4().hex,'text':body.text.strip(),'input_mode':body.input_mode,'transcript_edited':body.transcript_edited if body.input_mode=='voice' else False,'help_used':body.help_used,'step_id':step['id'],'intent_id':intent.get('id') if intent else None,'evidence_state':'practised','created_at':now})
     s['turns'].append({'role':'assistant','text':reply,'feedback_en':feedback,'matched':bool(intent),'created_at':now})
+    if semantic is not None:s['turns'][-2].update(match_source='semantic',checker_revision=semantic['checker_revision'],checker_confidence=semantic['confidence'],detected_language=semantic['language'],language_supported=semantic['language_supported'],language_evidence=semantic['language_evidence'])
     if intent:advance_intent(s,mission,steps,step,intent,now)
     result={'reply':reply,'matched':bool(intent),'feedback':feedback}
+    if semantic is not None:result['match_source']='semantic'
    elif operation=='clarify':
     if s['status']!='in_progress' or s['current_step']!=body.step_id:raise HTTPException(409,'This clarification is no longer current')
     if body.turn_index!=len(s['turns'])-2:raise HTTPException(409,'This clarification is no longer current')
@@ -405,10 +531,14 @@ def perform(sid,request,body,operation):
     if len(s['prior_runs'])>=50:raise ValueError('Revisit limit reached')
     s['prior_runs'].append({'status':s['status'],'turns':s['turns'],'completed_objectives':s['completed_objectives'],'completed_at':s.get('completed_at')})
     s['status']='in_progress';s['current_step']=s['snapshot']['mission']['start_step'];s['completed_objectives']=[];s.pop('completed_at',None);s['turns']=[{'role':'assistant','text':s['snapshot']['mission'].get('opening_sv',''),'created_at':now}]
-   s['updated_at']=now;s['request_results'][key]={'payload_hash':st.digest(body.model_dump_json()),'result':result};st.save_session(c,a['user_id'],s);c.execute('COMMIT');return {'session':s,**result}
+   s['updated_at']=now;s['request_results'][key]={'payload_hash':st.digest(body.model_dump_json()),'result':result};view=session_view(s)
+   if operation in ('turn','clarify','reset') and not view['content_status']['current']:raise ExerciseUpdated(view['content_status'])
+   st.save_session(c,a['user_id'],s);c.execute('COMMIT');return {'session':view,**result}
   except BaseException:c.execute('ROLLBACK');raise
 @app.post('/api/missions/{sid}/turn')
-def turn(sid:str,body:Turn,request:Request):return perform(sid,request,body,'turn')
+def turn(sid:str,body:Turn,request:Request):
+ if os.getenv('BP5_SEMANTIC_REQUIRED','0')=='1':return semantic_turn(sid,request,body)
+ return perform(sid,request,body,'turn')
 @app.post('/api/missions/{sid}/clarify')
 def clarify(sid:str,body:Clarify,request:Request):return perform(sid,request,body,'clarify')
 @app.post('/api/missions/{sid}/reset')

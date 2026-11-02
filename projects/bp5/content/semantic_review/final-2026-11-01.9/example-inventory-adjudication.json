@@ -1,0 +1,448 @@
+{
+  "schema_version": "1.0",
+  "from_version": "2026-11-01.8",
+  "from_sha256": "99be582abcdb920fc3c0b0dd59d5d3ad7359ac509f4c407ee64ab1f257702eca",
+  "to_version": "2026-11-01.9",
+  "to_sha256": "c8142f993e390f90234d651c515e0d1c708bf78070e8361d2039b133c0ceb3e8",
+  "note": "Source inventory adjudication, not a new language benchmark. Excluding an ambiguous auto-accept example does not assign an UNKNOWN gold label. Historical files and learner records remain unchanged.",
+  "counts": {
+    "changed_intents": 8,
+    "removed_exact_reply_contexts": 54,
+    "added_exact_reply_contexts": 2,
+    "canonical_examples_changed": 4
+  },
+  "changes": [
+    {
+      "key": "lib_cafe_m1/confirm_takeaway/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Jag behöver hjälp att hämta kaffet.",
+          "reason": "Needing collection assistance does not by itself refuse collection at the counter; unaided collection was not required.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "canonical_examples_changed": false
+    },
+    {
+      "key": "lib_transport_m3/confirm_direct/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Jag behöver hjälp att hitta dit.",
+          "reason": "Needing route assistance does not by itself refuse going to the other stop.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "canonical_examples_changed": false
+    },
+    {
+      "key": "lib_reception_m2/confirm_spell/confirm",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Ja, det går bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Absolut, det passar.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det fungerar fint.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Gärna.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, gärna.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det går bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det blir bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det låter bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det funkar.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det gör jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det kan jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det kan jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det vill jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det passar mig.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, kim stämmer.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Ja, det går bra."
+      ],
+      "new_examples_sv": [
+        "Ja, det stämmer."
+      ],
+      "canonical_examples_changed": true
+    },
+    {
+      "key": "lib_reception_m2/confirm_spell/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Nej, det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar tyvärr inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Tyvärr, jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det går tyvärr inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Nej, det fungerar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, men det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, men jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [
+        "Nej, det stämmer inte."
+      ],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det stämmer inte."
+      ],
+      "canonical_examples_changed": true
+    },
+    {
+      "key": "lib_reception_m2/confirm_write/confirm",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Ja, det går bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Absolut, det passar.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det fungerar fint.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Gärna.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, gärna.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det går bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det blir bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det låter bra.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det funkar.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det gör jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det kan jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det kan jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det vill jag.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, det passar mig.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, kim stämmer.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Ja, det går bra."
+      ],
+      "new_examples_sv": [
+        "Ja, det stämmer."
+      ],
+      "canonical_examples_changed": true
+    },
+    {
+      "key": "lib_reception_m2/confirm_write/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Nej, det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar tyvärr inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Tyvärr, jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Det går tyvärr inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Nej, det fungerar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, men det passar inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        },
+        {
+          "text_sv": "Ja, men jag kan inte.",
+          "reason": "A generic offer-response does not reliably affirm the name, deny it, or explicitly refuse verification. Preserve it for context review rather than assign UNKNOWN as a new gold label.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [
+        "Nej, det stämmer inte."
+      ],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det stämmer inte."
+      ],
+      "canonical_examples_changed": true
+    },
+    {
+      "key": "lib_customer_service_m3/confirm_written/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Jag väntar med bekräftelsen.",
+          "reason": "The offer already asks about confirmation later, after reading. An unspecified delay does not reliably refuse that later request.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "canonical_examples_changed": false
+    },
+    {
+      "key": "lib_customer_service_m3/confirm_explain/decline",
+      "removed_exact_replies": [
+        {
+          "text_sv": "Jag väntar med bekräftelsen.",
+          "reason": "The offer already asks about confirmation later, after explanation. An unspecified delay does not reliably refuse that later request.",
+          "decision": "exclude_from_auto_accept_inventory_pending_context_review",
+          "new_gold_label": null
+        }
+      ],
+      "added_exact_replies": [],
+      "old_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "new_examples_sv": [
+        "Nej, det passar inte."
+      ],
+      "canonical_examples_changed": false
+    }
+  ]
+}

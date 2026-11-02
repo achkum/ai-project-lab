@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "product": "BP5",
+  "report_file": "LANGUAGE_ACCEPTANCE.json",
+  "accepted_report_sha256": null,
+  "model_root": null,
+  "active_corpus": {
+    "sha256": "843834b551d1f707ff3b7c41cfc27f75302ee1aecf9a9843c9ffcaf2318e1fd2",
+    "metadata_sha256": "d15d2cfdb47001f52ea3f54689c8bdfb1510978b555227144056979deb88f21a",
+    "total": 826,
+    "valid": 505,
+    "negative": 321,
+    "mission_count": 54,
+    "long_suite": {"valid": 24, "negative": 12, "mission_count": 12},
+    "independent_evaluator_id": "bp5_language_acceptance",
+    "by_difficulty": {
+      "basic": {"total": 276, "valid": 175, "negative": 101},
+      "medium": {"total": 248, "valid": 153, "negative": 95},
+      "high": {"total": 302, "valid": 177, "negative": 125}
+    }
+  },
+  "thresholds": {
+    "valid_percent": 90,
+    "each_difficulty_percent": 85,
+    "max_wrong_intent_advances": 0,
+    "max_negative_advances": 0,
+    "minimum_valid": 120,
+    "minimum_negative": 120
+  },
+  "evidence_status": "No acceptable independent candidate report exists. Null pins intentionally prevent release.",
+  "artifact_location": "Operator may set BP5_ACCEPTANCE_ARTIFACT_ROOT to a local directory containing the exact evaluated Linux artifacts. This private location is not report identity; every declared artifact hash must still match. model_root remains null in the public contract.",
+  "trust_boundary": "The canonical repository contract is updated by the coordinating implementation workflow after verifying independent evaluation artifacts. This prevents accidental or stale completion, not forgery by a trusted repository editor. No human approval step is introduced.",
+  "corpus_rotation": "For a new independently frozen corpus, preserve the old corpus/report privately, replace active_corpus SHA, metadata SHA, exact counts and independent evaluator identity, and reset accepted_report_sha256 to null. Never reuse a disclosed corpus as a fresh holdout. Pin a new report only after the independent evaluator runs the entire new corpus against immutable candidate bytes and results pass this gate."
+}

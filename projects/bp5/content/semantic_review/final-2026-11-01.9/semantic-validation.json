@@ -1,0 +1,19 @@
+{
+  "content_version": "2026-11-01.9",
+  "source_sha256": "c8142f993e390f90234d651c515e0d1c708bf78070e8361d2039b133c0ceb3e8",
+  "passed": true,
+  "test_methods": 8,
+  "failures": [],
+  "errors": [],
+  "scope": [
+    "All 108 final predicates reference their actual authored offer.",
+    "Reordering illustrative refusal examples cannot change any final refusal predicate or response.",
+    "Specific alternative witnesses, assistance ambiguity, name verification and permitted question acts are checked.",
+    "Stable graphs and immutable .7/.8 snapshots are verified.",
+    "Synthetic adjudication conserves all original cases and assigns no replacement labels."
+  ],
+  "limitations": [
+    "These are engineering and authored semantic regressions, not independent language comprehension or learner-effectiveness results.",
+    "The lexical matcher remains deliberately narrow; exclusion from its inventory is not a semantic UNKNOWN gold label."
+  ]
+}

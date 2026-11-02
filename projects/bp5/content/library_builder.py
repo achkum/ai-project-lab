@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-VERSION = '2026-11-01.7'
+VERSION = '2026-11-01.9'
 NEG = ['inte', 'aldrig', 'inget', 'ingen', 'inga', 'nej']
 
 def G(*groups):
@@ -83,15 +83,24 @@ def situation(id,level,title,title_sv,description,character,tasks):
         for step in mission['steps']:
             step['prompt_en_kind']='task_guidance'
     revise(s)
+    from library_sources.context_clarifications import apply_context_clarifications
+    from library_sources.refusal_contract import apply_refusal_contract
+    for mission in s['missions']:
+        apply_context_clarifications(mission)
+        apply_refusal_contract(mission)
     return s
 
-def main():
+def main(output_path=None):
     from library_sources.basic import situations as basic
     from library_sources.medium import situations as medium
     from library_sources.high import situations as high
     situations=basic()+medium()+high()
     data={'schema_version':'2.0','content_version':VERSION,'language':'sv-SE','help_language':'en','legacy_policy':'Legacy scenarios.json is unchanged. Existing sessions resume their frozen snapshots; no old evidence is silently converted to guided missions.','learning_limit':'Guided task completion is not mastery. Basic/Medium/High are practice challenge labels, not SFI courses. Emotional-context benefit and retention effects remain unvalidated.','situations':situations,'provenance':{'authorship':'Original fictional dialogue, messages and exercises authored for BP5. No commercial lessons or national-test items copied.','curriculum_source':'curriculum.json retains official sources, pages and framework versions. All task links are partial authored interpretations, not an educator-validated course.','review_status':'Authored language/flow review plus deterministic engineering tests. No independent Swedish educator review, learner usability trial or learning-effectiveness validation has occurred.','evaluation':'library_evaluation.json contains separately authored paraphrases and negatives. After first execution and corrections these are regression cases, not a permanently unseen set.'}}
-    (ROOT/'library.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    output_path=Path(output_path) if output_path else ROOT/'library.json'
+    output_path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'Built {len(situations)} situations and {sum(len(s["missions"]) for s in situations)} guided missions.')
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--output')
+    main(parser.parse_args().output)
