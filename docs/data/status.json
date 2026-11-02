@@ -1,12 +1,24 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-02T10:47:23.533110+00:00",
+  "generated_at": "2026-11-02T10:56:35.675236+00:00",
   "connected": true,
   "thesis": {
-    "state": "completed",
-    "last_success": "2026-11-02T06:31:42.521170+00:00",
-    "next_run": "2026-11-03T08:00:00+01:00"
+    "state": "investigating",
+    "last_success": null,
+    "next_run": "2026-11-03T08:00:00+01:00",
+    "collection_last_success": "2026-11-02T06:31:42.521170+00:00",
+    "research_run": {
+      "id": "20261102-thesis-solo",
+      "date": "2026-11-02",
+      "state": "investigating",
+      "registered_at": "2026-11-02T10:52:57.963769+00:00",
+      "last_completed_at": null,
+      "target_topics": 10,
+      "investigated_topics": 0,
+      "selection_required": false,
+      "note": "Today’s thesis investigation is running. Target: 10 substantial Applied AI studies using data a solo student can access. Company partnerships and private organisational data are excluded. Existing ideas are being reassessed; source collection alone is not completed research."
+    }
   },
   "project": {
     "state": "running",
