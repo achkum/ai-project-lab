@@ -66,7 +66,7 @@ function ideaCard(x) {
 }
 function comparison(rows) {
  const fields=rows[0]?.lane==='Thesis'?[['Who it helps','audience'],['What we would test','question'],['What you would produce','deliverable'],['Main difficulty','risk']]:[['First customer','audience'],['Working first version','deliverable'],['Why someone would pay','buyer'],['Demand test','customer_test'],['Main risk','risk']];
- return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">Your selection</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
+ return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">Your selection</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.title||x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
 function learningDesign(x){
  const d=x.learning_design;if(x.id!=='BP5'||!d)return '';
