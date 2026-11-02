@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-01T20:25:23.524282+00:00",
+  "generated_at": "2026-11-02T06:31:43.317549+00:00",
   "connected": true,
   "thesis": {
     "state": "completed",
-    "last_success": "2026-11-01T06:31:15.802076+00:00",
+    "last_success": "2026-11-02T06:31:42.521170+00:00",
     "next_run": "2026-11-02T08:00:00+01:00"
   },
   "project": {
@@ -20,11 +20,11 @@
     "limit_sek": 0
   },
   "coverage": {
-    "checked": 26,
+    "checked": 33,
     "target": 20,
     "registered": 35,
-    "blocked": 0,
-    "source_families": 3
+    "blocked": 1,
+    "source_families": 4
   },
   "sources": [
     {
@@ -33,7 +33,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.AI/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-hci",
@@ -41,7 +41,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.HC/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-se",
@@ -49,7 +49,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.SE/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "hn",
@@ -145,7 +145,7 @@
       "category": "Community",
       "url": "https://discuss.frappe.io",
       "access": "Public feed",
-      "status": "checked"
+      "status": "unavailable"
     },
     {
       "id": "wordpress",
@@ -273,7 +273,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.CV/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-cs-sd",
@@ -281,7 +281,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.SD/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-cs-lg",
@@ -289,7 +289,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.LG/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-stat-ml",
@@ -297,7 +297,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/stat.ML/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     },
     {
       "id": "arxiv-eess-sp",
@@ -305,7 +305,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/eess.SP/recent",
       "access": "Public feed",
-      "status": "empty"
+      "status": "checked"
     }
   ],
   "opportunities": [
