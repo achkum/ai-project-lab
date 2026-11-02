@@ -116,7 +116,7 @@ function renderCards(lane,query=''){
  const conversation='<div class="explore-again"><div><strong>Not your direction?</strong><p>Question the recommendation, change the angle or explore a fresh set now.</p></div><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></div>';
  const signals=data.discovery_signals;
  const radar=signals?'<details class="provenance-panel"><summary><strong>What is getting attention now · GitHub & LinkedIn · '+esc(signals.checked_at)+'</strong></summary><p>'+esc(signals.scope)+'</p><div class="detail-grid">'+signals.items.map(s=>'<section><span class="tag">'+esc(s.source)+'</span><h3><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a></h3><p>'+esc(s.signal)+'</p><p><strong>Possible direction: </strong>'+esc(s.possibility)+'</p><p><strong>Still unknown: </strong>'+esc(s.limit)+'</p></section>').join('')+'</div></details>':'';
- const run=data.discovery_run;
+ const run=lane==='Thesis'?(data.thesis.research_run||data.discovery_run):data.discovery_run;
  const research=run?'<div class="lane-focus"><div><span class="tag">DISCOVERY · '+esc(pretty(run.lane_states?.[lane]||run.state))+'</span><p>'+esc(run.lane_notes?.[lane]||run.note)+'</p></div></div>':'';
  const reviewed=lane==='Project'&&run?.reviewed_directions?.length?'<details class="provenance-panel"><summary><strong>What the replacement review found</strong></summary><p>These are research findings, not a new build shortlist. Existing competitors do not rule out a business; we still need a concrete reason a customer would choose us.</p><div class="detail-grid">'+run.reviewed_directions.map(r=>'<section><span class="tag">'+esc(r.verdict)+'</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.problem)+'</p><p><strong>Why it was not shortlisted: </strong>'+esc(r.finding)+'</p><a class="text-link" href="'+esc(safeLink(r.source_url))+'" target="_blank" rel="noopener noreferrer">'+esc(r.source_label)+' ↗</a></section>').join('')+'</div></details>':'';
  const empty=lane==='Project'&&!query?'No replacement business shortlist is ready. The rejected small tools are archived; previous builds and their files remain available.':'No matching ideas. Try another search.';
@@ -137,7 +137,8 @@ function render(){
  const stats=[['Thesis cadence','Daily','Broad discovery, personalised ranking'],['Delivery window','7 days','No fixed weekday stages'],['Source coverage',data.coverage.checked+' / '+data.coverage.target,data.coverage.registered+' channels · '+(data.coverage.source_families??'—')+' source families'],['Releases this week',data.releases_last_7_days,'Actual releases only']];
  $('stats').innerHTML=stats.map(([l,v,n])=>'<div class="stat"><div class="label">'+esc(l)+'</div><div class="value">'+esc(v)+'</div><div class="note">'+esc(n)+'</div></div>').join('');
  $('thesis-state').textContent=pretty(data.thesis.state);$('project-state').textContent=pretty(data.project.state);
- $('thesis-last').textContent=when(data.thesis.last_success,'Not run');$('thesis-next').textContent=when(data.thesis.next_run,'Not scheduled');
+ $('thesis-last').textContent=when(data.thesis.last_success,'No recorded batch completion');$('thesis-next').textContent=when(data.thesis.next_run,'Not scheduled');
+ $('thesis-collected').textContent=when(data.thesis.collection_last_success,'Not recorded');
  $('project-stage').textContent=data.project.stage;$('project-target').textContent=when(data.project.target_at,'Starts with first selection');
  $('activity').innerHTML=data.events.map(x=>'<div class="event"><strong>'+esc(x.title)+'</strong><p>'+esc(x.detail)+'</p></div>').join('');
  $('decision-list').innerHTML=renderDecisions();

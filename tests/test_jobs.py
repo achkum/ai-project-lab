@@ -36,6 +36,30 @@ class JobsTests(unittest.TestCase):
         self.q.enqueue([{'id':'T4','version':1}],'request-123');self.q.claim()
         row=self.q.snapshot()['jobs'][0]
         self.assertNotIn('scope',row);self.assertNotIn('token',row)
+
+    def test_idle_snapshot_expires_once_without_restarting_or_losing_artifacts(self):
+        self.q.enqueue([{'id':'T4','version':1}], 'idle-disconnect')
+        job = self.q.claim()
+        self.q.db.execute("UPDATE jobs SET result=? WHERE id=?", ('{"summary":"partial work preserved"}', job['id']))
+        self.now += 181
+        row = self.q.snapshot()['jobs'][0]
+        self.assertEqual(row['state'], 'needs_attention')
+        self.assertEqual(row['result']['summary'], 'partial work preserved')
+        self.assertIsNone(self.q.claim())
+        self.q.snapshot()
+        self.assertEqual(self.q.db.execute("SELECT COUNT(*) FROM job_events WHERE action='lease_expired'").fetchone()[0], 1)
+        with self.assertRaises(ValueError):
+            self.q.heartbeat(job['id'], job['token'])
+
+    def test_snapshot_preserves_live_lease_and_owner_pause(self):
+        self.q.enqueue([{'id':'T4','version':1}], 'live-snapshot')
+        job = self.q.claim()
+        self.now += 179
+        self.assertEqual(self.q.snapshot()['jobs'][0]['state'], 'running')
+        self.q.heartbeat(job['id'], job['token'])
+        self.q.control(job['id'], 'pause')
+        self.now += 181
+        self.assertEqual(self.q.snapshot()['jobs'][0]['state'], 'paused')
     def test_material_scope_cannot_change_under_the_same_version(self):
         self.q.enqueue([{'id':'T4','version':1}],'request-123')
         self.q.catalog['T4']['title']='A different experiment'

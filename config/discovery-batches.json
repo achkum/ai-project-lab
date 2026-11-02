@@ -1,6 +1,10 @@
 {
   "cadence": "rolling",
-  "selection_required": true,
+  "selection_required": {
+    "project_build": true,
+    "thesis_investigation": false,
+    "thesis_commitment": true
+  },
   "current_project_batch": {
     "id": "20261101-business-followup",
     "state": "awaiting_selection",
@@ -115,5 +119,16 @@
       "at": "2026-11-01T15:23:22.090430+00:00",
       "reason": "Owner requested a production app with more learning situations, continuing practice, account isolation and laptop-independent hosting."
     }
-  ]
+  ],
+  "thesis_research": {
+    "id": "20261102-thesis-solo",
+    "date": "2026-11-02",
+    "state": "investigating",
+    "registered_at": "2026-11-02T10:52:57.963769+00:00",
+    "last_completed_at": null,
+    "target_topics": 10,
+    "investigated_topics": 0,
+    "selection_required": false,
+    "note": "Today’s thesis investigation is running. Target: 10 substantial Applied AI studies using data a solo student can access. Company partnerships and private organisational data are excluded. Existing ideas are being reassessed; source collection alone is not completed research."
+  }
 }

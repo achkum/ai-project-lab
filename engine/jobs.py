@@ -98,7 +98,19 @@ class Jobs:
             self.db.execute('INSERT INTO requests VALUES(?,?,?)',(request_id,digest,json.dumps(ids)))
         return ids
 
+    def _expire_leases(self, now):
+        """Called inside a write transaction; never restart disconnected work."""
+        expired = [r['id'] for r in self.db.execute(
+            "SELECT id FROM jobs WHERE state='running' AND lease_until<=?", (now,))]
+        self.db.execute("UPDATE jobs SET state='needs_attention',token=NULL,lease_until=NULL,message='Worker disconnected; review partial work before resuming',updated=? WHERE state='running' AND lease_until<=?", (now, now))
+        for jid in expired:
+            self.event(jid, 'lease_expired')
+
     def snapshot(self):
+        # A quiet queue must still reveal a disconnected worker. Previously this
+        # maintenance ran only when another job was claimed.
+        with self.transaction():
+            self._expire_leases(self.clock())
         rows=[]
         for r in self.db.execute('SELECT * FROM jobs ORDER BY created'):
             # Never expose execution leases or private artifact content to the browser.
@@ -120,7 +132,7 @@ class Jobs:
         with self.transaction():
             now=self.clock()
             # Lost leases need review, never launch a second copy of possibly running work.
-            self.db.execute("UPDATE jobs SET state='needs_attention',token=NULL,lease_until=NULL,message='Worker disconnected; review partial work before resuming',updated=? WHERE state='running' AND lease_until<=?",(now,now))
+            self._expire_leases(now)
             if self.db.execute("SELECT COUNT(*) FROM jobs WHERE state='running'").fetchone()[0]>=self.max_parallel: return None
             if allowed is None:
                 r=self.db.execute("SELECT * FROM jobs WHERE state='queued' ORDER BY created,id LIMIT 1").fetchone()
@@ -172,6 +184,7 @@ class Jobs:
     def control(self,jid,action):
         if action not in ('pause','resume','cancel'): raise ValueError('Invalid action')
         with self.transaction():
+            self._expire_leases(self.clock())
             r=self.db.execute('SELECT * FROM jobs WHERE id=?',(jid,)).fetchone()
             if not r: raise ValueError('Unknown job')
             if action=='resume' and r['state'] not in ('paused','needs_attention','quota_wait'):
