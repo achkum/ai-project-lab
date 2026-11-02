@@ -2,6 +2,7 @@
 const $ = id => document.getElementById(id);
 let data = window.LAB_SAMPLE;
 let lastError = '';
+let snapshotPending = true;
 const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pretty = s => String(s || 'Unknown').replaceAll('_',' ');
 const when = (s,fallback) => s && Number.isFinite(Date.parse(s)) ? new Date(s).toLocaleString('en-GB',{timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}) : fallback;
@@ -155,10 +156,10 @@ function renderSources(){
 }
 function render(){
  const sample=data.mode==='sample',age=data.generated_at?Date.now()-Date.parse(data.generated_at):null,stale=!sample&&age>10800000;
- $('notice').textContent=lastError || (sample?'Sample mode · Illustrative records only. No workflow is connected.':!data.connected?'Not connected · Backend setup is incomplete.':stale?'Stale snapshot · The last update is over three hours old. Check the coordinator.':'Live snapshot · Public-safe status only. Private details stay in GitHub.');
+ $('notice').textContent=lastError || (sample&&snapshotPending?'Loading the latest published research…':sample?'Sample mode · Illustrative records only. No workflow is connected.':!data.connected?'Not connected · Backend setup is incomplete.':stale?'Stale snapshot · The last update is over three hours old. Check the coordinator.':'Live snapshot · Public-safe status only. Private details stay in GitHub.');
  $('notice').classList.toggle('error',!!lastError||stale);
- $('connection').textContent=sample||!data.connected?'Not connected':stale?'Snapshot stale':'Snapshot connected';
- $('freshness').textContent=sample?'Awaiting first live snapshot':'Updated '+when(data.generated_at,'Unknown');
+ $('connection').textContent=sample&&snapshotPending?'Connecting…':sample||!data.connected?'Not connected':stale?'Snapshot stale':'Snapshot connected';
+ $('freshness').textContent=sample&&snapshotPending?'Loading latest snapshot…':sample?'Awaiting first live snapshot':'Updated '+when(data.generated_at,'Unknown');
  const stats=[['Thesis cadence','Daily','Broad discovery, personalised ranking'],['Delivery window','7 days','No fixed weekday stages'],['Source coverage',data.coverage.checked+' / '+data.coverage.target,data.coverage.registered+' channels · '+(data.coverage.source_families??'—')+' source families'],['Releases this week',data.releases_last_7_days,'Actual releases only']];
  $('stats').innerHTML=stats.map(([l,v,n])=>'<div class="stat"><div class="label">'+esc(l)+'</div><div class="value">'+esc(v)+'</div><div class="note">'+esc(n)+'</div></div>').join('');
  $('thesis-state').textContent=pretty(data.thesis.state);$('project-state').textContent=pretty(data.project.state);
@@ -175,7 +176,7 @@ async function refresh(){
   if(location.protocol==='file:'){lastError='Local sample preview · Serve over HTTP or open GitHub Pages to fetch snapshots.';}
   else {const r=await fetch('data/status.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const next=await r.json();if(!valid(next))throw Error('Invalid status schema');data=next;lastError='';}
  }catch(e){lastError='Snapshot update failed ('+e.message+'). '+(data.mode==='sample'?'Showing labelled sample data; no live connection.':'Retaining the last snapshot; check its age.');}
- finally{render();$('refresh').disabled=false;}
+ finally{snapshotPending=false;render();$('refresh').disabled=false;}
 }
 document.addEventListener('click',async e=>{
  const convo=e.target.closest('[data-conversation]');
