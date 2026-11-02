@@ -1,0 +1,91 @@
+{
+  "as_of": "2026-11-02",
+  "target": 10,
+  "investigated": 10,
+  "kept": 7,
+  "conditional_revision": 3,
+  "approved_or_endorsed": 0,
+  "experiments_completed": 0,
+  "items": [
+    {
+      "id": "ST1",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Count eligible examples per uploader/grouped split; inspect metadata-label shortcuts and exact/near duplicates. Frozen CLAP pretraining exposure is not established as absent.",
+      "kill_test": "Before model work, form a usable grouped split with adequate class support and matching audio/text features. Run a small clean/dropout comparison. Revise if the apparent advantage disappears against fixed fusion or if rare classes have too few independent uploaders; report a negative result rather than inventing a product gain."
+    },
+    {
+      "id": "ST2",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Count usable time per performer/channel, ensure paired alignment, audit rests and note overlap. Known comp-track offset and duplicate-note issues are documented; solos-only scope excludes those named tracks but is not a blanket label-quality guarantee.",
+      "kill_test": "Verify at least several independent solo recordings and usable single-note time for every performer. Check 20 hand-inspected intervals against labels and paired waveforms. Withdraw the octave-specific claim if errors are overwhelmingly annotation offsets or if the strong baseline leaves no measurable headroom."
+    },
+    {
+      "id": "ST3",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Audit device-position confounding, original folds versus person IDs, sampling irregularity and target-unit contract. Define a three-activity pilot before expanding.",
+      "kill_test": "Build subject-disjoint walking/sitting/standing splits with at least ten target participants in each selected position; inspect resampling and units on several acquisitions. Revise to fewer positions if support is insufficient. Stop the pretrained branch if the checkpoint cannot fit or a small embedding run exceeds the CPU budget."
+    },
+    {
+      "id": "ST4",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Check individual image availability and attribution, distinguish repeated/multiple scene judgments, audit masks, and ensure adequate independent-photo support for each chosen background/class.",
+      "kill_test": "Construct at least two credible background partitions with adequate independent photos per retained class; inspect a small set of masks and scene votes. Revise if gains only appear with random object splits or synthetic backgrounds. Any class with insufficient independent test photos is excluded before results are seen."
+    },
+    {
+      "id": "ST5",
+      "verdict": "revise",
+      "qualification": "conditional_revision",
+      "assessment": "Conditional/revise. A CNN plus standard few-shot prototypes or replay alone would be too close to coursework. A defensible thesis needs the preregistered class-incremental forgetting/unknown-rejection study, a carefully audited equivalence policy for visually indistinguishable symbols, multiple class orders and memory budgets, and comparison with established incremental methods. The original writer-transfer claim is withdrawn because contributor IDs cannot support it. Direct October evidence for this exact question was not found; recent handwriting/OCR sources are adjacent corroboration, not proof of a new gap. Do not endorse until the eligible-class/ambiguity audit and closer incremental-learning literature review support this scope.",
+      "unresolved": "Complete the small archive during an authorised experiment phase, verify hashes/image shapes and sufficient examples per class. Reconcile visually indistinguishable semantic labels before training.",
+      "kill_test": "Audit class counts, exact image duplicates and label equivalence; require usable base/new/unknown partitions and enough query images after support selection. Withdraw any personalisation or unseen-writer wording. If all observed errors are label ambiguity, revise the objective toward top-k ambiguity handling rather than forced accuracy."
+    },
+    {
+      "id": "ST6",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Build a streaming metadata selector, inspect selected images and count table/non-table pages by independent document. Check release duplicates and document category mapping.",
+      "kill_test": "Select independent source/target documents with enough table and negative pages; extract and inspect a small licensed subset, then benchmark frozen CPU inference. Revise to proposal reranking if the model's missing-candidate ceiling prevents head adaptation; withdraw if the subset pipeline exceeds feasible storage/runtime."
+    },
+    {
+      "id": "ST7",
+      "verdict": "revise",
+      "qualification": "conditional_revision",
+      "assessment": "Conditional/revise. Context stratification and generic calibration are established techniques and do not by themselves establish a master's contribution. The substantial version must isolate why a frozen tabular foundation model changes with context composition, compare learned correction against analytic prior correction and strong tree models under identical label/CPU budgets, and retain all preregistered conditions. Two datasets support a bounded mechanism study, not broad model superiority. CPU feasibility and whether a nontrivial adaptation question remains are still untested; withdraw if a routine prior correction answers the entire question.",
+      "unresolved": "Audit duplicates and feature types; exclude PageValues from any prospective purchasing prediction because it may encode post-outcome information. The month variable does not permit an exact chronological split.",
+      "kill_test": "Run the bounded CPU/memory preflight, verify context/query disjointness and quantify minority-class coverage. Withdraw if no feasible context configuration exists; revise if gains vanish against analytic prior correction or only appear with PageValues."
+    },
+    {
+      "id": "ST8",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Audit missingness, sampling frequency, near-duplicates and event-window definitions; freeze the exact repository revision before experiments.",
+      "kill_test": "Verify enough independent series remain for development and held-out-family evaluation after duplicate/label checks. If one simple statistical method dominates across budgets, report it and reassess the adapter. Reject any pipeline that uses future statistics or treats every point in an event window as an independently correct alarm."
+    },
+    {
+      "id": "ST9",
+      "verdict": "keep",
+      "qualification": "kept_as_investigated_possibility",
+      "assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "unresolved": "Enumerate and pin the complete selected corpus, count eligible queries, detect duplicated/inherited docstrings, review file-level license exceptions and manually judge a bounded set of ambiguous retrieval results.",
+      "kill_test": "Verify at least 1,000 usable deduplicated functions and 200 held-out queries after grouping, plus adequate source/license coverage. Benchmark 100-function embedding extraction. Revise if gains only reflect truncation, name leakage or copied docstrings; withdraw any claim of unseen-pretraining generalisation."
+    },
+    {
+      "id": "ST10",
+      "verdict": "revise",
+      "qualification": "conditional_revision",
+      "assessment": "Conditional/revise. Training matrix factorisation and LightGCN and comparing accuracy on a random MovieLens split would be coursework. A substantial version needs an independently designed small-history adapter, strict new-user/global-time separation, timestamp-tie sensitivity, all-catalogue ranking and the relevance/popularity/coverage trade-off at matched compute and label access. Data feasibility is demonstrated, but the model study and its scientific value are not. Historical selected users limit external validity. Commercial use and redistribution are not permitted by the inspected dataset terms without separate permission.",
+      "unresolved": "Finalize support-item eligibility, validation-user separation, positive-rating threshold, timestamp-tie handling and exact release attribution.",
+      "kill_test": "Reproduce the verified feasible cohort after support/catalogue filtering, audit time/user separation and run a small CPU fit. Require enough independent users per popularity stratum. Revise if gains disappear under tied-event handling or if catalogue coverage collapses; do not claim online benefit."
+    }
+  ]
+}

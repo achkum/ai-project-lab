@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-02",
+  "batch_id": "20261102-thesis-solo",
+  "scope": "Investigation decisions only. No existing job, queue item or published topic was changed.",
+  "decisions": [
+    {
+      "id": "R01",
+      "proposal": "Unseen-writer personalisation on HASY",
+      "decision": "withdraw",
+      "evidence": [
+        "S20",
+        "S21"
+      ],
+      "reason": "Contributor IDs collapse many writers and can be shared/multiple; they cannot support strict person-held-out claims.",
+      "replacement": "Conditional ST5 class-incremental/ambiguity study, explicitly without an unseen-writer claim."
+    },
+    {
+      "id": "R02",
+      "proposal": "OneShot has not tested noisy confirmations or temporal order",
+      "decision": "withdraw",
+      "evidence": [
+        "S34"
+      ],
+      "reason": "The paper's appendices already test these cases.",
+      "replacement": "ST8 cross-series trained combiner; count all pretraining labels and compare with supervised logistic and statistical rules."
+    },
+    {
+      "id": "R03",
+      "proposal": "Metadata gating or uploader-disjoint audio evaluation is new",
+      "decision": "withdraw",
+      "evidence": [
+        "S68",
+        "S69"
+      ],
+      "reason": "The complete DCASE report describes both, plus text dropout and conservative parent gating.",
+      "replacement": "ST1 controlled reliability/coverage/parameter-budget comparison against those established methods."
+    },
+    {
+      "id": "R04",
+      "proposal": "Treat CodeSearchNet's whole corpus as MIT",
+      "decision": "withdraw",
+      "evidence": [
+        "S39"
+      ],
+      "reason": "MIT covers repository code/docs; the source corpus has per-origin license metadata.",
+      "replacement": "ST9 direct audited repositories, file-level exclusions, pinned snapshots and attribution."
+    },
+    {
+      "id": "R05",
+      "proposal": "Use October waste paper's collected image corpus",
+      "decision": "reject_for_current_scope",
+      "evidence": [
+        "S16"
+      ],
+      "reason": "A concrete downloadable corpus/file license was not established from its data statement.",
+      "replacement": "ST4 public TACO, with collection-versus-per-image provenance limits made explicit."
+    },
+    {
+      "id": "R06",
+      "proposal": "Treat AICOS article terms as sensor-data license",
+      "decision": "withdraw",
+      "evidence": [
+        "S11",
+        "S12"
+      ],
+      "reason": "Article and dataset have different terms; the primary Zenodo dataset explicitly declares CC-BY-4.0.",
+      "replacement": "Use dataset record/README as the data evidence; model terms remain separate."
+    },
+    {
+      "id": "R07",
+      "proposal": "Commercialise MovieLens-based training without further rights",
+      "decision": "withdraw",
+      "evidence": [
+        "S57",
+        "S58"
+      ],
+      "reason": "Official terms require separate permission for commercial use and redistribution.",
+      "replacement": "ST10 is conditional research only; public artifacts contain aggregate counts and scripts/plans, no raw dataset."
+    },
+    {
+      "id": "R08",
+      "proposal": "Assume all small MobileNet weight releases have the same permissive license",
+      "decision": "revise",
+      "evidence": [
+        "S50"
+      ],
+      "reason": "Use a specifically inspected weight card rather than importing licensing from an architecture name.",
+      "replacement": "Explicit Apache-2.0 timm MobileNetV3-small variant."
+    },
+    {
+      "id": "R09",
+      "proposal": "Count Task-UtilityIQA as an October new lead",
+      "decision": "withdraw_date_claim",
+      "evidence": [
+        "S46"
+      ],
+      "reason": "Original source date is September 30 despite October aggregator listings.",
+      "replacement": "90-day corroboration only."
+    },
+    {
+      "id": "R10",
+      "proposal": "Use LinkedIn event dates or Reddit relative dates as post dates",
+      "decision": "withdraw_date_claim",
+      "evidence": [
+        "S49",
+        "S66",
+        "S51"
+      ],
+      "reason": "Original post dates were not reliable; official OmniParse announcement supplies its own October 8 date.",
+      "replacement": "Undated community context, no current-trend/demand inference."
+    },
+    {
+      "id": "R11",
+      "proposal": "Build another agent IDE/design-skill thesis because it is Trending",
+      "decision": "reject",
+      "evidence": [
+        "S47",
+        "S48",
+        "S62",
+        "S63"
+      ],
+      "reason": "Popularity/product features do not establish a scientific question, usable evaluation data or unmet demand.",
+      "replacement": "No new thesis slot assigned."
+    },
+    {
+      "id": "R12",
+      "proposal": "Count a forecast adaptation study as a new distinct tenth topic",
+      "decision": "duplicate_revise_existing",
+      "evidence": [
+        "S42",
+        "S43",
+        "S44",
+        "S45",
+        "S65"
+      ],
+      "reason": "This overlaps existing T6. It is retained only as a concrete refinement, not counted among ST1–ST10.",
+      "replacement": "See extra-t6-refinement.txt; no old scope or job changed."
+    },
+    {
+      "id": "R13",
+      "proposal": "ST5 as a standard small-image classifier/prototype demo",
+      "decision": "conditional_revise",
+      "evidence": [
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "reason": "Too close to coursework unless the ambiguity, forgetting, unknown-class and memory-budget study is justified. Direct current evidence for the exact question is weak.",
+      "replacement": "Conditional detailed brief with explicit qualification gates, not an endorsed tenth slot."
+    },
+    {
+      "id": "R14",
+      "proposal": "ST7 as ordinary context sampling plus calibration",
+      "decision": "conditional_revise",
+      "evidence": [
+        "S29",
+        "S30",
+        "S32",
+        "S33",
+        "S53"
+      ],
+      "reason": "Needs a nontrivial foundation-model adaptation question beyond analytic prior correction, plus feasible measured CPU cost.",
+      "replacement": "Bounded mechanism study; retain all conditions and negative results. Withdraw if routine correction answers the whole question."
+    },
+    {
+      "id": "R15",
+      "proposal": "ST10 as a random-split MovieLens model comparison",
+      "decision": "conditional_revise",
+      "evidence": [
+        "S58",
+        "S59",
+        "S61"
+      ],
+      "reason": "Mature textbook-adjacent setting. Must study an independently justified adapter, strict new-user/time separation, timestamp ties and relevance/coverage trade-offs.",
+      "replacement": "Conditional temporal adaptation protocol; data cohort is verified, models are not."
+    },
+    {
+      "id": "R16",
+      "proposal": "Private industrial records or an external company partner as a prerequisite",
+      "decision": "archive_or_revise_dependency",
+      "evidence": [],
+      "reason": "Incompatible with the user's solo-access constraint. Existing NT3-style incident retrieval requiring private linked incident logs needs a new public-data scope or archival; such linked data were not established here.",
+      "replacement": "Root should audit affected old cards. T4/T5 need not be archived merely for being industrial if a genuinely public offline dataset supports their question; remove private factory/deployment claims. No old job changed."
+    },
+    {
+      "id": "R17",
+      "proposal": "Treat a ZIP header/prefix as proof that a whole usable dataset was decoded",
+      "decision": "revise_evidence",
+      "evidence": [
+        "S05",
+        "S07",
+        "S12",
+        "S20",
+        "S25",
+        "S58"
+      ],
+      "reason": "Prefixes and complete members establish different things.",
+      "replacement": "Compact receipts explicitly identify complete CRC/format parses versus bounded partial samples, plus unresolved full-subset work."
+    }
+  ],
+  "shortfall": "Ten possibilities were investigated, but only seven are kept without a substantiality revision flag. ST5, ST7 and ST10 remain conditional/revise. This is an honest qualification shortfall, not ten endorsements.",
+  "automatic_actions": "No jobs enqueued, messages sent to third parties, datasets republished, deployments or global configurations changed."
+}

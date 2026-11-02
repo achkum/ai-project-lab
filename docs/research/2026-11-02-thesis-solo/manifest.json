@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "batch_id": "20261102-thesis-solo",
+  "as_of": "2026-11-02",
+  "status": "immutable_review_handoff",
+  "publication": "review_only; root sets hosted paths and publication timestamps",
+  "files": [
+    {
+      "path": "access-proof-receipts.json",
+      "bytes": 15409,
+      "sha256": "fea2a952d7f530f6b386f958813a2c8bbe70a86e336607faec4975831a5f0e40"
+    },
+    {
+      "path": "briefs/ST1.txt",
+      "bytes": 9854,
+      "sha256": "e284bbbabc163eeb6dbd65852d089fb7a6b0948baa1a352af472923677f05a74"
+    },
+    {
+      "path": "briefs/ST10.txt",
+      "bytes": 9900,
+      "sha256": "c2e2d6a1927d0fcdb46127a714d626e637e12fdc89686e6d5bb683de6aba30b5"
+    },
+    {
+      "path": "briefs/ST2.txt",
+      "bytes": 8517,
+      "sha256": "a84b30d86d95f566245717f860ba44fdba2e8825838d80754586eb7dae4836f1"
+    },
+    {
+      "path": "briefs/ST3.txt",
+      "bytes": 8571,
+      "sha256": "06382d3ad6da71ff948ca47ff43995ba24055dfa267f05ded6d1ff3dbb51e1e5"
+    },
+    {
+      "path": "briefs/ST4.txt",
+      "bytes": 8843,
+      "sha256": "7db2c29ee35e05cf8411f869c3b0e0e6873dd4d68d023b4d814d5f232c84d1cb"
+    },
+    {
+      "path": "briefs/ST5.txt",
+      "bytes": 9230,
+      "sha256": "a1e1b831780281899e01cb705fddf0b7b67c0dd07d0de328e05ee5c191f1a1a9"
+    },
+    {
+      "path": "briefs/ST6.txt",
+      "bytes": 8769,
+      "sha256": "4101f8bf3b7ec965927c6123070ad2e9e1901a11a837465d242a6b6da9358569"
+    },
+    {
+      "path": "briefs/ST7.txt",
+      "bytes": 9202,
+      "sha256": "da600aed11c42c373454463a77443b6dbb1e0427f7b41147407ae464269f7ccd"
+    },
+    {
+      "path": "briefs/ST8.txt",
+      "bytes": 8966,
+      "sha256": "2bca8b2f768dd6238c7fe586995c93355171cb7d2d0095aaed4285ef519281d5"
+    },
+    {
+      "path": "briefs/ST9.txt",
+      "bytes": 9734,
+      "sha256": "7b6d9e2cbb36fad5c98e3bc7d38afd24fc0fe683b535a666e93b5f779bb8f8b4"
+    },
+    {
+      "path": "extra-t6-refinement.txt",
+      "bytes": 2183,
+      "sha256": "37f819b9e9cd31ac331d53c8dfc906b119c60ad12be065ae3d7aa1528575b974"
+    },
+    {
+      "path": "proposed-public-cards.json",
+      "bytes": 172512,
+      "sha256": "7d5eba2879c9e263c718027c4f85a61d83953d564659796abf3ec8217eaab6f8"
+    },
+    {
+      "path": "proposed-public-copy.json",
+      "bytes": 22576,
+      "sha256": "984e0571b332e5a43dd7d987a78fd463361d4c371e0a8ff6fc8981ace0aac93f"
+    },
+    {
+      "path": "qualification-audit.json",
+      "bytes": 11321,
+      "sha256": "2fb9484eff4618b769a8078202595bfb50cf8f8791332e50be85af8afa6aeafc"
+    },
+    {
+      "path": "query-ledger.json",
+      "bytes": 12318,
+      "sha256": "d77ddd5d655dc2bb8c3cc4e78218a1858656f2810f95ae9809a866e8ba3dce35"
+    },
+    {
+      "path": "rejection-ledger.json",
+      "bytes": 8306,
+      "sha256": "74474f4a170d439c6a5b464cf029077ff14f9dcba5cff898fe85079b3d48715c"
+    },
+    {
+      "path": "research-briefs.json",
+      "bytes": 89886,
+      "sha256": "0dd787dea7d07c7419d5c436f6c0c4bcb110d10c6d59057d378726a04ac8b827"
+    },
+    {
+      "path": "research-summary.txt",
+      "bytes": 15604,
+      "sha256": "fbc19c3d732bd83cb1e2e0f18716d59bcd9f13f177eb5a8c55cecbb4427816ab"
+    },
+    {
+      "path": "source-ledger.json",
+      "bytes": 53256,
+      "sha256": "27ee3ee461f93d7771a716f0d0af5b302a3de4449ca8a4debfc699d67e3948c8"
+    }
+  ],
+  "file_count_excluding_manifest": 20,
+  "total_bytes_excluding_manifest": 494957,
+  "investigated": 10,
+  "kept": 7,
+  "conditional_revise": 3,
+  "sources": 69,
+  "compact_access_receipts": 16,
+  "model_experiments_completed": 0,
+  "new_paid_api_or_cloud_spend": 0,
+  "raw_datasets_or_models_included": false,
+  "validation": {
+    "json_parsed": true,
+    "source_references_valid": true,
+    "public_ids_unique_and_unused": true,
+    "artifact_links_exist_and_stay_in_package": true,
+    "plain_questions_match_copy": true,
+    "auto_start_disabled": true,
+    "no_owner_paths_or_hidden_corpus_references": true
+  },
+  "publication_allowlist": "Only these review files plus this manifest. Do not publish sibling raw samples, scripts, archive directories, PDF text or draft parts.",
+  "artifact_link_mapping": "Card artifact_links.relative_path is relative to this review directory; publisher maps it to the final hosted URL prefix.",
+  "manifest_self_hash": "Intentionally excluded to avoid recursive hashing."
+}

@@ -1,0 +1,134 @@
+Applied AI thesis discovery — 2 November 2026
+Ten investigated possibilities: seven kept; three conditional/revise. No model experiments completed.
+
+These are solo research plans for a CPU laptop with 16 GB RAM. No company partner, private records, participant recruitment, paid dataset, CUDA GPU or new paid API/cloud compute is assumed. They aim at substantial model adaptation and evaluation over about 20 weeks, not a weekend application.
+
+Seven kept possibilities are ST1 sound metadata reliability, ST2 guitar pitch/channel adaptation, ST3 movement across carrying positions, ST4 background-robust litter recognition, ST6 table-detector domain adaptation, ST8 cross-series anomaly combination and ST9 compact code-search robustness.
+
+ST5 incremental handwriting, ST7 reduced-context tabular models and ST10 new-user recommendation remain conditional. Their briefs state what must distinguish them from textbook model comparisons. This is a qualification shortfall against ten fully kept topics, rather than ten endorsements.
+
+Actual investigation
+69 source URLs were reviewed with explicit scopes. Some are only abstracts or selected methods, and multiple URLs from one project are not independent corroboration. GitHub daily/weekly Trending and public LinkedIn were checked. LinkedIn yielded no reliably dated fresh problem signal. Research/data evidence is stronger than consumer-demand evidence.
+
+Complete bounded data members include a BSD10k embedding, GuitarSet JAMS, AICOS sensor recording, TACO/HASY/DocLayNet images, NAB CSV, code files and MovieLens members. Other CSVs were deliberately read only as prefixes. No raw data, model checkpoint or large archive-directory dump is in this public review package. No model was trained or benchmarked.
+
+Corrections that matter
+- HASY's contributor identifiers cannot support a strict unseen-writer evaluation.
+- OneShot already studies corrupted confirmations and temporal order.
+- DCASE already has metadata gating, dropout and uploader-disjoint evaluation; they are required comparators.
+- CodeSearchNet's code license is not a blanket license for every source function.
+- MovieLens allows research subject to conditions and prohibits redistribution/commercial use without separate permission.
+- TACO has a collection-level CC-BY declaration but incomplete per-image rights fields; scene judgments require an explicit agreement policy.
+- AICOS data are CC-BY-4.0, while the proposed HARNET encoder has academic/noncommercial restrictions.
+- DocLayNet selective download is demonstrated by a complete decoded page, not only a ZIP header.
+
+Official LTU evidence
+The Applied AI programme describes a 30-credit thesis. The retrieved X7013E syllabus is for Spring 2027, decision date 14 June 2024. It describes independent systematic Applied AI work, justified methods, literature engagement, a scientific report, oral defence, opposition and attendance at two other thesis presentations. It prefers individual work. Entry includes 60 completed programme credits and examiner judgement of topic relevance and depth. The programme presents company/research-group work as a choice; a mandatory external partner was not found. These are source-derived expectations, not a guarantee of approval or confirmation of a particular student's course version.
+https://www.ltu.se/en/education/programme/tmdia-master-programme-in-applied-ai
+https://epok.ltu.se/epok/dynpdf/public/kursplan/downloadPublicKursplan.pdf?kursKod=X7013E&lasPeriod=226&locale=en
+
+Dates are not interchangeable
+Original publication, model release, record creation, event and observation dates are distinguished in source-ledger.json. DCASE's primary proceedings record says Published 27 October and Created 22 October; its event was 27–29 October. OmniParse's announcement is 8 October and its repository was created 9 October; the README's original date is unknown. TabICL's 12 February date is a v2 release, not the README publication. Unknown dates remain unknown.
+
+Public reading order
+Read the plain-language cards, then the selected full briefs. The formal question, comparison, ablations, splits, compute gates and multi-month plan are in each brief. No automatic start is authorised by this package; cards have auto_eligible=false and recommended=false, and publication timestamps are left unset.
+
+Options
+
+ST1 — Tag sound recordings even when their filenames are misleading [keep]
+People collect recordings with names such as final2.wav or tags copied from another file. A sound organiser should still recognise the recording and admit when the available clues disagree.
+Try: Teach a small model when to trust the recording and when to trust its description, then test whether it can safely use a broader label.
+Output: A trained small labeling model and evidence about when it should give a precise label, a broad label or no answer.
+Checked: Data access is demonstrated. Existing systems already use metadata gates and uploader-aware evaluation, so the study must test them fairly.
+Data: Public sound features and descriptions. A real feature file and all metadata were opened; 9,304 clips have CC0/CC-BY item licenses. No large audio download is required.
+Risk: Artificially wrong descriptions may not resemble real mistakes; previous exposure of the pretrained encoder is not fully known.
+Full brief: briefs/ST1.txt
+
+ST2 — Make guitar practice feedback less likely to jump to the wrong octave [keep]
+A practice tool can tell a guitarist that a correct note is an octave too high when the microphone or pickup emphasises harmonics. A compact adapted model could make this feedback more dependable.
+Try: Adapt a small pitch model using paired microphone and pickup recordings, and compare it with established pitch trackers and smoothing.
+Output: A small pitch-correction model, an audited evaluation set and a report on accuracy and feedback delay.
+Checked: Paired data and usable single-note intervals exist. The study must exclude/audit annotation problems and report the limits of six performers.
+Data: Public GuitarSet recordings from six performers, CC-BY-4.0. A complete solo annotation was parsed and an audio-file prefix read; known label mistakes are documented.
+Risk: A strong existing tracker may already solve the clean examples, and label timing errors can look like model errors.
+Full brief: briefs/ST2.txt
+
+ST3 — Keep activity recognition working when a phone moves from hand to pocket [keep]
+A movement model can confuse sitting, standing and walking when a phone is carried differently. The study would adapt a pretrained motion model using public recordings, without collecting anyone's activity data.
+Try: Adapt a pretrained movement model using public recordings from different people and body positions.
+Output: An adapted movement model and a study of which people, devices and positions it transfers to.
+Checked: The metadata provides enough participant/position coverage for a narrow walking/sitting/standing study. Sensor units and a real recording were checked.
+Data: AICOS-HAR is public under CC-BY-4.0. Full metadata and a complete sensor recording were parsed. The proposed pretrained encoder is restricted to academic/noncommercial work.
+Risk: Device and body position may be confounded. This does not establish medical, fall-detection or unrestricted everyday performance.
+Full brief: briefs/ST3.txt
+
+ST4 — Recognise litter without being fooled by the background [keep]
+A litter-labeling model may learn that bottles appear on a beach and paper appears indoors. It then fails when the same objects appear somewhere else, especially for less common categories.
+Try: Adapt a compact image model using object-only and surrounding-image views, then test changed backgrounds and unfamiliar categories.
+Output: An adapted crop recogniser and evidence about background sensitivity, rare classes and uncertain answers.
+Checked: Object counts and image access are verified. Scene judgments differ for many images, so a clean background-transfer split is a real feasibility gate.
+Data: TACO has public images and labels; a real image decoded. The collection declares CC-BY-4.0, but individual-image rights fields are blank. Background labels require a multi-annotation agreement policy.
+Risk: Small or ambiguous categories and uncertain scene labels can dominate. A visual label does not determine local recycling rules. Some comparisons assume the correct object outline is already known.
+Full brief: briefs/ST4.txt
+
+ST5 — Teach a handwriting recogniser new symbols without losing old ones [revise]
+A symbol recogniser trained on a fixed alphabet struggles when a user needs an unfamiliar mathematical symbol. Updating it with a few examples can also damage its recognition of symbols it already knew.
+Try: Study how a small recogniser learns new symbol classes while retaining old ones, with explicit handling of visually ambiguous symbols.
+Output: If the scope passes review, an incremental-learning model and an audited forgetting/ambiguity study—not merely another symbol classifier.
+Checked: Conditional. Data access is real, but a standard classifier/prototype comparison would be too thin. The closest incremental methods and ambiguity-focused contribution need stronger qualification.
+Data: HASY is publicly downloadable under ODbL. A complete image decoded. Contributor IDs are unreliable, so an unseen-writer claim was withdrawn.
+Risk: Conditional proposal. Some shapes cannot be distinguished from pixels alone. Direct October evidence for this exact question is weak; recent handwriting/OCR sources are adjacent.
+Full brief: briefs/ST5.txt
+
+ST6 — Help a small document model find tables in unfamiliar documents [keep]
+A table detector trained on scientific papers may miss a table in an instruction manual or financial report. Retraining a whole large parser can be impractical on a laptop.
+Try: Adapt a small part of a released table detector using a limited number of labelled public pages.
+Output: An adapted table detector and a report on the labels, computer time and document diversity needed.
+Checked: Selective access is demonstrated. The study concerns table locations, which differs from the older reading-order review topic.
+Data: DocLayNet is public under CDLA-Permissive-1.0. A complete page was extracted and decoded without downloading the 30 GB archive; a selective subset pipeline remains to be built.
+Risk: A frozen model may never propose some missed tables, limiting what a small head can repair. Table location is not accurate table-text extraction.
+Full brief: briefs/ST6.txt
+
+ST7 — Keep useful predictions when a table model can see fewer examples [revise]
+A pretrained table model may predict well when it can compare a row with many labelled examples, yet lose rare classes when its memory is shortened to run on a laptop.
+Try: Test context selection and a small learned correction against simple class balancing, calibration and strong ordinary models.
+Output: Conditional on a viable CPU pilot, a controlled study explaining when context reduction and adaptation help or fail.
+Checked: Conditional. Current context-compression work was reviewed, but ordinary sampling/calibration alone is insufficient. The foundation model's laptop runtime is not measured.
+Data: Two small UCI datasets have CC-BY-4.0 terms and parsed public CSV samples. A potentially outcome-derived shopping feature must be excluded; exact time-based splitting is unavailable.
+Risk: Conditional proposal. The expensive part may be the frozen model itself. Two datasets cannot support broad superiority claims.
+Full brief: briefs/ST7.txt
+
+ST8 — Learn which anomaly detector to trust after one confirmed event [keep]
+Different anomaly detectors notice different things: a sudden spike, a lasting level change or unusual timing. A small learned combiner could use experience from other signals and one confirmed event to decide which detectors are useful on a new signal.
+Try: Train a small combiner on separate public signals, then give it one confirmed event on a new signal.
+Output: A trained detector combiner and a causal, source-separated alarm evaluation.
+Checked: The recent paper already tests noisy confirmations and time order. The distinct proposal is cross-series learned combination, with all extra training labels counted.
+Data: NAB's current repository license is MIT. A complete real CSV and the event-window manifest were parsed; 35 real series have at least two labelled windows.
+Risk: Benchmark windows are coarse and some signals are easy for simple monitoring rules. Offline gains do not establish production incident performance.
+Full brief: briefs/ST8.txt
+
+ST9 — Make a compact code-search model depend less on names [keep]
+Code search can succeed by matching a function name or copied documentation while missing the behaviour described in a query. A small model that relies less on those shortcuts could be useful in unfamiliar code.
+Try: Adapt a compact code-search model with controlled naming changes and compare it with plain keyword and unchanged neural search.
+Output: A compact search adapter, a licensed corpus-building pipeline and a study of retrieval shortcuts and CPU cost.
+Checked: A 17M-parameter Apache-2.0 task-specific model is available. Its training includes code benchmarks, so held-out repositories do not prove absence of pretraining exposure.
+Data: Complete sample files from Requests and scikit-learn yielded 57 documented functions. Their project licenses and pandas' license were read; a larger deduplicated corpus still needs enumeration.
+Risk: Docstring queries are proxies for developer searches; several functions may be relevant. Full file-level corpus licensing and duplicate checks remain.
+Full brief: briefs/ST9.txt
+
+ST10 — Give a new user useful film recommendations from a few ratings [revise]
+A new user has little history, so a recommender often falls back to the same popular films. A small adaptation model can test how much personalisation is possible after only a few ratings.
+Try: Adapt a compact recommender to a new user and study the trade-off between relevance, personalisation and catalogue coverage.
+Output: Conditional on a substantial study design, an adaptation model and a careful new-user/time/popularity evaluation.
+Checked: Conditional. A usable later-user cohort is verified, but timestamp ties are common. A routine model comparison would be insufficient; strict time separation and adaptation/coverage analysis are essential.
+Data: MovieLens research access and complete member parsing were verified. It forbids redistribution and commercial use without separate permission. Historical users were selected for at least 20 ratings.
+Risk: Conditional proposal. Offline historic ratings do not establish engagement or modern consumer demand. The dataset cannot be presumed available for a commercial product.
+Full brief: briefs/ST10.txt
+
+Audit files
+source-ledger.json: dated sources and read scope.
+query-ledger.json: retained exact queries, channel coverage, failures and later research. Early query-string history is incomplete and explicitly disclosed.
+rejection-ledger.json: withdrawn claims, conditional proposals and old-topic dependencies to audit.
+access-proof-receipts.json: compact actual file checks; no raw rows/images.
+qualification-audit.json: keep/revise judgments and unrun kill tests.
+extra-t6-refinement.txt: optional refinement of existing forecasting topic, not an eleventh new idea.

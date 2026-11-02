@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-02",
+  "purpose": "Compact public-safe evidence of actual access and parsing, not model experiments.",
+  "raw_data_included": false,
+  "model_experiments_completed": 0,
+  "receipts": [
+    {
+      "dataset": "BSD10k",
+      "source_ids": [
+        "S04",
+        "S05",
+        "S68"
+      ],
+      "url": "https://zenodo.org/api/records/19868804/files/features.zip/content",
+      "member": "features/clap_audio_embeddings/28570.npy",
+      "complete_member": true,
+      "member_bytes": 2176,
+      "shape": [
+        512
+      ],
+      "dtype": "float32",
+      "sha256": "49d339284ccec38c468e8ba0d289c2caf6a34f438ee0c3b4785ccdf0564bd277",
+      "complete_metadata_rows": 10956,
+      "metadata_sha256": "d9059aa56fff0f8aa9556415ab18acd40bd457605dbdbfc4670b1088cfde05cd",
+      "license_counts": {
+        "http://creativecommons.org/licenses/by/3.0/": 2156,
+        "http://creativecommons.org/publicdomain/zero/1.0/": 3334,
+        "https://creativecommons.org/licenses/by/4.0/": 3814,
+        "http://creativecommons.org/licenses/sampling+/1.0/": 412,
+        "http://creativecommons.org/licenses/by-nc/3.0/": 419,
+        "https://creativecommons.org/licenses/by-nc/4.0/": 821
+      },
+      "note": "One whole NPY decoded without pickle; complete metadata parsed. Full feature archive and audio corpus were not downloaded."
+    },
+    {
+      "dataset": "GuitarSet",
+      "source_ids": [
+        "S07",
+        "S08",
+        "S64"
+      ],
+      "url": "https://zenodo.org/api/records/3371780/files/annotation.zip/content",
+      "member": "04_Jazz2-110-Bb_solo.jams",
+      "complete_member": true,
+      "bytes": 758023,
+      "sha256": "a4f99a1b804275b5c6fb9219f14281d5a32393adc427b8f3d3ec8d09bfb61499",
+      "json_parsed": true,
+      "duration_seconds": 34.90319999999997,
+      "notes_verified": 78,
+      "single_note_seconds": 24.25795918367328,
+      "audio_probe": "Separate 16 KB WAV prefix only; no complete waveform/playback or pitch model test."
+    },
+    {
+      "dataset": "AICOS-HAR",
+      "url": "https://zenodo.org/api/records/19452049/files/AICOS-HAR.zip/content",
+      "member": "AICOS-HAR/S65/Walking_9/SamsungGalaxyNexus-6_Hand/Accelerometer.txt",
+      "complete": true,
+      "crc_verified": true,
+      "bytes": 473670,
+      "transferred_bytes": 3852240,
+      "lines": 10996,
+      "sha256": "2501b9f6c49fec356f236f5534085bbcb51d759387403779da4be77acbd54b9f",
+      "note": "Complete sensor member extracted. Units/schema from official README; parsing details below.",
+      "numeric_rows": 10996,
+      "strictly_increasing_timestamps": true,
+      "duration_seconds": 110.153259277,
+      "mean_sampling_hz": 99.81547593023201,
+      "source_ids": [
+        "S11",
+        "S12"
+      ],
+      "metadata_complete": true,
+      "metadata_sha256": "df61f561af5d573b9964cd4a13eb1833ce30ebc802b7e1cde38f3d6ca17c4be7",
+      "metadata_rows_verified": 5231,
+      "dataset_terms": "CC-BY-4.0 from primary Zenodo record; article and HARNET terms are distinct."
+    },
+    {
+      "dataset": "DocLayNet",
+      "url": "https://codait-cos-dax.s3.us.cloud-object-storage.appdomain.cloud/dax-doclaynet/1.0.0/DocLayNet_core.zip",
+      "member": "PNG/132a855ee8b23533d8ae69af0049c038171a06ddfcac892c3c6d7e6b4091c642.png",
+      "complete": true,
+      "crc_verified": true,
+      "bytes": 763103,
+      "compressed_bytes": 750924,
+      "transferred_bytes": 13812914,
+      "image_size": [
+        1025,
+        1025
+      ],
+      "image_mode": "RGB",
+      "sha256": "ddce1967f1c93d53a14d0a50b53d64360e0147c4505825048652a65fbef58146",
+      "note": "Complete PNG extracted and decoded; selective access proven. Prior COCO sample was only a prefix, not a complete annotation dataset.",
+      "source_ids": [
+        "S25",
+        "S26"
+      ]
+    },
+    {
+      "dataset": "HASYv2",
+      "url": "https://zenodo.org/records/259444",
+      "member": "hasy-data/v2-141796.png",
+      "complete": true,
+      "bytes": 277,
+      "archive_prefix_bytes": 6000000,
+      "archive_complete": false,
+      "members_scanned": 33,
+      "image_size": [
+        32,
+        32
+      ],
+      "image_mode": "RGB",
+      "sha256": "2d114a9cd12d071df372271c26d92db8c948c2d3061512432bec7fe5d8bc2c95",
+      "note": "One complete image decoded from a deliberately incomplete bzip2/tar stream.",
+      "source_ids": [
+        "S20",
+        "S21"
+      ]
+    },
+    {
+      "dataset": "TACO",
+      "url": "https://img.tacodataset.org/thumb/33978196618_640.jpg",
+      "complete": true,
+      "bytes": 63455,
+      "image_size": [
+        480,
+        640
+      ],
+      "image_mode": "RGB",
+      "sha256": "dcde3b5b3de7c88fdb7435ece93d34552747fb04565a188aae099ef90890ee5a",
+      "source_ids": [
+        "S17",
+        "S18"
+      ]
+    },
+    {
+      "dataset": "MovieLens 1M",
+      "url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip",
+      "member": "ml-1m/movies.dat",
+      "complete": true,
+      "crc_verified": true,
+      "bytes": 171308,
+      "transferred_bytes": 58342,
+      "rows": 3883,
+      "fields": 3,
+      "sha256": "0140fc2356357c1a851d0f52e893a1e4d3696df632c4141cea8d5bc3d621f0b9",
+      "note": "Complete item metadata; earlier ratings prefix is not a complete ratings archive. Dataset forbids redistribution without separate permission.",
+      "source_ids": [
+        "S57",
+        "S58"
+      ]
+    },
+    {
+      "dataset": "dry-bean-sample.csv",
+      "source_ids": [
+        "S32"
+      ],
+      "url": "https://archive.ics.uci.edu/static/public/602/data.csv",
+      "http_status": 200,
+      "downloaded_bytes": 12000,
+      "complete_dataset": false,
+      "complete_rows_parsed": 65,
+      "columns": [
+        "Area",
+        "Perimeter",
+        "MajorAxisLength",
+        "MinorAxisLength",
+        "AspectRatio",
+        "Eccentricity",
+        "ConvexArea",
+        "EquivDiameter",
+        "Extent",
+        "Solidity",
+        "Roundness",
+        "Compactness",
+        "ShapeFactor1",
+        "ShapeFactor2",
+        "ShapeFactor3",
+        "ShapeFactor4",
+        "Class"
+      ],
+      "sha256": "f7d5c44a22dcc7983191eb3f6eaec711427d82707448721534a8b1e016411cf1",
+      "note": "Actual bounded CSV prefix, incomplete trailing row discarded; not represented as a complete dataset."
+    },
+    {
+      "dataset": "shoppers-sample.csv",
+      "source_ids": [
+        "S33"
+      ],
+      "url": "https://archive.ics.uci.edu/static/public/468/data.csv",
+      "http_status": 200,
+      "downloaded_bytes": 12000,
+      "complete_dataset": false,
+      "complete_rows_parsed": 149,
+      "columns": [
+        "Administrative",
+        "Administrative_Duration",
+        "Informational",
+        "Informational_Duration",
+        "ProductRelated",
+        "ProductRelated_Duration",
+        "BounceRates",
+        "ExitRates",
+        "PageValues",
+        "SpecialDay",
+        "Month",
+        "OperatingSystems",
+        "Browser",
+        "Region",
+        "TrafficType",
+        "VisitorType",
+        "Weekend",
+        "Revenue"
+      ],
+      "sha256": "6db89c6911ae00379c08fb65a94adc7cb73234a1d7af4454ee361ffde33bc2f4",
+      "note": "Actual bounded CSV prefix, incomplete trailing row discarded; not represented as a complete dataset."
+    },
+    {
+      "dataset": "bike-sample.csv",
+      "source_ids": [
+        "S45"
+      ],
+      "url": "https://archive.ics.uci.edu/static/public/275/data.csv",
+      "http_status": 200,
+      "downloaded_bytes": 12000,
+      "complete_dataset": false,
+      "complete_rows_parsed": 189,
+      "columns": [
+        "instant",
+        "dteday",
+        "season",
+        "yr",
+        "mnth",
+        "hr",
+        "holiday",
+        "weekday",
+        "workingday",
+        "weathersit",
+        "temp",
+        "atemp",
+        "hum",
+        "windspeed",
+        "casual",
+        "registered",
+        "cnt"
+      ],
+      "sha256": "059fd422a77244f5b4bd566fdeb361994fa504ae2158e7d2363e22f48e1b27d8",
+      "note": "Actual bounded CSV prefix, incomplete trailing row discarded; not represented as a complete dataset."
+    },
+    {
+      "dataset": "Requests source sample",
+      "source_ids": [
+        "S54"
+      ],
+      "complete_source_file": true,
+      "bytes": 41463,
+      "sha256": "e1cd583a5c91bcad7242e830d8dbcf9ec9d3b33be676a0aebbaebbf4412e9a8a",
+      "functions": 52,
+      "with_docstrings": 31,
+      "note": "Code parsed with AST, not executed. Corpus-level counts and per-file exclusions remain future work.",
+      "url": "https://github.com/psf/requests/blob/main/src/requests/models.py",
+      "git_blob_sha": "17b39cd1b3e132a05ca9f1b28e53a28e3fd6779e"
+    },
+    {
+      "dataset": "scikit-learn source sample",
+      "source_ids": [
+        "S55"
+      ],
+      "complete_source_file": true,
+      "bytes": 49207,
+      "sha256": "a6a68497db970f4fcf4abd71ac4904e86b13f974079b915753f7694420a00dcc",
+      "functions": 42,
+      "with_docstrings": 26,
+      "note": "Code parsed with AST, not executed. Corpus-level counts and per-file exclusions remain future work.",
+      "url": "https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/base.py",
+      "git_blob_sha": "03d074a141b739ec63798f8e264ff97dcb2dab6b"
+    },
+    {
+      "dataset": "NAB",
+      "source_ids": [
+        "S35",
+        "S36"
+      ],
+      "url": "https://github.com/numenta/NAB/blob/master/data/realAWSCloudwatch/ec2_cpu_utilization_5f5533.csv",
+      "complete_source_file": true,
+      "rows": 4032,
+      "sha256": "01613e6f632d067f11a5dfd40a188b0789752b388d9bc77a398bd06333878a76",
+      "git_blob_sha": "071ec4bf080a9924d6eed6f212131c232db8c79f",
+      "note": "Complete CSV parsed. Event-window counts verified separately from complete public JSON; no detector run."
+    },
+    {
+      "dataset": "MovieLens 1M",
+      "url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip",
+      "member": "ml-1m/ratings.dat",
+      "complete": true,
+      "crc_verified": true,
+      "rows": 1000209,
+      "users": 6040,
+      "bytes": 24594131,
+      "transferred_bytes": 5816412,
+      "sha256": "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f",
+      "raw_ratings_saved": false,
+      "purpose": "Bounded 5.6 MB compressed member used only to check timestamp/tie and cold-user data feasibility; no recommendation model fit.",
+      "cohorts": [
+        {
+          "first_user_time_quantile": 0.5,
+          "cutoff_utc": "2000-10-02T16:36:49+00:00",
+          "warm_users": 3021,
+          "cold_users": 3019,
+          "precut_catalog_items": 3521,
+          "cases": [
+            {
+              "support_ratings": 1,
+              "cold_users_any_later_positive": 3019,
+              "cold_users_at_least5_later_positive": 3015,
+              "boundary_tied_users": 2074
+            },
+            {
+              "support_ratings": 3,
+              "cold_users_any_later_positive": 3019,
+              "cold_users_at_least5_later_positive": 3014,
+              "boundary_tied_users": 1558
+            },
+            {
+              "support_ratings": 5,
+              "cold_users_any_later_positive": 3019,
+              "cold_users_at_least5_later_positive": 3012,
+              "boundary_tied_users": 1458
+            }
+          ]
+        },
+        {
+          "first_user_time_quantile": 0.7,
+          "cutoff_utc": "2000-11-20T05:22:39+00:00",
+          "warm_users": 4229,
+          "cold_users": 1811,
+          "precut_catalog_items": 3580,
+          "cases": [
+            {
+              "support_ratings": 1,
+              "cold_users_any_later_positive": 1811,
+              "cold_users_at_least5_later_positive": 1811,
+              "boundary_tied_users": 1236
+            },
+            {
+              "support_ratings": 3,
+              "cold_users_any_later_positive": 1811,
+              "cold_users_at_least5_later_positive": 1811,
+              "boundary_tied_users": 926
+            },
+            {
+              "support_ratings": 5,
+              "cold_users_any_later_positive": 1811,
+              "cold_users_at_least5_later_positive": 1809,
+              "boundary_tied_users": 874
+            }
+          ]
+        },
+        {
+          "first_user_time_quantile": 0.85,
+          "cutoff_utc": "2000-11-26T05:07:29+00:00",
+          "warm_users": 5135,
+          "cold_users": 905,
+          "precut_catalog_items": 3651,
+          "cases": [
+            {
+              "support_ratings": 1,
+              "cold_users_any_later_positive": 905,
+              "cold_users_at_least5_later_positive": 905,
+              "boundary_tied_users": 581
+            },
+            {
+              "support_ratings": 3,
+              "cold_users_any_later_positive": 905,
+              "cold_users_at_least5_later_positive": 905,
+              "boundary_tied_users": 420
+            },
+            {
+              "support_ratings": 5,
+              "cold_users_any_later_positive": 905,
+              "cold_users_at_least5_later_positive": 904,
+              "boundary_tied_users": 414
+            }
+          ]
+        }
+      ],
+      "source_ids": [
+        "S58"
+      ],
+      "rights": "Research permitted under conditions; no raw dataset redistribution/commercial use without separate permission."
+    },
+    {
+      "dataset": "TACO annotation manifest",
+      "source_ids": [
+        "S17",
+        "S18"
+      ],
+      "url": "https://github.com/pedropro/TACO/blob/master/data/annotations.json",
+      "complete_annotation_json_parsed": true,
+      "images": 1500,
+      "objects": 4784,
+      "categories": 60,
+      "per_image_license_manifest": "licenses array empty; collection CC-BY-4.0 comes from S18, not inferred from code license",
+      "note": "Raw annotations are not included in the public review package."
+    },
+    {
+      "document": "Official LTU X7013E syllabus",
+      "source_ids": [
+        "S02"
+      ],
+      "url": "https://epok.ltu.se/epok/dynpdf/public/kursplan/downloadPublicKursplan.pdf?kursKod=X7013E&lasPeriod=226&locale=en",
+      "complete_pdf": true,
+      "downloaded_bytes": 2178334,
+      "sha256": "3d64687fe6455eca0b25f25208fa594bfbf0f120804b128f9c0d72c3ef6d03db",
+      "parsed_with": "PyMuPDF",
+      "course_version": "Spring 2027",
+      "decision_date": "2024-06-14",
+      "note": "Complete document text inspected; raw PDF/text are not included in public review package."
+    }
+  ],
+  "unresolved_or_superseded": [
+    {
+      "route": "PAMAP2 legacy ZIP Range",
+      "result": "HTTP 200 ignored Range; transfer stopped; optional fallback not acquired."
+    },
+    {
+      "route": "DocLayNet guessed HF rows config",
+      "result": "404; superseded by demonstrated complete official ZIP member."
+    },
+    {
+      "route": "Early gzip metadata/partial LTU PDF/HASY partial tar errors",
+      "result": "Superseded by decoded primary metadata, complete syllabus PDF, and complete image extraction. Old failure logs retained privately, not treated as current success."
+    }
+  ]
+}

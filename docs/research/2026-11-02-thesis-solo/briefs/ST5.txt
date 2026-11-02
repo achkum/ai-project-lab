@@ -1,0 +1,92 @@
+ST5 — Teach a handwriting recogniser new symbols without losing old ones
+Investigated 2026-11-02 | REVISE | conditional_revision
+
+A symbol recogniser trained on a fixed alphabet struggles when a user needs an unfamiliar mathematical symbol. Updating it with a few examples can also damage its recognition of symbols it already knew.
+Example: After learning a new arrow symbol from five examples, the recogniser should still distinguish ordinary arrows and offer several possibilities for genuinely ambiguous shapes.
+
+What the study would try
+Study how a small recogniser learns new symbol classes while retaining old ones, with explicit handling of visually ambiguous symbols.
+Everyday question: Can it learn a new symbol from a few examples without forgetting familiar symbols?
+Expected research output: If the scope passes review, an incremental-learning model and an audited forgetting/ambiguity study—not merely another symbol classifier.
+
+What was actually checked
+Source/license/schema investigation; original writer-personalisation proposal withdrawn and replaced. No CNN trained.
+Downloaded a 1 MB compressed prefix and decoded official CSV rows/headers including path, class and user_id. The archive was deliberately incomplete, so no claim that the entire image set was downloaded. A later bounded six-MB archive-prefix read reached and fully decoded a complete 277-byte 32x32 image.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Conditional/revise. A CNN plus standard few-shot prototypes or replay alone would be too close to coursework. A defensible thesis needs the preregistered class-incremental forgetting/unknown-rejection study, a carefully audited equivalence policy for visually indistinguishable symbols, multiple class orders and memory budgets, and comparison with established incremental methods. The original writer-transfer claim is withdrawn because contributor IDs cannot support it. Direct October evidence for this exact question was not found; recent handwriting/OCR sources are adjacent corroboration, not proof of a new gap. Do not endorse until the eligible-class/ambiguity audit and closer incremental-learning literature review support this scope.
+The student trains an initial compact encoder, adapts it through controlled class-incremental episodes, evaluates forgetting and unknown-class rejection, and studies ambiguity in the labels. The scientific contribution is a carefully justified adaptation study, not a claim to invent incremental learning or another handwritten-digit tutorial.
+
+Scientific question and hypothesis
+What is the accuracy, forgetting and rejection trade-off when a compact symbol encoder is adapted to new classes under a small labelled-example and replay-memory budget?
+A prototype-based or low-rank adaptation head with a small replay/distillation constraint will preserve old-class performance better than unrestricted incremental fine-tuning, while recognising newly introduced classes from 1/5/10/20 examples.
+
+Data access and rights
+HASYv2
+Public 34,597,561-byte archive; no login or external participants. Use a preregistered subset of classes with enough examples for base, adaptation and final-query partitions.
+168,233 images, 369 classes, 32x32 pixels. Start with around 100 supported classes and up to 30,000 images; expand only if the protocol and class counts justify it.
+Terms: Primary Zenodo record says ODC Open Database License, not CC0 or the article's CC-BY license. Preserve attribution and applicable database-sharing terms; publish download/split scripts rather than a repackaged raw database.
+Still to verify: Complete the small archive during an authorised experiment phase, verify hashes/image shapes and sufficient examples per class. Reconcile visually indistinguishable semantic labels before training.
+
+Model adaptation
+A compact CNN trained on base symbol classes within this study, then frozen or partially adapted. This option builds its own pretrained task-specific encoder rather than depending on an unverified third-party checkpoint.
+Compare nearest prototypes, a learned metric projection, and last-layer/last-block adaptation with fixed small replay or distillation. Use class-equivalence-aware top-k scoring for intrinsically ambiguous glyphs.
+Target 100,000–500,000 base parameters; adapter below 50,000. Training at 32x32 is suited to CPU.
+Model terms: Student-written implementation and newly trained weights; raw-data terms remain separate.
+
+Comparators
+- HOG/flattened-pixel nearest-neighbour or linear classifier.
+- Frozen-encoder nearest prototypes.
+- Incremental softmax head, unconstrained fine-tuning, and a standard replay/distillation comparator.
+
+Evaluation and leakage controls
+Partition classes into base, validation-novel, test-novel and never-trained unknown groups before designing adapters. Keep adaptation support images separate from query images, and all transformed duplicates together. Repeat class orders/seeds. User IDs are NOT a reliable person identifier: the proposed unseen-writer study was withdrawn, and this design makes no strict writer-generalisation claim.
+
+Ablations
+- Prototype update versus learned projection.
+- Replay budget and distillation constraint.
+- Raw labels versus preregistered visually equivalent label groups; support size and class order.
+
+Measurements
+Old/new-class macro accuracy, forgetting relative to the pre-update checkpoint, unknown false acceptance, top-k/set-valued coverage for ambiguous symbols, memory and update time. Report class-level uncertainty and sensitivity to the large mixed-contributor user ID.
+
+CPU plan and cheaper fallback
+At most 30,000 32x32 images in the first study phase; under 4 GB target memory. Allow up to one overnight base training run, then small adaptation episodes. Establish throughput first; no external model/API.
+Freeze the base CNN and use only prototype/linear-head updates with replay. If even the small encoder is too slow, HOG-to-metric learning preserves the incremental-learning question but should be presented as the reduced model variant.
+
+Closest work and proposed contribution
+HASY already defines unknown-symbol verification, and incremental/prototypical methods are established. October OCR confidence fixes and recent handwriting benchmarks motivate careful reliability evaluation but do not prove this exact problem is new. The contribution is the combined forgetting, ambiguity and memory-budget study on a clearly bounded task.
+
+Risks and kill test
+Some symbols are indistinguishable from pixels alone; no model can recover missing semantic context. Contributor IDs are unreliable and cannot support person-held-out guarantees. Limiting classes may weaken claims about all mathematical handwriting.
+Audit class counts, exact image duplicates and label equivalence; require usable base/new/unknown partitions and enough query images after support selection. Withdraw any personalisation or unseen-writer wording. If all observed errors are label ambiguity, revise the objective toward top-k ambiguity handling rather than forced accuracy.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: incremental-learning literature and glyph/data audit.
+- Weeks 4–6: base encoder and non-neural baselines.
+- Weeks 7–11: adaptation, replay and prototype methods.
+- Weeks 12–15: class-order/support-size/ambiguity experiments.
+- Weeks 16–18: forgetting, rejection and compute analysis.
+- Weeks 19–20: thesis and local symbol-learning demonstration.
+
+Deliverables
+Class/duplicate/equivalence manifests, base and adapted compact models, incremental-evaluation code, error analysis and report.
+
+Optional later venture hypothesis
+A mathematical-note or drawing-input tool is a hypothesis only. No student recruitment, private handwriting or user study is needed for the thesis.
+
+Recency and scope
+October 5/14 OCR changes are a current reliability lead; August 24 WildHandBench is corroboration. HASY is explicitly 2017 background, and no new-trend claim is made.
+
+Reviewed sources
+[S20] HASY dataset — https://zenodo.org/records/259444
+Publication: 2017-01-24; verified: 2026-11-02. record JSON plus bounded compressed archive prefix and CSV schema
+[S21] HASY paper — https://arxiv.org/html/1701.08380v1
+Publication: 2017-01-29; verified: 2026-11-02. Data creation, label semantics, evaluation baselines, class difficulties and verification challenge
+[S22] WildHandBench — https://arxiv.org/html/2608.22959v1
+Publication: 2026-08-24; verified: 2026-11-02. introduction and dataset overview only
+[S23] UiPath OCR release notes — https://docs.uipath.com/document-understanding/automation-cloud/latest/release-notes/general-ml-packages-updates
+Publication: 2026-10-14; verified: 2026-11-02. September 23, October 5 and October 14 entries and surrounding release history
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

@@ -1,0 +1,17 @@
+Existing T6 forecasting topic — proposed refinement, not a new batch slot
+Investigated 2 November 2026. No existing job or topic scope changed.
+
+The October 15 Timestral release and October 29 Winder study make pretrained forecasting a current lead. The Winder study also acknowledges use of actual future weather and possible pretraining exposure. This is useful counterevidence: a hybrid residual model is already an existing approach, and an oracle-weather result is not an operational forecast.
+
+A concrete solo study could freeze the Apache-2.0 Chronos-Bolt Tiny model (9M parameters), train a small residual/quantile adapter using only calendar features and genuinely available past measurements, and evaluate rolling forecast origins on UCI Bike Sharing and optionally household electricity data. Compare seasonal naive, linear autoregression, a tree/covariate model, frozen Chronos, calibration-only and an existing covariate-aware hybrid. Exclude Bike Sharing's casual/registered components when predicting their sum. Future observed weather may appear only as an explicitly labelled oracle upper bound.
+
+The contribution would be a controlled study of how residual adaptation and interval calibration behave when covariate availability is honest, including a negative result. It must not claim invention of hybrid forecasts or pretraining-unseen evaluation. Point/interval errors, coverage, width, horizon, CPU time and seasonal drift should be measured under time-ordered splits. Data terms are CC-BY-4.0; a real Bike Sharing CSV prefix was parsed, while the optional power-data full acquisition has not been tested.
+
+This overlaps existing T6 and was therefore excluded from the ten distinct ST possibilities. Root may use it to revise that existing card after review, without changing an already selected job's acceptance scope.
+
+Reviewed sources:
+S42 https://mistral.ai/news/timestral/
+S43 https://winder.ai/timestral-ai-demand-forecasting/
+S44 https://huggingface.co/amazon/chronos-bolt-tiny
+S45 https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
+S65 https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+consumption

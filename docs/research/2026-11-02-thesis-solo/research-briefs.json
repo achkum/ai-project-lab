@@ -1,0 +1,793 @@
+{
+  "schema_version": 1,
+  "batch_id": "20261102-thesis-solo",
+  "as_of": "2026-11-02",
+  "status": "investigated_possibilities_for_review",
+  "qualified_kept": 7,
+  "conditional_revise": 3,
+  "experiments_completed": 0,
+  "briefs": [
+    {
+      "id": "ST1",
+      "title": "Tag sound recordings even when their filenames are misleading",
+      "domain": "Audio and personal media",
+      "verdict": "keep",
+      "summary": "People collect recordings with names such as final2.wav or tags copied from another file. A sound organiser should still recognise the recording and admit when the available clues disagree.",
+      "example": "A clip called birds.wav contains a door closing. The system should rely on the sound, or use a broad label, instead of confidently repeating the filename.",
+      "question": "Under uploader-disjoint evaluation, can a small learned gate between frozen audio and text representations retain useful classification accuracy when metadata is absent or contradictory?",
+      "hypothesis": "A small conflict-trained gate may improve error-versus-coverage under missing or contradictory metadata relative to published attention fusion and conservative parent gating, at a smaller parameter budget. Existing methods may match or beat it; this is not a measured or novel-method claim.",
+      "why_masters": "The work trains a multimodal classifier and reliability gate, justifies corruption assumptions, compares strong released-feature baselines, and studies how grouping and hierarchy change conclusions. The deliverable is evidence about representation adaptation and uncertainty, with a functioning example as supporting work.",
+      "data": {
+        "name": "BSD10k v1.2",
+        "sources": [
+          "S04",
+          "S05"
+        ],
+        "access": "No login. Official metadata and precomputed CLAP audio/text embeddings are separate from the large audio archive.",
+        "size": "10,956 clips, 35.25 hours; 49,346,956-byte feature ZIP and 2,726,927-byte metadata ZIP. Initial CC0/CC-BY subset has 9,304 clips across all 23 second-level classes; audio ZIP is 8.58 GB and is unnecessary for the main study.",
+        "license": "Metadata: CC-BY-4.0. Audio has item-specific CC0, CC-BY, CC-BY-NC and Sampling+ licenses. Initial subset excludes NC and Sampling+; retain item attribution and feature provenance.",
+        "verified": "Decoded one 512-dimensional float32 NPY, read all metadata rows, counted 2,481 uploader IDs, and checked archive members. Sample sound 28570 is CC-BY-4.0.",
+        "remaining": "Count eligible examples per uploader/grouped split; inspect metadata-label shortcuts and exact/near duplicates. Frozen CLAP pretraining exposure is not established as absent."
+      },
+      "model": {
+        "backbone": "Official pretrained CLAP audio and text features; no foundation-model training or waveform inference required.",
+        "adaptation": "Train audio-only/text-only linear heads, a concatenation head, then a small gating network using modality disagreement and missingness. Use a hierarchical objective that can return a broad class when detailed confidence is weak. Test against existing attention fusion and conservative parent-consistent gating; extra hierarchy is an ablation rather than an assumed improvement.",
+        "parameters": "Approximately 10,000–150,000 learned head/gate parameters; exact count fixed after feature/schema audit.",
+        "license": "Use the official released feature route and preserve dataset attribution. Any later direct CLAP checkpoint use requires its own pinned model/license check."
+      },
+      "baselines": [
+        "Majority/top-level frequency and metadata-only text classification.",
+        "Audio-only logistic regression and concatenation of the same frozen features.",
+        "Simple probability averaging, fixed metadata dropout, and calibrated hierarchical fallback.",
+        "Published HATR attention-fusion baseline and a conservative audio-parent-consistent metadata gate. Use a clean implementation if the official baseline code license remains unresolved; do not silently omit these strong alternatives."
+      ],
+      "design": "Group by uploader before splitting; keep every clip and its variants together. Reserve a final uploader-held-out test partition. Tune on development uploaders only. Test clean, text-absent and deliberately mismatched text conditions separately, labelling the latter as controlled stress tests rather than observed prevalence. Hold out at least one corruption construction from adapter tuning so it is not evaluated only on the exact mismatch generator used in training.",
+      "ablations": [
+        "Gate versus fixed fusion with identical feature access.",
+        "Training with/without dropout and conflict augmentation.",
+        "Fine-class versus broad-class fallback. For a raw-text shortcut diagnostic, compare TF-IDF metadata heads with and without class-name words; do not pretend precomputed CLAP vectors changed when words are removed."
+      ],
+      "measures": "Macro-F1 and balanced accuracy over 23 classes; top-level accuracy; worst-class recall; Brier score and error-versus-coverage curves; CPU latency and peak memory. Bootstrap uploader groups, not individual correlated clips.",
+      "compute": "Feature arrays for 9,304 examples with two 512-float vectors are about 38 MB before metadata/overhead. Head fitting should be modest on a 16 GB CPU laptop; allow a measured pilot to set the experiment budget. Initial experiment cap: 2 GB RAM and one hour per head configuration; no GPU/API. The published attention baseline is larger (about 7.3M trainable parameters); measure its CPU training separately and retain it as the existing-method comparator.",
+      "fallback": "Use audio-only logistic regression plus a learned confidence head. This still permits the grouping/calibration study if the text embedding pathway is incomplete.",
+      "closest_work": "The full October DCASE report already describes metadata gates, text dropout and uploader-disjoint evaluation. These are required comparators, not claimed inventions. The contribution is a controlled reliability/coverage/parameter-budget study under fixed representations and matched data, separating clean, missing and contradictory metadata; a negative result is valid.",
+      "risks": "Artificially shuffled filenames may be easier to detect than naturally bad descriptions. Uploader grouping may expose a large benchmark shortcut. Feature pretraining overlap limits claims about completely unseen audio.",
+      "kill_test": "Before model work, form a usable grouped split with adequate class support and matching audio/text features. Run a small clean/dropout comparison. Revise if the apparent advantage disappears against fixed fusion or if rare classes have too few independent uploaders; report a negative result rather than inventing a product gain.",
+      "work_plan": [
+        "Weeks 1–3: literature, licensing manifest and uploader/duplicate audit.",
+        "Weeks 4–6: grouped baselines and calibration protocol.",
+        "Weeks 7–10: train gate and hierarchical adaptation.",
+        "Weeks 11–15: corruption, class and grouping ablations with repeated seeds.",
+        "Weeks 16–18: uncertainty, runtime and error analysis.",
+        "Weeks 19–20: reproducible report, model card and demonstration."
+      ],
+      "deliverables": "Dataset acquisition/filter script, split manifests, trained small heads, evaluation code, an error catalogue and thesis report; optional local sound-library demo.",
+      "venture": "Hypothesis: local media organisers could use robust tags. Demand and willingness to pay are untested; the thesis needs no customer.",
+      "source_ids": [
+        "S03",
+        "S04",
+        "S05",
+        "S67",
+        "S68",
+        "S69"
+      ],
+      "recency": "Proceedings officially published October 27, 2026 (separate from the October 22 repository-record creation and workshop event dates). BSD10k is older data.",
+      "performed": "Source, license, archive and sample-feature investigation only. No model was trained.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Decoded one 512-dimensional float32 NPY, read all metadata rows, counted 2,481 uploader IDs, and checked archive members. Sample sound 28570 is CC-BY-4.0.",
+        "The full October DCASE report already describes metadata gates, text dropout and uploader-disjoint evaluation. These are required comparators, not claimed inventions. The contribution is a controlled reliability/coverage/parameter-budget study under fixed representations and matched data, separating clean, missing and contradictory metadata; a negative result is valid.",
+        "Metadata: CC-BY-4.0. Audio has item-specific CC0, CC-BY, CC-BY-NC and Sampling+ licenses. Initial subset excludes NC and Sampling+; retain item attribution and feature provenance.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST2",
+      "title": "Make guitar practice feedback less likely to jump to the wrong octave",
+      "domain": "Music and consumer audio",
+      "verdict": "keep",
+      "summary": "A practice tool can tell a guitarist that a correct note is an octave too high when the microphone or pickup emphasises harmonics. A compact adapted model could make this feedback more dependable.",
+      "example": "The same single-note phrase is recorded through a pickup and a room microphone. The displayed notes should remain consistent across both recordings.",
+      "question": "Can a small temporal correction model trained on frozen pitch-network activations improve monophonic guitar pitch and octave consistency across performers and recording channels?",
+      "hypothesis": "A learned temporal correction head will reduce octave errors under channel changes beyond frame smoothing alone, without hiding genuine pitch changes or increasing voiced/unvoiced mistakes.",
+      "why_masters": "The project adapts a pretrained acoustic model, audits real timing annotations, uses a performer-held-out design, compares neural adaptation with a strong classical pitch tracker and structured smoothing, and analyses accuracy versus latency. It is not a full music-transcription app.",
+      "data": {
+        "name": "GuitarSet v1.1.0",
+        "sources": [
+          "S07",
+          "S08",
+          "S64"
+        ],
+        "access": "Public Zenodo ZIPs support selective range reads. Select solo tracks and annotated intervals with exactly one active note; do not assume all guitar audio is monophonic.",
+        "size": "360 paired recording/annotation entries. Annotation ZIP 39.1 MB; mono microphone 656.9 MB; pickup mix 683.1 MB. Start with at most 20–30 minutes of eligible monophonic material across six performer IDs.",
+        "license": "CC-BY-4.0 dataset. Preserve citation/attribution and an explicit annotation-correction/exclusion manifest.",
+        "verified": "Read a WAV prefix and a complete 34.90-second solo JAMS: 78 notes, six pitch-contour/note tracks, and 24.26 seconds with exactly one active annotated note.",
+        "remaining": "Count usable time per performer/channel, ensure paired alignment, audit rests and note overlap. Known comp-track offset and duplicate-note issues are documented; solos-only scope excludes those named tracks but is not a blanket label-quality guarantee."
+      },
+      "model": {
+        "backbone": "CREPE tiny pretrained pitch network; freeze it and cache its activation vectors.",
+        "adaptation": "Train a small temporal convolution or linear temporal correction head over short activation sequences, with an explicit voiced/unvoiced output. Compare a learned transition prior with fixed Viterbi/HMM smoothing.",
+        "parameters": "Keep the added head below 100,000 parameters and the temporal window short enough to report causal and delayed variants.",
+        "license": "CREPE project MIT. Pin the official tiny-weight release and its integrity/terms before any future weight download."
+      },
+      "baselines": [
+        "YIN or pYIN, with their normal voicing/temporal settings.",
+        "Unmodified CREPE tiny and its existing Viterbi smoothing.",
+        "A simple median filter and a calibration-only head on identical activations."
+      ],
+      "design": "Leave one performer out; put all channels, derived windows and altered versions of a recording in the same fold. Use separate development performers for settings. Evaluate microphone-to-pickup and pickup-to-microphone transfer. Synthetic noise/equalisation are optional labelled stress conditions, never the only test.",
+      "ablations": [
+        "Temporal correction versus per-frame calibration.",
+        "Channel augmentation versus real paired-channel training.",
+        "Voicing loss and transition smoothing; causal versus look-ahead context."
+      ],
+      "measures": "Raw pitch accuracy within a specified cents tolerance, raw chroma accuracy, octave-error rate, voicing precision/recall, note-onset F1 where labels support it, processing time and algorithmic delay. Show every held-out performer; uncertainty with only six performers will be wide.",
+      "compute": "Cache at most a few hundred thousand 360-bin activation vectors (hundreds of MB). Tiny-network extraction is the main CPU cost; set a pilot-based cap of one overnight extraction and at most two hours per head experiment. Peak target 4 GB; no large music model training.",
+      "fallback": "Learn a small classifier choosing between CREPE and pYIN proposals using their confidence and local signal features. Preserve the same held-out protocol.",
+      "closest_work": "CREPE already supports temporal smoothing, and October SheetSage2 uses structured decoding for coherent transcription. This study isolates a much narrower paired-channel guitar adaptation problem; it does not claim invention of temporal consistency or reproduce the larger transcription system.",
+      "risks": "A strong pYIN baseline may already solve clean single-note portions. Annotation errors can masquerade as model errors. Selecting only easy monophonic fragments may reduce practical coverage, which must be reported. A performer holdout does not by itself establish generalisation to unseen musical compositions.",
+      "kill_test": "Verify at least several independent solo recordings and usable single-note time for every performer. Check 20 hand-inspected intervals against labels and paired waveforms. Withdraw the octave-specific claim if errors are overwhelmingly annotation offsets or if the strong baseline leaves no measurable headroom.",
+      "work_plan": [
+        "Weeks 1–3: music/pitch literature and label audit.",
+        "Weeks 4–6: paired-channel corpus and classical/neural baselines.",
+        "Weeks 7–11: temporal-head training and calibration.",
+        "Weeks 12–15: performer/channel transfer and delay ablations.",
+        "Weeks 16–18: failure taxonomy and compute assessment.",
+        "Weeks 19–20: report and local practice-feedback demonstration."
+      ],
+      "deliverables": "Audited interval manifest, compact correction model, pitch-evaluation pipeline, performer/channel error analysis and report.",
+      "venture": "Hypothesis: practice or recording tools could use more stable feedback. No musician recruitment or commercial validation is required for this offline study.",
+      "source_ids": [
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S64"
+      ],
+      "recency": "SheetSage2 October 4 is a method/alternative lead. GuitarSet and its errata are older background, not fresh issues.",
+      "performed": "Read primary methods, licenses and errata; bounded annotation/audio access checks only.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Read a WAV prefix and a complete 34.90-second solo JAMS: 78 notes, six pitch-contour/note tracks, and 24.26 seconds with exactly one active annotated note.",
+        "CREPE already supports temporal smoothing, and October SheetSage2 uses structured decoding for coherent transcription. This study isolates a much narrower paired-channel guitar adaptation problem; it does not claim invention of temporal consistency or reproduce the larger transcription system.",
+        "CC-BY-4.0 dataset. Preserve citation/attribution and an explicit annotation-correction/exclusion manifest.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST3",
+      "title": "Keep activity recognition working when a phone moves from hand to pocket",
+      "domain": "Wearables and consumer sensing",
+      "verdict": "keep",
+      "summary": "A movement model can confuse sitting, standing and walking when a phone is carried differently. The study would adapt a pretrained motion model using public recordings, without collecting anyone's activity data.",
+      "example": "A model trained on a phone held in the hand is tested on a different person's phone in a pocket.",
+      "question": "How much does a small adaptation of a frozen wearable encoder improve activity recognition under simultaneous participant and body-position shift?",
+      "hypothesis": "Unit-consistent preprocessing, rotation augmentation and a small learned feature adapter will improve worst-position macro-F1 over a plain frozen-encoder head. Any target-position adaptation data must come from separate development participants.",
+      "why_masters": "This is a transfer-learning study with a real device/position hierarchy, competing signal-processing and pretrained-model baselines, labelled/unlabelled adaptation-budget controls and subject-level uncertainty. It examines where pretrained wearable representations transfer and where they fail.",
+      "data": {
+        "name": "AICOS-HAR; PAMAP2 as optional external check",
+        "sources": [
+          "S11",
+          "S12",
+          "S13"
+        ],
+        "access": "AICOS-HAR public ZIP supports selected-member range reads. Its metadata names participant, activity/trial, device, position and fold. No private UK Biobank raw data are needed.",
+        "size": "AICOS-HAR: 5,231 acquisitions, 106 participant IDs, 101.4 hours; 2.54 GB total. Archive metadata verified Hand/Leg/Hip coverage of 88/55/27 participants. For walking/sitting/standing, the least-covered selected position/activity has 11 participants. Plan a selected 5–15-hour accelerometer subset, not all sensors.",
+        "license": "AICOS-HAR CC-BY-4.0 confirmed in primary Zenodo metadata. PAMAP2 also CC-BY-4.0, but its legacy server ignored range requests; full fallback acquisition is not yet tested.",
+        "verified": "Decoded real accelerometer rows; full README states m/s² and nanosecond timestamps. All 5,231 metadata rows read; body/activity participant support counted. A complete 473,670-byte accelerometer member passed ZIP CRC and parsed 10,996 numeric rows with increasing timestamps, spanning 110.15 seconds at about 99.82 Hz.",
+        "remaining": "Audit device-position confounding, original folds versus person IDs, sampling irregularity and target-unit contract. Define a three-activity pilot before expanding."
+      },
+      "model": {
+        "backbone": "HARNET five-second frozen encoder, pretrained on wearable movement; input contract is 3 axes by 150 samples at 30 Hz.",
+        "adaptation": "Train a linear/MLP classifier plus a low-rank feature adapter. Compare source-only rotation augmentation with covariance alignment using a strictly separate unlabelled target-position development pool.",
+        "parameters": "Train small heads/adapters; keep the backbone frozen. Exact feature width and checkpoint footprint must be measured in the pilot.",
+        "license": "HARNET academic/noncommercial license permits a research-scoped study but does not support a commercial-rights claim."
+      },
+      "baselines": [
+        "Time/frequency summary features with logistic regression or random forest.",
+        "Small CNN trained from scratch on the same labelled training windows.",
+        "Frozen HARNET plus linear head; rotation augmentation without a learned adapter."
+      ],
+      "design": "Split participants before windowing; hold entire trials together. Create held-out position and held-out device-family tests, reporting confounding if they cannot be separated. Distinguish zero-target-data adaptation from a fixed budget of unlabelled target-position data supplied by development participants. No test-person windows may set normalization, alignment or thresholds.",
+      "ablations": [
+        "Resampling/unit/gravity treatment.",
+        "Rotation augmentation versus learned adapter.",
+        "Source-only versus permitted unlabelled target data; axis magnitude alone versus full axes."
+      ],
+      "measures": "Macro-F1, balanced accuracy, worst-position and per-activity recall, calibration and coverage, CPU throughput and RAM. Bootstrap people, not overlapping windows. Report the smallest subgroup rather than hiding it in an overall average.",
+      "compute": "Start with at most 10,000 nonoverlapping five-second windows. Raw 3x150 float32 arrays are about 18 MB; cached embeddings add modest storage. Target at most 6 GB RAM, one overnight encoder pass and small-head fitting on CPU. Runtime is not measured yet.",
+      "fallback": "A compact one-dimensional CNN with the same augmentation/alignment protocol, or frozen-feature normalization only. This remains an Applied AI study even if HARNET transfer fails.",
+      "closest_work": "The October AICOS-HAR paper specifically concerns diverse devices and body positions, so position-invariant HAR is not claimed new. The contribution is a controlled, limited-compute adaptation study with combined shifts, explicit data budgets and a strong hand-engineered baseline.",
+      "risks": "Position and device may be confounded; healthy controlled activities do not establish performance for falls, illness or everyday unrestricted use. HARNET's source-body location and unit expectations can dominate transfer.",
+      "kill_test": "Build subject-disjoint walking/sitting/standing splits with at least ten target participants in each selected position; inspect resampling and units on several acquisitions. Revise to fewer positions if support is insufficient. Stop the pretrained branch if the checkpoint cannot fit or a small embedding run exceeds the CPU budget.",
+      "work_plan": [
+        "Weeks 1–3: HAR transfer literature and metadata/confounding audit.",
+        "Weeks 4–6: windowing, units and reproducible subject splits.",
+        "Weeks 7–10: train classical, CNN and frozen-encoder baselines.",
+        "Weeks 11–14: adapter and target-data-budget study.",
+        "Weeks 15–18: device/position ablations and grouped uncertainty.",
+        "Weeks 19–20: report, model card and replay demo."
+      ],
+      "deliverables": "Selective downloader, sensor preprocessing/split manifests, trained adapter, subgroup/compute evaluation and thesis.",
+      "venture": "A later fitness or device-software component is a hypothesis. The current pretrained model has noncommercial restrictions; no medical or deployment benefit is established.",
+      "source_ids": [
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "recency": "Publisher article October 10; dataset itself was published April 7 and is not represented as an October data release.",
+      "performed": "Dataset license, metadata and real sensor sample verified; no model experiments.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Decoded real accelerometer rows; full README states m/s² and nanosecond timestamps. All 5,231 metadata rows read; body/activity participant support counted.",
+        "The October AICOS-HAR paper specifically concerns diverse devices and body positions, so position-invariant HAR is not claimed new. The contribution is a controlled, limited-compute adaptation study with combined shifts, explicit data budgets and a strong hand-engineered baseline.",
+        "AICOS-HAR CC-BY-4.0 confirmed in primary Zenodo metadata. PAMAP2 also CC-BY-4.0, but its legacy server ignored range requests; full fallback acquisition is not yet tested.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST4",
+      "title": "Recognise litter without being fooled by the background",
+      "domain": "Computer vision and environmental software",
+      "verdict": "keep",
+      "summary": "A litter-labeling model may learn that bottles appear on a beach and paper appears indoors. It then fails when the same objects appear somewhere else, especially for less common categories.",
+      "example": "A crushed cup photographed among leaves should not become a plastic wrapper merely because the model has mostly seen cups on clean pavement.",
+      "question": "Can a compact pretrained image model adapted with object/context separation and class balancing improve minority-category recognition under background shift?",
+      "hypothesis": "Training on segmented objects plus a controlled amount of context will improve worst-class performance across held-out backgrounds compared with ordinary rectangular crops, without making unknown categories look confidently familiar.",
+      "why_masters": "The study adapts a pretrained vision backbone, audits hierarchical and multi-annotator labels, tests class imbalance and background dependence separately, and evaluates uncertainty with meaningful photo-level splits. It studies recognition of supplied object crops, not an industrial sorting installation or chemical recyclability.",
+      "data": {
+        "name": "TACO",
+        "sources": [
+          "S17",
+          "S18",
+          "S19"
+        ],
+        "access": "Public annotation JSON and individual hosted image/thumbnail URLs. Full ZIP is unnecessary for an initial crop study.",
+        "size": "1,500 images, 4,784 object annotations. Candidate known classes include Bottle 439, Can 273, Cup 192, Paper 148, Carton 251 and Plastic bag/wrapper 850. Use other sufficiently supported labelled categories for unknown-class evaluation; exclude Unlabeled litter from exact-class supervision.",
+        "license": "Official collection record: CC-BY-4.0; code MIT. Annotation JSON has empty per-image license entries, so collection-level terms are the evidence and individual contributor provenance remains a limitation.",
+        "verified": "Parsed object counts/category hierarchy and downloaded a real 63,455-byte thumbnail. Scene metadata has 4,296 rows for 1,496 images; 690 images have differing scene-label sets across rows, requiring an explicit consensus/multi-label policy.",
+        "remaining": "Check individual image availability and attribution, distinguish repeated/multiple scene judgments, audit masks, and ensure adequate independent-photo support for each chosen background/class."
+      },
+      "model": {
+        "backbone": "timm MobileNetV3-small, 2.5M parameters, pretrained on ImageNet; freeze its backbone initially.",
+        "adaptation": "Train a class-balanced head over cached object-only and context features, with a small learned fusion gate and calibrated reject option. Compare a limited last-block adaptation only if CPU pilot permits.",
+        "parameters": "Head/gate below 200,000 parameters; object crops at 160–224 pixels.",
+        "license": "Official timm weight card declares Apache-2.0."
+      },
+      "baselines": [
+        "Colour/texture descriptors with a linear classifier.",
+        "Frozen MobileNet features with ordinary cross-entropy and rectangular crops.",
+        "Class-weighted loss or balanced sampling alone; object-mask cropping alone; simple maximum-probability rejection."
+      ],
+      "design": "All objects/crops/augmentations from an original photo stay in one partition. Detect duplicate photos before splitting. Derive background groups from an explicit multi-annotation consensus; report ambiguous-background images separately. Hold out whole background groups where class support permits. Unknown development categories and unknown test categories must be disjoint. Gold segmentation masks are an oracle diagnostic/assisted variant; report them separately from crop-only inference, which does not have a true outline supplied.",
+      "ablations": [
+        "Object-only, context-only and object-plus-context views.",
+        "Balanced sampling versus loss weighting, held at the same label budget.",
+        "Fusion gate and rejection calibration; real background holdout versus artificial background stress."
+      ],
+      "measures": "Macro-F1, per-class recall, worst-background performance, unknown false-accept rate and error-versus-coverage. Bootstrap photos. Report how many photos, objects and classes remain after filtering, plus CPU latency/RAM.",
+      "compute": "A few thousand small crops and cached features should fit below 4 GB. One CPU feature pass and small-head fitting are the main plan. Set a measured extraction cap of one overnight run and at most one hour per cached-feature fit.",
+      "fallback": "Use frozen object-crop embeddings and class-balanced logistic regression; retain the domain/unknown-class study. If backgrounds cannot form credible groups, withdraw the background-transfer claim and report only grouped-photo imbalance/recognition results.",
+      "closest_work": "October waste-classification research already combines augmentation, attention and imbalance losses. Its image corpus was not independently downloadable with a clear file/license manifest. The proposed work uses a different public setting and a controlled object/context comparison; it does not reproduce the reported industrial accuracy.",
+      "risks": "Small numbers of rare classes and uncertain scene labels can dominate results. Recognition from a crop assumes localisation is supplied. A visual class does not establish whether an item is recyclable under local rules. Any future use of the mask-assisted variant would need a separate foreground estimator or supplied outline; benchmark masks do not demonstrate that deployment step.",
+      "kill_test": "Construct at least two credible background partitions with adequate independent photos per retained class; inspect a small set of masks and scene votes. Revise if gains only appear with random object splits or synthetic backgrounds. Any class with insufficient independent test photos is excluded before results are seen.",
+      "work_plan": [
+        "Weeks 1–3: litter-recognition literature, rights and annotation audit.",
+        "Weeks 4–6: crop pipeline and photo/background splits.",
+        "Weeks 7–10: class balancing and object/context adapters.",
+        "Weeks 11–15: held-out-background and unknown-class experiments.",
+        "Weeks 16–18: uncertainty, error categories and CPU profiling.",
+        "Weeks 19–20: thesis, reproducible manifests and illustrative labeling demo."
+      ],
+      "deliverables": "Attribution-aware data manifest, adapted image head, background/imbalance benchmark, calibrated rejection evaluation and report.",
+      "venture": "Hypothesis: cleanup-photo catalogues might benefit. No evidence of customer demand or automatic sorting readiness is claimed.",
+      "source_ids": [
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S50"
+      ],
+      "recency": "October 20 study is a current lead; TACO and MobileNet are older reusable foundations.",
+      "performed": "Primary licenses/schema/counts and a real image access check; no image-model training.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Parsed object counts/category hierarchy and downloaded a real 63,455-byte thumbnail. Scene metadata has 4,296 rows for 1,496 images; 690 images have differing scene-label sets across rows, requiring an explicit consensus/multi-label policy.",
+        "October waste-classification research already combines augmentation, attention and imbalance losses. Its image corpus was not independently downloadable with a clear file/license manifest. The proposed work uses a different public setting and a controlled object/context comparison; it does not reproduce the reported industrial accuracy.",
+        "Official collection record: CC-BY-4.0; code MIT. Annotation JSON has empty per-image license entries, so collection-level terms are the evidence and individual contributor provenance remains a limitation.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST5",
+      "title": "Teach a handwriting recogniser new symbols without losing old ones",
+      "domain": "Handwriting and learning software",
+      "verdict": "revise",
+      "summary": "A symbol recogniser trained on a fixed alphabet struggles when a user needs an unfamiliar mathematical symbol. Updating it with a few examples can also damage its recognition of symbols it already knew.",
+      "example": "After learning a new arrow symbol from five examples, the recogniser should still distinguish ordinary arrows and offer several possibilities for genuinely ambiguous shapes.",
+      "question": "What is the accuracy, forgetting and rejection trade-off when a compact symbol encoder is adapted to new classes under a small labelled-example and replay-memory budget?",
+      "hypothesis": "A prototype-based or low-rank adaptation head with a small replay/distillation constraint will preserve old-class performance better than unrestricted incremental fine-tuning, while recognising newly introduced classes from 1/5/10/20 examples.",
+      "why_masters": "The student trains an initial compact encoder, adapts it through controlled class-incremental episodes, evaluates forgetting and unknown-class rejection, and studies ambiguity in the labels. The scientific contribution is a carefully justified adaptation study, not a claim to invent incremental learning or another handwritten-digit tutorial.",
+      "data": {
+        "name": "HASYv2",
+        "sources": [
+          "S20",
+          "S21"
+        ],
+        "access": "Public 34,597,561-byte archive; no login or external participants. Use a preregistered subset of classes with enough examples for base, adaptation and final-query partitions.",
+        "size": "168,233 images, 369 classes, 32x32 pixels. Start with around 100 supported classes and up to 30,000 images; expand only if the protocol and class counts justify it.",
+        "license": "Primary Zenodo record says ODC Open Database License, not CC0 or the article's CC-BY license. Preserve attribution and applicable database-sharing terms; publish download/split scripts rather than a repackaged raw database.",
+        "verified": "Downloaded a 1 MB compressed prefix and decoded official CSV rows/headers including path, class and user_id. The archive was deliberately incomplete, so no claim that the entire image set was downloaded. A later bounded six-MB archive-prefix read reached and fully decoded a complete 277-byte 32x32 image.",
+        "remaining": "Complete the small archive during an authorised experiment phase, verify hashes/image shapes and sufficient examples per class. Reconcile visually indistinguishable semantic labels before training."
+      },
+      "model": {
+        "backbone": "A compact CNN trained on base symbol classes within this study, then frozen or partially adapted. This option builds its own pretrained task-specific encoder rather than depending on an unverified third-party checkpoint.",
+        "adaptation": "Compare nearest prototypes, a learned metric projection, and last-layer/last-block adaptation with fixed small replay or distillation. Use class-equivalence-aware top-k scoring for intrinsically ambiguous glyphs.",
+        "parameters": "Target 100,000–500,000 base parameters; adapter below 50,000. Training at 32x32 is suited to CPU.",
+        "license": "Student-written implementation and newly trained weights; raw-data terms remain separate."
+      },
+      "baselines": [
+        "HOG/flattened-pixel nearest-neighbour or linear classifier.",
+        "Frozen-encoder nearest prototypes.",
+        "Incremental softmax head, unconstrained fine-tuning, and a standard replay/distillation comparator."
+      ],
+      "design": "Partition classes into base, validation-novel, test-novel and never-trained unknown groups before designing adapters. Keep adaptation support images separate from query images, and all transformed duplicates together. Repeat class orders/seeds. User IDs are NOT a reliable person identifier: the proposed unseen-writer study was withdrawn, and this design makes no strict writer-generalisation claim.",
+      "ablations": [
+        "Prototype update versus learned projection.",
+        "Replay budget and distillation constraint.",
+        "Raw labels versus preregistered visually equivalent label groups; support size and class order."
+      ],
+      "measures": "Old/new-class macro accuracy, forgetting relative to the pre-update checkpoint, unknown false acceptance, top-k/set-valued coverage for ambiguous symbols, memory and update time. Report class-level uncertainty and sensitivity to the large mixed-contributor user ID.",
+      "compute": "At most 30,000 32x32 images in the first study phase; under 4 GB target memory. Allow up to one overnight base training run, then small adaptation episodes. Establish throughput first; no external model/API.",
+      "fallback": "Freeze the base CNN and use only prototype/linear-head updates with replay. If even the small encoder is too slow, HOG-to-metric learning preserves the incremental-learning question but should be presented as the reduced model variant.",
+      "closest_work": "HASY already defines unknown-symbol verification, and incremental/prototypical methods are established. October OCR confidence fixes and recent handwriting benchmarks motivate careful reliability evaluation but do not prove this exact problem is new. The contribution is the combined forgetting, ambiguity and memory-budget study on a clearly bounded task.",
+      "risks": "Some symbols are indistinguishable from pixels alone; no model can recover missing semantic context. Contributor IDs are unreliable and cannot support person-held-out guarantees. Limiting classes may weaken claims about all mathematical handwriting.",
+      "kill_test": "Audit class counts, exact image duplicates and label equivalence; require usable base/new/unknown partitions and enough query images after support selection. Withdraw any personalisation or unseen-writer wording. If all observed errors are label ambiguity, revise the objective toward top-k ambiguity handling rather than forced accuracy.",
+      "work_plan": [
+        "Weeks 1–3: incremental-learning literature and glyph/data audit.",
+        "Weeks 4–6: base encoder and non-neural baselines.",
+        "Weeks 7–11: adaptation, replay and prototype methods.",
+        "Weeks 12–15: class-order/support-size/ambiguity experiments.",
+        "Weeks 16–18: forgetting, rejection and compute analysis.",
+        "Weeks 19–20: thesis and local symbol-learning demonstration."
+      ],
+      "deliverables": "Class/duplicate/equivalence manifests, base and adapted compact models, incremental-evaluation code, error analysis and report.",
+      "venture": "A mathematical-note or drawing-input tool is a hypothesis only. No student recruitment, private handwriting or user study is needed for the thesis.",
+      "source_ids": [
+        "S20",
+        "S21",
+        "S22",
+        "S23"
+      ],
+      "recency": "October 5/14 OCR changes are a current reliability lead; August 24 WildHandBench is corroboration. HASY is explicitly 2017 background, and no new-trend claim is made.",
+      "performed": "Source/license/schema investigation; original writer-personalisation proposal withdrawn and replaced. No CNN trained.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "conditional_revision",
+      "substantiality_assessment": "Conditional/revise. A CNN plus standard few-shot prototypes or replay alone would be too close to coursework. A defensible thesis needs the preregistered class-incremental forgetting/unknown-rejection study, a carefully audited equivalence policy for visually indistinguishable symbols, multiple class orders and memory budgets, and comparison with established incremental methods. The original writer-transfer claim is withdrawn because contributor IDs cannot support it. Direct October evidence for this exact question was not found; recent handwriting/OCR sources are adjacent corroboration, not proof of a new gap. Do not endorse until the eligible-class/ambiguity audit and closer incremental-learning literature review support this scope.",
+      "investigated_findings": [
+        "Downloaded a 1 MB compressed prefix and decoded official CSV rows/headers including path, class and user_id. The archive was deliberately incomplete, so no claim that the entire image set was downloaded. A later bounded six-MB archive-prefix read reached and fully decoded a complete 277-byte 32x32 image.",
+        "HASY already defines unknown-symbol verification, and incremental/prototypical methods are established. October OCR confidence fixes and recent handwriting benchmarks motivate careful reliability evaluation but do not prove this exact problem is new. The contribution is the combined forgetting, ambiguity and memory-budget study on a clearly bounded task.",
+        "Primary Zenodo record says ODC Open Database License, not CC0 or the article's CC-BY license. Preserve attribution and applicable database-sharing terms; publish download/split scripts rather than a repackaged raw database.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST6",
+      "title": "Help a small document model find tables in unfamiliar documents",
+      "domain": "Document computer vision",
+      "verdict": "keep",
+      "summary": "A table detector trained on scientific papers may miss a table in an instruction manual or financial report. Retraining a whole large parser can be impractical on a laptop.",
+      "example": "An annual report uses a borderless table with a shaded heading. The model should locate the table without treating a nearby chart as another table.",
+      "question": "How far can a frozen table detector be adapted to new document categories using a small labelled-page budget and only its output heads or a small query-feature adapter?",
+      "hypothesis": "A small domain-adapted head will improve table detection on held-out documents beyond confidence-threshold tuning alone, while retaining useful performance on the source-like category.",
+      "why_masters": "This is a label-budget and domain-transfer study of a pretrained object detector, with document/source grouping, localisation metrics, adapter ablations and explicit compute limits. It uses existing region labels rather than requiring a company archive or new reading-order annotation.",
+      "data": {
+        "name": "DocLayNet",
+        "sources": [
+          "S25",
+          "S26"
+        ],
+        "access": "Official public archive supports selective HTTP Range access. Stream COCO metadata and extract selected PNG members, retaining source-document/collection information.",
+        "size": "80,863 pages and 11 region classes. Core ZIP 30.01 GB; do not download it in full. Train metadata is 81.8 MB compressed/565 MB uncompressed; a streaming reader plus approximately 1,000–2,000 selected pages is the proposed study footprint.",
+        "license": "CDLA-Permissive-1.0. Preserve dataset provenance/attribution and terms when redistributing enhanced data; code and model terms are separate.",
+        "verified": "Read 13.08 MB of ZIP directory/sample data and decoded page/category metadata including document name, collection, page number and table class 9. Range success is real; full subset extraction and model runtime are not yet tested. Subsequently extracted a complete 763,103-byte PNG, passed ZIP CRC verification and fully decoded it as 1025x1025 RGB; the selected-member route is demonstrated, while full annotation extraction remains future work.",
+        "remaining": "Build a streaming metadata selector, inspect selected images and count table/non-table pages by independent document. Check release duplicates and document category mapping."
+      },
+      "model": {
+        "backbone": "Microsoft Table Transformer table-detection checkpoint, DETR-R18, about 110 MB.",
+        "adaptation": "Freeze backbone/transformer and cache query features; train classification/box heads or a small residual adapter with the original matching loss. A limited last-decoder adaptation is optional only if CPU timing permits.",
+        "parameters": "Prefer output-head/query-adapter training; keep cached features and a page-at-a-time pipeline below the memory cap.",
+        "license": "Model card and official repository declare MIT."
+      },
+      "baselines": [
+        "Line/connected-component and word-alignment table heuristics, with limitations stated.",
+        "Unmodified Table Transformer.",
+        "Confidence-threshold calibration and head-only adaptation on exactly the same labelled pages."
+      ],
+      "design": "Respect official train/validation/test roles and additionally group by source document and collection. Sample label budgets of 16/64/128 development pages without using final test labels. Hold out complete document categories or collections where support permits; all degradations of a page stay together. Distinguish real category transfer from synthetic scan degradation.",
+      "ablations": [
+        "Classification-only versus box-head/query-feature adaptation.",
+        "Label budget and document-source diversity.",
+        "Threshold tuning, scan augmentation and source-performance retention."
+      ],
+      "measures": "AP50/AP75 and mean AP, table recall at a fixed false-box-per-page budget, small/borderless-table errors, CPU latency and peak RAM. Bootstrap documents/collections, not pages. Table location metrics do not establish cell-text extraction quality.",
+      "compute": "Selective image subset on disk, streaming JSON metadata, frozen inference and cached head fitting. Target below 8 GB RAM, maximum one overnight feature pass and a measured per-configuration CPU limit. Do not run billion-parameter parsers or paid OCR APIs.",
+      "fallback": "Train a calibrated reranker of frozen detector proposals plus simple geometric candidates. Clearly label the reduced scope: it cannot find a table for which no candidate exists.",
+      "closest_work": "Table Transformer already supports domain adaptation, and October OmniParseBench highlights separate table/layout slices and strong current parsers. This study asks about constrained adaptation efficiency and retained source performance. It does not invent table detection or claim parity with full modern parsing systems.",
+      "risks": "A frozen detector may not propose missed target tables, limiting head-only improvement. Collection overlap can inflate results. Table localisation alone is insufficient for usable CSV extraction.",
+      "kill_test": "Select independent source/target documents with enough table and negative pages; extract and inspect a small licensed subset, then benchmark frozen CPU inference. Revise to proposal reranking if the model's missing-candidate ceiling prevents head adaptation; withdraw if the subset pipeline exceeds feasible storage/runtime.",
+      "work_plan": [
+        "Weeks 1–3: table-domain adaptation literature and source audit.",
+        "Weeks 4–6: selective downloader, group splits and frozen baselines.",
+        "Weeks 7–11: head/query adapter and label-budget experiment.",
+        "Weeks 12–15: category/collection transfer and localisation ablations.",
+        "Weeks 16–18: confidence, failure and CPU analysis.",
+        "Weeks 19–20: thesis, reproducible model and page inspection demo."
+      ],
+      "deliverables": "Selective data pipeline, document-level split manifests, adapted detection head, localisation/compute report and thesis.",
+      "venture": "A local document-processing component is a hypothesis; no production/customer benefit is established.",
+      "source_ids": [
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S51"
+      ],
+      "recency": "Official OmniParseBench announcement is October 8, confirmed from its contents. DocLayNet/TATR are older background.",
+      "related_existing": "NT1 asks which reading-order errors a reviewer should fix. ST6 trains/evaluates table localisation under domain shift and does not reuse that research question.",
+      "performed": "Official sources/license and archive-route checks; no detector run or training.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Read 13.08 MB of ZIP directory/sample data and decoded page/category metadata including document name, collection, page number and table class 9. Range success is real; full subset extraction and model runtime are not yet tested. Subsequently extracted a complete 763,103-byte PNG, passed ZIP CRC verification and fully decoded it as 1025x1025 RGB; the selected-member route is demonstrated, while full annotation extraction remains future work.",
+        "Table Transformer already supports domain adaptation, and October OmniParseBench highlights separate table/layout slices and strong current parsers. This study asks about constrained adaptation efficiency and retained source performance. It does not invent table detection or claim parity with full modern parsing systems.",
+        "CDLA-Permissive-1.0. Preserve dataset provenance/attribution and terms when redistributing enhanced data; code and model terms are separate.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST7",
+      "title": "Keep useful predictions when a table model can see fewer examples",
+      "domain": "Tabular foundation models",
+      "verdict": "revise",
+      "summary": "A pretrained table model may predict well when it can compare a row with many labelled examples, yet lose rare classes when its memory is shortened to run on a laptop.",
+      "example": "A small comparison set of bean measurements could accidentally contain too few examples of an uncommon bean type, producing confident but biased predictions.",
+      "question": "Under a fixed labelled-data and CPU budget, can class-aware context selection and a small learned output correction preserve minority-class accuracy when TabICL uses a much smaller context?",
+      "hypothesis": "Class-coverage-aware selection plus a regularised correction trained on out-of-fold predictions will improve minority recall and calibration over random context sampling, beyond what simple class-prior correction alone achieves.",
+      "why_masters": "This is a constrained adaptation study of a pretrained tabular transformer. It separates data selection from learned correction, measures minority-class/calibration trade-offs, retains negative results, and compares against strong conventional models rather than only a deliberately weak baseline.",
+      "data": {
+        "name": "UCI Dry Bean and Online Shoppers Purchasing Intention",
+        "sources": [
+          "S32",
+          "S33"
+        ],
+        "access": "Public UCI files, no login. Both CSV sample routes were actually downloaded and parsed; full data are small enough for laptop experiments.",
+        "size": "Dry Bean: 13,611 rows, 16 features, 7 classes. Shoppers: 12,330 sessions, 17 input variables and a heavily imbalanced binary target.",
+        "license": "Both primary UCI records explicitly declare CC-BY-4.0.",
+        "verified": "Bounded real CSV reads established column/row accessibility. The source describes shopper sessions as belonging to different users. No private sales/organisation data are needed.",
+        "remaining": "Audit duplicates and feature types; exclude PageValues from any prospective purchasing prediction because it may encode post-outcome information. The month variable does not permit an exact chronological split."
+      },
+      "model": {
+        "backbone": "Released TabICL checkpoint with CPU support; use one estimator and small contexts initially.",
+        "adaptation": "Cache out-of-fold class probabilities from class-aware/random/representative contexts, then fit a small regularised logit correction using class coverage/prior statistics. A parameter-free prior correction is a required comparator.",
+        "parameters": "The pretrained transformer remains frozen. Train only tens to hundreds of correction parameters, depending on class count; no full-backbone fine-tuning.",
+        "license": "Current TabICL code and the verified jingang/TabICL weight card declare BSD-3-Clause. The separate forecasting subproject has different terms."
+      },
+      "baselines": [
+        "Logistic regression and a tuned HistGradientBoosting/XGBoost-style tree baseline using the same available labels.",
+        "Unadapted TabICL with random and class-stratified context.",
+        "Analytic class-prior correction and standard temperature calibration."
+      ],
+      "design": "Use nested grouped-by-duplicate row splits; do not describe them as temporal deployment validation. Choose labelled pool sizes and contexts, such as pool 1,024 and context 32/128/512, on training/development data. Generate correction training examples out of fold so query labels never enter their contexts. Keep label availability, query batches, seeds and CPU budgets comparable. Report every preregistered dataset/condition, including cases where the pretrained model is worse.",
+      "ablations": [
+        "Context selection alone versus learned correction alone versus their combination.",
+        "Class-prior correction versus extra learned parameters.",
+        "Context size, number of available labels and controlled class-imbalance sensitivity."
+      ],
+      "measures": "Macro-F1/balanced accuracy, worst-class recall, log loss/calibration and minority precision-recall; CPU inference/training time and peak RAM. Report repeated-split intervals and both aggregate and class-specific results.",
+      "compute": "Start with context 32/128, one estimator and bounded query batches on CPU. Cap memory at 10–12 GB and an initial 256-query timing run at 30 minutes. Only expand to context 512 if measured scaling supports overnight completion. These are gates, not measured speeds.",
+      "fallback": "Reduce context, queries and model ensemble size while retaining frozen TabICL. If even the smallest setting fails memory/runtime gates, withdraw the foundation-model variant rather than relabel an ordinary tabular tutorial as equivalent.",
+      "closest_work": "October TabAlign already learns linear hidden-activation alignment from full to reduced contexts. This proposal tests a cheaper output-level correction and class-coverage selection, with strong prior-correction and tree baselines. It is an independently justified adaptation study, not a claim that context compression is new.",
+      "risks": "CPU inference may dominate despite tiny adaptation. Two datasets support a bounded study, not a universal tabular-model claim. Selection effects, duplicated records and outcome-derived features can create spurious improvements.",
+      "kill_test": "Run the bounded CPU/memory preflight, verify context/query disjointness and quantify minority-class coverage. Withdraw if no feasible context configuration exists; revise if gains vanish against analytic prior correction or only appear with PageValues.",
+      "work_plan": [
+        "Weeks 1–3: context compression literature, feature/leakage audit and CPU gate.",
+        "Weeks 4–6: nested splits, tree and unadapted transformer baselines.",
+        "Weeks 7–10: context selection and correction adapter.",
+        "Weeks 11–15: label/context/imbalance ablations with fixed budgets.",
+        "Weeks 16–18: class-specific errors, calibration and resource analysis.",
+        "Weeks 19–20: reproducible benchmark and thesis."
+      ],
+      "deliverables": "Frozen-model adaptation module, feature/split manifests, budget-controlled comparison and a negative-result-capable thesis.",
+      "venture": "Hypothesis: local low-data analytics could benefit. Demand and cross-industry generalisation have not been established.",
+      "source_ids": [
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S53"
+      ],
+      "recency": "TabAlign October 5 is the current lead. The datasets and pretrained-model release are background.",
+      "related_existing": "NT6 studies explanation-mask leakage. ST7 studies predictive adaptation to reduced contexts and minority-class coverage, with a different hypothesis and outcome.",
+      "performed": "Primary paper/model/data-license review and bounded CSV access; no TabICL runtime or model experiment.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "conditional_revision",
+      "substantiality_assessment": "Conditional/revise. Context stratification and generic calibration are established techniques and do not by themselves establish a master's contribution. The substantial version must isolate why a frozen tabular foundation model changes with context composition, compare learned correction against analytic prior correction and strong tree models under identical label/CPU budgets, and retain all preregistered conditions. Two datasets support a bounded mechanism study, not broad model superiority. CPU feasibility and whether a nontrivial adaptation question remains are still untested; withdraw if a routine prior correction answers the entire question.",
+      "investigated_findings": [
+        "Bounded real CSV reads established column/row accessibility. The source describes shopper sessions as belonging to different users. No private sales/organisation data are needed.",
+        "October TabAlign already learns linear hidden-activation alignment from full to reduced contexts. This proposal tests a cheaper output-level correction and class-coverage selection, with strong prior-correction and tree baselines. It is an independently justified adaptation study, not a claim that context compression is new.",
+        "Both primary UCI records explicitly declare CC-BY-4.0.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST8",
+      "title": "Learn which anomaly detector to trust after one confirmed event",
+      "domain": "Time-series models and software monitoring",
+      "verdict": "keep",
+      "summary": "Different anomaly detectors notice different things: a sudden spike, a lasting level change or unusual timing. A small learned combiner could use experience from other signals and one confirmed event to decide which detectors are useful on a new signal.",
+      "example": "After one unusual CPU-usage episode is confirmed, the model should improve later alarms without repeatedly flagging ordinary daily peaks.",
+      "question": "Does a cross-series pretrained combiner provide better later-event recall at a fixed false-alarm rate than a fixed detector ensemble after one confirmation on a new series?",
+      "hypothesis": "A small gating model trained on separate signal families will transfer useful detector-selection behaviour, but gains will shrink for unseen anomaly types and must be evaluated against a globally trained logistic combiner and simple statistical monitoring.",
+      "why_masters": "The student builds a task-specific model from detector outputs, studies transfer across series families, carefully accounts for training labels and time order, and evaluates alarm trade-offs. It does not require a company's incident log or a recruited operator.",
+      "data": {
+        "name": "Numenta Anomaly Benchmark real-series subset",
+        "sources": [
+          "S35",
+          "S36"
+        ],
+        "access": "Public repository CSVs and anomaly-window JSON. Use realAWSCloudwatch, realAdExchange, realKnownCause, realTraffic and realTweets; exclude artificial series from the main claim.",
+        "size": "47 real series; 35 have at least two labelled anomaly windows, supporting a first-confirmation/later-event protocol. Data are small individual CSVs.",
+        "license": "Current repository LICENSE.txt is MIT, with 2014–2024 copyright. This is the inspected current license, not an assumed historic AGPL license or an invented CC dataset license.",
+        "verified": "Parsed the complete window manifest and family counts and read actual timestamp/value rows. One complete AWS CSV was additionally fetched for parsing. The real/ artificial distinction is explicit in the source README. Complete AWS CSV parsing is documented in the compact access receipt.",
+        "remaining": "Audit missingness, sampling frequency, near-duplicates and event-window definitions; freeze the exact repository revision before experiments."
+      },
+      "model": {
+        "backbone": "A fixed pool of approximately six low-cost detectors: rolling median/MAD, EWMA/CUSUM, autoregressive residuals, isolation forest and window-feature nearest neighbours.",
+        "adaptation": "Pretrain a small logistic/MLP gating model across training-series episodes; condition it on causally normalised detector scores and the confirmed-event score profile. At deployment, update only a few gate/calibration parameters from one confirmation.",
+        "parameters": "Approximately 1,000–20,000 parameters; no large time-series transformer is required.",
+        "license": "Newly written combiner; choose permissively licensed detector implementations and pin their versions."
+      },
+      "baselines": [
+        "Rolling MAD/EWMA/CUSUM statistical process control.",
+        "Best development-selected single detector, mean/max ensemble and the OneShot-style fixed-pool weighting rule.",
+        "A globally trained logistic combiner with exactly the same training-label access as the proposed gating model."
+      ],
+      "design": "Hold out complete series and preferably whole source families, with a separate development family/series set. All normalisation and detector fitting on a test series use only its available past. Simulate one confirmation at a predefined point in the first labelled window; score only later windows after confirmation. Count all cross-series pretraining labels. OneShot does not consume the same pretraining supervision, so report that difference rather than presenting it as an equal-supervision comparison.",
+      "ablations": [
+        "No cross-series pretraining, no confirmation conditioning and logistic versus nonlinear gate.",
+        "Detector diversity and score-normalisation choice.",
+        "In-family versus held-out-family transfer; same-type versus different-type later events where labels permit."
+      ],
+      "measures": "Event recall at fixed false alarms per unit time, precision-recall, NAB score as secondary, delay from benchmark-window start and CPU cost. Benchmark windows do not reveal a precise real-world incident onset; report that limit. Bootstrap series/families rather than time points.",
+      "compute": "Small CSVs and cached detector scores should fit well below 4 GB. Train only the small combiner, with bounded rolling windows. Target minutes per detector/series and hours for the complete preregistered study, verified in a pilot.",
+      "fallback": "Use a regularised logistic gate and fewer inexpensive detectors. If family transfer is unstable, retain a clearly labelled within-family study and negative-transfer result; do not claim universal monitoring readiness.",
+      "closest_work": "The October OneShot paper ALREADY investigates corrupted confirmations, temporal order and normal-set contamination. Those proposed gaps were withdrawn after reading its appendices. Its fixed-pool, no-trained-combiner setting motivates the distinct cross-series learned-combiner question here.",
+      "risks": "NAB windows are coarse and several signals are easy for simple methods. The public benchmark does not establish operational incident relevance or user tolerance. Transfer can merely recognise source-family characteristics. Only five source families and few independent labelled events are available; use regularisation and report broad uncertainty rather than treating windows as independent evidence.",
+      "kill_test": "Verify enough independent series remain for development and held-out-family evaluation after duplicate/label checks. If one simple statistical method dominates across budgets, report it and reassess the adapter. Reject any pipeline that uses future statistics or treats every point in an event window as an independently correct alarm.",
+      "work_plan": [
+        "Weeks 1–3: OneShot/SPC literature and benchmark audit.",
+        "Weeks 4–6: causal detectors and first-confirmation protocol.",
+        "Weeks 7–10: cross-series combiner and equal-label trained baseline.",
+        "Weeks 11–15: held-out families, ablations and false-alarm curves.",
+        "Weeks 16–18: coarse-label sensitivity and CPU/error analysis.",
+        "Weeks 19–20: reproducible alarm simulator and thesis."
+      ],
+      "deliverables": "Causal detector/adapter pipeline, family-aware evaluation manifest, pretraining-label accounting and alarm-quality report.",
+      "venture": "A local monitoring assistant is a hypothesis. Benchmark gains do not establish demand or production incident detection.",
+      "source_ids": [
+        "S34",
+        "S35",
+        "S36",
+        "S37"
+      ],
+      "recency": "OneShot October 12 is current. The public forum's exact original date could not be verified and is contextual evidence only; its SPC criticism is addressed with a baseline.",
+      "performed": "Paper appendices and public-label/data/license investigation; no anomaly model trained.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Parsed the complete window manifest and family counts and read actual timestamp/value rows. One complete AWS CSV was additionally fetched for parsing. The real/ artificial distinction is explicit in the source README. Complete AWS CSV parsing is documented in the compact access receipt.",
+        "The October OneShot paper ALREADY investigates corrupted confirmations, temporal order and normal-set contamination. Those proposed gaps were withdrawn after reading its appendices. Its fixed-pool, no-trained-combiner setting motivates the distinct cross-series learned-combiner question here.",
+        "Current repository LICENSE.txt is MIT, with 2014–2024 copyright. This is the inspected current license, not an assumed historic AGPL license or an invented CC dataset license.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST9",
+      "title": "Make a compact code-search model depend less on names",
+      "domain": "Developer tools and semantic retrieval",
+      "verdict": "keep",
+      "summary": "Code search can succeed by matching a function name or copied documentation while missing the behaviour described in a query. A small model that relies less on those shortcuts could be useful in unfamiliar code.",
+      "example": "A query such as 'raise an error when a response was unsuccessful' should retrieve the relevant function even if a project uses an unexpected identifier.",
+      "question": "Can a small contrastive adapter on a compact code-retrieval model improve robustness to identifier/documentation shortcuts while preserving retrieval quality and CPU efficiency?",
+      "hypothesis": "An adapter trained with identifier-masked retrieval text and hard negatives will reduce the performance drop under controlled naming changes, with a measurable trade-off on ordinary unmodified code.",
+      "why_masters": "The study adapts a pretrained task-specific retrieval model, builds an auditable licensed corpus, evaluates repository-held-out retrieval and shortcut stress separately, and measures realistic CPU/memory costs. It is not a generic code-chat interface or a claim that code retrieval is new.",
+      "data": {
+        "name": "Direct source snapshots from Requests, scikit-learn and pandas",
+        "sources": [
+          "S54",
+          "S55",
+          "S56"
+        ],
+        "access": "Public GitHub files under inspected project licenses. Select non-vendored Python functions with useful docstrings and parse them locally; pin snapshots and preserve source/license attribution.",
+        "size": "Two fully read sample files already yield 94 function definitions, 57 with docstrings. The intended corpus is a measured 2,000–5,000 usable functions across the three projects, subject to an AST/count/duplication audit, not an already verified corpus total.",
+        "license": "Requests Apache-2.0; scikit-learn BSD-3-Clause; pandas BSD-3-Clause. Check per-file headers and exclude bundled/generated/third-party exceptions. CodeSearchNet's MIT code license does not establish a single MIT license for its entire corpus.",
+        "verified": "Read official license files and complete Requests models.py and scikit-learn base.py contents; parsed real functions/docstrings. pandas frame.py was read only in a selected range, not claimed as a full corpus inspection.",
+        "remaining": "Enumerate and pin the complete selected corpus, count eligible queries, detect duplicated/inherited docstrings, review file-level license exceptions and manually judge a bounded set of ambiguous retrieval results."
+      },
+      "model": {
+        "backbone": "LateOn-Code-edge, a 17M-parameter late-interaction retriever with 48-dimensional token vectors.",
+        "adaptation": "Freeze the encoder and cache token embeddings; learn a small residual low-rank projection with contrastive/hard-negative and naming-consistency objectives. Compare against the unchanged released projection.",
+        "parameters": "For a rank-8 residual adapter over 48-dimensional vectors, about 768 projection weights plus any biases. Fix query/document token budgets across comparisons.",
+        "license": "Official weight card declares Apache-2.0."
+      },
+      "baselines": [
+        "BM25 and identifier/token search.",
+        "Unmodified LateOn-Code-edge, and a simple BM25/neural hybrid.",
+        "An ordinary contrastive projection without identifier stress, and optionally a small general sentence encoder with its pretraining overlap disclosed."
+      ],
+      "design": "Use leave-one-repository-out rotations with development modules separated from training. Strip docstrings from retrieved code when they form queries. Group all functions' transformed versions and exact/near duplicates; split modules/classes together. Identifier masking changes retrieval text only and is not claimed to be a semantics-preserving executable program transformation. Manually review a fixed random sample of retrieved alternatives to address multiple relevant functions.",
+      "ablations": [
+        "Hard negatives, naming-consistency objective and residual adapter.",
+        "Unmodified versus identifier-masked code; docstring/query lexical overlap strata.",
+        "Fixed token truncation budgets and compact vector precision."
+      ],
+      "measures": "MRR/Recall@k and nDCG where multiple relevant results are judged; absolute clean/stress performance and performance drop; index size, build time, query latency and RAM. Bootstrap queries grouped by repository/module and disclose that only three repositories support limited transfer claims.",
+      "compute": "Use 256–512 document tokens initially, cache float16 token vectors and cap the corpus at a few thousand functions. Expect hundreds of MB of embeddings, but measure extraction time and RAM before expanding. Train the tiny projection on CPU; no agent-RL or paid LLM teacher.",
+      "fallback": "Use pooled embeddings and a small metric projection if late-interaction scoring is too slow; report the changed retrieval architecture explicitly. A frozen BM25/neural hybrid remains the lower-cost comparator.",
+      "closest_work": "The October Small Agents Can Search work already uses local semantic retrieval with this compact retriever. LateOn's own training includes CodeSearchNet/CoIR, so repository-held-out evaluation does not prove the encoder never saw related code during pretraining. The contribution is controlled shortcut robustness and small-adapter efficiency, not uncontaminated benchmark superiority.",
+      "risks": "Docstring-generated queries are proxies for real developer searches, not evidence of bug-fixing effectiveness. Pretraining exposure is incompletely known. Different functions may be equally relevant and automatic single-answer labels can understate that.",
+      "kill_test": "Verify at least 1,000 usable deduplicated functions and 200 held-out queries after grouping, plus adequate source/license coverage. Benchmark 100-function embedding extraction. Revise if gains only reflect truncation, name leakage or copied docstrings; withdraw any claim of unseen-pretraining generalisation.",
+      "work_plan": [
+        "Weeks 1–3: retrieval/adaptation literature and corpus/license audit.",
+        "Weeks 4–6: AST extraction, grouped splits and frozen/BM25 baselines.",
+        "Weeks 7–10: cached embeddings and projection training.",
+        "Weeks 11–15: repository rotations, shortcut/negative-sampling ablations.",
+        "Weeks 16–18: bounded relevance audit and CPU/index analysis.",
+        "Weeks 19–20: reproducible local search prototype and thesis."
+      ],
+      "deliverables": "License-aware acquisition/split scripts, compact learned adapter, shortcut-robustness benchmark, small relevance-audit set and report.",
+      "venture": "A local IDE/search component is a hypothesis. No developer demand, agent improvement or commercial efficacy is established.",
+      "source_ids": [
+        "S38",
+        "S39",
+        "S40",
+        "S41",
+        "S52",
+        "S54",
+        "S55",
+        "S56"
+      ],
+      "recency": "October 4 Small Agents Can Search is current; model and source-code foundations are independently checked background.",
+      "performed": "Actual code/license/AST and model-card inspection; no embedding model downloaded or trained.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "kept_as_investigated_possibility",
+      "substantiality_assessment": "Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.",
+      "investigated_findings": [
+        "Read official license files and complete Requests models.py and scikit-learn base.py contents; parsed real functions/docstrings. pandas frame.py was read only in a selected range, not claimed as a full corpus inspection.",
+        "The October Small Agents Can Search work already uses local semantic retrieval with this compact retriever. LateOn's own training includes CodeSearchNet/CoIR, so repository-held-out evaluation does not prove the encoder never saw related code during pretraining. The contribution is controlled shortcut robustness and small-adapter efficiency, not uncontaminated benchmark superiority.",
+        "Requests Apache-2.0; scikit-learn BSD-3-Clause; pandas BSD-3-Clause. Check per-file headers and exclude bundled/generated/third-party exceptions. CodeSearchNet's MIT code license does not establish a single MIT license for its entire corpus.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    },
+    {
+      "id": "ST10",
+      "title": "Give a new user useful film recommendations from a few ratings",
+      "domain": "Recommender systems and consumer software",
+      "verdict": "revise",
+      "summary": "A new user has little history, so a recommender often falls back to the same popular films. A small adaptation model can test how much personalisation is possible after only a few ratings.",
+      "example": "After rating three older comedies, a user should receive relevant candidates without the list being dominated entirely by the most rated blockbusters.",
+      "question": "Under a CPU budget and 1/3/5 initial ratings, can a compact adaptation head over pretrained item embeddings improve new-user ranking without reducing catalogue coverage or over-amplifying popularity?",
+      "hypothesis": "A regularised history-to-user embedding head with a learned popularity correction will outperform a simple average of liked-item embeddings at small support sizes, but the ranking/coverage trade-off will vary with the popularity of a user's history.",
+      "why_masters": "The student trains a task-specific recommender backbone, adapts a small new-user model, and evaluates strict user/time separation, support-size effects and popularity bias. The contribution is a controlled CPU-feasible adaptation study, not a claim to invent cold-start recommendation.",
+      "data": {
+        "name": "MovieLens 1M; MovieLens 100K optional sensitivity set",
+        "sources": [
+          "S57",
+          "S58"
+        ],
+        "access": "Public official files with no login. The 1M ZIP is about 6 MB. No private customer histories or recruited users are needed.",
+        "size": "Verified 1,000,209 ratings from 6,040 users, and 3,883 complete movie metadata rows. Users were selected for at least 20 ratings, so the exercise simulates restricted visible history within an experienced-user dataset.",
+        "license": "Official GroupLens terms permit research with conditions, prohibit redistribution without separate permission and require separate permission for commercial use. These are not unrestricted open-data terms. Publish scripts and aggregate results, not raw rows; do not assume commercial reuse of this dataset or trained artifacts.",
+        "verified": "Fully decompressed and parsed the 171 KB movie member and 24.59 MB ratings member using 5.82 MB compressed transfer for the latter. Ratings were processed only for feasibility counts and were not saved. At the 70% first-user-time cutoff, 1,811 later users exist; 1,809 have at least five strictly later positive ratings in the earlier catalogue after five support ratings. No recommender was fitted.",
+        "remaining": "Finalize support-item eligibility, validation-user separation, positive-rating threshold, timestamp-tie handling and exact release attribution."
+      },
+      "model": {
+        "backbone": "Train 32-dimensional matrix-factorisation and a small LightGCN item representation using only warm-user training interactions before the cutoff.",
+        "adaptation": "Freeze item embeddings and learn a small history-to-user mapping/gate plus regularised popularity correction. Encode rating values and support count; compare a simple weighted mean and per-user ridge/gradient adaptation.",
+        "parameters": "Warm embeddings on the order of a few hundred thousand parameters; small new-user head below 50,000.",
+        "license": "Student implementation/trained model; research data restrictions remain explicit and commercial artefact reuse is not assumed."
+      },
+      "baselines": [
+        "Global popularity and genre-weighted popularity.",
+        "Matrix factorisation with a fitted new-user vector.",
+        "LightGCN item-embedding mean/ridge adaptation and a head without popularity correction."
+      ],
+      "design": "Use global timestamp cutoffs and wholly held-out new users; pretraining graph edges cannot include those users or later ratings. Restrict ranking to items known before the cutoff and exclude already rated items. Use earliest eligible support ratings and strictly later query ratings; randomise or aggregate timestamp ties and report sensitivity. The feasibility probe found 874 of 1,811 users had a timestamp tie at the five-rating boundary, so item-ID tie ordering cannot silently define ground truth. Rank the entire eligible catalogue rather than 100 easy sampled negatives.",
+      "ablations": [
+        "Support size 1/3/5 and history-selection/tie policy.",
+        "Learned head, regularisation and popularity correction separately.",
+        "Matrix factorisation versus LightGCN backbone; popular versus less-popular user histories."
+      ],
+      "measures": "Recall/NDCG@10/20, catalogue coverage, recommendation-popularity concentration, relevance by user-history popularity, and CPU training/query cost. Bootstrap users. An unobserved item is not a demonstrated dislike, and offline ranking does not establish engagement or causal satisfaction.",
+      "compute": "About one million sparse ratings and small embeddings fit a laptop. Start with matrix factorisation and sampled training batches, then a shallow LightGCN only if measured CPU time allows. Cap an initial fit at two hours and total planned runs at an explicit overnight-per-configuration budget.",
+      "fallback": "Use matrix-factorisation item embeddings and a linear/ridge adaptation head; preserve the strict cold-user/time/popularity evaluation. MovieLens 100K is a smaller auxiliary study, not an independent modern-market replication.",
+      "closest_work": "October DeepCommerceRec already combines graph/sequence/context information and evaluates cold-start/temporal settings. The October 29 IGDM source was abstract-only and is corroboration, not a fully inspected method. The proposed contribution is a narrower adaptation/coverage trade-off with transparent CPU cost and stronger timestamp-tie accounting; no novelty guarantee.",
+      "risks": "Historic film ratings do not establish present-day consumer behaviour. Users with at least 20 ratings are not actual zero-history users. Timestamp ties and exposure bias can affect apparent gains. Dataset terms constrain any venture experiment.",
+      "kill_test": "Reproduce the verified feasible cohort after support/catalogue filtering, audit time/user separation and run a small CPU fit. Require enough independent users per popularity stratum. Revise if gains disappear under tied-event handling or if catalogue coverage collapses; do not claim online benefit.",
+      "work_plan": [
+        "Weeks 1–3: cold-user/popularity literature and license/time audit.",
+        "Weeks 4–6: temporal cohorts and popularity/MF baselines.",
+        "Weeks 7–10: backbone and small adaptation head.",
+        "Weeks 11–15: support-size, popularity and tie-handling ablations.",
+        "Weeks 16–18: exposure limitations, uncertainty and CPU analysis.",
+        "Weeks 19–20: reproducible offline demonstrator and thesis."
+      ],
+      "deliverables": "Acquisition/evaluation scripts, compact item/adaptation models subject to data-term review, user/time split specification, ranking/coverage report and thesis.",
+      "venture": "Personalisation is a possible future application, not validated demand. Any commercial data/model experiment needs separately suitable rights; this research dataset cannot be presumed available for that purpose.",
+      "source_ids": [
+        "S57",
+        "S58",
+        "S59",
+        "S60",
+        "S61"
+      ],
+      "recency": "October 14 full-method paper and October 29 accepted abstract are current leads. MovieLens and LightGCN are explicitly older foundations.",
+      "performed": "Complete bounded data-member parsing and temporal feasibility counts; no model training, recommendation-quality result or user study.",
+      "batch_id": "20261102-thesis-solo",
+      "investigated_at": "2026-11-02",
+      "experiments_completed": 0,
+      "auto_eligible": false,
+      "qualification": "conditional_revision",
+      "substantiality_assessment": "Conditional/revise. Training matrix factorisation and LightGCN and comparing accuracy on a random MovieLens split would be coursework. A substantial version needs an independently designed small-history adapter, strict new-user/global-time separation, timestamp-tie sensitivity, all-catalogue ranking and the relevance/popularity/coverage trade-off at matched compute and label access. Data feasibility is demonstrated, but the model study and its scientific value are not. Historical selected users limit external validity. Commercial use and redistribution are not permitted by the inspected dataset terms without separate permission.",
+      "investigated_findings": [
+        "Fully decompressed and parsed the 171 KB movie member and 24.59 MB ratings member using 5.82 MB compressed transfer for the latter. Ratings were processed only for feasibility counts and were not saved. At the 70% first-user-time cutoff, 1,811 later users exist; 1,809 have at least five strictly later positive ratings in the earlier catalogue after five support ratings. No recommender was fitted.",
+        "October DeepCommerceRec already combines graph/sequence/context information and evaluates cold-start/temporal settings. The October 29 IGDM source was abstract-only and is corroboration, not a fully inspected method. The proposed contribution is a narrower adaptation/coverage trade-off with transparent CPU cost and stronger timestamp-tie accounting; no novelty guarantee.",
+        "Official GroupLens terms permit research with conditions, prohibit redistribution without separate permission and require separate permission for commercial use. These are not unrestricted open-data terms. Publish scripts and aggregate results, not raw rows; do not assume commercial reuse of this dataset or trained artifacts.",
+        "Model training and model-quality/runtime experiments completed: 0."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+ST10 — Give a new user useful film recommendations from a few ratings
+Investigated 2026-11-02 | REVISE | conditional_revision
+
+A new user has little history, so a recommender often falls back to the same popular films. A small adaptation model can test how much personalisation is possible after only a few ratings.
+Example: After rating three older comedies, a user should receive relevant candidates without the list being dominated entirely by the most rated blockbusters.
+
+What the study would try
+Adapt a compact recommender to a new user and study the trade-off between relevance, personalisation and catalogue coverage.
+Everyday question: How useful can recommendations become after one, three or five ratings?
+Expected research output: Conditional on a substantial study design, an adaptation model and a careful new-user/time/popularity evaluation.
+
+What was actually checked
+Complete bounded data-member parsing and temporal feasibility counts; no model training, recommendation-quality result or user study.
+Fully decompressed and parsed the 171 KB movie member and 24.59 MB ratings member using 5.82 MB compressed transfer for the latter. Ratings were processed only for feasibility counts and were not saved. At the 70% first-user-time cutoff, 1,811 later users exist; 1,809 have at least five strictly later positive ratings in the earlier catalogue after five support ratings. No recommender was fitted.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Conditional/revise. Training matrix factorisation and LightGCN and comparing accuracy on a random MovieLens split would be coursework. A substantial version needs an independently designed small-history adapter, strict new-user/global-time separation, timestamp-tie sensitivity, all-catalogue ranking and the relevance/popularity/coverage trade-off at matched compute and label access. Data feasibility is demonstrated, but the model study and its scientific value are not. Historical selected users limit external validity. Commercial use and redistribution are not permitted by the inspected dataset terms without separate permission.
+The student trains a task-specific recommender backbone, adapts a small new-user model, and evaluates strict user/time separation, support-size effects and popularity bias. The contribution is a controlled CPU-feasible adaptation study, not a claim to invent cold-start recommendation.
+
+Scientific question and hypothesis
+Under a CPU budget and 1/3/5 initial ratings, can a compact adaptation head over pretrained item embeddings improve new-user ranking without reducing catalogue coverage or over-amplifying popularity?
+A regularised history-to-user embedding head with a learned popularity correction will outperform a simple average of liked-item embeddings at small support sizes, but the ranking/coverage trade-off will vary with the popularity of a user's history.
+
+Data access and rights
+MovieLens 1M; MovieLens 100K optional sensitivity set
+Public official files with no login. The 1M ZIP is about 6 MB. No private customer histories or recruited users are needed.
+Verified 1,000,209 ratings from 6,040 users, and 3,883 complete movie metadata rows. Users were selected for at least 20 ratings, so the exercise simulates restricted visible history within an experienced-user dataset.
+Terms: Official GroupLens terms permit research with conditions, prohibit redistribution without separate permission and require separate permission for commercial use. These are not unrestricted open-data terms. Publish scripts and aggregate results, not raw rows; do not assume commercial reuse of this dataset or trained artifacts.
+Still to verify: Finalize support-item eligibility, validation-user separation, positive-rating threshold, timestamp-tie handling and exact release attribution.
+
+Model adaptation
+Train 32-dimensional matrix-factorisation and a small LightGCN item representation using only warm-user training interactions before the cutoff.
+Freeze item embeddings and learn a small history-to-user mapping/gate plus regularised popularity correction. Encode rating values and support count; compare a simple weighted mean and per-user ridge/gradient adaptation.
+Warm embeddings on the order of a few hundred thousand parameters; small new-user head below 50,000.
+Model terms: Student implementation/trained model; research data restrictions remain explicit and commercial artefact reuse is not assumed.
+
+Comparators
+- Global popularity and genre-weighted popularity.
+- Matrix factorisation with a fitted new-user vector.
+- LightGCN item-embedding mean/ridge adaptation and a head without popularity correction.
+
+Evaluation and leakage controls
+Use global timestamp cutoffs and wholly held-out new users; pretraining graph edges cannot include those users or later ratings. Restrict ranking to items known before the cutoff and exclude already rated items. Use earliest eligible support ratings and strictly later query ratings; randomise or aggregate timestamp ties and report sensitivity. The feasibility probe found 874 of 1,811 users had a timestamp tie at the five-rating boundary, so item-ID tie ordering cannot silently define ground truth. Rank the entire eligible catalogue rather than 100 easy sampled negatives.
+
+Ablations
+- Support size 1/3/5 and history-selection/tie policy.
+- Learned head, regularisation and popularity correction separately.
+- Matrix factorisation versus LightGCN backbone; popular versus less-popular user histories.
+
+Measurements
+Recall/NDCG@10/20, catalogue coverage, recommendation-popularity concentration, relevance by user-history popularity, and CPU training/query cost. Bootstrap users. An unobserved item is not a demonstrated dislike, and offline ranking does not establish engagement or causal satisfaction.
+
+CPU plan and cheaper fallback
+About one million sparse ratings and small embeddings fit a laptop. Start with matrix factorisation and sampled training batches, then a shallow LightGCN only if measured CPU time allows. Cap an initial fit at two hours and total planned runs at an explicit overnight-per-configuration budget.
+Use matrix-factorisation item embeddings and a linear/ridge adaptation head; preserve the strict cold-user/time/popularity evaluation. MovieLens 100K is a smaller auxiliary study, not an independent modern-market replication.
+
+Closest work and proposed contribution
+October DeepCommerceRec already combines graph/sequence/context information and evaluates cold-start/temporal settings. The October 29 IGDM source was abstract-only and is corroboration, not a fully inspected method. The proposed contribution is a narrower adaptation/coverage trade-off with transparent CPU cost and stronger timestamp-tie accounting; no novelty guarantee.
+
+Risks and kill test
+Historic film ratings do not establish present-day consumer behaviour. Users with at least 20 ratings are not actual zero-history users. Timestamp ties and exposure bias can affect apparent gains. Dataset terms constrain any venture experiment.
+Reproduce the verified feasible cohort after support/catalogue filtering, audit time/user separation and run a small CPU fit. Require enough independent users per popularity stratum. Revise if gains disappear under tied-event handling or if catalogue coverage collapses; do not claim online benefit.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: cold-user/popularity literature and license/time audit.
+- Weeks 4–6: temporal cohorts and popularity/MF baselines.
+- Weeks 7–10: backbone and small adaptation head.
+- Weeks 11–15: support-size, popularity and tie-handling ablations.
+- Weeks 16–18: exposure limitations, uncertainty and CPU analysis.
+- Weeks 19–20: reproducible offline demonstrator and thesis.
+
+Deliverables
+Acquisition/evaluation scripts, compact item/adaptation models subject to data-term review, user/time split specification, ranking/coverage report and thesis.
+
+Optional later venture hypothesis
+Personalisation is a possible future application, not validated demand. Any commercial data/model experiment needs separately suitable rights; this research dataset cannot be presumed available for that purpose.
+
+Recency and scope
+October 14 full-method paper and October 29 accepted abstract are current leads. MovieLens and LightGCN are explicitly older foundations.
+
+Reviewed sources
+[S57] MovieLens 100K terms — https://files.grouplens.org/datasets/movielens/ml-100k-README.txt
+Publication: None; verified: 2026-11-02. Complete primary README/license, schema and bounded rating-file sample
+[S58] MovieLens 1M terms — https://files.grouplens.org/datasets/movielens/ml-1m-README.txt
+Publication: None; verified: 2026-11-02. Complete primary README, complete ZIP README/movie member, and complete ratings member parsed in memory for data feasibility only.
+[S59] DeepCommerceRec — https://link.springer.com/article/10.1007/s10791-026-10672-2
+Publication: 2026-10-14; verified: 2026-11-02. Introduction, graph/sequence fusion, training/inference, evaluation setup, discussion/limitations and data availability
+[S60] Intent-guided diffusion recommendation — https://link.springer.com/article/10.1007/s11063-026-11894-7
+Publication: 2026-10-29; verified: 2026-11-02. Publisher accepted-article abstract, date and stated dataset list only
+[S61] LightGCN — https://arxiv.org/html/2002.02126v4
+Publication: 2020-02-06; verified: 2026-11-02. Method equations, training objective and ablation rationale; displayed version July 7 2020
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

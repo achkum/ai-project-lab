@@ -1,0 +1,97 @@
+ST7 — Keep useful predictions when a table model can see fewer examples
+Investigated 2026-11-02 | REVISE | conditional_revision
+
+A pretrained table model may predict well when it can compare a row with many labelled examples, yet lose rare classes when its memory is shortened to run on a laptop.
+Example: A small comparison set of bean measurements could accidentally contain too few examples of an uncommon bean type, producing confident but biased predictions.
+
+What the study would try
+Test context selection and a small learned correction against simple class balancing, calibration and strong ordinary models.
+Everyday question: Can a pretrained table model use fewer examples without losing the uncommon cases?
+Expected research output: Conditional on a viable CPU pilot, a controlled study explaining when context reduction and adaptation help or fail.
+
+What was actually checked
+Primary paper/model/data-license review and bounded CSV access; no TabICL runtime or model experiment.
+Bounded real CSV reads established column/row accessibility. The source describes shopper sessions as belonging to different users. No private sales/organisation data are needed.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Conditional/revise. Context stratification and generic calibration are established techniques and do not by themselves establish a master's contribution. The substantial version must isolate why a frozen tabular foundation model changes with context composition, compare learned correction against analytic prior correction and strong tree models under identical label/CPU budgets, and retain all preregistered conditions. Two datasets support a bounded mechanism study, not broad model superiority. CPU feasibility and whether a nontrivial adaptation question remains are still untested; withdraw if a routine prior correction answers the entire question.
+This is a constrained adaptation study of a pretrained tabular transformer. It separates data selection from learned correction, measures minority-class/calibration trade-offs, retains negative results, and compares against strong conventional models rather than only a deliberately weak baseline.
+
+Scientific question and hypothesis
+Under a fixed labelled-data and CPU budget, can class-aware context selection and a small learned output correction preserve minority-class accuracy when TabICL uses a much smaller context?
+Class-coverage-aware selection plus a regularised correction trained on out-of-fold predictions will improve minority recall and calibration over random context sampling, beyond what simple class-prior correction alone achieves.
+
+Data access and rights
+UCI Dry Bean and Online Shoppers Purchasing Intention
+Public UCI files, no login. Both CSV sample routes were actually downloaded and parsed; full data are small enough for laptop experiments.
+Dry Bean: 13,611 rows, 16 features, 7 classes. Shoppers: 12,330 sessions, 17 input variables and a heavily imbalanced binary target.
+Terms: Both primary UCI records explicitly declare CC-BY-4.0.
+Still to verify: Audit duplicates and feature types; exclude PageValues from any prospective purchasing prediction because it may encode post-outcome information. The month variable does not permit an exact chronological split.
+
+Model adaptation
+Released TabICL checkpoint with CPU support; use one estimator and small contexts initially.
+Cache out-of-fold class probabilities from class-aware/random/representative contexts, then fit a small regularised logit correction using class coverage/prior statistics. A parameter-free prior correction is a required comparator.
+The pretrained transformer remains frozen. Train only tens to hundreds of correction parameters, depending on class count; no full-backbone fine-tuning.
+Model terms: Current TabICL code and the verified jingang/TabICL weight card declare BSD-3-Clause. The separate forecasting subproject has different terms.
+
+Comparators
+- Logistic regression and a tuned HistGradientBoosting/XGBoost-style tree baseline using the same available labels.
+- Unadapted TabICL with random and class-stratified context.
+- Analytic class-prior correction and standard temperature calibration.
+
+Evaluation and leakage controls
+Use nested grouped-by-duplicate row splits; do not describe them as temporal deployment validation. Choose labelled pool sizes and contexts, such as pool 1,024 and context 32/128/512, on training/development data. Generate correction training examples out of fold so query labels never enter their contexts. Keep label availability, query batches, seeds and CPU budgets comparable. Report every preregistered dataset/condition, including cases where the pretrained model is worse.
+
+Ablations
+- Context selection alone versus learned correction alone versus their combination.
+- Class-prior correction versus extra learned parameters.
+- Context size, number of available labels and controlled class-imbalance sensitivity.
+
+Measurements
+Macro-F1/balanced accuracy, worst-class recall, log loss/calibration and minority precision-recall; CPU inference/training time and peak RAM. Report repeated-split intervals and both aggregate and class-specific results.
+
+CPU plan and cheaper fallback
+Start with context 32/128, one estimator and bounded query batches on CPU. Cap memory at 10–12 GB and an initial 256-query timing run at 30 minutes. Only expand to context 512 if measured scaling supports overnight completion. These are gates, not measured speeds.
+Reduce context, queries and model ensemble size while retaining frozen TabICL. If even the smallest setting fails memory/runtime gates, withdraw the foundation-model variant rather than relabel an ordinary tabular tutorial as equivalent.
+
+Closest work and proposed contribution
+October TabAlign already learns linear hidden-activation alignment from full to reduced contexts. This proposal tests a cheaper output-level correction and class-coverage selection, with strong prior-correction and tree baselines. It is an independently justified adaptation study, not a claim that context compression is new.
+
+Risks and kill test
+CPU inference may dominate despite tiny adaptation. Two datasets support a bounded study, not a universal tabular-model claim. Selection effects, duplicated records and outcome-derived features can create spurious improvements.
+Run the bounded CPU/memory preflight, verify context/query disjointness and quantify minority-class coverage. Withdraw if no feasible context configuration exists; revise if gains vanish against analytic prior correction or only appear with PageValues.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: context compression literature, feature/leakage audit and CPU gate.
+- Weeks 4–6: nested splits, tree and unadapted transformer baselines.
+- Weeks 7–10: context selection and correction adapter.
+- Weeks 11–15: label/context/imbalance ablations with fixed budgets.
+- Weeks 16–18: class-specific errors, calibration and resource analysis.
+- Weeks 19–20: reproducible benchmark and thesis.
+
+Deliverables
+Frozen-model adaptation module, feature/split manifests, budget-controlled comparison and a negative-result-capable thesis.
+
+Optional later venture hypothesis
+Hypothesis: local low-data analytics could benefit. Demand and cross-industry generalisation have not been established.
+
+Recency and scope
+TabAlign October 5 is the current lead. The datasets and pretrained-model release are background.
+NT6 studies explanation-mask leakage. ST7 studies predictive adaptation to reduced contexts and minority-class coverage, with a different hypothesis and outcome.
+
+Reviewed sources
+[S29] TabAlign — https://arxiv.org/html/2610.06679v1
+Publication: 2026-10-05; verified: 2026-11-02. Introduction, alignment method, experimental design, results, limitations and effective-sample appendix
+[S30] TabICL — https://github.com/soda-inria/tabicl/blob/main/README.md
+Publication: None; verified: 2026-11-02. README through fine-tuning and model version tables
+[S31] TabICL code license — https://github.com/soda-inria/tabicl/blob/main/LICENSE
+Publication: None; verified: 2026-11-02. entire BSD license section; forecast subdirectory separate Apache notice
+[S32] Dry Bean — https://archive.ics.uci.edu/dataset/602/dry+bean+dataset
+Publication: 2020-09-13; verified: 2026-11-02. full dataset page, license and first 12 KB CSV download
+[S33] Online Shoppers — https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset
+Publication: 2018-08-30; verified: 2026-11-02. full dataset page, license and first 12 KB CSV download
+[S53] TabICL weights — https://huggingface.co/jingang/TabICL/raw/main/README.md
+Publication: None; verified: 2026-11-02. Complete official weight card and no-login model API metadata
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

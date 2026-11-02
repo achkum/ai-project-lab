@@ -1,0 +1,92 @@
+ST8 — Learn which anomaly detector to trust after one confirmed event
+Investigated 2026-11-02 | KEEP | kept_as_investigated_possibility
+
+Different anomaly detectors notice different things: a sudden spike, a lasting level change or unusual timing. A small learned combiner could use experience from other signals and one confirmed event to decide which detectors are useful on a new signal.
+Example: After one unusual CPU-usage episode is confirmed, the model should improve later alarms without repeatedly flagging ordinary daily peaks.
+
+What the study would try
+Train a small combiner on separate public signals, then give it one confirmed event on a new signal.
+Everyday question: Can experience from other signals help it raise better later alarms after one confirmation?
+Expected research output: A trained detector combiner and a causal, source-separated alarm evaluation.
+
+What was actually checked
+Paper appendices and public-label/data/license investigation; no anomaly model trained.
+Parsed the complete window manifest and family counts and read actual timestamp/value rows. One complete AWS CSV was additionally fetched for parsing. The real/ artificial distinction is explicit in the source README. Complete AWS CSV parsing is documented in the compact access receipt.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.
+The student builds a task-specific model from detector outputs, studies transfer across series families, carefully accounts for training labels and time order, and evaluates alarm trade-offs. It does not require a company's incident log or a recruited operator.
+
+Scientific question and hypothesis
+Does a cross-series pretrained combiner provide better later-event recall at a fixed false-alarm rate than a fixed detector ensemble after one confirmation on a new series?
+A small gating model trained on separate signal families will transfer useful detector-selection behaviour, but gains will shrink for unseen anomaly types and must be evaluated against a globally trained logistic combiner and simple statistical monitoring.
+
+Data access and rights
+Numenta Anomaly Benchmark real-series subset
+Public repository CSVs and anomaly-window JSON. Use realAWSCloudwatch, realAdExchange, realKnownCause, realTraffic and realTweets; exclude artificial series from the main claim.
+47 real series; 35 have at least two labelled anomaly windows, supporting a first-confirmation/later-event protocol. Data are small individual CSVs.
+Terms: Current repository LICENSE.txt is MIT, with 2014–2024 copyright. This is the inspected current license, not an assumed historic AGPL license or an invented CC dataset license.
+Still to verify: Audit missingness, sampling frequency, near-duplicates and event-window definitions; freeze the exact repository revision before experiments.
+
+Model adaptation
+A fixed pool of approximately six low-cost detectors: rolling median/MAD, EWMA/CUSUM, autoregressive residuals, isolation forest and window-feature nearest neighbours.
+Pretrain a small logistic/MLP gating model across training-series episodes; condition it on causally normalised detector scores and the confirmed-event score profile. At deployment, update only a few gate/calibration parameters from one confirmation.
+Approximately 1,000–20,000 parameters; no large time-series transformer is required.
+Model terms: Newly written combiner; choose permissively licensed detector implementations and pin their versions.
+
+Comparators
+- Rolling MAD/EWMA/CUSUM statistical process control.
+- Best development-selected single detector, mean/max ensemble and the OneShot-style fixed-pool weighting rule.
+- A globally trained logistic combiner with exactly the same training-label access as the proposed gating model.
+
+Evaluation and leakage controls
+Hold out complete series and preferably whole source families, with a separate development family/series set. All normalisation and detector fitting on a test series use only its available past. Simulate one confirmation at a predefined point in the first labelled window; score only later windows after confirmation. Count all cross-series pretraining labels. OneShot does not consume the same pretraining supervision, so report that difference rather than presenting it as an equal-supervision comparison.
+
+Ablations
+- No cross-series pretraining, no confirmation conditioning and logistic versus nonlinear gate.
+- Detector diversity and score-normalisation choice.
+- In-family versus held-out-family transfer; same-type versus different-type later events where labels permit.
+
+Measurements
+Event recall at fixed false alarms per unit time, precision-recall, NAB score as secondary, delay from benchmark-window start and CPU cost. Benchmark windows do not reveal a precise real-world incident onset; report that limit. Bootstrap series/families rather than time points.
+
+CPU plan and cheaper fallback
+Small CSVs and cached detector scores should fit well below 4 GB. Train only the small combiner, with bounded rolling windows. Target minutes per detector/series and hours for the complete preregistered study, verified in a pilot.
+Use a regularised logistic gate and fewer inexpensive detectors. If family transfer is unstable, retain a clearly labelled within-family study and negative-transfer result; do not claim universal monitoring readiness.
+
+Closest work and proposed contribution
+The October OneShot paper ALREADY investigates corrupted confirmations, temporal order and normal-set contamination. Those proposed gaps were withdrawn after reading its appendices. Its fixed-pool, no-trained-combiner setting motivates the distinct cross-series learned-combiner question here.
+
+Risks and kill test
+NAB windows are coarse and several signals are easy for simple methods. The public benchmark does not establish operational incident relevance or user tolerance. Transfer can merely recognise source-family characteristics. Only five source families and few independent labelled events are available; use regularisation and report broad uncertainty rather than treating windows as independent evidence.
+Verify enough independent series remain for development and held-out-family evaluation after duplicate/label checks. If one simple statistical method dominates across budgets, report it and reassess the adapter. Reject any pipeline that uses future statistics or treats every point in an event window as an independently correct alarm.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: OneShot/SPC literature and benchmark audit.
+- Weeks 4–6: causal detectors and first-confirmation protocol.
+- Weeks 7–10: cross-series combiner and equal-label trained baseline.
+- Weeks 11–15: held-out families, ablations and false-alarm curves.
+- Weeks 16–18: coarse-label sensitivity and CPU/error analysis.
+- Weeks 19–20: reproducible alarm simulator and thesis.
+
+Deliverables
+Causal detector/adapter pipeline, family-aware evaluation manifest, pretraining-label accounting and alarm-quality report.
+
+Optional later venture hypothesis
+A local monitoring assistant is a hypothesis. Benchmark gains do not establish demand or production incident detection.
+
+Recency and scope
+OneShot October 12 is current. The public forum's exact original date could not be verified and is contextual evidence only; its SPC criticism is addressed with a baseline.
+
+Reviewed sources
+[S34] OneShot — https://arxiv.org/html/2610.16219v1
+Publication: 2026-10-12; verified: 2026-11-02. Method, temporal/scoring-set appendices, corruption evidence and Appendix O scope table
+[S35] NAB data documentation — https://github.com/numenta/NAB/blob/master/data/README.md
+Publication: None; verified: 2026-11-02. Complete data README, one CSV prefix and complete label-window JSON
+[S36] NAB project and current license — https://github.com/numenta/NAB/blob/master/LICENSE.txt
+Publication: None; verified: 2026-11-02. complete current MIT license plus project README
+[S37] TSAD benchmark criticism discussion — https://www.reddit.com/r/MachineLearning/comments/1w1wt1s/you_can_beat_sota_time_series_anomaly_detection/
+Publication: None; verified: 2026-11-02. original post and all expanded visible discussion through end of thread; collapsed replies not fetched
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

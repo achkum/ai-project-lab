@@ -123,12 +123,30 @@
   "thesis_research": {
     "id": "20261102-thesis-solo",
     "date": "2026-11-02",
-    "state": "investigating",
+    "state": "possibilities_ready",
     "registered_at": "2026-11-02T10:52:57.963769+00:00",
-    "last_completed_at": null,
+    "last_completed_at": "2026-11-02T13:01:47.258287+00:00",
     "target_topics": 10,
-    "investigated_topics": 0,
+    "investigated_topics": 10,
     "selection_required": false,
-    "note": "Today’s thesis investigation is running. Target: 10 substantial Applied AI studies using data a solo student can access. Company partnerships and private organisational data are excluded. Existing ideas are being reassessed; source collection alone is not completed research."
+    "note": "Ten initial investigations completed on 2 November. Seven possibilities are worth considering; three need a stronger study plan. Source dates, current alternatives and solo data access were checked. Model experiments have not been run. Older ideas are below.",
+    "published_at": "2026-11-02T13:01:47.258287+00:00",
+    "kept": 7,
+    "conditional_revision": 3,
+    "experiments_completed": 0,
+    "source_pages_reviewed": 69,
+    "topic_ids": [
+      "ST1",
+      "ST2",
+      "ST3",
+      "ST4",
+      "ST5",
+      "ST6",
+      "ST7",
+      "ST8",
+      "ST9",
+      "ST10"
+    ],
+    "summary_url": "https://achkum.github.io/ai-project-lab/research/2026-11-02-thesis-solo/research-summary.txt"
   }
 }

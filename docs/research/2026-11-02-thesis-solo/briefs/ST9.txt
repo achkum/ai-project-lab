@@ -1,0 +1,100 @@
+ST9 — Make a compact code-search model depend less on names
+Investigated 2026-11-02 | KEEP | kept_as_investigated_possibility
+
+Code search can succeed by matching a function name or copied documentation while missing the behaviour described in a query. A small model that relies less on those shortcuts could be useful in unfamiliar code.
+Example: A query such as 'raise an error when a response was unsuccessful' should retrieve the relevant function even if a project uses an unexpected identifier.
+
+What the study would try
+Adapt a compact code-search model with controlled naming changes and compare it with plain keyword and unchanged neural search.
+Everyday question: Can a small code-search update make retrieval less dependent on familiar names?
+Expected research output: A compact search adapter, a licensed corpus-building pipeline and a study of retrieval shortcuts and CPU cost.
+
+What was actually checked
+Actual code/license/AST and model-card inspection; no embedding model downloaded or trained.
+Read official license files and complete Requests models.py and scikit-learn base.py contents; parsed real functions/docstrings. pandas frame.py was read only in a selected range, not claimed as a full corpus inspection.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.
+The study adapts a pretrained task-specific retrieval model, builds an auditable licensed corpus, evaluates repository-held-out retrieval and shortcut stress separately, and measures realistic CPU/memory costs. It is not a generic code-chat interface or a claim that code retrieval is new.
+
+Scientific question and hypothesis
+Can a small contrastive adapter on a compact code-retrieval model improve robustness to identifier/documentation shortcuts while preserving retrieval quality and CPU efficiency?
+An adapter trained with identifier-masked retrieval text and hard negatives will reduce the performance drop under controlled naming changes, with a measurable trade-off on ordinary unmodified code.
+
+Data access and rights
+Direct source snapshots from Requests, scikit-learn and pandas
+Public GitHub files under inspected project licenses. Select non-vendored Python functions with useful docstrings and parse them locally; pin snapshots and preserve source/license attribution.
+Two fully read sample files already yield 94 function definitions, 57 with docstrings. The intended corpus is a measured 2,000–5,000 usable functions across the three projects, subject to an AST/count/duplication audit, not an already verified corpus total.
+Terms: Requests Apache-2.0; scikit-learn BSD-3-Clause; pandas BSD-3-Clause. Check per-file headers and exclude bundled/generated/third-party exceptions. CodeSearchNet's MIT code license does not establish a single MIT license for its entire corpus.
+Still to verify: Enumerate and pin the complete selected corpus, count eligible queries, detect duplicated/inherited docstrings, review file-level license exceptions and manually judge a bounded set of ambiguous retrieval results.
+
+Model adaptation
+LateOn-Code-edge, a 17M-parameter late-interaction retriever with 48-dimensional token vectors.
+Freeze the encoder and cache token embeddings; learn a small residual low-rank projection with contrastive/hard-negative and naming-consistency objectives. Compare against the unchanged released projection.
+For a rank-8 residual adapter over 48-dimensional vectors, about 768 projection weights plus any biases. Fix query/document token budgets across comparisons.
+Model terms: Official weight card declares Apache-2.0.
+
+Comparators
+- BM25 and identifier/token search.
+- Unmodified LateOn-Code-edge, and a simple BM25/neural hybrid.
+- An ordinary contrastive projection without identifier stress, and optionally a small general sentence encoder with its pretraining overlap disclosed.
+
+Evaluation and leakage controls
+Use leave-one-repository-out rotations with development modules separated from training. Strip docstrings from retrieved code when they form queries. Group all functions' transformed versions and exact/near duplicates; split modules/classes together. Identifier masking changes retrieval text only and is not claimed to be a semantics-preserving executable program transformation. Manually review a fixed random sample of retrieved alternatives to address multiple relevant functions.
+
+Ablations
+- Hard negatives, naming-consistency objective and residual adapter.
+- Unmodified versus identifier-masked code; docstring/query lexical overlap strata.
+- Fixed token truncation budgets and compact vector precision.
+
+Measurements
+MRR/Recall@k and nDCG where multiple relevant results are judged; absolute clean/stress performance and performance drop; index size, build time, query latency and RAM. Bootstrap queries grouped by repository/module and disclose that only three repositories support limited transfer claims.
+
+CPU plan and cheaper fallback
+Use 256–512 document tokens initially, cache float16 token vectors and cap the corpus at a few thousand functions. Expect hundreds of MB of embeddings, but measure extraction time and RAM before expanding. Train the tiny projection on CPU; no agent-RL or paid LLM teacher.
+Use pooled embeddings and a small metric projection if late-interaction scoring is too slow; report the changed retrieval architecture explicitly. A frozen BM25/neural hybrid remains the lower-cost comparator.
+
+Closest work and proposed contribution
+The October Small Agents Can Search work already uses local semantic retrieval with this compact retriever. LateOn's own training includes CodeSearchNet/CoIR, so repository-held-out evaluation does not prove the encoder never saw related code during pretraining. The contribution is controlled shortcut robustness and small-adapter efficiency, not uncontaminated benchmark superiority.
+
+Risks and kill test
+Docstring-generated queries are proxies for real developer searches, not evidence of bug-fixing effectiveness. Pretraining exposure is incompletely known. Different functions may be equally relevant and automatic single-answer labels can understate that.
+Verify at least 1,000 usable deduplicated functions and 200 held-out queries after grouping, plus adequate source/license coverage. Benchmark 100-function embedding extraction. Revise if gains only reflect truncation, name leakage or copied docstrings; withdraw any claim of unseen-pretraining generalisation.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: retrieval/adaptation literature and corpus/license audit.
+- Weeks 4–6: AST extraction, grouped splits and frozen/BM25 baselines.
+- Weeks 7–10: cached embeddings and projection training.
+- Weeks 11–15: repository rotations, shortcut/negative-sampling ablations.
+- Weeks 16–18: bounded relevance audit and CPU/index analysis.
+- Weeks 19–20: reproducible local search prototype and thesis.
+
+Deliverables
+License-aware acquisition/split scripts, compact learned adapter, shortcut-robustness benchmark, small relevance-audit set and report.
+
+Optional later venture hypothesis
+A local IDE/search component is a hypothesis. No developer demand, agent improvement or commercial efficacy is established.
+
+Recency and scope
+October 4 Small Agents Can Search is current; model and source-code foundations are independently checked background.
+
+Reviewed sources
+[S38] Small Agents with Semantic Search — https://arxiv.org/html/2610.05099v1
+Publication: 2026-10-04; verified: 2026-11-02. Introduction, retrieval interface, training data/decontamination, experiments and limitations
+[S39] CodeSearchNet documentation — https://github.com/github/CodeSearchNet/blob/master/README.md
+Publication: None; verified: 2026-11-02. complete README, resources inventory and license statement
+[S40] CodeBERT weight card — https://huggingface.co/microsoft/codebert-base/raw/main/README.md
+Publication: None; verified: 2026-11-02. entire card
+[S41] MiniLM sentence encoder — https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/raw/main/README.md
+Publication: None; verified: 2026-11-02. model card, license metadata, truncation and training-data table
+[S52] LateOn-Code-edge model card — https://huggingface.co/lightonai/LateOn-Code-edge/raw/main/README.md
+Publication: None; verified: 2026-11-02. License, architecture, training-corpus list and retrieval/reranking usage; numerical benchmark table not independently reproduced
+[S54] Requests source/license — https://github.com/psf/requests/blob/main/LICENSE
+Publication: None; verified: 2026-11-02. Entire Apache-2.0 license; models.py sample parsed without execution
+[S55] scikit-learn source/license — https://github.com/scikit-learn/scikit-learn/blob/main/COPYING
+Publication: None; verified: 2026-11-02. Entire BSD-3-Clause license; base.py sample parsed without execution
+[S56] pandas source/license — https://github.com/pandas-dev/pandas/blob/main/LICENSE
+Publication: None; verified: 2026-11-02. Entire BSD-3-Clause license and source/docstring section in core/frame.py
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

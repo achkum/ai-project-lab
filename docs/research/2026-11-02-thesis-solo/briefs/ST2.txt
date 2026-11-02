@@ -1,0 +1,96 @@
+ST2 — Make guitar practice feedback less likely to jump to the wrong octave
+Investigated 2026-11-02 | KEEP | kept_as_investigated_possibility
+
+A practice tool can tell a guitarist that a correct note is an octave too high when the microphone or pickup emphasises harmonics. A compact adapted model could make this feedback more dependable.
+Example: The same single-note phrase is recorded through a pickup and a room microphone. The displayed notes should remain consistent across both recordings.
+
+What the study would try
+Adapt a small pitch model using paired microphone and pickup recordings, and compare it with established pitch trackers and smoothing.
+Everyday question: Can the same guitar phrase produce more consistent notes across recording channels?
+Expected research output: A small pitch-correction model, an audited evaluation set and a report on accuracy and feedback delay.
+
+What was actually checked
+Read primary methods, licenses and errata; bounded annotation/audio access checks only.
+Read a WAV prefix and a complete 34.90-second solo JAMS: 78 notes, six pitch-contour/note tracks, and 24.26 seconds with exactly one active annotated note.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.
+The project adapts a pretrained acoustic model, audits real timing annotations, uses a performer-held-out design, compares neural adaptation with a strong classical pitch tracker and structured smoothing, and analyses accuracy versus latency. It is not a full music-transcription app.
+
+Scientific question and hypothesis
+Can a small temporal correction model trained on frozen pitch-network activations improve monophonic guitar pitch and octave consistency across performers and recording channels?
+A learned temporal correction head will reduce octave errors under channel changes beyond frame smoothing alone, without hiding genuine pitch changes or increasing voiced/unvoiced mistakes.
+
+Data access and rights
+GuitarSet v1.1.0
+Public Zenodo ZIPs support selective range reads. Select solo tracks and annotated intervals with exactly one active note; do not assume all guitar audio is monophonic.
+360 paired recording/annotation entries. Annotation ZIP 39.1 MB; mono microphone 656.9 MB; pickup mix 683.1 MB. Start with at most 20–30 minutes of eligible monophonic material across six performer IDs.
+Terms: CC-BY-4.0 dataset. Preserve citation/attribution and an explicit annotation-correction/exclusion manifest.
+Still to verify: Count usable time per performer/channel, ensure paired alignment, audit rests and note overlap. Known comp-track offset and duplicate-note issues are documented; solos-only scope excludes those named tracks but is not a blanket label-quality guarantee.
+
+Model adaptation
+CREPE tiny pretrained pitch network; freeze it and cache its activation vectors.
+Train a small temporal convolution or linear temporal correction head over short activation sequences, with an explicit voiced/unvoiced output. Compare a learned transition prior with fixed Viterbi/HMM smoothing.
+Keep the added head below 100,000 parameters and the temporal window short enough to report causal and delayed variants.
+Model terms: CREPE project MIT. Pin the official tiny-weight release and its integrity/terms before any future weight download.
+
+Comparators
+- YIN or pYIN, with their normal voicing/temporal settings.
+- Unmodified CREPE tiny and its existing Viterbi smoothing.
+- A simple median filter and a calibration-only head on identical activations.
+
+Evaluation and leakage controls
+Leave one performer out; put all channels, derived windows and altered versions of a recording in the same fold. Use separate development performers for settings. Evaluate microphone-to-pickup and pickup-to-microphone transfer. Synthetic noise/equalisation are optional labelled stress conditions, never the only test.
+
+Ablations
+- Temporal correction versus per-frame calibration.
+- Channel augmentation versus real paired-channel training.
+- Voicing loss and transition smoothing; causal versus look-ahead context.
+
+Measurements
+Raw pitch accuracy within a specified cents tolerance, raw chroma accuracy, octave-error rate, voicing precision/recall, note-onset F1 where labels support it, processing time and algorithmic delay. Show every held-out performer; uncertainty with only six performers will be wide.
+
+CPU plan and cheaper fallback
+Cache at most a few hundred thousand 360-bin activation vectors (hundreds of MB). Tiny-network extraction is the main CPU cost; set a pilot-based cap of one overnight extraction and at most two hours per head experiment. Peak target 4 GB; no large music model training.
+Learn a small classifier choosing between CREPE and pYIN proposals using their confidence and local signal features. Preserve the same held-out protocol.
+
+Closest work and proposed contribution
+CREPE already supports temporal smoothing, and October SheetSage2 uses structured decoding for coherent transcription. This study isolates a much narrower paired-channel guitar adaptation problem; it does not claim invention of temporal consistency or reproduce the larger transcription system.
+
+Risks and kill test
+A strong pYIN baseline may already solve clean single-note portions. Annotation errors can masquerade as model errors. Selecting only easy monophonic fragments may reduce practical coverage, which must be reported. A performer holdout does not by itself establish generalisation to unseen musical compositions.
+Verify at least several independent solo recordings and usable single-note time for every performer. Check 20 hand-inspected intervals against labels and paired waveforms. Withdraw the octave-specific claim if errors are overwhelmingly annotation offsets or if the strong baseline leaves no measurable headroom.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: music/pitch literature and label audit.
+- Weeks 4–6: paired-channel corpus and classical/neural baselines.
+- Weeks 7–11: temporal-head training and calibration.
+- Weeks 12–15: performer/channel transfer and delay ablations.
+- Weeks 16–18: failure taxonomy and compute assessment.
+- Weeks 19–20: report and local practice-feedback demonstration.
+
+Deliverables
+Audited interval manifest, compact correction model, pitch-evaluation pipeline, performer/channel error analysis and report.
+
+Optional later venture hypothesis
+Hypothesis: practice or recording tools could use more stable feedback. No musician recruitment or commercial validation is required for this offline study.
+
+Recency and scope
+SheetSage2 October 4 is a method/alternative lead. GuitarSet and its errata are older background, not fresh issues.
+
+Reviewed sources
+[S06] SheetSage2 — https://arxiv.org/html/2610.05336v1
+Publication: 2026-10-04; verified: 2026-11-02. Introduction, architecture/structured-decoding sections, related work, limitations and impact statement
+[S07] GuitarSet release — https://zenodo.org/records/3371780
+Publication: 2019-08-20; verified: 2026-11-02. Record JSON, archive directories, microphone WAV prefix and one complete solo JAMS
+[S08] GuitarSet annotation offset issue — https://github.com/marl/GuitarSet/issues/5
+Publication: 2023-09-14; verified: 2026-11-02. entire issue and one visible comment; latest update 2024-10-23
+[S09] CREPE model documentation — https://github.com/marl/crepe/blob/master/README.md
+Publication: None; verified: 2026-11-02. complete README and model sizes/training-data limitations
+[S10] CREPE license — https://github.com/marl/crepe/blob/master/LICENSE
+Publication: None; verified: 2026-11-02. entire license
+[S64] GuitarSet duplicated-note erratum — https://github.com/marl/GuitarSet/issues/4
+Publication: 2020-05-15; verified: 2026-11-02. Complete issue and visible author reply; updated October 10 2023
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

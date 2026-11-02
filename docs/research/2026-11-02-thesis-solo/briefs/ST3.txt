@@ -1,0 +1,94 @@
+ST3 — Keep activity recognition working when a phone moves from hand to pocket
+Investigated 2026-11-02 | KEEP | kept_as_investigated_possibility
+
+A movement model can confuse sitting, standing and walking when a phone is carried differently. The study would adapt a pretrained motion model using public recordings, without collecting anyone's activity data.
+Example: A model trained on a phone held in the hand is tested on a different person's phone in a pocket.
+
+What the study would try
+Adapt a pretrained movement model using public recordings from different people and body positions.
+Everyday question: Can activity recognition stay useful when a phone moves from a hand to a pocket?
+Expected research output: An adapted movement model and a study of which people, devices and positions it transfers to.
+
+What was actually checked
+Dataset license, metadata and real sensor sample verified; no model experiments.
+Decoded real accelerometer rows; full README states m/s² and nanosecond timestamps. All 5,231 metadata rows read; body/activity participant support counted. A complete 473,670-byte accelerometer member passed ZIP CRC and parsed 10,996 numeric rows with increasing timestamps, spanning 110.15 seconds at about 99.82 Hz.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.
+This is a transfer-learning study with a real device/position hierarchy, competing signal-processing and pretrained-model baselines, labelled/unlabelled adaptation-budget controls and subject-level uncertainty. It examines where pretrained wearable representations transfer and where they fail.
+
+Scientific question and hypothesis
+How much does a small adaptation of a frozen wearable encoder improve activity recognition under simultaneous participant and body-position shift?
+Unit-consistent preprocessing, rotation augmentation and a small learned feature adapter will improve worst-position macro-F1 over a plain frozen-encoder head. Any target-position adaptation data must come from separate development participants.
+
+Data access and rights
+AICOS-HAR; PAMAP2 as optional external check
+AICOS-HAR public ZIP supports selected-member range reads. Its metadata names participant, activity/trial, device, position and fold. No private UK Biobank raw data are needed.
+AICOS-HAR: 5,231 acquisitions, 106 participant IDs, 101.4 hours; 2.54 GB total. Archive metadata verified Hand/Leg/Hip coverage of 88/55/27 participants. For walking/sitting/standing, the least-covered selected position/activity has 11 participants. Plan a selected 5–15-hour accelerometer subset, not all sensors.
+Terms: AICOS-HAR CC-BY-4.0 confirmed in primary Zenodo metadata. PAMAP2 also CC-BY-4.0, but its legacy server ignored range requests; full fallback acquisition is not yet tested.
+Still to verify: Audit device-position confounding, original folds versus person IDs, sampling irregularity and target-unit contract. Define a three-activity pilot before expanding.
+
+Model adaptation
+HARNET five-second frozen encoder, pretrained on wearable movement; input contract is 3 axes by 150 samples at 30 Hz.
+Train a linear/MLP classifier plus a low-rank feature adapter. Compare source-only rotation augmentation with covariance alignment using a strictly separate unlabelled target-position development pool.
+Train small heads/adapters; keep the backbone frozen. Exact feature width and checkpoint footprint must be measured in the pilot.
+Model terms: HARNET academic/noncommercial license permits a research-scoped study but does not support a commercial-rights claim.
+
+Comparators
+- Time/frequency summary features with logistic regression or random forest.
+- Small CNN trained from scratch on the same labelled training windows.
+- Frozen HARNET plus linear head; rotation augmentation without a learned adapter.
+
+Evaluation and leakage controls
+Split participants before windowing; hold entire trials together. Create held-out position and held-out device-family tests, reporting confounding if they cannot be separated. Distinguish zero-target-data adaptation from a fixed budget of unlabelled target-position data supplied by development participants. No test-person windows may set normalization, alignment or thresholds.
+
+Ablations
+- Resampling/unit/gravity treatment.
+- Rotation augmentation versus learned adapter.
+- Source-only versus permitted unlabelled target data; axis magnitude alone versus full axes.
+
+Measurements
+Macro-F1, balanced accuracy, worst-position and per-activity recall, calibration and coverage, CPU throughput and RAM. Bootstrap people, not overlapping windows. Report the smallest subgroup rather than hiding it in an overall average.
+
+CPU plan and cheaper fallback
+Start with at most 10,000 nonoverlapping five-second windows. Raw 3x150 float32 arrays are about 18 MB; cached embeddings add modest storage. Target at most 6 GB RAM, one overnight encoder pass and small-head fitting on CPU. Runtime is not measured yet.
+A compact one-dimensional CNN with the same augmentation/alignment protocol, or frozen-feature normalization only. This remains an Applied AI study even if HARNET transfer fails.
+
+Closest work and proposed contribution
+The October AICOS-HAR paper specifically concerns diverse devices and body positions, so position-invariant HAR is not claimed new. The contribution is a controlled, limited-compute adaptation study with combined shifts, explicit data budgets and a strong hand-engineered baseline.
+
+Risks and kill test
+Position and device may be confounded; healthy controlled activities do not establish performance for falls, illness or everyday unrestricted use. HARNET's source-body location and unit expectations can dominate transfer.
+Build subject-disjoint walking/sitting/standing splits with at least ten target participants in each selected position; inspect resampling and units on several acquisitions. Revise to fewer positions if support is insufficient. Stop the pretrained branch if the checkpoint cannot fit or a small embedding run exceeds the CPU budget.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: HAR transfer literature and metadata/confounding audit.
+- Weeks 4–6: windowing, units and reproducible subject splits.
+- Weeks 7–10: train classical, CNN and frozen-encoder baselines.
+- Weeks 11–14: adapter and target-data-budget study.
+- Weeks 15–18: device/position ablations and grouped uncertainty.
+- Weeks 19–20: report, model card and replay demo.
+
+Deliverables
+Selective downloader, sensor preprocessing/split manifests, trained adapter, subgroup/compute evaluation and thesis.
+
+Optional later venture hypothesis
+A later fitness or device-software component is a hypothesis. The current pretrained model has noncommercial restrictions; no medical or deployment benefit is established.
+
+Recency and scope
+Publisher article October 10; dataset itself was published April 7 and is not represented as an October data release.
+
+Reviewed sources
+[S11] AICOS-HAR paper — https://www.nature.com/articles/s41597-026-08470-y
+Publication: 2026-10-10; verified: 2026-11-02. publisher early-access page and abstract; methods unavailable in visible page
+[S12] AICOS-HAR dataset — https://zenodo.org/records/19452049
+Publication: 2026-04-07; verified: 2026-11-02. Official metadata plus archive README, all 5,231 metadata rows and bounded accelerometer sample
+[S13] PAMAP2 — https://archive.ics.uci.edu/dataset/231/pamap2+physical+activity+monitoring
+Publication: 2012-08-05; verified: 2026-11-02. full primary dataset description, variable table and license
+[S14] HARNET documentation — https://github.com/OxWearables/ssl-wearables/blob/main/README.md
+Publication: None; verified: 2026-11-02. complete README
+[S15] HARNET license — https://github.com/OxWearables/ssl-wearables/blob/main/LICENSE.md
+Publication: None; verified: 2026-11-02. entire license
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

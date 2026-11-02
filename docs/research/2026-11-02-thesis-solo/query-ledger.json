@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-02",
+  "batch_id": "20261102-thesis-solo",
+  "audit_limit": "The early broad-discovery phase did not persist every exact query string. The source ledger preserves the reviewed URLs, original-date evidence, scope and decisions. The exact queries below are retained from later investigation; this is not presented as an exhaustive query transcript.",
+  "selection_policy": "Recent primary leads were prioritised within 30 days (from October 3), with 90-day corroboration and explicitly older data/method background. No current-trend or demand claim is inferred from a single source.",
+  "queries": [
+    {
+      "id": "Q01",
+      "queried_at": "2026-11-02",
+      "query": "\"forecasting\" \"October 2026\" \"Chronos\"",
+      "purpose": "Forecast model releases and alternatives",
+      "associated_reviewed_sources": [
+        "S42",
+        "S43",
+        "S44"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q02",
+      "queried_at": "2026-11-02",
+      "query": "\"forecasting\" \"Oct 2026\" \"calibration\"",
+      "purpose": "Forecast uncertainty and covariates",
+      "associated_reviewed_sources": [
+        "S42",
+        "S43"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q03",
+      "queried_at": "2026-11-02",
+      "query": "\"HASY\" \"Open Database License\"",
+      "purpose": "Verify handwriting data terms",
+      "associated_reviewed_sources": [
+        "S20",
+        "S21"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q04",
+      "queried_at": "2026-11-02",
+      "query": "\"AICOS-HAR\" \"dataset\" license",
+      "purpose": "Separate article terms from dataset terms",
+      "associated_reviewed_sources": [
+        "S11",
+        "S12"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q05",
+      "queried_at": "2026-11-02",
+      "query": "site.datalab.to \"Omni Parse\" \"October\"",
+      "purpose": "Resolve announcement date",
+      "associated_reviewed_sources": [
+        "S51"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q06",
+      "queried_at": "2026-11-02",
+      "query": "site.huggingface.co \"TabICL\" \"license\"",
+      "purpose": "Find official model card",
+      "associated_reviewed_sources": [
+        "S53"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q07",
+      "queried_at": "2026-11-02",
+      "query": "site.github.com \"LateOn-Code-edge\"",
+      "purpose": "Compact task-specific code model",
+      "associated_reviewed_sources": [
+        "S52"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q08",
+      "queried_at": "2026-11-02",
+      "query": "site.linkedin.com/posts \"DCASE2026\" \"Oct\"",
+      "purpose": "Mandatory public LinkedIn channel",
+      "associated_reviewed_sources": [
+        "S49"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q09",
+      "queried_at": "2026-11-02",
+      "query": "\"recommendation\" \"cold-start\" \"October 2026\" arxiv",
+      "purpose": "New-user recommendation research",
+      "associated_reviewed_sources": [
+        "S59",
+        "S60"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q10",
+      "queried_at": "2026-11-02",
+      "query": "\"recommender\" \"Oct 2026\" \"few-shot\"",
+      "purpose": "Adaptation alternatives",
+      "associated_reviewed_sources": [
+        "S59",
+        "S60"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q11",
+      "queried_at": "2026-11-02",
+      "query": "\"MovieLens\" \"October\" \"2026\" \"adaptation\"",
+      "purpose": "Recent work using accessible data",
+      "associated_reviewed_sources": [
+        "S59",
+        "S60"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q12",
+      "queried_at": "2026-11-02",
+      "query": "site.grouplens.org \"MovieLens 100K\" license",
+      "purpose": "Primary research-use terms",
+      "associated_reviewed_sources": [
+        "S57",
+        "S58"
+      ],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q13",
+      "queried_at": "2026-11-02",
+      "query": "\"handwritten\" \"incremental\" \"October 2026\"",
+      "purpose": "Test ST5 direct recency/closest-work strength",
+      "associated_reviewed_sources": [],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    },
+    {
+      "id": "Q14",
+      "queried_at": "2026-11-02",
+      "query": "\"symbol\" \"few-shot\" \"Oct 2026\" recognition",
+      "purpose": "Test ST5 direct recency/closest-work strength",
+      "associated_reviewed_sources": [],
+      "association_note": "Associated final evidence after follow-up, not an asserted one-to-one search-result transcript."
+    }
+  ],
+  "channels": [
+    {
+      "channel": "Primary research",
+      "scope": "DCASE full task report, arXiv methods/appendices, publisher papers and release notes",
+      "result": "Current method comparisons and several counterexamples changed the proposals. AICOS-HAR and IGDM were only partially/abstract visible and are marked accordingly.",
+      "sources": [
+        "S03",
+        "S06",
+        "S11",
+        "S16",
+        "S22",
+        "S29",
+        "S34",
+        "S38",
+        "S43",
+        "S59",
+        "S60",
+        "S68"
+      ]
+    },
+    {
+      "channel": "GitHub daily Trending",
+      "url": "https://github.com/trending",
+      "observed_at": "2026-11-02",
+      "result": "Public page contents reviewed. Displayed growth is a snapshot, not proof of demand or an independently measured long-term trend.",
+      "observations": [
+        {
+          "repository": "thedotmack/claude-mem",
+          "stars_today": 1526
+        },
+        {
+          "repository": "lightpanda-io/browser",
+          "stars_today": 825
+        },
+        {
+          "repository": "shiyu-coder/Kronos",
+          "stars_today": 630
+        },
+        {
+          "repository": "cjpais/Handy",
+          "stars_today": 339
+        },
+        {
+          "repository": "kornia/kornia",
+          "stars_today": 101
+        }
+      ],
+      "source": "S47",
+      "qualification": "No thesis gap proposed solely from this list; uninspected repository methods are not counted as reviewed sources."
+    },
+    {
+      "channel": "GitHub weekly Trending",
+      "url": "https://github.com/trending?since=weekly",
+      "observed_at": "2026-11-02",
+      "result": "Public page reviewed; ThinkRail and Hallmark README follow-ups were rejected as thesis evidence without a scientific question.",
+      "observations": [
+        {
+          "repository": "Nutlope/hallmark",
+          "stars_this_week": 11566
+        },
+        {
+          "repository": "pbakaus/impeccable",
+          "stars_this_week": 12017
+        },
+        {
+          "repository": "JetBrains/thinkrail",
+          "stars_this_week": 5760
+        },
+        {
+          "repository": "cloudflare/security-audit-skill",
+          "stars_this_week": 10069
+        }
+      ],
+      "sources": [
+        "S48",
+        "S62",
+        "S63"
+      ]
+    },
+    {
+      "channel": "Public LinkedIn",
+      "scope": "Publicly visible DCASE workshop notice; no logged-in pages or contact",
+      "result": "Post contents read, but its original timestamp was not reliably visible. Event date and relative/crawl dates were not substituted. No fresh LinkedIn problem/demand signal qualified.",
+      "sources": [
+        "S49"
+      ]
+    },
+    {
+      "channel": "Public discussions and issue resolutions",
+      "scope": "Reddit OneShot/benchmark discussion, OmniParse public discussion, complete GuitarSet issues and visible author replies",
+      "result": "Simple-monitoring criticism became a required baseline; conflicting dates were not treated as freshness. GuitarSet documentation updates were distinguished from verified data patches.",
+      "sources": [
+        "S08",
+        "S37",
+        "S64",
+        "S66"
+      ]
+    },
+    {
+      "channel": "Primary datasets, model cards and licenses",
+      "scope": "Zenodo/UCI/GroupLens metadata and real bounded file access; GitHub license files; official model cards",
+      "result": "Actual complete-member and structured-prefix checks are in access-proof-receipts.json. Article/code licenses were not substituted for data/weight licenses.",
+      "sources": [
+        "S05",
+        "S07",
+        "S12",
+        "S15",
+        "S18",
+        "S20",
+        "S26",
+        "S28",
+        "S31",
+        "S32",
+        "S33",
+        "S36",
+        "S50",
+        "S52",
+        "S53",
+        "S54",
+        "S55",
+        "S56",
+        "S57",
+        "S58"
+      ]
+    },
+    {
+      "channel": "Official LTU requirements",
+      "scope": "Programme page plus complete official X7013E Spring 2027 syllabus",
+      "result": "Independent justified Applied AI work, method justification, reporting and examination expectations verified. Examiner judgement is still required; no mandatory company partner found.",
+      "sources": [
+        "S01",
+        "S02"
+      ]
+    }
+  ],
+  "access_and_resolution_notes": [
+    "Web-tool access failures for some ordinary public pages were followed by bounded public HTTP retrieval, without authentication or bypassing paywalls.",
+    "The first metadata reader mishandled gzip responses. It was corrected; decoded primary JSON and later receipts supersede those failures.",
+    "The initial LTU PDF prefix and unavailable pypdf parser were superseded by a complete 2.18 MB PDF and successful PyMuPDF extraction.",
+    "PAMAP2's legacy ZIP server ignored Range with HTTP 200; transfer was stopped. AICOS-HAR is the verified main data route.",
+    "One DocLayNet Hugging Face rows/config route returned 404. The official archive subsequently yielded a complete CRC-checked PNG via Range.",
+    "The initially guessed TabICL model identifier failed; the official jingang/TabICL card/API was verified.",
+    "DCASE baseline LICENSE filename returned 404. Code reuse is not licensed by assumption; a clean implementation of the published comparator is the fallback.",
+    "Complete-member probes distinguish full decoded members from intentionally truncated streams. No model checkpoint or large raw corpus was downloaded."
+  ],
+  "coverage_limit": "Research/data coverage is stronger than consumer-community or buyer evidence. No market trend, representative pain frequency, paid demand or 10–20-year relevance is established.",
+  "later_research_not_qualified": [
+    {
+      "lead": "Few-shot class-incremental learning methods for ST5",
+      "reason": "Needs a closer primary-method comparison before the conditional proposal can be endorsed; no missing result is invented."
+    },
+    {
+      "lead": "FoundPDE and few-shot reservoir-computing papers encountered in final search",
+      "reason": "Search-only leads, not full-method/license/data investigations, not counted in the 69 reviewed URLs and not added to fill the batch."
+    },
+    {
+      "lead": "Model CPU runtimes and adaptation headroom",
+      "reason": "Every proposed model experiment remains unrun. Future experiments begin with the written resource/quality gates."
+    }
+  ]
+}

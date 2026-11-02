@@ -1,0 +1,94 @@
+ST4 — Recognise litter without being fooled by the background
+Investigated 2026-11-02 | KEEP | kept_as_investigated_possibility
+
+A litter-labeling model may learn that bottles appear on a beach and paper appears indoors. It then fails when the same objects appear somewhere else, especially for less common categories.
+Example: A crushed cup photographed among leaves should not become a plastic wrapper merely because the model has mostly seen cups on clean pavement.
+
+What the study would try
+Adapt a compact image model using object-only and surrounding-image views, then test changed backgrounds and unfamiliar categories.
+Everyday question: Can a litter recogniser rely less on the background without overlooking uncommon items?
+Expected research output: An adapted crop recogniser and evidence about background sensitivity, rare classes and uncertain answers.
+
+What was actually checked
+Primary licenses/schema/counts and a real image access check; no image-model training.
+Parsed object counts/category hierarchy and downloaded a real 63,455-byte thumbnail. Scene metadata has 4,296 rows for 1,496 images; 690 images have differing scene-label sets across rows, requiring an explicit consensus/multi-label policy.
+Model experiments completed: 0. Runtime targets below are planned limits, not measured results.
+
+Qualification and research depth
+Kept as an investigated possibility because the scope combines explicit model adaptation with a justified controlled comparison, grouped evaluation and measurable failure trade-offs. Data access and primary terms were inspected. This is a feasibility judgment, not completed model evidence, a novelty claim or LTU approval.
+The study adapts a pretrained vision backbone, audits hierarchical and multi-annotator labels, tests class imbalance and background dependence separately, and evaluates uncertainty with meaningful photo-level splits. It studies recognition of supplied object crops, not an industrial sorting installation or chemical recyclability.
+
+Scientific question and hypothesis
+Can a compact pretrained image model adapted with object/context separation and class balancing improve minority-category recognition under background shift?
+Training on segmented objects plus a controlled amount of context will improve worst-class performance across held-out backgrounds compared with ordinary rectangular crops, without making unknown categories look confidently familiar.
+
+Data access and rights
+TACO
+Public annotation JSON and individual hosted image/thumbnail URLs. Full ZIP is unnecessary for an initial crop study.
+1,500 images, 4,784 object annotations. Candidate known classes include Bottle 439, Can 273, Cup 192, Paper 148, Carton 251 and Plastic bag/wrapper 850. Use other sufficiently supported labelled categories for unknown-class evaluation; exclude Unlabeled litter from exact-class supervision.
+Terms: Official collection record: CC-BY-4.0; code MIT. Annotation JSON has empty per-image license entries, so collection-level terms are the evidence and individual contributor provenance remains a limitation.
+Still to verify: Check individual image availability and attribution, distinguish repeated/multiple scene judgments, audit masks, and ensure adequate independent-photo support for each chosen background/class.
+
+Model adaptation
+timm MobileNetV3-small, 2.5M parameters, pretrained on ImageNet; freeze its backbone initially.
+Train a class-balanced head over cached object-only and context features, with a small learned fusion gate and calibrated reject option. Compare a limited last-block adaptation only if CPU pilot permits.
+Head/gate below 200,000 parameters; object crops at 160–224 pixels.
+Model terms: Official timm weight card declares Apache-2.0.
+
+Comparators
+- Colour/texture descriptors with a linear classifier.
+- Frozen MobileNet features with ordinary cross-entropy and rectangular crops.
+- Class-weighted loss or balanced sampling alone; object-mask cropping alone; simple maximum-probability rejection.
+
+Evaluation and leakage controls
+All objects/crops/augmentations from an original photo stay in one partition. Detect duplicate photos before splitting. Derive background groups from an explicit multi-annotation consensus; report ambiguous-background images separately. Hold out whole background groups where class support permits. Unknown development categories and unknown test categories must be disjoint. Gold segmentation masks are an oracle diagnostic/assisted variant; report them separately from crop-only inference, which does not have a true outline supplied.
+
+Ablations
+- Object-only, context-only and object-plus-context views.
+- Balanced sampling versus loss weighting, held at the same label budget.
+- Fusion gate and rejection calibration; real background holdout versus artificial background stress.
+
+Measurements
+Macro-F1, per-class recall, worst-background performance, unknown false-accept rate and error-versus-coverage. Bootstrap photos. Report how many photos, objects and classes remain after filtering, plus CPU latency/RAM.
+
+CPU plan and cheaper fallback
+A few thousand small crops and cached features should fit below 4 GB. One CPU feature pass and small-head fitting are the main plan. Set a measured extraction cap of one overnight run and at most one hour per cached-feature fit.
+Use frozen object-crop embeddings and class-balanced logistic regression; retain the domain/unknown-class study. If backgrounds cannot form credible groups, withdraw the background-transfer claim and report only grouped-photo imbalance/recognition results.
+
+Closest work and proposed contribution
+October waste-classification research already combines augmentation, attention and imbalance losses. Its image corpus was not independently downloadable with a clear file/license manifest. The proposed work uses a different public setting and a controlled object/context comparison; it does not reproduce the reported industrial accuracy.
+
+Risks and kill test
+Small numbers of rare classes and uncertain scene labels can dominate results. Recognition from a crop assumes localisation is supplied. A visual class does not establish whether an item is recyclable under local rules. Any future use of the mask-assisted variant would need a separate foreground estimator or supplied outline; benchmark masks do not demonstrate that deployment step.
+Construct at least two credible background partitions with adequate independent photos per retained class; inspect a small set of masks and scene votes. Revise if gains only appear with random object splits or synthetic backgrounds. Any class with insufficient independent test photos is excluded before results are seen.
+
+Planning estimate: approximately 20 weeks
+- Weeks 1–3: litter-recognition literature, rights and annotation audit.
+- Weeks 4–6: crop pipeline and photo/background splits.
+- Weeks 7–10: class balancing and object/context adapters.
+- Weeks 11–15: held-out-background and unknown-class experiments.
+- Weeks 16–18: uncertainty, error categories and CPU profiling.
+- Weeks 19–20: thesis, reproducible manifests and illustrative labeling demo.
+
+Deliverables
+Attribution-aware data manifest, adapted image head, background/imbalance benchmark, calibrated rejection evaluation and report.
+
+Optional later venture hypothesis
+Hypothesis: cleanup-photo catalogues might benefit. No evidence of customer demand or automatic sorting readiness is claimed.
+
+Recency and scope
+October 20 study is a current lead; TACO and MobileNet are older reusable foundations.
+
+Reviewed sources
+[S16] Waste classification study — https://link.springer.com/article/10.1007/s44274-026-01086-4
+Publication: 2026-10-20; verified: 2026-11-02. Introduction, architecture, experiments, limitations and data-availability section
+[S17] TACO documentation — https://github.com/pedropro/TACO/blob/master/README.md
+Publication: None; verified: 2026-11-02. complete README, dataset directory and annotation schema/counts
+[S18] TACO release and license — https://zenodo.org/records/3587843
+Publication: 2019-06-09; verified: 2026-11-02. official dataset record JSON
+[S19] TACO code license — https://github.com/pedropro/TACO/blob/master/LICENSE
+Publication: None; verified: 2026-11-02. entire license
+[S50] MobileNetV3 small weight card — https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/raw/main/README.md
+Publication: None; verified: 2026-11-02. model card including license, feature-extraction role and resource statistics
+
+This is a research-feasibility investigation, not a completed experiment, a claim of novelty, commercial validation or LTU topic approval. See source-ledger.json for precise dates/scopes and access-proof-receipts.json for actual bounded data checks.

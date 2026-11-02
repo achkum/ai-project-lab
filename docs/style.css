@@ -32,3 +32,7 @@ dialog{width:min(900px,94vw)}.detail-lead{font-size:17px!important;color:#526874
 .card-date{display:block;font-size:11px;color:#71818a;margin:9px 0}.idea-card .idea-intro{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.idea-card .idea-outcome strong{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.idea-card .source-preview{min-height:0;margin-top:12px;padding:10px 0}.idea-card .source-preview a{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.comparison table{min-width:0;width:100%}.comparison td,.comparison th{min-width:150px;max-width:320px}.selected-comparison summary{font-weight:650;cursor:pointer}
 
 .comparison thead th{text-transform:none;letter-spacing:0}
+
+.existing-apps{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px 0}.existing-apps a{font-size:13px;color:var(--accent);font-weight:650}
+
+.decision-note{font-size:12px;line-height:1.5;padding:8px 10px;border-left:3px solid #b18a44;background:#faf7ef;color:#61523c}
