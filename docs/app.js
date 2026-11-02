@@ -57,13 +57,12 @@ function outcomeSummary(x) {
 }
 function ideaCard(x) {
  const thesis=x.lane==='Thesis';
- const facts=thesis?[['What we would find out',x.question],['Main difficulty',x.risk]]:[['Who could pay',x.buyer||x.audience],['Why they would return',x.business_case?.repeat_use||x.market||'Not established']];
- const badge=x.status==='completed'?'Completed prototype':x.investigation_result?'Investigated — see findings':thesis?'Research idea':x.assessment?.startsWith('More uncertain')?'Exploratory business hypothesis':'Business hypothesis';
- return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge">'+badge+'</span></div><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p>'+outcomeSummary(x)+ideaFlow(x)+'<div class="idea-outcome"><span class="label">WHAT YOU GET</span><strong>'+esc(x.deliverable||'To assess')+'</strong></div><div class="idea-facts">'+facts.map(([label,value])=>'<div><span class="label">'+esc(label)+'</span><strong>'+esc(value)+'</strong></div>').join('')+'</div>'+sourcePreview(x)+'<p class="idea-audience"><span>For</span> '+esc(x.audience||'To investigate')+'</p><button class="idea-open" data-detail="'+esc(x.id)+'">'+(thesis?'Explain ':'Explore ')+esc(x.id)+' →</button></article>';
+ const badge=x.status==='running'?(thesis?'Investigation running':'Build in progress'):x.status==='completed'?(thesis?'Investigation complete':'Completed prototype'):x.investigation_result?'Investigated — see findings':thesis?'Research idea':x.assessment?.startsWith('More uncertain')?'Exploratory business hypothesis':'Business hypothesis';
+ return '<article class="idea-card '+(x.selected?'chosen':'')+'">'+(typeof selectionControl==='function'?selectionControl(x):'')+'<div class="idea-top"><span class="tag">'+esc(x.domain||x.lane)+'</span><span class="idea-badge">'+badge+'</span></div><span class="card-date">Idea batch · '+esc(displayDay(batchDate(x)))+'</span><h2>'+esc(x.title)+'</h2><p class="idea-intro">'+esc(x.summary)+'</p><div class="idea-outcome"><span class="label">'+(thesis?'INTENDED STUDY OUTCOME':'INTENDED PRODUCT OUTCOME')+'</span><strong>'+esc(x.deliverable||x.question||'To assess')+'</strong></div>'+sourcePreview(x)+'<button class="idea-open" data-detail="'+esc(x.id)+'">'+(thesis?'Study details':'Product details')+' · '+esc(x.id)+' →</button></article>';
 }
 function comparison(rows) {
  const fields=rows[0]?.lane==='Thesis'?[['Who it helps','audience'],['What we would test','question'],['What you would produce','deliverable'],['Main difficulty','risk']]:[['First customer','audience'],['Working first version','deliverable'],['Why someone would pay','buyer'],['Demand test','customer_test'],['Main risk','risk']];
- return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">No invented scores</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
+ return '<section class="comparison"><div class="section-title"><h2>Compare at a glance</h2><span class="tag">Your selection</span></div><div class="table-wrap"><table><thead><tr><th>Consideration</th>'+rows.map(x=>'<th>'+esc(x.id)+' · '+esc(x.domain)+'</th>').join('')+'</tr></thead><tbody>'+fields.map(([label,key])=>'<tr><th scope="row">'+label+'</th>'+rows.map(x=>'<td>'+esc(x[key]||'To assess')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>';
 }
 function learningDesign(x){
  const d=x.learning_design;if(x.id!=='BP5'||!d)return '';
@@ -106,22 +105,44 @@ function openConversation(mode,lane,id) {
  };
  $('detail').showModal();
 }
-function renderCards(lane,query=''){
- const rows=data.opportunities.map(presentIdea).filter(x=>x.lane===lane&&(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase()));
- if(lane==='Project')rows.sort((a,b)=>Number(a.status==='completed')-Number(b.status==='completed'));
- const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
- const chosen=rows.find(x=>x.selected),recommended=rows.find(x=>x.recommended);
- const focus=data.audit?.hold?null:chosen||recommended;
- const intro=focus?'<div class="lane-focus"><div><span class="tag">'+(chosen?'YOUR CURRENT DIRECTION':'OUR RECOMMENDATION')+'</span><p><strong>'+esc(focus.id)+'</strong> · '+esc(focus.reason||focus.title)+'</p></div><span class="pill">'+(chosen?esc(pretty(focus.status)):'Ready to review')+'</span></div>':'';
- const conversation='<div class="explore-again"><div><strong>Not your direction?</strong><p>Question the recommendation, change the angle or explore a fresh set now.</p></div><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></div>';
- const signals=data.discovery_signals;
- const radar=signals?'<details class="provenance-panel"><summary><strong>What is getting attention now · GitHub & LinkedIn · '+esc(signals.checked_at)+'</strong></summary><p>'+esc(signals.scope)+'</p><div class="detail-grid">'+signals.items.map(s=>'<section><span class="tag">'+esc(s.source)+'</span><h3><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a></h3><p>'+esc(s.signal)+'</p><p><strong>Possible direction: </strong>'+esc(s.possibility)+'</p><p><strong>Still unknown: </strong>'+esc(s.limit)+'</p></section>').join('')+'</div></details>':'';
- const run=lane==='Thesis'?(data.thesis.research_run||data.discovery_run):data.discovery_run;
- const research=run?'<div class="lane-focus"><div><span class="tag">DISCOVERY · '+esc(pretty(run.lane_states?.[lane]||run.state))+'</span><p>'+esc(run.lane_notes?.[lane]||run.note)+'</p></div></div>':'';
- const reviewed=lane==='Project'&&run?.reviewed_directions?.length?'<details class="provenance-panel"><summary><strong>What the replacement review found</strong></summary><p>These are research findings, not a new build shortlist. Existing competitors do not rule out a business; we still need a concrete reason a customer would choose us.</p><div class="detail-grid">'+run.reviewed_directions.map(r=>'<section><span class="tag">'+esc(r.verdict)+'</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.problem)+'</p><p><strong>Why it was not shortlisted: </strong>'+esc(r.finding)+'</p><a class="text-link" href="'+esc(safeLink(r.source_url))+'" target="_blank" rel="noopener noreferrer">'+esc(r.source_label)+' ↗</a></section>').join('')+'</div></details>':'';
- const empty=lane==='Project'&&!query?'No replacement business shortlist is ready. The rejected small tools are archived; previous builds and their files remain available.':'No matching ideas. Try another search.';
- dest.innerHTML=research+(typeof jobControls==='function'?jobControls(lane):'')+conversation+reviewed+radar+(rows.length?intro+'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>'+comparison(rows):'<div class="empty">'+empty+'</div>');
+function selectedForComparison(lane) {
+ return data.opportunities.filter(x=>x.lane===lane&&typeof selectedIdeas!=='undefined'&&selectedIdeas.has(x.id)).map(presentIdea);
 }
+function batchMatches(x,batch,lane) {
+ if(!batch)return false;
+ return lane==='Project'&&Array.isArray(batch.project_ids)?batch.project_ids.includes(x.id):(x.batch_id||x.shortlist)===batch.id;
+}
+function batchDate(x) {
+ const m=/^(\d{4})(\d{2})(\d{2})(?:-|$)/.exec(x.batch_id||x.shortlist||'');
+ return m?m[1]+'-'+m[2]+'-'+m[3]:(x.published_at||'Date not recorded');
+}
+function displayDay(value){
+ return value&&Number.isFinite(Date.parse(value))?new Date(value).toLocaleDateString('en-GB',{timeZone:'Europe/Stockholm',day:'numeric',month:'short',year:'numeric'}):'Date not recorded';
+}
+function renderCards(lane,query=''){
+ const dest=$(lane==='Thesis'?'thesis-cards':'project-cards');
+ const earlierOpen=!!dest.querySelector('[data-earlier]')?.open;
+ const comparisonOpen=!!dest.querySelector('[data-comparison]')?.open;
+ const all=data.opportunities.map(presentIdea).filter(x=>x.lane===lane);
+ const matches=x=>(x.title+' '+x.summary+' '+(x.domain||'')).toLowerCase().includes(query.toLowerCase());
+ const batch=lane==='Thesis'?data.thesis.research_run:data.project.current_batch;
+ const current=all.filter(x=>batchMatches(x,batch,lane)&&matches(x));
+ const earlier=all.filter(x=>!batchMatches(x,batch,lane)&&matches(x));
+ const activeState=s=>['running','queued','paused','needs_attention','quota_wait'].includes(s);
+ const pinned=all.filter(x=>!batchMatches(x,batch,lane)&&(activeState(x.status)||(typeof liveJobs!=='undefined'&&liveJobs.some(j=>j.candidate===x.id&&j.version===x.version&&activeState(j.state)))));
+ const rest=earlier.filter(x=>!pinned.includes(x));
+ const date=lane==='Thesis'?batch?.date:batch?.published_at;
+ const progress=lane==='Thesis'&&batch&&Number.isInteger(batch.investigated_topics)&&Number.isInteger(batch.target_topics)?'<p><strong>'+esc(batch.investigated_topics)+' / '+esc(batch.target_topics)+' topics investigated</strong></p>':'';
+ const research=batch?'<div class="lane-focus"><div><span class="tag">'+(lane==='Thesis'?'CURRENT RESEARCH · ':'CURRENT BATCH · ')+esc(displayDay(date))+' · '+esc(pretty(batch.state))+'</span>'+progress+(lane==='Thesis'?'<p>'+esc(batch.note||'')+'</p>':'')+'</div></div>':'';
+ const currentEmpty=query?'No current ideas match this search.':lane==='Thesis'?'Current research is underway; its topic cards have not yet been published.':'No ideas are available for this batch.';
+ const cardGrid=rows=>'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>';
+ const chosen=selectedForComparison(lane);
+ const grouped=[...new Set(rest.map(batchDate))].sort().reverse().map(date=>'<section><h3>Ideas dated '+esc(displayDay(date))+'</h3>'+cardGrid(rest.filter(x=>batchDate(x)===date))+'</section>').join('');
+ const conversation='<details class="provenance-panel"><summary>Explore different ideas</summary><p>Question an idea, change the angle or explore a fresh set.</p><button data-conversation="new" data-lane="'+lane.toLowerCase()+'">Find different ideas →</button></details>';
+ const compare=chosen.length>=2?'<details class="provenance-panel selected-comparison" data-comparison '+(comparisonOpen?'open':'')+'><summary>Compare '+chosen.length+' selected options</summary>'+comparison(chosen)+'</details>':'';
+ dest.innerHTML=research+(typeof jobControls==='function'?jobControls(lane):'')+compare+(batch?'<h2>Current '+(lane==='Thesis'?'research':'ideas')+'</h2>':'<h2>Ideas · batch date unavailable</h2>')+(current.length?cardGrid(current):'<div class="empty">'+(batch?currentEmpty:'Current batch metadata is unavailable. See earlier ideas below.')+'</div>')+(pinned.length?'<section><h2>Active work from earlier batches</h2>'+cardGrid(pinned)+'</section>':'')+(rest.length?'<details class="provenance-panel" data-earlier '+(earlierOpen?'open':'')+'><summary>Earlier ideas ('+rest.length+')</summary>'+grouped+'</details>':'')+conversation;
+}
+
 function renderSources(){
  const q=$('source-search').value.toLowerCase(),cat=$('source-category').value;
  const rows=data.sources.filter(x=>(cat==='All categories'||x.category===cat)&&(x.name+' '+x.access).toLowerCase().includes(q));
@@ -137,8 +158,7 @@ function render(){
  const stats=[['Thesis cadence','Daily','Broad discovery, personalised ranking'],['Delivery window','7 days','No fixed weekday stages'],['Source coverage',data.coverage.checked+' / '+data.coverage.target,data.coverage.registered+' channels · '+(data.coverage.source_families??'—')+' source families'],['Releases this week',data.releases_last_7_days,'Actual releases only']];
  $('stats').innerHTML=stats.map(([l,v,n])=>'<div class="stat"><div class="label">'+esc(l)+'</div><div class="value">'+esc(v)+'</div><div class="note">'+esc(n)+'</div></div>').join('');
  $('thesis-state').textContent=pretty(data.thesis.state);$('project-state').textContent=pretty(data.project.state);
- $('thesis-last').textContent=when(data.thesis.last_success,'No recorded batch completion');$('thesis-next').textContent=when(data.thesis.next_run,'Not scheduled');
- $('thesis-collected').textContent=when(data.thesis.collection_last_success,'Not recorded');
+ $('thesis-last').textContent=when(data.thesis.last_success,'No recorded batch completion');$('thesis-collected').textContent=when(data.thesis.collection_last_success,'Not recorded');$('thesis-next').textContent=when(data.thesis.next_run,'Not scheduled');
  $('project-stage').textContent=data.project.stage;$('project-target').textContent=when(data.project.target_at,'Starts with first selection');
  $('activity').innerHTML=data.events.map(x=>'<div class="event"><strong>'+esc(x.title)+'</strong><p>'+esc(x.detail)+'</p></div>').join('');
  $('decision-list').innerHTML=renderDecisions();

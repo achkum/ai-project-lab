@@ -100,7 +100,11 @@ def main(refresh_assets=False):
         snapshot=compose(seed,catalog,audit,collection,jobs,sources,datetime.now(timezone.utc).timestamp(),
                          batches.get('thesis_research') if batches else None)
         if signals: snapshot['discovery_signals']=signals
-        if batches: snapshot['discovery_run']=batches['last_run']
+        if batches:
+            snapshot['discovery_run']=batches['last_run']
+            current=batches.get('current_project_batch')
+            if current:
+                snapshot['project']['current_batch']={k:current[k] for k in ('id','project_ids','published_at','state') if k in current}
         snapshot['opportunity_copy']=presentation
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         git('add','--','docs/data/status.json')

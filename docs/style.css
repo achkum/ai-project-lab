@@ -28,3 +28,7 @@ dialog{width:min(900px,94vw)}.detail-lead{font-size:17px!important;color:#526874
 .job-row a.primary{display:inline-flex;align-items:center;padding:9px 14px;color:#fff;background:#245b4c;border-radius:6px;text-decoration:none;font-weight:650}
 
 .learning-design{margin:24px 0}.learning-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.learning-levels article{border:1px solid var(--line, #deded8);border-radius:16px;padding:16px}.learning-levels p{line-height:1.5;font-size:.93rem}@media(max-width:700px){.learning-levels{grid-template-columns:1fr}}
+
+.card-date{display:block;font-size:11px;color:#71818a;margin:9px 0}.idea-card .idea-intro{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.idea-card .idea-outcome strong{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.idea-card .source-preview{min-height:0;margin-top:12px;padding:10px 0}.idea-card .source-preview a{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.comparison table{min-width:0;width:100%}.comparison td,.comparison th{min-width:150px;max-width:320px}.selected-comparison summary{font-weight:650;cursor:pointer}
+
+.comparison thead th{text-transform:none;letter-spacing:0}
