@@ -5,18 +5,34 @@
   "accepted_report_sha256": null,
   "model_root": null,
   "active_corpus": {
-    "sha256": "843834b551d1f707ff3b7c41cfc27f75302ee1aecf9a9843c9ffcaf2318e1fd2",
-    "metadata_sha256": "d15d2cfdb47001f52ea3f54689c8bdfb1510978b555227144056979deb88f21a",
-    "total": 826,
-    "valid": 505,
-    "negative": 321,
+    "sha256": "724dfcde76710a6e6bd8a305053286d15374c4292fc654a2791e10f7405cd18d",
+    "metadata_sha256": "75e45cba1c4f25d6e48836fa1dd9b021497e2a9d70fcbf953987d38e030b2a09",
+    "total": 983,
+    "valid": 636,
+    "negative": 347,
     "mission_count": 54,
-    "long_suite": {"valid": 24, "negative": 12, "mission_count": 12},
+    "long_suite": {
+      "valid": 24,
+      "negative": 12,
+      "mission_count": 12
+    },
     "independent_evaluator_id": "bp5_language_acceptance",
     "by_difficulty": {
-      "basic": {"total": 276, "valid": 175, "negative": 101},
-      "medium": {"total": 248, "valid": 153, "negative": 95},
-      "high": {"total": 302, "valid": 177, "negative": 125}
+      "basic": {
+        "total": 341,
+        "valid": 232,
+        "negative": 109
+      },
+      "medium": {
+        "total": 298,
+        "valid": 195,
+        "negative": 103
+      },
+      "high": {
+        "total": 344,
+        "valid": 209,
+        "negative": 135
+      }
     }
   },
   "thresholds": {
@@ -27,7 +43,7 @@
     "minimum_valid": 120,
     "minimum_negative": 120
   },
-  "evidence_status": "No acceptable independent candidate report exists. Null pins intentionally prevent release.",
+  "evidence_status": "Independent .9 corpus v3 is frozen before candidate outputs. No acceptable independent candidate report exists; null pins prevent release.",
   "artifact_location": "Operator may set BP5_ACCEPTANCE_ARTIFACT_ROOT to a local directory containing the exact evaluated Linux artifacts. This private location is not report identity; every declared artifact hash must still match. model_root remains null in the public contract.",
   "trust_boundary": "The canonical repository contract is updated by the coordinating implementation workflow after verifying independent evaluation artifacts. This prevents accidental or stale completion, not forgery by a trusted repository editor. No human approval step is introduced.",
   "corpus_rotation": "For a new independently frozen corpus, preserve the old corpus/report privately, replace active_corpus SHA, metadata SHA, exact counts and independent evaluator identity, and reset accepted_report_sha256 to null. Never reuse a disclosed corpus as a fresh holdout. Pin a new report only after the independent evaluator runs the entire new corpus against immutable candidate bytes and results pass this gate."
