@@ -1,41 +1,28 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-04T06:32:19.516628+00:00",
+  "generated_at": "2026-11-04T06:37:13.675888+00:00",
   "connected": true,
   "thesis": {
-    "state": "possibilities_ready",
+    "state": "investigating",
     "last_success": "2026-11-02T13:01:47.258287+00:00",
     "next_run": "2026-11-04T08:00:00+01:00",
     "collection_last_success": "2026-11-04T06:32:18.718158+00:00",
     "research_run": {
-      "id": "20261102-thesis-solo",
-      "date": "2026-11-02",
-      "state": "possibilities_ready",
-      "registered_at": "2026-11-02T10:52:57.963769+00:00",
+      "id": "20261104-thesis-solo",
+      "date": "2026-11-04",
+      "state": "investigating",
+      "registered_at": "2026-11-04T06:37:12.912514+00:00",
       "last_completed_at": "2026-11-02T13:01:47.258287+00:00",
       "target_topics": 10,
-      "investigated_topics": 10,
+      "investigated_topics": 0,
       "selection_required": false,
-      "note": "Ten initial investigations completed on 2 November. Seven possibilities are worth considering; three need a stronger study plan. Source dates, current alternatives and solo data access were checked. Model experiments have not been run. Older ideas are below.",
-      "published_at": "2026-11-02T13:01:47.258287+00:00",
-      "kept": 7,
-      "conditional_revision": 3,
-      "experiments_completed": 0,
-      "source_pages_reviewed": 69,
-      "topic_ids": [
-        "ST1",
-        "ST2",
-        "ST3",
-        "ST4",
-        "ST5",
-        "ST6",
-        "ST7",
-        "ST8",
-        "ST9",
-        "ST10"
+      "previous_batch_id": "20261102-thesis-solo",
+      "catch_up": true,
+      "missed_days": [
+        "2026-11-03"
       ],
-      "summary_url": "https://achkum.github.io/ai-project-lab/research/2026-11-02-thesis-solo/research-summary.txt"
+      "note": "A single catch-up investigation started on 4 November. The last completed thesis batch is from 2 November; 3 November was missed. Source collection is separate. New possibilities are being checked for prior work, usable public data and solo compute feasibility. Previous topics and project selections are preserved."
     }
   },
   "project": {
