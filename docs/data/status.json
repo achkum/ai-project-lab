@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-04T06:59:31.536658+00:00",
+  "generated_at": "2026-11-04T07:15:23.598423+00:00",
   "connected": true,
   "thesis": {
     "state": "investigating",
     "last_success": "2026-11-02T13:01:47.258287+00:00",
-    "next_run": "2026-11-04T08:00:00+01:00",
+    "next_run": "2026-11-05T08:00:00+01:00",
     "collection_last_success": "2026-11-04T06:32:18.718158+00:00",
     "research_run": {
       "id": "20261104-thesis-solo",
@@ -26,8 +26,8 @@
     }
   },
   "project": {
-    "state": "running",
-    "stage": "running",
+    "state": "paused",
+    "stage": "paused",
     "window_start": "2026-10-31T12:54:52.504456+00:00",
     "target_at": "2026-11-07T12:54:52.504456+00:00",
     "current_batch": {
@@ -4688,7 +4688,7 @@
       "quality_gate_version": 3,
       "title": "Prata: Swedish role-play with a continuing learning path",
       "domain": "Swedish role-play and SFI learning",
-      "status": "running",
+      "status": "paused",
       "recommended": false,
       "auto_eligible": false,
       "startable": true,
