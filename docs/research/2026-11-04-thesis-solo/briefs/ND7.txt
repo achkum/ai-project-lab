@@ -1,0 +1,57 @@
+ND7: Should an ECG model fill missing signals or work with what it has?
+4 November 2026 — KEEP
+
+Problem
+Reconstructed ECG channels can look plausible while changing the classification result.
+
+Example
+Two recorded ECG lead channels are unavailable. Compare rebuilding those signals with telling the classifier which channels are missing. This does not simulate the physical effects of electrode failure.
+
+Research question
+At a matched CPU/model budget, when does direct mask-aware multi-label classification outperform reconstruction-then-classification under missing ECG leads and time segments?
+
+What you would build/train
+Train a compact 1-D CNN at 100 Hz with observed-signal masks and structured lead dropout. Compare linear/compact autoencoder reconstruction followed by the same classifier. Learn calibration on held-out patients.
+
+Comparisons
+Zero-fill plus missingness mask; fixed surviving-lead classifier Linear cross-lead regression and small denoising autoencoder Direct structured-dropout classifier; ImputeECG as the current high-compute reconstruction reference, not a promised reproduction
+
+Evaluation
+Use PTB-XL v1.0.3 patient-wise folds 1–8/9/10, with duplicate audit. Mask leads/time windows only after splitting. Evaluate macro-AUPRC, label-wise sensitivity at preselected specificity, calibration and risk/coverage. Separate random failures from lead-specific structured loss. Synthetic missingness is not evidence about a clinic’s actual failure process.
+
+Data and terms
+Public PTB-XL metadata prefix parsed, complete waveform header read, and full 24,000-byte 100-Hz 12-lead ECG record decoded. CC BY 4.0. No institutional credentials/new agreement required for these files. Clinical deployment, patient benefit and external-hospital validity are not established.
+
+CPU plan
+Pilot: 1,000–2,000 records, five diagnostic superclasses, less than 500k parameters, short early-stopped runs. Stream batches; target under 6 GB RAM. Expand only after measuring wall time; no A100 replication or 500-Hz transformer training.
+
+Semester scope
+Weeks 1–3: validate labels, folds and signal scaling Weeks 4–8: train matched compact baselines Weeks 9–14: structured missingness and direct-versus-reconstruction ablations Weeks 15–20: calibration, subgroup uncertainty, compute profile and thesis
+
+Closest work
+ImputeECG (July 2026) already tests diagnosis after reconstruction and warns about unrecoverable transient abnormalities. Its A100 training and external/private evaluations are outside this plan.
+
+Proposed contribution
+An equal-budget applied comparison of directly learned missingness handling against reconstruction, including where visually good reconstruction harms decisions. Downstream diagnostic evaluation itself is not new.
+
+Research connection
+LTU ML staff explicitly work on physiological-signal-driven interaction and reliable intelligent systems; the study contributes robust learning under missing physiological measurements.
+
+Limits
+The verified Health Intelligence projects concentrate on brain signals. This is a proposed extension, not a verified LTU ECG project or available medical supervision. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+July closest work is outside the desired 90-day corroboration window; no invented fresh trigger Full-waveform public labels are coarse Missingness simulation cannot prove safety of reconstructed signals
+
+Output
+Compact trained ECG models and a reproducible decision-level comparison explaining when reconstruction is unnecessary or harmful.
+
+Verdict
+Verified public signal/label access and an achievable, substantive applied model-development/evaluation study. Rank below the directly LTU-linked voice/inner-speech directions for institutional specificity.
+
+Source URLs
+https://physionet.org/content/ptb-xl/1.0.3/
+https://physionet.org/files/ptb-xl/1.0.3/LICENSE.txt
+https://arxiv.org/html/2607.05009v1
+https://www.ltu.se/en/staff/r/rajkumar-saini
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html

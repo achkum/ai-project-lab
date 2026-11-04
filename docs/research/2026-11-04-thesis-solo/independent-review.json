@@ -1,0 +1,183 @@
+{
+  "review_date": "2026-11-04",
+  "scope": "Independent bounded review of main ND1-ND10 batch; no experiments, workers, source candidate edits or publishing. All project work remains paused. Extension summaries not available when checked; not reviewed.",
+  "academic_assessment": "Accept complex applied development OR smaller research scope for X7013E30credits. No new algorithm, publication or PhD-level novelty is imposed. Supervisor/examiner approval is not inferred. Official syllabus URL was retrieved successfully as PDF but text extraction was unavailable in this review; detailed requirements rely on the parent-verified syllabus contract.",
+  "overall": "Three keep/four revise/three withdraw is defensible after the required textual/scope corrections. Seven data-qualified means bounded public data/access evidence, not seven ready approved theses or measured compute feasibility.",
+  "publication_status": "Ready after correcting ND1/ND7/ND10 public wording and clarifying ND5 unseen-location comparison; no need to wait for model experiments to publish honestly gated proposals.",
+  "reviews": [
+    {
+      "id": "ND1",
+      "review_verdict": "keep_after_text_correction",
+      "rationale": "Methods fit is real but indirect; no verified LTU air-sensor project. Sequential reference-budget adaptation is meaningful ML development.",
+      "correction": "Replace the everyday example and first_view example: reference requests test whether recalibration controls future error under changing conditions; they cannot causally distinguish drift from environmental change. Replace \"Separate ...\" in evaluation with \"Report changing-condition performance without attributing causal contributions.\" Narrow closest-work difference: the cited Oct2026 paper already has reference-efficient and drift scenarios; the proposed distinction is sequential query/update policy at equal acquired-reference budget.",
+      "publication_action": "required_before_publication"
+    },
+    {
+      "id": "ND2",
+      "review_verdict": "withdraw_supported",
+      "rationale": "Observed 403/data-sample failure justifies exclusion from this verified-data shortlist; audio/species methods fit is supported by LTU staff interests.",
+      "correction": "Describe access failure as this investigation's observed route failure, not proof the public dataset is universally unavailable. Existing related methods do not themselves disqualify a master thesis; access is the operative gate.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND3",
+      "review_verdict": "withdraw_supported",
+      "rationale": "Accessible chips do not resolve conflicting reuse terms. Conservative exclusion is justified; geospatial LTU fit cannot override this.",
+      "correction": "Keep licence unresolved rather than declaring reuse illegal or impossible. Preserve the withdrawn audit row without counting it as a selectable qualified study.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND4",
+      "review_verdict": "withdraw_supported",
+      "rationale": "Verified usable electrical-load samples are missing; UK-DALE/REFIT metadata alone do not satisfy the stated access gate. LTU connection is honestly indirect.",
+      "correction": "Keep failure scoped to tested routes. Do not imply conservation/NILM prior work makes an applied development thesis ineligible.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND5",
+      "review_verdict": "revise_supported",
+      "rationale": "Verified network/generator support a simulation-only prototype gate. LTU water/AI4Science connection is indirect, not a current pressure-leak project. Set-valued localization is substantive.",
+      "correction": "Explicitly require shared node-wise scoring or scenario-based inference for unseen-location evaluation. A fixed multiclass boosted classifier trained without particular location labels is not a meaningful unseen-location comparator; use seen-location episode tests for that baseline and a separately declared unseen-location test for transferable models. Keep coverage under shifted simulation empirical and confirm simulator feasibility before committing.",
+      "publication_action": "required_scope_clarification_before_publication"
+    },
+    {
+      "id": "ND6",
+      "review_verdict": "revise_supported",
+      "rationale": "Preserving annotated short bouts is a defensible focused development/evaluation study despite close smoothing prior work. LTU EEG connection is adjacent.",
+      "correction": "Retain the close StageGuard comparator and offline/context matching. Prefer a locally trained classifier for the clean main test if YASA training exposure cannot be excluded; any exposed pretrained result is secondary. Group nights and all uncertainty/model selection by person. No micro-arousal or clinical claim.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND7",
+      "review_verdict": "keep_supported_with_example_correction",
+      "rationale": "The current file already specifies patient-wise PTB-XL1-8/9/10, duplicate audit and masking only after splitting; this matches official PTB-XL guidance. Learned masks/dropout versus reconstruction is substantive; physiological-ML fit is adjacent.",
+      "correction": "Change \"Two electrodes fail\" to \"Two recorded lead channels are missing\" unless electrode-to-derived-lead failure propagation is explicitly modeled. Split patients before every imputer/classifier/scaler fit; use identical frozen test masks across paired methods, and patient-cluster uncertainty. Account for total reconstruction+classifier parameters/compute when claiming matched budget. Downstream diagnostic evaluation is already in ImputeECG.",
+      "publication_action": "required_example_correction_before_publication"
+    },
+    {
+      "id": "ND8",
+      "review_verdict": "revise_supported_as_lower_priority",
+      "rationale": "Public event/noise bytes and a small-model plan support a bounded feasibility gate. Weak specific LTU seismic-AI linkage supports lower priority, not an academic ineligibility claim.",
+      "correction": "Clarify event-based calibration/validation distinct from final test; quality flags are training supervision only, not leaked test features. Report whether label-quality weights predict true noise or merely labeler/source strata. Keep 100-trace sample distinct from evidence that the larger selection pipeline is feasible.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND9",
+      "review_verdict": "keep_supported",
+      "rationale": "Strongest ready direction: LTU staff page explicitly lists speech variability and audio classification supervision interests. Hard-negative selection with learned rejection and controlled comparisons is meaningful applied development without novel architecture.",
+      "correction": "Keep speaker and unknown-word-type splits independent of mining and threshold tuning. Charge mining passes in total compute and use a feasible operating point with enough negatives. Preserve isolated-clip FPR wording, not false activations/hour. Do not imply staff commitment or demonstrated customer demand.",
+      "publication_action": "none"
+    },
+    {
+      "id": "ND10",
+      "review_verdict": "revise_supported_after_front_card_correction",
+      "rationale": "Direct LTU EEG/inner-speech research and prior-thesis connection is strongest institutionally. Actual data access is qualified; event alignment remains a legitimate prototype feasibility gate. The corrected methods explicitly acknowledge cue/task confounding.",
+      "correction": "Retitle/reword all first-view claims as artifact sensitivity in visually cued EEG task-label classification, e.g. \"Audit eye-movement effects in a cued EEG word task.\" Do not call surviving accuracy isolated imagined-word decoding or estimate a causal percentage due to ocular activity: visible words and inner speech overlap. Four participants require four reported outer folds and conservative descriptive uncertainty; freeze event reconciliation before training. Define whether held-out-subject unsupervised ICA uses only a permitted calibration period or is explicitly transductive; train-only learned corrections must not silently use test-person data.",
+      "publication_action": "required_before_publication"
+    }
+  ],
+  "source_file_sha256": {
+    "candidates.json": "77e363e1398565ca17a5ddc6a43357a51569763926fbcc8478df50822fdb9571",
+    "evidence.json": "370776a5604b0aeaa1807e9e9a7ac4361e8fed002f768e2688d1f8e13944e427",
+    "data-access-checks.json": "ded272de182515e4a12916a83035be6cd71fe73811ef50efa246a6bab5b150fd"
+  },
+  "primary_sources_checked": [
+    {
+      "url": "https://www.ltu.se/en/staff/g/gyorgy-kovacs",
+      "supports": "Explicit speech/audio thesis interests; no implied supervision commitment."
+    },
+    {
+      "url": "https://physionet.org/content/ptb-xl/1.0.3/",
+      "supports": "Patient-wise folds1-8/9/10,100Hz data and duplicate-removal release notes."
+    },
+    {
+      "url": "https://archive.ics.uci.edu/dataset/360/air+quality",
+      "supports": "One historic sensor installation and explicit research-only legacy wording alongside current licence metadata."
+    },
+    {
+      "url": "https://arxiv.org/html/2610.11236v1",
+      "supports": "Reference-efficient, location-transfer, drift and event-conditioned calibration already evaluated."
+    },
+    {
+      "url": "https://arxiv.org/html/2607.05009v1",
+      "supports": "Reconstructed ECG already evaluated for downstream diagnosis."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10264396/",
+      "supports": "Primary full text also inspected in preserved inner-primary-readable.txt: word visible throughout2-second EEG task; ocular-reference manual ICA already used."
+    },
+    {
+      "url": "https://epok.ltu.se/epok/dynpdf/public/kursplan/downloadPublicKursplan.pdf?kursKod=X7013E&lasPeriod=226&locale=en",
+      "supports": "Primary PDF retrieval succeeded; detailed extracted requirements independently supplied by parent, not re-extracted here."
+    }
+  ],
+  "nonblocking_improvements": [
+    "Separate ranking by immediate readiness from ranking by LTU specificity: ND10 has stronger institutional connection but more unresolved design gates than ND7.",
+    "HTTP403 on tested routes is evidence of failed verification, not permanent global data unavailability.",
+    "A working prototype pilot is an appropriate feasibility gate, not an impermissible missing thesis result.",
+    "CPU/RAM plans are unmeasured targets; absence of LTU GPUs/resources is correctly disclosed."
+  ],
+  "extension_review": {
+    "scope": "Bounded independent LE1/LE2 extension review; candidates/evidence/accesschecks plus preserved primary page/paper text and targeted official NAISS/current form-paper retrieval. No candidates edited or published; no experiments.",
+    "overall_verdict": "Both keep as qualified thesis possibilities with the already declared data-grouping, label-decoding and compute pilots. Substantive ML development and controlled comparisons fit an applied development/smaller research thesis; no new-algorithm requirement.",
+    "current_ltu_connection": "Supported independently of page date or projectarchive URL: preserved official Document Analysis page explicitly places Page segmentation and Layout analysis under Current projects; linked page describes Form Field Extraction and Page Layout Analysis including main text/marginalia. September2026 paper has LTU authors. Official NAISS2026/3-882 lists2026-11-01 to2027-11-01 and active document-analysis tasks. This corroborates continuing group activity, not funding or approval of either precise proposed thesis and not student compute entitlement.",
+    "reviews": [
+      {
+        "id": "LE1",
+        "review_verdict": "keep_with_evaluation_clarification",
+        "rationale": "Verified labelled public sample and publisher Apache2 declaration support access qualification. Signature-vs-text conditional classification and context/imbalance ablations are a specific learning study; detector mAP is correctly excluded. Full family inventory and sufficient rare independent families remain proper precommitment gates.",
+        "correction": "Preserve natural signature/text prevalence on validation/test, or explicitly report sampling weights and target population. Training negative caps/class balancing must not silently inflate test PR-AUC or precision. Freeze candidate-region selection and report provided-box results separately from secondary proposal-based results. Family-disjoint split/grouping and parameter/compute equality are required, as already planned.",
+        "publication_action": "Add one sentence clarifying unaltered evaluation prevalence; otherwise no blocker.",
+        "limits": "Only200 decoded rows establish format/access; they do not validate signature-family diversity or the planned full subset. Context gate/contrastive loss is not established novelty or guaranteed useful."
+      },
+      {
+        "id": "LE2",
+        "review_verdict": "keep_with_supervision_clarification",
+        "rationale": "Controlled multiclass boundary-noise learning, matched ignored-band/soft-label/hard-noise baselines, unchanged evaluation labels and bounded architecture form a substantive applied study. Three manuscripts permit three descriptive transfer cases, not broad population generalization; candidate correctly discloses this.",
+        "correction": "Construct the learner's uncertain boundary band and plausible adjacent-class set exclusively from its coarsened observed TRAIN mask. The original clean mask may generate controlled corruption and supply a separately labeled clean-supervision upper baseline, but must not secretly inform the robust loss. Use source-only tuning per manuscript-held-out fold; primary within-manuscript experimentation must not select settings using the outer held-out source. Resolve palette/overlap class rules before training.",
+        "publication_action": "Clarify supervision information available to each baseline before publication; no need to execute the pilot first.",
+        "limits": "Public legacy private-test pair is format evidence only; do not turn it into development data. Page resampling describes within-source uncertainty; three sources cannot support population-wide writer claims. Corrupted boundaries are synthetic, not measured annotation-time savings."
+      }
+    ],
+    "evidence_metadata_corrections": [
+      "Keep original publication date distinct from page updated date and project start/end. Several extension original_publication_date strings currently contain Updated2026-10-26 or Start/End; use dedicated fields or null original dates.",
+      "LE-E9: an embedded May-looking DOI component is not publication-date evidence. Retain verified August2026 issue date as issue date; remove DOI-derived dating unless publisher metadata independently confirms."
+    ],
+    "sources": [
+      {
+        "url": "https://www.ltu.se/en/research/research-subjects/machine-learning/research-areas/document-analysis",
+        "scope": "Preserved full primary page, explicit Current projects section read."
+      },
+      {
+        "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/documentanalysis/projectarchivedocumentanalysis/pagesegmentationandlayoutanalysis.5.48f4e5b19e0230fb7e2cc78.html",
+        "scope": "Preserved full primary page, explicit subproject descriptions read; fresh browser open unavailable."
+      },
+      {
+        "url": "https://supr.naiss.se/public/project/39690/",
+        "scope": "Official dates and full current project abstract freshly read."
+      },
+      {
+        "url": "https://arxiv.org/html/2609.23679v1",
+        "scope": "Fresh primary paper title/authors/methodological framing and benchmark characteristics inspected."
+      },
+      {
+        "url": "https://link.springer.com/article/10.1007/s10032-024-00475-w",
+        "scope": "Preserved primary weak-label paper inspected for existing approximate-ground-truth work."
+      }
+    ],
+    "source_file_sha256": {
+      "candidates.json": "062fb3b5489baf312d7f15c86995ac3da0e2dced25b993748a7c3a31192a1b92",
+      "evidence.json": "87d2a68f77a736c3f86c7d8024558538e60ac85f198e17e737212958d9c7670f",
+      "accesschecks.json": "775c3228376e32255d358b6cb6431239e7a6cbc35f90e6a8732a0b168dc7c13d",
+      "SUMMARY.txt": "27935e4b692a0856438d401624fc2fcc80e927980f3300170edbe2a759eca437"
+    }
+  },
+  "publication_corrections_applied": {
+    "ND1": "Removed an unsupported causal claim about separating sensor drift from environmental change. The contribution is a matched-budget sequential comparison, not the invention of reference-efficient calibration.",
+    "ND5": "Unseen-location evaluation requires shared node-wise scoring or scenario inference. Fixed multiclass trees are restricted to held-out episodes at known locations.",
+    "ND7": "Missing recorded lead channels are distinct from physical electrode failures; the example and simulated-missingness claim now preserve that distinction.",
+    "ND10": "Visible words prevent isolated inner-speech identification. The study is a cued-task classification/artifact audit; no causal fraction of thought decoding is claimed.",
+    "LE1": "Natural held-out signature prevalence must be preserved; only training negatives may be capped or resampled.",
+    "LE2": "Boundary uncertainty and plausible class sets must be computed from coarsened training labels only. Clean masks cannot silently provide privileged training supervision."
+  }
+}

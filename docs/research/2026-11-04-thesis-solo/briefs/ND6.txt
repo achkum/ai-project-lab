@@ -1,0 +1,60 @@
+ND6: Stop sleep-stage smoothing from erasing short real changes
+4 November 2026 — REVISE
+
+Problem
+Making predictions look smoother can improve average accuracy while deleting short bouts that the human scorer actually marked.
+
+Example
+A scorer marks one minute of waking between longer sleep periods. A smoother may erase it as noise; the study asks when that helps and when it hides evidence.
+
+Research question
+Can a compact learned smoothing gate improve macro-F1 without materially reducing recall of human-labelled short stage bouts, compared with fixed-duration and confidence-aware smoothing?
+
+What you would build/train
+Use YASA as a task-specific pretrained LightGBM baseline, plus a locally trained feature classifier. Train a small gate deciding whether to accept an epoch prediction or a smoothed alternative using local probabilities and signal-quality features.
+
+Comparisons
+Unsmoothed epoch classifier; majority/median smoothing HMM/HSMM duration smoothing StageGuard-style confidence/quality-aware smoothing; random-transformer smoother where reproducible
+
+Evaluation
+Group all nights by person. Tune on development people, test once on held-out people; disclose potential pretrained data exposure. Report macro-F1, transition precision/recall, duration-stratified bout recall and temporal displacement. Score 30-second labels only: no claim to identify micro-arousals absent in annotations. YASA uses future context, so compare offline scoring at matched context windows.
+
+Data and terms
+Sleep-EDF public signal EDF prefix parsed; full 4,620-byte hypnogram fetched and sleep labels parsed. Open Data Commons Attribution License 1.0 on PhysioNet; not CC BY. Full nights were not downloaded. Historical cohorts and scorer labels do not establish clinical benefit; check model/software terms before redistributing weights.
+
+CPU plan
+Pilot: four to eight nights, cached epoch features and tiny gate; process EDF in chunks, target below 4 GB RAM. Scale to a participant-stratified subset of 20–40 people before deciding whether all nights are necessary.
+
+Semester scope
+Weeks 1–3: validate epochs, stages and participant grouping Weeks 4–8: reproduce unsmoothed/fixed and current quality-aware alternatives Weeks 9–14: train gate, compare equal context and test duration sensitivities Weeks 15–20: ablate signal quality versus confidence, quantify uncertainty and write
+
+Closest work
+StageGuard (July 2026) already combines transition constraints, duration models and signal quality. October duration-aware world-model work and May random-transformer research make generic learned smoothing a weak novelty claim. AnySleep (October 30) addresses broad channel-agnostic staging at a very different training scale.
+
+Proposed contribution
+An applied failure-analysis and mitigation project centred on preserving labelled short bouts under a fixed computation/context budget. A careful negative result against simple/current smoothers is legitimate; superiority is not promised.
+
+Research connection
+Health Intelligence studies learning from noninvasive EEG and interpretation of brain activity. This thesis concerns the reliability of EEG-derived temporal decisions.
+
+Limits
+LTU page focuses inner speech and neurological/BCI work; no specific sleep-staging project or clinical collaborator is assumed. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Gate may reproduce StageGuard rather than add useful behaviour Few short bouts yield wide intervals Sleep EDF label conventions and cohorts limit generalization
+
+Output
+A reproducible scorer comparison, trained correction gate and an evidence-based account of which short changes are lost by smoothing.
+
+Verdict
+Data and CPU path pass, but exact scope should be tightened against very close existing work; LTU brain-signal methods fit is adjacent rather than an advertised sleep project.
+
+Source URLs
+https://physionet.org/content/sleep-edfx/1.0.0/
+https://physionet.org/content/sleep-edfx/view-license/1.0.0/
+https://yasa-sleep.org/generated/yasa.SleepStaging.html
+https://arxiv.org/html/2607.23284v1
+https://arxiv.org/html/2610.33033v1
+https://arxiv.org/html/2605.09905v1
+https://www.nature.com/articles/s41746-026-03406-7
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html

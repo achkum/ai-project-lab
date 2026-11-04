@@ -1,0 +1,121 @@
+{
+  "batch_id": "20261104-thesis-solo",
+  "date": "2026-11-04",
+  "target": 10,
+  "audited": 12,
+  "retained": 9,
+  "kept": 5,
+  "conditional_revision": 4,
+  "withdrawn": 3,
+  "experiments_completed": 0,
+  "items": [
+    {
+      "id": "ND1",
+      "title": "When should an air sensor be checked again?",
+      "verdict": "keep",
+      "assessment": "Public research-compatible data, small CPU workload and a substantive adaptive-learning comparison. LTU connection is a measurement/efficient-ML methods fit, not a currently advertised air-sensor thesis.",
+      "data_gate": "pass_for_noncommercial_research",
+      "academic_alignment": "indirect",
+      "correction": "Removed an unsupported causal claim about separating sensor drift from environmental change. The contribution is a matched-budget sequential comparison, not the invention of reference-efficient calibration."
+    },
+    {
+      "id": "ND2",
+      "title": "Tell mosquito species apart without learning the recording site",
+      "verdict": "withdraw",
+      "assessment": "Failed actual-data access gate; prior work also removes the original generic adaptation claim.",
+      "data_gate": "fail_access",
+      "academic_alignment": "indirect",
+      "correction": null
+    },
+    {
+      "id": "ND3",
+      "title": "Show where a small flood mapper is unsure about the shoreline",
+      "verdict": "withdraw",
+      "assessment": "Failed licence gate despite successful sample downloads.",
+      "data_gate": "fail_licence",
+      "academic_alignment": "indirect",
+      "correction": null
+    },
+    {
+      "id": "ND4",
+      "title": "Leave room for appliances the energy model has never seen",
+      "verdict": "withdraw",
+      "assessment": "Metadata openness did not translate into verified usable data.",
+      "data_gate": "fail_access",
+      "academic_alignment": "indirect",
+      "correction": null
+    },
+    {
+      "id": "ND5",
+      "title": "Tell a water engineer when several leak locations look equally plausible",
+      "verdict": "revise",
+      "assessment": "Usable licensed simulation inputs, but narrower LTU research connection and incomplete closest-paper access make this a reserve study, not a top recommendation.",
+      "data_gate": "pass_for_simulation_only",
+      "academic_alignment": "indirect",
+      "correction": "Unseen-location evaluation requires shared node-wise scoring or scenario inference. Fixed multiclass trees are restricted to held-out episodes at known locations."
+    },
+    {
+      "id": "ND6",
+      "title": "Stop sleep-stage smoothing from erasing short real changes",
+      "verdict": "revise",
+      "assessment": "Data and CPU path pass, but exact scope should be tightened against very close existing work; LTU brain-signal methods fit is adjacent rather than an advertised sleep project.",
+      "data_gate": "pass",
+      "academic_alignment": "indirect",
+      "correction": null
+    },
+    {
+      "id": "ND7",
+      "title": "Should an ECG model fill missing signals or work with what it has?",
+      "verdict": "keep",
+      "assessment": "Verified public signal/label access and an achievable, substantive applied model-development/evaluation study. Rank below the directly LTU-linked voice/inner-speech directions for institutional specificity.",
+      "data_gate": "pass",
+      "academic_alignment": "indirect",
+      "correction": "Missing recorded lead channels are distinct from physical electrode failures; the example and simulated-missingness claim now preserve that distinction."
+    },
+    {
+      "id": "ND8",
+      "title": "Let a small earthquake detector admit when its timing is unreliable",
+      "verdict": "revise",
+      "assessment": "Data and CPU study are credible, but institutional/application fit is weaker than the directly linked LTU ML topics. Keep as reserve; do not promote based only on the word geophysics.",
+      "data_gate": "pass",
+      "academic_alignment": "indirect",
+      "correction": null
+    },
+    {
+      "id": "ND9",
+      "title": "Teach a small voice-command model which similar words to ignore",
+      "verdict": "keep",
+      "assessment": "Directly connected to LTU’s explicitly listed speech/audio master-thesis interests, verified public audio and a months-long scientific comparison. No new architecture is required.",
+      "data_gate": "pass",
+      "academic_alignment": "direct",
+      "correction": null
+    },
+    {
+      "id": "ND10",
+      "title": "Can a brain-signal model get the right answer for the wrong reason?",
+      "verdict": "revise",
+      "assessment": "Strongest direct LTU project/data connection, with real licensed file access. Promising thesis direction once the explicit alignment/control pilot is resolved; not a ready semantic-decoding claim.",
+      "data_gate": "pass_with_study_design_gate",
+      "academic_alignment": "direct",
+      "correction": "Visible words prevent isolated inner-speech identification. The study is a cued-task classification/artifact audit; no causal fraction of thought decoding is claimed."
+    },
+    {
+      "id": "LE1",
+      "title": "Teach a small model when an empty form field is for a signature",
+      "verdict": "keep",
+      "assessment": "Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.",
+      "data_gate": "pass_for_research",
+      "academic_alignment": "direct",
+      "correction": "Natural held-out signature prevalence must be preserved; only training negatives may be capped or resampled."
+    },
+    {
+      "id": "LE2",
+      "title": "Keep marginal notes separate when manuscript training labels are rough",
+      "verdict": "keep",
+      "assessment": "Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.",
+      "data_gate": "pass_for_research",
+      "academic_alignment": "direct",
+      "correction": "Boundary uncertainty and plausible class sets must be computed from coarsened training labels only. Clean masks cannot silently provide privileged training supervision."
+    }
+  ]
+}

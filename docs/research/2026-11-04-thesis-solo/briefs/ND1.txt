@@ -1,0 +1,58 @@
+ND1: When should an air sensor be checked again?
+4 November 2026 — KEEP
+
+Problem
+A cheap sensor can gradually become less accurate; checking it against a reference instrument has a cost.
+
+Example
+A sensor becomes less accurate over several weeks. Compare when a model requests new reference readings, and whether those readings reduce future error. This cannot establish why the sensor changed.
+
+Research question
+At equal budgets of newly revealed reference measurements, which sequential recalibration policy best controls future concentration error and worst-week error on a changing sensor time series?
+
+What you would build/train
+Fit ridge and shallow boosted-tree calibration models, then learn a small residual-update model. Compare scheduled, uncertainty-based and drift-triggered label requests; explicitly charge every reference reading used.
+
+Comparisons
+Static ridge; static boosted trees Periodic recalibration and random measurement requests at the same label budget Rolling-window retraining; uncertainty-only selection; proposed combined disagreement-and-change trigger
+
+Evaluation
+Chronological outer blocks; tune thresholds only on earlier months. Mask all unpurchased reference values. Fit imputers/scalers only on historical training data. Group uncertainty estimates by week; report MAE, worst-week MAE, error versus purchased labels, and update time. Report performance under changing conditions without attributing causal contributions to sensor drift or concentration changes; this dataset cannot identify them.
+
+Data and terms
+UCI CSV prefix parsed: 303 complete rows, 15 columns; sensor and reference fields present. UCI currently displays CC BY 4.0; embedded historical terms restrict use to research and exclude commercial use. Proposed thesis stays within the intersection. One historic outdoor installation, 2004–2005; no indoor, multi-device or modern regulatory claim. Do not transfer the thesis data into a venture without resolving the terms.
+
+CPU plan
+Pilot: 2,000 chronological rows, ridge/tree fits, at most 20 parameter settings. Full dataset about 9,358 rows; laptop memory target below 2 GB. Measure actual time in the pilot; no runtime measured today. VPS optional for result viewing, not training.
+
+Semester scope
+Weeks 1–3: reproduce static calibration and audit missing sentinel -200 Weeks 4–8: build the budgeted sequential learning protocol and implement three update policies Weeks 9–14: nested chronological evaluation, seasonal stress tests and ablations Weeks 15–20: sensitivity/uncertainty analysis, reproducible package and thesis
+
+Closest work
+The October 2026 lightweight indoor-calibration study already evaluates drift and chronological deployment scenarios. Its newly described dataset access was not verified here; use UCI data only. Public LinkedIn calibration webinars corroborate professional interest, not demand.
+
+Proposed contribution
+Compare sequential update and measurement-request policies at exactly matched reference-label budgets on a public historical dataset. Existing reference-efficient and drift-aware calibration methods are baselines; this is an applied comparative study, not a newly invented calibration principle.
+
+Research connection
+Electronic Systems explicitly studies measurement technology for monitoring and instrumentation; Sustainable ML studies efficient algorithms and deployment. The thesis joins those through measured calibration cost and adaptation reliability.
+
+Limits
+No specific LTU air-quality project or field partner was verified. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+One device limits external validity Missing references and seasonality can bias query policy comparisons Acquisition cost is simulated; no actual instrument cost or field savings claimed
+
+Output
+An auditable sequential calibration benchmark, trained compact models, label-budget/error curves and a recommendation about when simple schedules suffice.
+
+Verdict
+Public research-compatible data, small CPU workload and a substantive adaptive-learning comparison. LTU connection is a measurement/efficient-ML methods fit, not a currently advertised air-sensor thesis.
+
+Source URLs
+https://arxiv.org/html/2610.11236v1
+https://archive.ics.uci.edu/api/dataset?id=360
+https://archive.ics.uci.edu/dataset/360/air+quality
+https://cz.linkedin.com/posts/czwa_making-sense-of-sensor-calibration-metadata-activity-7517828216091516928-hZh0
+https://www.ltu.se/en/research/research-subjects/electronic-systems
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html

@@ -10,4 +10,8 @@ test('comparison follows local selection across search and batch changes without
  const html=nodes['thesis-cards'].innerHTML;assert.ok(html.includes('Compare at a glance'));assert.ok(html.includes('T1 ·'));assert.ok(html.includes('T2 ·'));assert.ok(!html.includes('P1 ·'));
  context.renderCards('Project');assert.ok(!nodes['project-cards'].innerHTML.includes('Compare at a glance'));
  context.renderCards('Thesis');assert.deepEqual([...context.selectedIdeas],['T1','T2','P1']);assert.ok(nodes['thesis-cards'].innerHTML.includes('CURRENT RESEARCH · 2 Nov 2026'));assert.ok(nodes['thesis-cards'].innerHTML.includes('0 / 10 topics investigated'));
+ sample.thesis.research_run.investigated_topics=12;sample.thesis.research_run.qualified_topics=9;
+ context.renderCards('Thesis');assert.match(nodes['thesis-cards'].innerHTML,/9 \/ 10 possibilities retained/);
+ assert.match(nodes['thesis-cards'].innerHTML,/12 leads investigated/);
+ assert.doesNotMatch(nodes['thesis-cards'].innerHTML,/12 \/ 10 topics investigated/);
 });

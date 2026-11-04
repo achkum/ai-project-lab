@@ -1,0 +1,48 @@
+Applied AI thesis investigation: 4 November 2026
+
+12 leads audited; 9 public-data possibilities retained: 5 keep, 4 revise; 3 withdrawn. Target: 10 qualified possibilities. A shortfall is disclosed rather than filled with inaccessible data or duplicate studies.
+3 November was missed. This is the single 4 November catch-up batch, not a backdated daily run.
+90 distinct source URLs were inspected, with reading depth and original dates recorded. Abstract-only and targeted reads are labelled; URL count does not measure evidence quality.
+GitHub daily/weekly Trending and public LinkedIn were checked as discovery channels, not proof of a thesis gap.
+
+Academic basis: LTU TMDIA Applied AI; X7013E is a 30-credit independent thesis. The official Spring 2027 syllabus is currently served with a 2024 revision date. It permits complex development or a smaller research project with justified methods and critical evaluation. No supervisor, examiner, organisational data or university hardware entitlement is assumed.
+The early broad pass preceded the owner's LTU-first correction; those candidates are labelled as direct or indirect connections. The document-analysis extension started from actual LTU research. Earlier incomplete query retention is disclosed in the ledger.
+
+No model experiments or full thesis commitment have started. Projects remain paused by the owner.
+
+LE1 [KEEP] Teach a small model when an empty form field is for a signature
+An empty signature line and an ordinary text field can look almost identical. The clue is often beside the field: its label, neighbouring date field or place in the form.
+Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.
+
+LE2 [KEEP] Keep marginal notes separate when manuscript training labels are rough
+A digitisation model must separate main text from marginal notes. Precise pixel labels are expensive; coarse boundaries can teach a model to erase small notes or merge them into the main text.
+Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.
+
+ND9 [KEEP] Teach a small voice-command model which similar words to ignore
+Recognizing a command in an isolated clip does not ensure a model can reject other similar words.
+Directly connected to LTU’s explicitly listed speech/audio master-thesis interests, verified public audio and a months-long scientific comparison. No new architecture is required.
+
+ND10 [REVISE] Can a brain-signal model get the right answer for the wrong reason?
+A model can classify the word shown during a brain-recording task by using eye movements or recording shortcuts. That does not prove it recognises imagined speech.
+Strongest direct LTU project/data connection, with real licensed file access. Promising thesis direction once the explicit alignment/control pilot is resolved; not a ready semantic-decoding claim.
+
+ND7 [KEEP] Should an ECG model fill missing signals or work with what it has?
+Reconstructed ECG channels can look plausible while changing the classification result.
+Verified public signal/label access and an achievable, substantive applied model-development/evaluation study. Rank below the directly LTU-linked voice/inner-speech directions for institutional specificity.
+
+ND1 [KEEP] When should an air sensor be checked again?
+A cheap sensor can gradually become less accurate; checking it against a reference instrument has a cost.
+Public research-compatible data, small CPU workload and a substantive adaptive-learning comparison. LTU connection is a measurement/efficient-ML methods fit, not a currently advertised air-sensor thesis.
+
+ND6 [REVISE] Stop sleep-stage smoothing from erasing short real changes
+Making predictions look smoother can improve average accuracy while deleting short bouts that the human scorer actually marked.
+Data and CPU path pass, but exact scope should be tightened against very close existing work; LTU brain-signal methods fit is adjacent rather than an advertised sleep project.
+
+ND5 [REVISE] Tell a water engineer when several leak locations look equally plausible
+A few pressure sensors may not identify a unique leaking pipe, especially when two leaks occur together.
+Usable licensed simulation inputs, but narrower LTU research connection and incomplete closest-paper access make this a reserve study, not a top recommendation.
+
+ND8 [REVISE] Let a small earthquake detector admit when its timing is unreliable
+A small model may put a precise-looking timestamp on noise or on a poorly defined arrival.
+Data and CPU study are credible, but institutional/application fit is weaker than the directly linked LTU ML topics. Keep as reserve; do not promote based only on the word geophysics.
+

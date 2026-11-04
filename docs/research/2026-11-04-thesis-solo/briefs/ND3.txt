@@ -1,0 +1,58 @@
+ND3: Show where a small flood mapper is unsure about the shoreline
+4 November 2026 — WITHDRAW
+
+Problem
+A fast flood mask can be wrong around boundaries and small flooded areas.
+
+Example
+Two maps agree about a large flooded field but disagree along a road; the study would expose those uncertain pixels.
+
+Research question
+Does a learned local boundary correction/rejection stage improve event-held-out flood mapping at a fixed CPU inference budget?
+
+What you would build/train
+Would adapt a small segmentation decoder or boundary head; compare to compact U-Net and frozen-feature linear heads.
+
+Comparisons
+Compact U-Net Prithvi-derived Tiny student; frozen and fully trained versions Threshold calibration without a learned correction stage
+
+Evaluation
+Nested event-level splits; thresholds and model selection must exclude the held-out event. Report boundary F1, IoU, risk/coverage and peak RAM, not only average segmentation accuracy.
+
+Data and terms
+Complete official label TIFF and S1/S2 chips downloaded. Label decoded as 512 by 512 with -1/0/1 values. Both official STAC collections declare proprietary. Unresolved: official source and label STAC say proprietary, while other descriptions/mirrors imply openness. GitHub issue 18 remains open; all two replies read, last 2026-09-15 asks the same clarification. No maintainer resolution found.
+
+CPU plan
+Not qualified. A small head on 128-pixel tiles could be tested locally, but accessible bytes do not grant reuse rights.
+
+Semester scope
+Would need reproduction, strict event-split correction, adaptation, CPU profiling and failure analysis; no work is authorized while rights remain unclear.
+
+Closest work
+October 2026 Prithvi-to-Tiny paper already studies compact flood segmentation, boundaries, entropy and CPU speed; U-Net is a strong alternative.
+
+Proposed contribution
+Nested selection and actionable boundary rejection would need separate evaluation; generic small-model flood mapping is already established.
+
+Research connection
+LTU Computer Vision lists the Swedish Space Data Lab; geospatial image analysis is substantively relevant.
+
+Limits
+No thesis endorsement; no right to reuse the selected dataset. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Unresolved data rights Few independent flood events Foundation pretraining exposure and hyperparameter leakage
+
+Output
+Licence conflict evidence and withdrawn lead.
+
+Verdict
+Failed licence gate despite successful sample downloads.
+
+Source URLs
+https://arxiv.org/html/2610.34904v1
+https://raw.githubusercontent.com/cloudtostreet/Sen1Floods11/master/README.md
+https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_source/collection.json
+https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_label/collection.json
+https://github.com/cloudtostreet/Sen1Floods11/issues/18
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/computervision.4.1290fc0918d8763190a6f0c8.html

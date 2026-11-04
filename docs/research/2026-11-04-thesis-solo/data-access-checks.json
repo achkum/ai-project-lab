@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-04",
+  "scope": "Bounded samples and primary terms, not a full training-data quality audit.",
+  "checks": [
+    {
+      "candidate_id": "ND1",
+      "check_id": "D1",
+      "gate": "pass_for_noncommercial_research",
+      "access_proof": "UCI CSV prefix parsed: 303 complete rows, 15 columns; sensor and reference fields present.",
+      "licence": "UCI currently displays CC BY 4.0; embedded historical terms restrict use to research and exclude commercial use. Proposed thesis stays within the intersection.",
+      "uncertainty": "One historic outdoor installation, 2004–2005; no indoor, multi-device or modern regulatory claim. Do not transfer the thesis data into a venture without resolving the terms.",
+      "source_urls": [
+        "https://archive.ics.uci.edu/api/dataset?id=360",
+        "https://archive.ics.uci.edu/dataset/360/air+quality"
+      ],
+      "data_link": "https://archive.ics.uci.edu/dataset/360/air+quality"
+    },
+    {
+      "candidate_id": "ND2",
+      "check_id": "D2",
+      "gate": "fail_access",
+      "access_proof": "Zenodo metadata and file list read; development archive returned HTTP 403 using ordinary public GET and bounded range requests. No actual audio sample obtained.",
+      "licence": "Zenodo record declares CC BY 4.0.",
+      "uncertainty": "Licence metadata is not proof of usable file access; no qualified topic until a permitted public route actually works.",
+      "source_urls": [
+        "https://zenodo.org/api/records/20478577"
+      ],
+      "data_link": "https://zenodo.org/records/20478577"
+    },
+    {
+      "candidate_id": "ND3",
+      "check_id": "D3",
+      "gate": "fail_licence",
+      "access_proof": "Complete official label TIFF and S1/S2 chips downloaded. Label decoded as 512 by 512 with -1/0/1 values. Both official STAC collections declare proprietary.",
+      "licence": "Unresolved: official source and label STAC say proprietary, while other descriptions/mirrors imply openness.",
+      "uncertainty": "GitHub issue 18 remains open; all two replies read, last 2026-09-15 asks the same clarification. No maintainer resolution found.",
+      "source_urls": [
+        "https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_source/collection.json",
+        "https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_label/collection.json"
+      ],
+      "data_link": "https://github.com/cloudtostreet/Sen1Floods11"
+    },
+    {
+      "candidate_id": "ND4",
+      "check_id": "D4",
+      "gate": "fail_access",
+      "access_proof": "UK-DALE owner page and REFIT publisher/Zenodo metadata read. UK-DALE legacy host redirected away from data; actual cleaned REFIT CSV and publisher files returned 403.",
+      "licence": "UK-DALE/REFIT pages declare CC BY 4.0.",
+      "uncertainty": "A separate Figshare REFIT Smart Home record was inspected but is not the electrical-load dataset and is not treated as substitute access.",
+      "source_urls": [
+        "https://jack-kelly.com/data/",
+        "https://data.ukedc.rl.ac.uk/browse/edc/efficiency/residential/EnergyConsumption/Domestic/UK-DALE-2017/UK-DALE-FULL-disaggregated",
+        "https://pureportal.strath.ac.uk/en/datasets/31da3ece-f902-4e95-a093-e0a9536983c4",
+        "https://zenodo.org/records/5063428"
+      ],
+      "data_link": "https://jack-kelly.com/data/"
+    },
+    {
+      "candidate_id": "ND5",
+      "check_id": "D5",
+      "gate": "pass_for_simulation_only",
+      "access_proof": "Complete L-Town nominal EPANET network (412,200 bytes), dataset README and generator source downloaded; generator imports WNTR and explicitly creates leak nodes. SCADA pressure CSV returned 403.",
+      "licence": "Network/data record CC BY 4.0; generator EUPL 1.2 with README permitting 1.1 or later.",
+      "uncertainty": "Use freshly generated simulations only. Neither held-out benchmark SCADA nor operational field data are claimed available; simulator execution has not yet been tested.",
+      "source_urls": [
+        "https://zenodo.org/api/records/4017659",
+        "https://zenodo.org/api/records/4017659/files/README.txt/content",
+        "https://zenodo.org/api/records/4017659/files/L-TOWN.inp/content",
+        "https://raw.githubusercontent.com/KIOS-Research/BattLeDIM/master/Dataset%20Generator/README.txt"
+      ],
+      "data_link": "https://zenodo.org/records/4017659"
+    },
+    {
+      "candidate_id": "ND6",
+      "check_id": "D6",
+      "gate": "pass",
+      "access_proof": "Sleep-EDF public signal EDF prefix parsed; full 4,620-byte hypnogram fetched and sleep labels parsed.",
+      "licence": "Open Data Commons Attribution License 1.0 on PhysioNet; not CC BY.",
+      "uncertainty": "Full nights were not downloaded. Historical cohorts and scorer labels do not establish clinical benefit; check model/software terms before redistributing weights.",
+      "source_urls": [
+        "https://physionet.org/content/sleep-edfx/1.0.0/",
+        "https://physionet.org/content/sleep-edfx/view-license/1.0.0/"
+      ],
+      "data_link": "https://physionet.org/content/sleep-edfx/1.0.0/"
+    },
+    {
+      "candidate_id": "ND7",
+      "check_id": "D7",
+      "gate": "pass",
+      "access_proof": "Public PTB-XL metadata prefix parsed, complete waveform header read, and full 24,000-byte 100-Hz 12-lead ECG record decoded.",
+      "licence": "CC BY 4.0.",
+      "uncertainty": "No institutional credentials/new agreement required for these files. Clinical deployment, patient benefit and external-hospital validity are not established.",
+      "source_urls": [
+        "https://physionet.org/content/ptb-xl/1.0.3/",
+        "https://physionet.org/files/ptb-xl/1.0.3/LICENSE.txt"
+      ],
+      "data_link": "https://physionet.org/content/ptb-xl/1.0.3/"
+    },
+    {
+      "candidate_id": "ND8",
+      "check_id": "D8",
+      "gate": "pass",
+      "access_proof": "All 100 STEAD sample traces and metadata decoded (7.57 MB). Separately decoded a complete real noise trace from official SeisBench HDF5 using 99,480 bytes in 15 bounded range requests.",
+      "licence": "STEAD CC BY 4.0 confirmed in official distribution/source.",
+      "uncertainty": "100-sample file contains earthquakes only; it is not a negative dataset. Full SeisBench waveform object is about 91 GB and was not downloaded. Larger pilot requires selective ranges and a streamed metadata pass.",
+      "source_urls": [
+        "https://raw.githubusercontent.com/smousavi05/STEAD/master/README.md",
+        "https://raw.githubusercontent.com/smousavi05/STEAD/master/LICENSE"
+      ],
+      "data_link": "https://github.com/smousavi05/STEAD"
+    },
+    {
+      "candidate_id": "ND9",
+      "check_id": "D9",
+      "gate": "pass",
+      "access_proof": "First 1 MiB of official Speech Commands v0.02 archive yielded a complete 16-kHz mono WAV: 16,000 frames. Dataset licence verified on primary Google release page.",
+      "licence": "CC BY 4.0 for Speech Commands; software/other checkpoints retain their own terms.",
+      "uncertainty": "The verified archive is about 2.43 GB compressed; use a small deterministic subset first. No long real-background corpus was verified for this proposal; do not claim continuous-listening results.",
+      "source_urls": [
+        "https://www.tensorflow.org/datasets/catalog/speech_commands"
+      ],
+      "data_link": "https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz"
+    },
+    {
+      "candidate_id": "ND10",
+      "check_id": "D10",
+      "gate": "pass_with_study_design_gate",
+      "access_proof": "OpenNeuro ds004196 v2.0.2 metadata declares CC0. Complete labels/channel metadata read; public S3 returned 1 MiB of a 152,513,024-byte BDF and a complete one-second record was decoded: 73 channels, 512 samples per channel.",
+      "licence": "Dataset CC0; LTU preprocessing repository GPL-3.0.",
+      "uncertainty": "Only four healthy participants; cue/inner-speech timing and event units require reconciliation. Actual files are accessible, but aligned training epochs have not yet been established. No patient/clinical benefit inference.",
+      "source_urls": [
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/dataset_description.json",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/sub-01/ses-EEG/eeg/sub-01_ses-EEG_task-inner_eeg.json",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/README"
+      ],
+      "data_link": "https://openneuro.org/datasets/ds004196/versions/2.0.2"
+    },
+    {
+      "candidate_id": "LE1",
+      "check_id": "LE-D1",
+      "gate": "pass_for_research",
+      "access_proof": "Complete 33,930,838-byte parquet sample downloaded and decoded: 200 image/annotation rows; first JPEG 1081x1400 with 138 boxes. Full train/validation/test archives and annotation JSON files are public in repository metadata.",
+      "licence": "Apache-2.0 declared in official dataset card",
+      "uncertainty": "Before committing, inventory unique signature-bearing document families and group overlap using full annotation metadata. Require enough independent held-out families for meaningful intervals; otherwise drop this topic or change the claim, not duplicate crops to inflate sample size.",
+      "source_urls": [
+        "https://huggingface.co/datasets/omoured/minicommonform"
+      ],
+      "data_link": "https://huggingface.co/datasets/omoured/minicommonform"
+    },
+    {
+      "candidate_id": "LE2",
+      "check_id": "LE-D2",
+      "gate": "pass_for_research",
+      "access_proof": "50,000,000 bytes fetched in two bounded HTTP ranges from a 1,295,308,933-byte archive. Nested archives yielded matching original JPEG and pixel mask for CB55 page 0019r, both 4872x6496, and its PAGE XML. Decoding succeeded. The archive is a website mirror containing nested zip files; a single flat image folder should not be assumed.",
+      "licence": "CC-BY-4.0 explicitly returned by unauthenticated Zenodo metadata API",
+      "uncertainty": "Three manuscripts severely limit generalisation; no invented independent-writer count.",
+      "source_urls": [
+        "https://zenodo.org/records/19127869"
+      ],
+      "data_link": "https://zenodo.org/records/19127869"
+    }
+  ]
+}

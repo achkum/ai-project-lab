@@ -1,0 +1,61 @@
+ND5: Tell a water engineer when several leak locations look equally plausible
+4 November 2026 — REVISE
+
+Problem
+A few pressure sensors may not identify a unique leaking pipe, especially when two leaks occur together.
+
+Example
+The same pressure drop could come from either of two streets. The study tests whether a model should return a small region rather than one confident pipe.
+
+Research question
+In a public simulated water network, how do sensor loss, concurrent leaks and hydraulic-model mismatch change the size and reliability of a learned set of possible leak locations?
+
+What you would build/train
+Generate labelled hydraulic scenarios from the verified public network. Train a small graph classifier or gradient-boosted residual classifier and calibrate location sets; compare single-location and set-valued predictions. For unseen locations, use shared node-wise graph scores or scenario matching. A fixed multiclass boosted-tree model is only a known-location baseline.
+
+Comparisons
+Pressure-residual nearest scenario and hydraulic sensitivity ranking Boosted trees on sensor residuals Small graph model with/without physical residuals; current physics-informed GNN as a conceptual comparator
+
+Evaluation
+Split entire simulated episodes and leak locations, not adjacent time steps. Hold out demand patterns, roughness perturbations and leak pairs. Report coverage versus graph-distance/region size and false localization on no-leak episodes. Any conformal-style coverage is empirical under model shift, not a guaranteed field bound. Report known-location episode generalization separately from unseen-node tests; only models capable of scoring unseen nodes enter the latter comparison.
+
+Data and terms
+Complete L-Town nominal EPANET network (412,200 bytes), dataset README and generator source downloaded; generator imports WNTR and explicitly creates leak nodes. SCADA pressure CSV returned 403. Network/data record CC BY 4.0; generator EUPL 1.2 with README permitting 1.1 or later. Use freshly generated simulations only. Neither held-out benchmark SCADA nor operational field data are claimed available; simulator execution has not yet been tested.
+
+CPU plan
+Pilot: 30–100 short scenarios, limited leak nodes, one hydraulic worker and a tiny graph/tree model. Cache sensor vectors, not full hydraulic histories; target under 6 GB on laptop. Expand to hundreds/thousands only after timing and storage measurements.
+
+Semester scope
+Weeks 1–4: validate generator against documented nominal cases and characterize distinguishable locations Weeks 5–9: train location/set models and build equal-information baselines Weeks 10–15: concurrent-leak, sensor-loss and model-mismatch experiments Weeks 16–20: uncertainty limits, reproducibility and report
+
+Closest work
+October 2026 concurrent-leak physics-GNN preprint reports strong detection but difficult localization; only abstract/result summary was accessible here, not full methods. Existing simulator already generates leaks.
+
+Proposed contribution
+A rigorous study of identification ambiguity and region size, not a real water-utility deployment or a claim to invent simulation/GNN leak detection.
+
+Research connection
+Urban Water Engineering explicitly covers collection and transport in drinking-water/sewer systems; ML AI4Science supports learned scientific models. The proposed contribution is inference reliability under incomplete sensing.
+
+Limits
+The current water group page prioritizes stormwater/sewers; a current LTU pressure-leak localization project was not found. Do not equate those subjects automatically. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Only simulation can be defended Hydraulic parameter choices may dominate results Current-paper full-method review remains incomplete LTU project-level alignment weaker than the speech/EEG proposals
+
+Output
+A public simulation/evaluation suite, compact diagnostic model and maps showing where available sensors cannot resolve a leak uniquely.
+
+Verdict
+Usable licensed simulation inputs, but narrower LTU research connection and incomplete closest-paper access make this a reserve study, not a top recommendation.
+
+Source URLs
+https://zenodo.org/api/records/4017659
+https://zenodo.org/api/records/4017659/files/README.txt/content
+https://zenodo.org/api/records/4017659/files/L-TOWN.inp/content
+https://raw.githubusercontent.com/KIOS-Research/BattLeDIM/master/Dataset%20Generator/dataset_generator.py
+https://raw.githubusercontent.com/KIOS-Research/BattLeDIM/master/Dataset%20Generator/README.txt
+https://raw.githubusercontent.com/KIOS-Research/BattLeDIM/master/LICENSE.md
+https://www.preprints.org/manuscript/202610.0666
+https://www.ltu.se/en/research/research-subjects/urban-water-engineering
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/ai4science.4.1290fc0918d8763190a6f12e.html

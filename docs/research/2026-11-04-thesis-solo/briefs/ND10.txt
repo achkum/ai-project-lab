@@ -1,0 +1,64 @@
+ND10: Can a brain-signal model get the right answer for the wrong reason?
+4 November 2026 — REVISE
+
+Problem
+A model can classify the word shown during a brain-recording task by using eye movements or recording shortcuts. That does not prove it recognises imagined speech.
+
+Example
+Someone sees “four” and silently imagines saying it. The study checks whether recognition survives removing eye-movement signals. Because the word stays on screen, success would still not prove that the model reads thoughts.
+
+Research question
+On LTU’s public inner-speech EEG dataset, how much of compact word/category classification survives strict event alignment, participant-held-out evaluation and reproducible ocular-artifact handling with negative controls?
+
+What you would build/train
+Train regularized covariance/bandpower classifiers and EEGNet. Compare nuisance-channel exclusion, train-only artifact correction and a small nuisance-invariance penalty. Use the same trials and preprocessing for all models; no foundation-model pretraining or fMRI training needed.
+
+Comparisons
+Chance/label-permutation and temporal-offset controls Bandpower plus regularized linear classifier; covariance classifier EEGNet; closest published spectro-temporal transformer where implementation is reproducible and CPU cost acceptable EOG-only, fixation/rest and early-versus-late task windows as diagnostic controls; none isolates internal speech from reading the simultaneously visible word
+
+Evaluation
+Split people before preprocessing/model selection, and keep complete trials/windows together. Evaluate all four held-out participants separately, with conservative uncertainty rather than treating 1,280 nominal trials as independent people. Compare two-category and eight-word tasks. Resolve BDF Status triggers against events.tsv and the stimulation protocol before training: values around 4,000 per trial appear millisecond-scale, and the checked subject TSV has319 rows (daughter39, other words40), not the described320. If alignment cannot be justified, stop the classification claim and report the reproducibility failure. The protocol has1-second fixation,2-second visible-word/inner-speech task,1-second rest; no separate cue-only control exists.
+
+Data and terms
+OpenNeuro ds004196 v2.0.2 metadata declares CC0. Complete labels/channel metadata read; public S3 returned 1 MiB of a 152,513,024-byte BDF and a complete one-second record was decoded: 73 channels, 512 samples per channel. Dataset CC0; LTU preprocessing repository GPL-3.0. Only four healthy participants; cue/inner-speech timing and event units require reconciliation. Actual files are accessible, but aligned training epochs have not yet been established. No patient/clinical benefit inference.
+
+CPU plan
+Pilot: align one person’s first 20 trials; extract bandpower/covariance features; then all four EEG files sequentially (approximately 150 MB each for the checked file). Downsample after appropriate filtering; EEGNet under 100k parameters, target under 4 GB RAM. No MRI processing, proprietary MATLAB dependency or GPU required for the proposed Python pipeline.
+
+Semester scope
+Weeks 1–4: reproducible event alignment, protocol audit and participant splits; go/no-go for semantic classification Weeks 5–8: matched linear/covariance/EEGNet baselines and negative controls Weeks 9–14: nuisance handling/adaptation and cross-person tests Weeks 15–20: uncertainty, error analysis, reproducible scientific package and thesis
+
+Closest work
+LTU’s 2023 dataset paper already uses manually selected ICA components to reduce eye artifacts, so ocular cleaning itself is not new. Existing theses address inner speech. A2025 EEGNet/transformer paper already uses leave-one-subject-out evaluation; its reported dataset identifier, subject list and epoch counts do not match official metadata. These are unresolved reproducibility questions, not proof of invalid results. LTU’s May2026 review highlights data, computation and evaluation limits.
+
+Proposed contribution
+A reproducible cued-task classification and artifact audit: compare compact models under matched preprocessing and negative controls, report sensitivity to nuisance handling, and establish what this small dataset can support. The visible word prevents a clean separation of reading and internal speech; no causal share or thought-decoding result is claimed.
+
+Research connection
+LTU Brain Analysis explicitly studies noninvasive inner-speech decoding; its active 2025–2027 project and listed prior master theses use the same public dataset family. This proposal investigates reliability of a learned decoder within that direction.
+
+Limits
+The study uses existing public EEG only. It does not assume project membership, access to newer patient data, hardware, supervision or clinical endorsement. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Only four people make population claims untenable No separate latent inner-speech ground truth exists Word remains visible throughout task: visual reading versus inner speech is not identifiable here Alignment and319-versus320-event discrepancy are explicit initial scientific gates
+
+Output
+A validated EEG preprocessing/training package, compact classifiers and a control-based account of what the recorded signals can actually support.
+
+Verdict
+Strongest direct LTU project/data connection, with real licensed file access. Promising thesis direction once the explicit alignment/control pilot is resolved; not a ready semantic-decoding claim.
+
+Source URLs
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html
+https://www.ltu.se/en/research/research-subjects/machine-learning/resources-software-hardware--datasets
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence/projectarchivebrainanalysis/understandingtheneuraldynamicsofinnerspeechamultimodalandlongitudinalperspective.5.264138ae195b24275b983ce7.html
+https://raw.githubusercontent.com/LTU-Machine-Learning/Inner_Speech_EEG_FMRI/main/README.md
+https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/dataset_description.json
+https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/sub-01/ses-EEG/eeg/sub-01_ses-EEG_task-inner_events.tsv
+https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/sub-01/ses-EEG/eeg/sub-01_ses-EEG_task-inner_eeg.json
+https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/README
+https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2025.1668935/full
+https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2026.1838064/full
+https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10264396/fullTextXML
+https://raw.githubusercontent.com/LTU-Machine-Learning/Inner_Speech_EEG_fMRI/main/EEG_preprocessing/processing_pipeline.m

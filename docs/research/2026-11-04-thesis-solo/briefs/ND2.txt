@@ -1,0 +1,57 @@
+ND2: Tell mosquito species apart without learning the recording site
+4 November 2026 — WITHDRAW
+
+Problem
+A model may identify the microphone or collection setting instead of the insect.
+
+Example
+A recording from a new trap sounds different; the classifier may confidently assign the wrong species because most training clips came from one setting.
+
+Research question
+Can domain-balanced harmonic features and compact learned prototypes improve species recognition when recording settings and species frequencies are confounded?
+
+What you would build/train
+If data became accessible: train a pitch-feature forest and small log-mel CNN; compare balanced prototypes and harmonic consistency objectives.
+
+Comparisons
+Pitch statistics plus random forest Published challenge baseline Domain-balanced prototypes and domain-adversarial models already present in 2026 results
+
+Evaluation
+Hold out complete recording domains and original recording groups; do not scatter adjacent clips across splits. Report supported species-domain cells separately and avoid evaluating missing class/domain combinations as if balanced.
+
+Data and terms
+Zenodo metadata and file list read; development archive returned HTTP 403 using ordinary public GET and bounded range requests. No actual audio sample obtained. Zenodo record declares CC BY 4.0. Licence metadata is not proof of usable file access; no qualified topic until a permitted public route actually works.
+
+CPU plan
+Unqualified: could start with 5,000 clips and fixed features on CPU, but this plan is not an access proof.
+
+Semester scope
+A full study would require confounding audit, matched baselines, controlled balancing, held-domain evaluation and interpretation across several months.
+
+Closest work
+BioDCASE 2026 results already include balanced prototypes, harmonic/pitch methods, domain adaptation and large pretrained embeddings.
+
+Proposed contribution
+Would need a careful causal-confounding study, not a claim that balancing or pitch features are new.
+
+Research connection
+The official master-supervision page explicitly includes audio event/species classification.
+
+Limits
+Fit cannot repair the failed data gate; this is not an offered LTU mosquito project. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Actual files inaccessible Large class/domain imbalance Closely overlapping published approaches
+
+Output
+Blocked lead audit; no selectable thesis proposal.
+
+Verdict
+Failed actual-data access gate; prior work also removes the original generic adaptation claim.
+
+Source URLs
+https://biodcase.github.io/challenge2026/task5
+https://arxiv.org/html/2603.20118v1
+https://zenodo.org/api/records/20478577
+https://biodcase.github.io/challenge2026/task5-results
+https://www.ltu.se/en/staff/g/gyorgy-kovacs

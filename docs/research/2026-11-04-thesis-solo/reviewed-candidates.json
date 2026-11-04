@@ -1,0 +1,1323 @@
+[
+  {
+    "id": "ND1",
+    "title": "When should an air sensor be checked again?",
+    "person": "A researcher maintaining inexpensive environmental sensors.",
+    "problem": "A cheap sensor can gradually become less accurate; checking it against a reference instrument has a cost.",
+    "everyday_example": "A sensor becomes less accurate over several weeks. Compare when a model requests new reference readings, and whether those readings reduce future error. This cannot establish why the sensor changed.",
+    "scientific_question": "At equal budgets of newly revealed reference measurements, which sequential recalibration policy best controls future concentration error and worst-week error on a changing sensor time series?",
+    "model_training_or_adaptation": "Fit ridge and shallow boosted-tree calibration models, then learn a small residual-update model. Compare scheduled, uncertainty-based and drift-triggered label requests; explicitly charge every reference reading used.",
+    "baselines_and_comparisons": [
+      "Static ridge; static boosted trees",
+      "Periodic recalibration and random measurement requests at the same label budget",
+      "Rolling-window retraining; uncertainty-only selection; proposed combined disagreement-and-change trigger"
+    ],
+    "leakage_aware_evaluation": "Chronological outer blocks; tune thresholds only on earlier months. Mask all unpurchased reference values. Fit imputers/scalers only on historical training data. Group uncertainty estimates by week; report MAE, worst-week MAE, error versus purchased labels, and update time. Report performance under changing conditions without attributing causal contributions to sensor drift or concentration changes; this dataset cannot identify them.",
+    "data_access": {
+      "check_id": "D1",
+      "gate": "pass_for_noncommercial_research",
+      "access_proof": "UCI CSV prefix parsed: 303 complete rows, 15 columns; sensor and reference fields present.",
+      "licence": "UCI currently displays CC BY 4.0; embedded historical terms restrict use to research and exclude commercial use. Proposed thesis stays within the intersection.",
+      "uncertainty": "One historic outdoor installation, 2004–2005; no indoor, multi-device or modern regulatory claim. Do not transfer the thesis data into a venture without resolving the terms.",
+      "source_urls": [
+        "https://archive.ics.uci.edu/api/dataset?id=360",
+        "https://archive.ics.uci.edu/dataset/360/air+quality"
+      ],
+      "data_link": "https://archive.ics.uci.edu/dataset/360/air+quality"
+    },
+    "cpu_plan": "Pilot: 2,000 chronological rows, ridge/tree fits, at most 20 parameter settings. Full dataset about 9,358 rows; laptop memory target below 2 GB. Measure actual time in the pilot; no runtime measured today. VPS optional for result viewing, not training.",
+    "multi_month_scope": [
+      "Weeks 1–3: reproduce static calibration and audit missing sentinel -200",
+      "Weeks 4–8: build the budgeted sequential learning protocol and implement three update policies",
+      "Weeks 9–14: nested chronological evaluation, seasonal stress tests and ablations",
+      "Weeks 15–20: sensitivity/uncertainty analysis, reproducible package and thesis"
+    ],
+    "closest_work": "The October 2026 lightweight indoor-calibration study already evaluates drift and chronological deployment scenarios. Its newly described dataset access was not verified here; use UCI data only. Public LinkedIn calibration webinars corroborate professional interest, not demand.",
+    "proposed_difference": "Compare sequential update and measurement-request policies at exactly matched reference-label budgets on a public historical dataset. Existing reference-efficient and drift-aware calibration methods are baselines; this is an applied comparative study, not a newly invented calibration principle.",
+    "risks": [
+      "One device limits external validity",
+      "Missing references and seasonality can bias query policy comparisons",
+      "Acquisition cost is simulated; no actual instrument cost or field savings claimed"
+    ],
+    "concrete_output": "An auditable sequential calibration benchmark, trained compact models, label-budget/error curves and a recommendation about when simple schedules suffice.",
+    "verdict": "keep",
+    "verdict_reason": "Public research-compatible data, small CPU workload and a substantive adaptive-learning comparison. LTU connection is a measurement/efficient-ML methods fit, not a currently advertised air-sensor thesis.",
+    "provenance": [
+      "sensor-paper",
+      "air-data",
+      "air-terms",
+      "linkedin-czwa",
+      "ltu-electronics",
+      "ltu-sustainable"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-electronics",
+        "ltu-sustainable"
+      ],
+      "strength": "methods fit",
+      "substantive_connection": "Electronic Systems explicitly studies measurement technology for monitoring and instrumentation; Sustainable ML studies efficient algorithms and deployment. The thesis joins those through measured calibration cost and adaptation reliability.",
+      "limits": "No specific LTU air-quality project or field partner was verified.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Electronic Systems",
+          "url": "https://www.ltu.se/en/research/research-subjects/electronic-systems"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "When should an air sensor be checked again?",
+      "who": "A researcher maintaining inexpensive environmental sensors.",
+      "problem": "A cheap sensor can gradually become less accurate; checking it against a reference instrument has a cost.",
+      "example": "A sensor becomes less accurate over several weeks. Compare when a model requests new reference readings, and whether those readings reduce future error. This cannot establish why the sensor changed.",
+      "you_would_make": "An auditable sequential calibration benchmark, trained compact models, label-budget/error curves and a recommendation about when simple schedules suffice.",
+      "status": "keep"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "Compare sequential update and measurement-request policies at exactly matched reference-label budgets on a public historical dataset. Existing reference-efficient and drift-aware calibration methods are baselines; this is an applied comparative study, not a newly invented calibration principle.",
+      "research_connection": "Electronic Systems explicitly studies measurement technology for monitoring and instrumentation; Sustainable ML studies efficient algorithms and deployment. The thesis joins those through measured calibration cost and adaptation reliability.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Electronic Systems",
+          "url": "https://www.ltu.se/en/research/research-subjects/electronic-systems"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ],
+      "verified_evidence": "Measurement/instrumentation methods support ND1; no current air-quality project verified.; Efficiency, optimization and edge deployment are actual interests; no hardware entitlement follows.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "No specific LTU air-quality project or field partner was verified. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    },
+    "independent_review_correction": "Removed an unsupported causal claim about separating sensor drift from environmental change. The contribution is a matched-budget sequential comparison, not the invention of reference-efficient calibration."
+  },
+  {
+    "id": "ND2",
+    "title": "Tell mosquito species apart without learning the recording site",
+    "person": "A bioacoustics researcher evaluating insect monitoring models.",
+    "problem": "A model may identify the microphone or collection setting instead of the insect.",
+    "everyday_example": "A recording from a new trap sounds different; the classifier may confidently assign the wrong species because most training clips came from one setting.",
+    "scientific_question": "Can domain-balanced harmonic features and compact learned prototypes improve species recognition when recording settings and species frequencies are confounded?",
+    "model_training_or_adaptation": "If data became accessible: train a pitch-feature forest and small log-mel CNN; compare balanced prototypes and harmonic consistency objectives.",
+    "baselines_and_comparisons": [
+      "Pitch statistics plus random forest",
+      "Published challenge baseline",
+      "Domain-balanced prototypes and domain-adversarial models already present in 2026 results"
+    ],
+    "leakage_aware_evaluation": "Hold out complete recording domains and original recording groups; do not scatter adjacent clips across splits. Report supported species-domain cells separately and avoid evaluating missing class/domain combinations as if balanced.",
+    "data_access": {
+      "check_id": "D2",
+      "gate": "fail_access",
+      "access_proof": "Zenodo metadata and file list read; development archive returned HTTP 403 using ordinary public GET and bounded range requests. No actual audio sample obtained.",
+      "licence": "Zenodo record declares CC BY 4.0.",
+      "uncertainty": "Licence metadata is not proof of usable file access; no qualified topic until a permitted public route actually works.",
+      "source_urls": [
+        "https://zenodo.org/api/records/20478577"
+      ],
+      "data_link": "https://zenodo.org/records/20478577"
+    },
+    "cpu_plan": "Unqualified: could start with 5,000 clips and fixed features on CPU, but this plan is not an access proof.",
+    "multi_month_scope": [
+      "A full study would require confounding audit, matched baselines, controlled balancing, held-domain evaluation and interpretation across several months."
+    ],
+    "closest_work": "BioDCASE 2026 results already include balanced prototypes, harmonic/pitch methods, domain adaptation and large pretrained embeddings.",
+    "proposed_difference": "Would need a careful causal-confounding study, not a claim that balancing or pitch features are new.",
+    "risks": [
+      "Actual files inaccessible",
+      "Large class/domain imbalance",
+      "Closely overlapping published approaches"
+    ],
+    "concrete_output": "Blocked lead audit; no selectable thesis proposal.",
+    "verdict": "withdraw",
+    "verdict_reason": "Failed actual-data access gate; prior work also removes the original generic adaptation claim.",
+    "provenance": [
+      "mosquito-task",
+      "mosquito-paper",
+      "mosquito-data",
+      "mosquito-results",
+      "ltu-kovacs"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-kovacs"
+      ],
+      "strength": "potential direct methods fit",
+      "substantive_connection": "The official master-supervision page explicitly includes audio event/species classification.",
+      "limits": "Fit cannot repair the failed data gate; this is not an offered LTU mosquito project.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU György Kovács master-thesis interests",
+          "url": "https://www.ltu.se/en/staff/g/gyorgy-kovacs"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Tell mosquito species apart without learning the recording site",
+      "who": "A bioacoustics researcher evaluating insect monitoring models.",
+      "problem": "A model may identify the microphone or collection setting instead of the insect.",
+      "example": "A recording from a new trap sounds different; the classifier may confidently assign the wrong species because most training clips came from one setting.",
+      "you_would_make": "Blocked lead audit; no selectable thesis proposal.",
+      "status": "withdraw"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "Would need a careful causal-confounding study, not a claim that balancing or pitch features are new.",
+      "research_connection": "The official master-supervision page explicitly includes audio event/species classification.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU György Kovács master-thesis interests",
+          "url": "https://www.ltu.se/en/staff/g/gyorgy-kovacs"
+        }
+      ],
+      "verified_evidence": "Explicit speech robustness/audio-event topics directly support ND9 methods fit.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "Fit cannot repair the failed data gate; this is not an offered LTU mosquito project. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND3",
+    "title": "Show where a small flood mapper is unsure about the shoreline",
+    "person": "A remote-sensing researcher comparing compact flood maps.",
+    "problem": "A fast flood mask can be wrong around boundaries and small flooded areas.",
+    "everyday_example": "Two maps agree about a large flooded field but disagree along a road; the study would expose those uncertain pixels.",
+    "scientific_question": "Does a learned local boundary correction/rejection stage improve event-held-out flood mapping at a fixed CPU inference budget?",
+    "model_training_or_adaptation": "Would adapt a small segmentation decoder or boundary head; compare to compact U-Net and frozen-feature linear heads.",
+    "baselines_and_comparisons": [
+      "Compact U-Net",
+      "Prithvi-derived Tiny student; frozen and fully trained versions",
+      "Threshold calibration without a learned correction stage"
+    ],
+    "leakage_aware_evaluation": "Nested event-level splits; thresholds and model selection must exclude the held-out event. Report boundary F1, IoU, risk/coverage and peak RAM, not only average segmentation accuracy.",
+    "data_access": {
+      "check_id": "D3",
+      "gate": "fail_licence",
+      "access_proof": "Complete official label TIFF and S1/S2 chips downloaded. Label decoded as 512 by 512 with -1/0/1 values. Both official STAC collections declare proprietary.",
+      "licence": "Unresolved: official source and label STAC say proprietary, while other descriptions/mirrors imply openness.",
+      "uncertainty": "GitHub issue 18 remains open; all two replies read, last 2026-09-15 asks the same clarification. No maintainer resolution found.",
+      "source_urls": [
+        "https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_source/collection.json",
+        "https://storage.googleapis.com/sen1floods11/v1.1/catalog/sen1floods11_hand_labeled_label/collection.json"
+      ],
+      "data_link": "https://github.com/cloudtostreet/Sen1Floods11"
+    },
+    "cpu_plan": "Not qualified. A small head on 128-pixel tiles could be tested locally, but accessible bytes do not grant reuse rights.",
+    "multi_month_scope": [
+      "Would need reproduction, strict event-split correction, adaptation, CPU profiling and failure analysis; no work is authorized while rights remain unclear."
+    ],
+    "closest_work": "October 2026 Prithvi-to-Tiny paper already studies compact flood segmentation, boundaries, entropy and CPU speed; U-Net is a strong alternative.",
+    "proposed_difference": "Nested selection and actionable boundary rejection would need separate evaluation; generic small-model flood mapping is already established.",
+    "risks": [
+      "Unresolved data rights",
+      "Few independent flood events",
+      "Foundation pretraining exposure and hyperparameter leakage"
+    ],
+    "concrete_output": "Licence conflict evidence and withdrawn lead.",
+    "verdict": "withdraw",
+    "verdict_reason": "Failed licence gate despite successful sample downloads.",
+    "provenance": [
+      "flood-paper",
+      "flood-repo",
+      "flood-licence-source",
+      "flood-licence-label",
+      "flood-issue18",
+      "ltu-cv"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-cv"
+      ],
+      "strength": "potential application fit",
+      "substantive_connection": "LTU Computer Vision lists the Swedish Space Data Lab; geospatial image analysis is substantively relevant.",
+      "limits": "No thesis endorsement; no right to reuse the selected dataset.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Computer Vision",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/computervision.4.1290fc0918d8763190a6f0c8.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Show where a small flood mapper is unsure about the shoreline",
+      "who": "A remote-sensing researcher comparing compact flood maps.",
+      "problem": "A fast flood mask can be wrong around boundaries and small flooded areas.",
+      "example": "Two maps agree about a large flooded field but disagree along a road; the study would expose those uncertain pixels.",
+      "you_would_make": "Licence conflict evidence and withdrawn lead.",
+      "status": "withdraw"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "Nested selection and actionable boundary rejection would need separate evaluation; generic small-model flood mapping is already established.",
+      "research_connection": "LTU Computer Vision lists the Swedish Space Data Lab; geospatial image analysis is substantively relevant.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Computer Vision",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/computervision.4.1290fc0918d8763190a6f0c8.html"
+        }
+      ],
+      "verified_evidence": "Swedish Space Data Lab provides real remote-sensing context; selected flood dataset still fails rights.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "No thesis endorsement; no right to reuse the selected dataset. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND4",
+    "title": "Leave room for appliances the energy model has never seen",
+    "person": "A researcher studying household electricity disaggregation.",
+    "problem": "A model can force all electricity use into known appliance labels, making an unseen appliance look like a familiar one.",
+    "everyday_example": "A heater is plugged in for the first time. A model should not automatically report that the washing machine used that energy.",
+    "scientific_question": "Can an explicitly learned unknown-load residual reduce false attribution while preserving useful known-appliance estimates?",
+    "model_training_or_adaptation": "Would train compact sequence-to-point regressors with a nonnegative residual and conservation penalty; compare matched models without the unknown component.",
+    "baselines_and_comparisons": [
+      "Appliance-state thresholds and factorial hidden Markov baseline",
+      "Compact sequence-to-point CNN",
+      "Event-aware physics-constrained NILM and recent transfer/attention approaches"
+    ],
+    "leakage_aware_evaluation": "Hold out houses and complete appliance instances; chronological splits within remaining homes. Preserve missing-data indicators and audit filled zeros. Evaluate false attribution, energy conservation and per-appliance errors.",
+    "data_access": {
+      "check_id": "D4",
+      "gate": "fail_access",
+      "access_proof": "UK-DALE owner page and REFIT publisher/Zenodo metadata read. UK-DALE legacy host redirected away from data; actual cleaned REFIT CSV and publisher files returned 403.",
+      "licence": "UK-DALE/REFIT pages declare CC BY 4.0.",
+      "uncertainty": "A separate Figshare REFIT Smart Home record was inspected but is not the electrical-load dataset and is not treated as substitute access.",
+      "source_urls": [
+        "https://jack-kelly.com/data/",
+        "https://data.ukedc.rl.ac.uk/browse/edc/efficiency/residential/EnergyConsumption/Domestic/UK-DALE-2017/UK-DALE-FULL-disaggregated",
+        "https://pureportal.strath.ac.uk/en/datasets/31da3ece-f902-4e95-a093-e0a9536983c4",
+        "https://zenodo.org/records/5063428"
+      ],
+      "data_link": "https://jack-kelly.com/data/"
+    },
+    "cpu_plan": "Unqualified. A downsampled week and a sub-500k-parameter model could fit CPU, but no usable selected waveform sample was verified.",
+    "multi_month_scope": [
+      "Would require missingness audit, controlled unseen-appliance construction, model training, cross-house evaluation and uncertainty analysis."
+    ],
+    "closest_work": "Recent physics-aware and event-aware NILM papers already use conservation; October 2026 diffusion NILM is a costly alternative with unavailable-on-request data.",
+    "proposed_difference": "Study unknown appliance attribution under realistic missing measurements, rather than claiming conservation itself is new.",
+    "risks": [
+      "Data download failed",
+      "Unknown residual may absorb all errors without identifying anything useful",
+      "No verified bill savings or buyer demand"
+    ],
+    "concrete_output": "Blocked data-access record and a scoped research question.",
+    "verdict": "withdraw",
+    "verdict_reason": "Metadata openness did not translate into verified usable data.",
+    "provenance": [
+      "ukdale-owner",
+      "ukdale-host",
+      "refit-page",
+      "refit-load",
+      "nilm-current"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-sustainable"
+      ],
+      "strength": "weak/indirect",
+      "substantive_connection": "Efficient energy-related learning could be relevant, but no specific current LTU NILM research connection was verified.",
+      "limits": "Failed data access is independently sufficient to withdraw.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Leave room for appliances the energy model has never seen",
+      "who": "A researcher studying household electricity disaggregation.",
+      "problem": "A model can force all electricity use into known appliance labels, making an unseen appliance look like a familiar one.",
+      "example": "A heater is plugged in for the first time. A model should not automatically report that the washing machine used that energy.",
+      "you_would_make": "Blocked data-access record and a scoped research question.",
+      "status": "withdraw"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "Study unknown appliance attribution under realistic missing measurements, rather than claiming conservation itself is new.",
+      "research_connection": "Efficient energy-related learning could be relevant, but no specific current LTU NILM research connection was verified.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ],
+      "verified_evidence": "Efficiency, optimization and edge deployment are actual interests; no hardware entitlement follows.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "Failed data access is independently sufficient to withdraw. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND5",
+    "title": "Tell a water engineer when several leak locations look equally plausible",
+    "person": "A researcher testing water-network diagnosis methods.",
+    "problem": "A few pressure sensors may not identify a unique leaking pipe, especially when two leaks occur together.",
+    "everyday_example": "The same pressure drop could come from either of two streets. The study tests whether a model should return a small region rather than one confident pipe.",
+    "scientific_question": "In a public simulated water network, how do sensor loss, concurrent leaks and hydraulic-model mismatch change the size and reliability of a learned set of possible leak locations?",
+    "model_training_or_adaptation": "Generate labelled hydraulic scenarios from the verified public network. Train a small graph classifier or gradient-boosted residual classifier and calibrate location sets; compare single-location and set-valued predictions. For unseen locations, use shared node-wise graph scores or scenario matching. A fixed multiclass boosted-tree model is only a known-location baseline.",
+    "baselines_and_comparisons": [
+      "Pressure-residual nearest scenario and hydraulic sensitivity ranking",
+      "Boosted trees on sensor residuals",
+      "Small graph model with/without physical residuals; current physics-informed GNN as a conceptual comparator"
+    ],
+    "leakage_aware_evaluation": "Split entire simulated episodes and leak locations, not adjacent time steps. Hold out demand patterns, roughness perturbations and leak pairs. Report coverage versus graph-distance/region size and false localization on no-leak episodes. Any conformal-style coverage is empirical under model shift, not a guaranteed field bound. Report known-location episode generalization separately from unseen-node tests; only models capable of scoring unseen nodes enter the latter comparison.",
+    "data_access": {
+      "check_id": "D5",
+      "gate": "pass_for_simulation_only",
+      "access_proof": "Complete L-Town nominal EPANET network (412,200 bytes), dataset README and generator source downloaded; generator imports WNTR and explicitly creates leak nodes. SCADA pressure CSV returned 403.",
+      "licence": "Network/data record CC BY 4.0; generator EUPL 1.2 with README permitting 1.1 or later.",
+      "uncertainty": "Use freshly generated simulations only. Neither held-out benchmark SCADA nor operational field data are claimed available; simulator execution has not yet been tested.",
+      "source_urls": [
+        "https://zenodo.org/api/records/4017659",
+        "https://zenodo.org/api/records/4017659/files/README.txt/content",
+        "https://zenodo.org/api/records/4017659/files/L-TOWN.inp/content",
+        "https://raw.githubusercontent.com/KIOS-Research/BattLeDIM/master/Dataset%20Generator/README.txt"
+      ],
+      "data_link": "https://zenodo.org/records/4017659"
+    },
+    "cpu_plan": "Pilot: 30–100 short scenarios, limited leak nodes, one hydraulic worker and a tiny graph/tree model. Cache sensor vectors, not full hydraulic histories; target under 6 GB on laptop. Expand to hundreds/thousands only after timing and storage measurements.",
+    "multi_month_scope": [
+      "Weeks 1–4: validate generator against documented nominal cases and characterize distinguishable locations",
+      "Weeks 5–9: train location/set models and build equal-information baselines",
+      "Weeks 10–15: concurrent-leak, sensor-loss and model-mismatch experiments",
+      "Weeks 16–20: uncertainty limits, reproducibility and report"
+    ],
+    "closest_work": "October 2026 concurrent-leak physics-GNN preprint reports strong detection but difficult localization; only abstract/result summary was accessible here, not full methods. Existing simulator already generates leaks.",
+    "proposed_difference": "A rigorous study of identification ambiguity and region size, not a real water-utility deployment or a claim to invent simulation/GNN leak detection.",
+    "risks": [
+      "Only simulation can be defended",
+      "Hydraulic parameter choices may dominate results",
+      "Current-paper full-method review remains incomplete",
+      "LTU project-level alignment weaker than the speech/EEG proposals"
+    ],
+    "concrete_output": "A public simulation/evaluation suite, compact diagnostic model and maps showing where available sensors cannot resolve a leak uniquely.",
+    "verdict": "revise",
+    "verdict_reason": "Usable licensed simulation inputs, but narrower LTU research connection and incomplete closest-paper access make this a reserve study, not a top recommendation.",
+    "provenance": [
+      "water-data",
+      "water-readme",
+      "water-network",
+      "water-generator",
+      "water-generator-readme",
+      "water-generator-license",
+      "water-current",
+      "ltu-water",
+      "ltu-science"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-water",
+        "ltu-science"
+      ],
+      "strength": "indirect interdisciplinary fit",
+      "substantive_connection": "Urban Water Engineering explicitly covers collection and transport in drinking-water/sewer systems; ML AI4Science supports learned scientific models. The proposed contribution is inference reliability under incomplete sensing.",
+      "limits": "The current water group page prioritizes stormwater/sewers; a current LTU pressure-leak localization project was not found. Do not equate those subjects automatically.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Urban Water Engineering",
+          "url": "https://www.ltu.se/en/research/research-subjects/urban-water-engineering"
+        },
+        {
+          "title": "LTU AI4Science",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/ai4science.4.1290fc0918d8763190a6f12e.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Tell a water engineer when several leak locations look equally plausible",
+      "who": "A researcher testing water-network diagnosis methods.",
+      "problem": "A few pressure sensors may not identify a unique leaking pipe, especially when two leaks occur together.",
+      "example": "The same pressure drop could come from either of two streets. The study tests whether a model should return a small region rather than one confident pipe.",
+      "you_would_make": "A public simulation/evaluation suite, compact diagnostic model and maps showing where available sensors cannot resolve a leak uniquely.",
+      "status": "revise"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "A rigorous study of identification ambiguity and region size, not a real water-utility deployment or a claim to invent simulation/GNN leak detection.",
+      "research_connection": "Urban Water Engineering explicitly covers collection and transport in drinking-water/sewer systems; ML AI4Science supports learned scientific models. The proposed contribution is inference reliability under incomplete sensing.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Urban Water Engineering",
+          "url": "https://www.ltu.se/en/research/research-subjects/urban-water-engineering"
+        },
+        {
+          "title": "LTU AI4Science",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/ai4science.4.1290fc0918d8763190a6f12e.html"
+        }
+      ],
+      "verified_evidence": "Drinking-water transport is within scope, but current emphasis is stormwater/sewers; ND5 fit remains indirect.; REE characterization, RI-SCALE and drill-core analysis; generic superconductivity/seismology mapping would overstate fit.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "The current water group page prioritizes stormwater/sewers; a current LTU pressure-leak localization project was not found. Do not equate those subjects automatically. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    },
+    "independent_review_correction": "Unseen-location evaluation requires shared node-wise scoring or scenario inference. Fixed multiclass trees are restricted to held-out episodes at known locations."
+  },
+  {
+    "id": "ND6",
+    "title": "Stop sleep-stage smoothing from erasing short real changes",
+    "person": "A sleep-signal researcher checking automatic overnight scoring.",
+    "problem": "Making predictions look smoother can improve average accuracy while deleting short bouts that the human scorer actually marked.",
+    "everyday_example": "A scorer marks one minute of waking between longer sleep periods. A smoother may erase it as noise; the study asks when that helps and when it hides evidence.",
+    "scientific_question": "Can a compact learned smoothing gate improve macro-F1 without materially reducing recall of human-labelled short stage bouts, compared with fixed-duration and confidence-aware smoothing?",
+    "model_training_or_adaptation": "Use YASA as a task-specific pretrained LightGBM baseline, plus a locally trained feature classifier. Train a small gate deciding whether to accept an epoch prediction or a smoothed alternative using local probabilities and signal-quality features.",
+    "baselines_and_comparisons": [
+      "Unsmoothed epoch classifier; majority/median smoothing",
+      "HMM/HSMM duration smoothing",
+      "StageGuard-style confidence/quality-aware smoothing; random-transformer smoother where reproducible"
+    ],
+    "leakage_aware_evaluation": "Group all nights by person. Tune on development people, test once on held-out people; disclose potential pretrained data exposure. Report macro-F1, transition precision/recall, duration-stratified bout recall and temporal displacement. Score 30-second labels only: no claim to identify micro-arousals absent in annotations. YASA uses future context, so compare offline scoring at matched context windows.",
+    "data_access": {
+      "check_id": "D6",
+      "gate": "pass",
+      "access_proof": "Sleep-EDF public signal EDF prefix parsed; full 4,620-byte hypnogram fetched and sleep labels parsed.",
+      "licence": "Open Data Commons Attribution License 1.0 on PhysioNet; not CC BY.",
+      "uncertainty": "Full nights were not downloaded. Historical cohorts and scorer labels do not establish clinical benefit; check model/software terms before redistributing weights.",
+      "source_urls": [
+        "https://physionet.org/content/sleep-edfx/1.0.0/",
+        "https://physionet.org/content/sleep-edfx/view-license/1.0.0/"
+      ],
+      "data_link": "https://physionet.org/content/sleep-edfx/1.0.0/"
+    },
+    "cpu_plan": "Pilot: four to eight nights, cached epoch features and tiny gate; process EDF in chunks, target below 4 GB RAM. Scale to a participant-stratified subset of 20–40 people before deciding whether all nights are necessary.",
+    "multi_month_scope": [
+      "Weeks 1–3: validate epochs, stages and participant grouping",
+      "Weeks 4–8: reproduce unsmoothed/fixed and current quality-aware alternatives",
+      "Weeks 9–14: train gate, compare equal context and test duration sensitivities",
+      "Weeks 15–20: ablate signal quality versus confidence, quantify uncertainty and write"
+    ],
+    "closest_work": "StageGuard (July 2026) already combines transition constraints, duration models and signal quality. October duration-aware world-model work and May random-transformer research make generic learned smoothing a weak novelty claim. AnySleep (October 30) addresses broad channel-agnostic staging at a very different training scale.",
+    "proposed_difference": "An applied failure-analysis and mitigation project centred on preserving labelled short bouts under a fixed computation/context budget. A careful negative result against simple/current smoothers is legitimate; superiority is not promised.",
+    "risks": [
+      "Gate may reproduce StageGuard rather than add useful behaviour",
+      "Few short bouts yield wide intervals",
+      "Sleep EDF label conventions and cohorts limit generalization"
+    ],
+    "concrete_output": "A reproducible scorer comparison, trained correction gate and an evidence-based account of which short changes are lost by smoothing.",
+    "verdict": "revise",
+    "verdict_reason": "Data and CPU path pass, but exact scope should be tightened against very close existing work; LTU brain-signal methods fit is adjacent rather than an advertised sleep project.",
+    "provenance": [
+      "sleep-data",
+      "sleep-terms",
+      "yasa-doc",
+      "sleep-stageguard",
+      "sleep-dwell",
+      "sleep-random",
+      "sleep-anysleep",
+      "ltu-health"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-health"
+      ],
+      "strength": "adjacent methods fit",
+      "substantive_connection": "Health Intelligence studies learning from noninvasive EEG and interpretation of brain activity. This thesis concerns the reliability of EEG-derived temporal decisions.",
+      "limits": "LTU page focuses inner speech and neurological/BCI work; no specific sleep-staging project or clinical collaborator is assumed.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Stop sleep-stage smoothing from erasing short real changes",
+      "who": "A sleep-signal researcher checking automatic overnight scoring.",
+      "problem": "Making predictions look smoother can improve average accuracy while deleting short bouts that the human scorer actually marked.",
+      "example": "A scorer marks one minute of waking between longer sleep periods. A smoother may erase it as noise; the study asks when that helps and when it hides evidence.",
+      "you_would_make": "A reproducible scorer comparison, trained correction gate and an evidence-based account of which short changes are lost by smoothing.",
+      "status": "revise"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "An applied failure-analysis and mitigation project centred on preserving labelled short bouts under a fixed computation/context budget. A careful negative result against simple/current smoothers is legitimate; superiority is not promised.",
+      "research_connection": "Health Intelligence studies learning from noninvasive EEG and interpretation of brain activity. This thesis concerns the reliability of EEG-derived temporal decisions.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        }
+      ],
+      "verified_evidence": "Direct inner-speech/EEG connection; sleep/ECG are adjacent methods applications, not verified current offers.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "LTU page focuses inner speech and neurological/BCI work; no specific sleep-staging project or clinical collaborator is assumed. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND7",
+    "title": "Should an ECG model fill missing signals or work with what it has?",
+    "person": "A researcher building robust ECG analysis models.",
+    "problem": "Reconstructed ECG channels can look plausible while changing the classification result.",
+    "everyday_example": "Two recorded ECG lead channels are unavailable. Compare rebuilding those signals with telling the classifier which channels are missing. This does not simulate the physical effects of electrode failure.",
+    "scientific_question": "At a matched CPU/model budget, when does direct mask-aware multi-label classification outperform reconstruction-then-classification under missing ECG leads and time segments?",
+    "model_training_or_adaptation": "Train a compact 1-D CNN at 100 Hz with observed-signal masks and structured lead dropout. Compare linear/compact autoencoder reconstruction followed by the same classifier. Learn calibration on held-out patients.",
+    "baselines_and_comparisons": [
+      "Zero-fill plus missingness mask; fixed surviving-lead classifier",
+      "Linear cross-lead regression and small denoising autoencoder",
+      "Direct structured-dropout classifier; ImputeECG as the current high-compute reconstruction reference, not a promised reproduction"
+    ],
+    "leakage_aware_evaluation": "Use PTB-XL v1.0.3 patient-wise folds 1–8/9/10, with duplicate audit. Mask leads/time windows only after splitting. Evaluate macro-AUPRC, label-wise sensitivity at preselected specificity, calibration and risk/coverage. Separate random failures from lead-specific structured loss. Synthetic missingness is not evidence about a clinic’s actual failure process.",
+    "data_access": {
+      "check_id": "D7",
+      "gate": "pass",
+      "access_proof": "Public PTB-XL metadata prefix parsed, complete waveform header read, and full 24,000-byte 100-Hz 12-lead ECG record decoded.",
+      "licence": "CC BY 4.0.",
+      "uncertainty": "No institutional credentials/new agreement required for these files. Clinical deployment, patient benefit and external-hospital validity are not established.",
+      "source_urls": [
+        "https://physionet.org/content/ptb-xl/1.0.3/",
+        "https://physionet.org/files/ptb-xl/1.0.3/LICENSE.txt"
+      ],
+      "data_link": "https://physionet.org/content/ptb-xl/1.0.3/"
+    },
+    "cpu_plan": "Pilot: 1,000–2,000 records, five diagnostic superclasses, less than 500k parameters, short early-stopped runs. Stream batches; target under 6 GB RAM. Expand only after measuring wall time; no A100 replication or 500-Hz transformer training.",
+    "multi_month_scope": [
+      "Weeks 1–3: validate labels, folds and signal scaling",
+      "Weeks 4–8: train matched compact baselines",
+      "Weeks 9–14: structured missingness and direct-versus-reconstruction ablations",
+      "Weeks 15–20: calibration, subgroup uncertainty, compute profile and thesis"
+    ],
+    "closest_work": "ImputeECG (July 2026) already tests diagnosis after reconstruction and warns about unrecoverable transient abnormalities. Its A100 training and external/private evaluations are outside this plan.",
+    "proposed_difference": "An equal-budget applied comparison of directly learned missingness handling against reconstruction, including where visually good reconstruction harms decisions. Downstream diagnostic evaluation itself is not new.",
+    "risks": [
+      "July closest work is outside the desired 90-day corroboration window; no invented fresh trigger",
+      "Full-waveform public labels are coarse",
+      "Missingness simulation cannot prove safety of reconstructed signals"
+    ],
+    "concrete_output": "Compact trained ECG models and a reproducible decision-level comparison explaining when reconstruction is unnecessary or harmful.",
+    "verdict": "keep",
+    "verdict_reason": "Verified public signal/label access and an achievable, substantive applied model-development/evaluation study. Rank below the directly LTU-linked voice/inner-speech directions for institutional specificity.",
+    "provenance": [
+      "ecg-data",
+      "ecg-terms",
+      "ecg-impute",
+      "ltu-saini",
+      "ltu-health"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-saini",
+        "ltu-health"
+      ],
+      "strength": "adjacent physiological-ML fit",
+      "substantive_connection": "LTU ML staff explicitly work on physiological-signal-driven interaction and reliable intelligent systems; the study contributes robust learning under missing physiological measurements.",
+      "limits": "The verified Health Intelligence projects concentrate on brain signals. This is a proposed extension, not a verified LTU ECG project or available medical supervision.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Rajkumar Saini research",
+          "url": "https://www.ltu.se/en/staff/r/rajkumar-saini"
+        },
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Should an ECG model fill missing signals or work with what it has?",
+      "who": "A researcher building robust ECG analysis models.",
+      "problem": "Reconstructed ECG channels can look plausible while changing the classification result.",
+      "example": "Two recorded ECG lead channels are unavailable. Compare rebuilding those signals with telling the classifier which channels are missing. This does not simulate the physical effects of electrode failure.",
+      "you_would_make": "Compact trained ECG models and a reproducible decision-level comparison explaining when reconstruction is unnecessary or harmful.",
+      "status": "keep"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "An equal-budget applied comparison of directly learned missingness handling against reconstruction, including where visually good reconstruction harms decisions. Downstream diagnostic evaluation itself is not new.",
+      "research_connection": "LTU ML staff explicitly work on physiological-signal-driven interaction and reliable intelligent systems; the study contributes robust learning under missing physiological measurements.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Rajkumar Saini research",
+          "url": "https://www.ltu.se/en/staff/r/rajkumar-saini"
+        },
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        }
+      ],
+      "verified_evidence": "Physiological-signal interaction and reliable applied ML support an adjacent ECG methods connection.; Direct inner-speech/EEG connection; sleep/ECG are adjacent methods applications, not verified current offers.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "The verified Health Intelligence projects concentrate on brain signals. This is a proposed extension, not a verified LTU ECG project or available medical supervision. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    },
+    "independent_review_correction": "Missing recorded lead channels are distinct from physical electrode failures; the example and simulated-missingness claim now preserve that distinction."
+  },
+  {
+    "id": "ND8",
+    "title": "Let a small earthquake detector admit when its timing is unreliable",
+    "person": "A researcher preparing seismic phase picks for later analysis.",
+    "problem": "A small model may put a precise-looking timestamp on noise or on a poorly defined arrival.",
+    "everyday_example": "A trace has a weak first arrival. Returning a broad uncertain interval may be more honest than a timestamp that is wrong by half a second.",
+    "scientific_question": "Can label-quality-aware training and calibrated pick intervals reduce confidently wrong seismic arrival times at a fixed model size and accepted-pick rate?",
+    "model_training_or_adaptation": "Train a small 1-D phase-picking CNN with quality-weighted/soft arrival targets and a confidence head. Use handcrafted onset features plus a boosted model as a strong low-cost alternative. Pretrained PhaseNet weights are optional only after their exact release/licence and training exposure are verified.",
+    "baselines_and_comparisons": [
+      "STA/LTA onset detector",
+      "Handcrafted features plus boosted trees; GreenPhase-style shallow pipeline",
+      "Same tiny CNN with hard labels, soft labels, quality weights and post-hoc calibration separately"
+    ],
+    "leakage_aware_evaluation": "Keep each earthquake event and its traces within a split; independently stress held-out stations. Do not use event/arrival metadata as model inputs. Include real noise recordings. Report timing error conditional on successful detection, missed arrivals, false picks per noise window and coverage/interval width. Do not equate per-window rates with continuous false alarms or earthquake-warning performance.",
+    "data_access": {
+      "check_id": "D8",
+      "gate": "pass",
+      "access_proof": "All 100 STEAD sample traces and metadata decoded (7.57 MB). Separately decoded a complete real noise trace from official SeisBench HDF5 using 99,480 bytes in 15 bounded range requests.",
+      "licence": "STEAD CC BY 4.0 confirmed in official distribution/source.",
+      "uncertainty": "100-sample file contains earthquakes only; it is not a negative dataset. Full SeisBench waveform object is about 91 GB and was not downloaded. Larger pilot requires selective ranges and a streamed metadata pass.",
+      "source_urls": [
+        "https://raw.githubusercontent.com/smousavi05/STEAD/master/README.md",
+        "https://raw.githubusercontent.com/smousavi05/STEAD/master/LICENSE"
+      ],
+      "data_link": "https://github.com/smousavi05/STEAD"
+    },
+    "cpu_plan": "Pilot: 100 events plus selected noise; then 2,000–5,000 traces, downsampled if scientifically justified. Tiny CNN under 300k parameters, cached features, under 6 GB RAM. A shallow baseline remains the fallback if timed training is slow.",
+    "multi_month_scope": [
+      "Weeks 1–4: trace/label audit, event grouping and real-noise sampling",
+      "Weeks 5–9: build onset and tiny-neural baselines",
+      "Weeks 10–15: label-quality, uncertainty and station-transfer experiments",
+      "Weeks 16–20: calibration limits, runtime and report"
+    ],
+    "closest_work": "October regional fine-tuning and October edge-distillation papers already address adaptation and efficient picking. GreenPhase offers a shallow alternative; its runtime/comparisons do not constitute a laptop benchmark. Tiny-picker authors report weak noise rejection, but their weights are not assumed available.",
+    "proposed_difference": "Study the reliability/coverage trade-off with imperfect labels and real noise, not simply compress a phase picker.",
+    "risks": [
+      "Regional earthquake data does not validate mining microseismic monitoring",
+      "Label-quality flags can be weak proxies",
+      "LTU Applied Geophysics page/project list does not establish a close seismic-AI topic match"
+    ],
+    "concrete_output": "A compact picker, controlled label-quality ablations and uncertainty/false-pick evaluation on public traces.",
+    "verdict": "revise",
+    "verdict_reason": "Data and CPU study are credible, but institutional/application fit is weaker than the directly linked LTU ML topics. Keep as reserve; do not promote based only on the word geophysics.",
+    "provenance": [
+      "seismic-data",
+      "seismic-small",
+      "seismic-terms",
+      "seismic-green",
+      "seismic-current",
+      "seismic-distill",
+      "seismic-tiny",
+      "ltu-geophysics",
+      "ltu-projects"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-geophysics",
+        "ltu-projects",
+        "ltu-sustainable"
+      ],
+      "strength": "indirect and currently insufficient for priority",
+      "substantive_connection": "Applied Geophysics works on physical-signal interpretation and geological/environmental inference; Sustainable ML studies model efficiency.",
+      "limits": "Current verified geophysics project D-Rex concerns exploration; its data/problem are not STEAD earthquake phase picking. No LTU seismic-AI supervisor/project was verified.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Applied Geophysics",
+          "url": "https://www.ltu.se/en/research/research-subjects/applied-geophysics"
+        },
+        {
+          "title": "LTU Applied Geophysics current projects",
+          "url": "https://www.ltu.se/en/research/research-subjects/applied-geophysics/research-projects"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Let a small earthquake detector admit when its timing is unreliable",
+      "who": "A researcher preparing seismic phase picks for later analysis.",
+      "problem": "A small model may put a precise-looking timestamp on noise or on a poorly defined arrival.",
+      "example": "A trace has a weak first arrival. Returning a broad uncertain interval may be more honest than a timestamp that is wrong by half a second.",
+      "you_would_make": "A compact picker, controlled label-quality ablations and uncertainty/false-pick evaluation on public traces.",
+      "status": "revise"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "Study the reliability/coverage trade-off with imperfect labels and real noise, not simply compress a phase picker.",
+      "research_connection": "Applied Geophysics works on physical-signal interpretation and geological/environmental inference; Sustainable ML studies model efficiency.",
+      "alignment_kind": "indirect",
+      "institutional_sources": [
+        {
+          "title": "LTU Applied Geophysics",
+          "url": "https://www.ltu.se/en/research/research-subjects/applied-geophysics"
+        },
+        {
+          "title": "LTU Applied Geophysics current projects",
+          "url": "https://www.ltu.se/en/research/research-subjects/applied-geophysics/research-projects"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ],
+      "verified_evidence": "Geological/physical inference broad fit only; not a specific seismic-ML project.; Exploration direction does not by itself justify earthquake phase-picking alignment.; Efficiency, optimization and edge deployment are actual interests; no hardware entitlement follows.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "Current verified geophysics project D-Rex concerns exploration; its data/problem are not STEAD earthquake phase picking. No LTU seismic-AI supervisor/project was verified. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND9",
+    "title": "Teach a small voice-command model which similar words to ignore",
+    "person": "A researcher developing local voice interfaces.",
+    "problem": "Recognizing a command in an isolated clip does not ensure a model can reject other similar words.",
+    "everyday_example": "A device meant to respond to “go” should not activate on a different short word. The study controls how unknown words are selected during training.",
+    "scientific_question": "Under a fixed negative-example and compute budget, which hard-negative training strategy best preserves command recall while rejecting previously unseen word types and speakers?",
+    "model_training_or_adaptation": "Train a small depthwise CNN or causal TCN on log-mel features. Compare random negatives, score-mined negatives and phonetic/confusion-diverse negative selection. Learn an explicit rejection/energy head; keep threshold tuning separate from mining.",
+    "baselines_and_comparisons": [
+      "Log-mel statistics plus logistic regression",
+      "Small DS-CNN with ordinary unknown class and threshold calibration",
+      "Hard-negative mining, diversity-balanced mining, and energy/prototype rejection under matched examples and parameter count"
+    ],
+    "leakage_aware_evaluation": "Group by speaker using file naming conventions; hold out entire unknown-word types as well as speakers. Mine negatives only from training. Report recall at fixed false-positive rates and per-word confusion, with speaker bootstrap intervals. No deployment false activations per hour from isolated clips; synthetic concatenation is only a controlled stress test.",
+    "data_access": {
+      "check_id": "D9",
+      "gate": "pass",
+      "access_proof": "First 1 MiB of official Speech Commands v0.02 archive yielded a complete 16-kHz mono WAV: 16,000 frames. Dataset licence verified on primary Google release page.",
+      "licence": "CC BY 4.0 for Speech Commands; software/other checkpoints retain their own terms.",
+      "uncertainty": "The verified archive is about 2.43 GB compressed; use a small deterministic subset first. No long real-background corpus was verified for this proposal; do not claim continuous-listening results.",
+      "source_urls": [
+        "https://www.tensorflow.org/datasets/catalog/speech_commands"
+      ],
+      "data_link": "https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz"
+    },
+    "cpu_plan": "Pilot: 3,000–5,000 one-second clips, cached log-mel features, model under 200k parameters. Start with linear and small CNN fits, measure time/peak RAM and cap runs. Full study uses bounded subsets and few seeds on the 16-GB laptop.",
+    "multi_month_scope": [
+      "Weeks 1–3: speaker/word split audit and simple floors",
+      "Weeks 4–8: compact model training and negative-selection policies",
+      "Weeks 9–14: held-word/speaker evaluation, base-rate and threshold sensitivity",
+      "Weeks 15–20: compute/accuracy trade-offs, reproducible model and write-up"
+    ],
+    "closest_work": "ZP-KWS (June initial, September revision) already studies personalized zero-shot keywords and speaker gating; its hard-minimal-pair failures show limits. FalseWake already builds CPU streaming evaluation and reports a poor linear baseline. Neither just building an engine nor a speaker split is a new contribution.",
+    "proposed_difference": "A matched-budget investigation of which negative examples teach useful rejection beyond memorized unknown words. It is an applied learning/evaluation thesis, not a wake-word demo.",
+    "risks": [
+      "Only 35 short vocabulary items limit open-world claims",
+      "Phonetic heuristics may underperform ordinary score mining",
+      "Current noise-robust personalized systems are stronger alternatives but not all cheap to reproduce"
+    ],
+    "concrete_output": "A compact trained command model, a reproducible unknown-word protocol and evidence about negative-selection strategies.",
+    "verdict": "keep",
+    "verdict_reason": "Directly connected to LTU’s explicitly listed speech/audio master-thesis interests, verified public audio and a months-long scientific comparison. No new architecture is required.",
+    "provenance": [
+      "speech-google",
+      "speech-paper",
+      "speech-data",
+      "speech-falsewake",
+      "speech-current",
+      "ltu-kovacs",
+      "ltu-sustainable"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-kovacs",
+        "ltu-sustainable"
+      ],
+      "strength": "direct research/thesis-interest fit",
+      "substantive_connection": "The official LTU master-supervision page lists speech recognition under noisy/speaker-varying conditions and audio event classification. Sustainable ML supports small, efficient models. The contribution is robust learned rejection under a resource budget.",
+      "limits": "A listed interest is not a commitment to supervise this particular proposal; no hardware or private audio assumed.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU György Kovács master-thesis interests",
+          "url": "https://www.ltu.se/en/staff/g/gyorgy-kovacs"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Teach a small voice-command model which similar words to ignore",
+      "who": "A researcher developing local voice interfaces.",
+      "problem": "Recognizing a command in an isolated clip does not ensure a model can reject other similar words.",
+      "example": "A device meant to respond to “go” should not activate on a different short word. The study controls how unknown words are selected during training.",
+      "you_would_make": "A compact trained command model, a reproducible unknown-word protocol and evidence about negative-selection strategies.",
+      "status": "keep"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "A matched-budget investigation of which negative examples teach useful rejection beyond memorized unknown words. It is an applied learning/evaluation thesis, not a wake-word demo.",
+      "research_connection": "The official LTU master-supervision page lists speech recognition under noisy/speaker-varying conditions and audio event classification. Sustainable ML supports small, efficient models. The contribution is robust learned rejection under a resource budget.",
+      "alignment_kind": "direct",
+      "institutional_sources": [
+        {
+          "title": "LTU György Kovács master-thesis interests",
+          "url": "https://www.ltu.se/en/staff/g/gyorgy-kovacs"
+        },
+        {
+          "title": "LTU Sustainable ML",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html"
+        }
+      ],
+      "verified_evidence": "Explicit speech robustness/audio-event topics directly support ND9 methods fit.; Efficiency, optimization and edge deployment are actual interests; no hardware entitlement follows.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "A listed interest is not a commitment to supervise this particular proposal; no hardware or private audio assumed. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    }
+  },
+  {
+    "id": "ND10",
+    "title": "Can a brain-signal model get the right answer for the wrong reason?",
+    "person": "An LTU brain-computer-interface researcher evaluating imagined-word recognition.",
+    "problem": "A model can classify the word shown during a brain-recording task by using eye movements or recording shortcuts. That does not prove it recognises imagined speech.",
+    "everyday_example": "Someone sees “four” and silently imagines saying it. The study checks whether recognition survives removing eye-movement signals. Because the word stays on screen, success would still not prove that the model reads thoughts.",
+    "scientific_question": "On LTU’s public inner-speech EEG dataset, how much of compact word/category classification survives strict event alignment, participant-held-out evaluation and reproducible ocular-artifact handling with negative controls?",
+    "model_training_or_adaptation": "Train regularized covariance/bandpower classifiers and EEGNet. Compare nuisance-channel exclusion, train-only artifact correction and a small nuisance-invariance penalty. Use the same trials and preprocessing for all models; no foundation-model pretraining or fMRI training needed.",
+    "baselines_and_comparisons": [
+      "Chance/label-permutation and temporal-offset controls",
+      "Bandpower plus regularized linear classifier; covariance classifier",
+      "EEGNet; closest published spectro-temporal transformer where implementation is reproducible and CPU cost acceptable",
+      "EOG-only, fixation/rest and early-versus-late task windows as diagnostic controls; none isolates internal speech from reading the simultaneously visible word"
+    ],
+    "leakage_aware_evaluation": "Split people before preprocessing/model selection, and keep complete trials/windows together. Evaluate all four held-out participants separately, with conservative uncertainty rather than treating 1,280 nominal trials as independent people. Compare two-category and eight-word tasks. Resolve BDF Status triggers against events.tsv and the stimulation protocol before training: values around 4,000 per trial appear millisecond-scale, and the checked subject TSV has319 rows (daughter39, other words40), not the described320. If alignment cannot be justified, stop the classification claim and report the reproducibility failure. The protocol has1-second fixation,2-second visible-word/inner-speech task,1-second rest; no separate cue-only control exists.",
+    "data_access": {
+      "check_id": "D10",
+      "gate": "pass_with_study_design_gate",
+      "access_proof": "OpenNeuro ds004196 v2.0.2 metadata declares CC0. Complete labels/channel metadata read; public S3 returned 1 MiB of a 152,513,024-byte BDF and a complete one-second record was decoded: 73 channels, 512 samples per channel.",
+      "licence": "Dataset CC0; LTU preprocessing repository GPL-3.0.",
+      "uncertainty": "Only four healthy participants; cue/inner-speech timing and event units require reconciliation. Actual files are accessible, but aligned training epochs have not yet been established. No patient/clinical benefit inference.",
+      "source_urls": [
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/dataset_description.json",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/sub-01/ses-EEG/eeg/sub-01_ses-EEG_task-inner_eeg.json",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004196/master/README"
+      ],
+      "data_link": "https://openneuro.org/datasets/ds004196/versions/2.0.2"
+    },
+    "cpu_plan": "Pilot: align one person’s first 20 trials; extract bandpower/covariance features; then all four EEG files sequentially (approximately 150 MB each for the checked file). Downsample after appropriate filtering; EEGNet under 100k parameters, target under 4 GB RAM. No MRI processing, proprietary MATLAB dependency or GPU required for the proposed Python pipeline.",
+    "multi_month_scope": [
+      "Weeks 1–4: reproducible event alignment, protocol audit and participant splits; go/no-go for semantic classification",
+      "Weeks 5–8: matched linear/covariance/EEGNet baselines and negative controls",
+      "Weeks 9–14: nuisance handling/adaptation and cross-person tests",
+      "Weeks 15–20: uncertainty, error analysis, reproducible scientific package and thesis"
+    ],
+    "closest_work": "LTU’s 2023 dataset paper already uses manually selected ICA components to reduce eye artifacts, so ocular cleaning itself is not new. Existing theses address inner speech. A2025 EEGNet/transformer paper already uses leave-one-subject-out evaluation; its reported dataset identifier, subject list and epoch counts do not match official metadata. These are unresolved reproducibility questions, not proof of invalid results. LTU’s May2026 review highlights data, computation and evaluation limits.",
+    "proposed_difference": "A reproducible cued-task classification and artifact audit: compare compact models under matched preprocessing and negative controls, report sensitivity to nuisance handling, and establish what this small dataset can support. The visible word prevents a clean separation of reading and internal speech; no causal share or thought-decoding result is claimed.",
+    "risks": [
+      "Only four people make population claims untenable",
+      "No separate latent inner-speech ground truth exists",
+      "Word remains visible throughout task: visual reading versus inner speech is not identifiable here",
+      "Alignment and319-versus320-event discrepancy are explicit initial scientific gates"
+    ],
+    "concrete_output": "A validated EEG preprocessing/training package, compact classifiers and a control-based account of what the recorded signals can actually support.",
+    "verdict": "revise",
+    "verdict_reason": "Strongest direct LTU project/data connection, with real licensed file access. Promising thesis direction once the explicit alignment/control pilot is resolved; not a ready semantic-decoding claim.",
+    "provenance": [
+      "ltu-health",
+      "ltu-resources",
+      "inner-current-ltu",
+      "inner-repo",
+      "inner-description",
+      "inner-events",
+      "inner-metadata",
+      "inner-readme",
+      "inner-closest",
+      "inner-review",
+      "inner-primary-xml",
+      "inner-pipeline"
+    ],
+    "ltu_fit": {
+      "source_ids": [
+        "ltu-health",
+        "inner-current-ltu",
+        "ltu-resources"
+      ],
+      "strength": "direct active-project and public-data fit",
+      "substantive_connection": "LTU Brain Analysis explicitly studies noninvasive inner-speech decoding; its active 2025–2027 project and listed prior master theses use the same public dataset family. This proposal investigates reliability of a learned decoder within that direction.",
+      "limits": "The study uses existing public EEG only. It does not assume project membership, access to newer patient data, hardware, supervision or clinical endorsement.",
+      "academic_expectations_ref": "academic_contract",
+      "endorsement": false,
+      "institutional_sources": [
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        },
+        {
+          "title": "LTU active inner-speech project 2025–2027",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence/projectarchivebrainanalysis/understandingtheneuraldynamicsofinnerspeechamultimodalandlongitudinalperspective.5.264138ae195b24275b983ce7.html"
+        },
+        {
+          "title": "LTU ML resources and datasets",
+          "url": "https://www.ltu.se/en/research/research-subjects/machine-learning/resources-software-hardware--datasets"
+        }
+      ]
+    },
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "venture_hypothesis": "Optional downstream use only. No buyer interviews, willingness to pay or validated demand established.",
+    "first_view": {
+      "title": "Can a brain-signal model get the right answer for the wrong reason?",
+      "who": "An LTU brain-computer-interface researcher evaluating imagined-word recognition.",
+      "problem": "A model can classify the word shown during a brain-recording task by using eye movements or recording shortcuts. That does not prove it recognises imagined speech.",
+      "example": "Someone sees “four” and silently imagines saying it. The study checks whether recognition survives removing eye-movement signals. Because the word stays on screen, success would still not prove that the model reads thoughts.",
+      "you_would_make": "A validated EEG preprocessing/training package, compact classifiers and a control-based account of what the recorded signals can actually support.",
+      "status": "revise"
+    },
+    "distinct_from_previous_batch": "Compared with ST1–ST10 and prior NT/T/RT titles: this studies a different target/task, not a renamed audio-metadata, guitar, HAR-position, litter-background, symbol, table, tabular-context, anomaly-combiner, code-search or recommendation project.",
+    "academic_fit": {
+      "study_type": "Smaller applied research project with substantial model/pipeline development and comparative evaluation",
+      "student_contribution": "A reproducible cued-task classification and artifact audit: compare compact models under matched preprocessing and negative controls, report sensitivity to nuisance handling, and establish what this small dataset can support. The visible word prevents a clean separation of reading and internal speech; no causal share or thought-decoding result is claimed.",
+      "research_connection": "LTU Brain Analysis explicitly studies noninvasive inner-speech decoding; its active 2025–2027 project and listed prior master theses use the same public dataset family. This proposal investigates reliability of a learned decoder within that direction.",
+      "alignment_kind": "direct",
+      "institutional_sources": [
+        {
+          "title": "LTU Health Intelligence",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence.4.4e99bee318d872d07486a8d1.html"
+        },
+        {
+          "title": "LTU active inner-speech project 2025–2027",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/healthintelligence/projectarchivebrainanalysis/understandingtheneuraldynamicsofinnerspeechamultimodalandlongitudinalperspective.5.264138ae195b24275b983ce7.html"
+        },
+        {
+          "title": "LTU ML resources and datasets",
+          "url": "https://www.ltu.se/en/research/research-subjects/machine-learning/resources-software-hardware--datasets"
+        }
+      ],
+      "verified_evidence": "Direct inner-speech/EEG connection; sleep/ECG are adjacent methods applications, not verified current offers.; Direct current research connection; project page update is 2025, not a new 2026 dataset. No access to collaborators/patients is implied.; Actual resources followed; listings are not guaranteed user access or blanket dataset licences.",
+      "our_inference": "The proposed question can be assessed against X7013E as a substantial applied development/research study; relevance does not constitute examiner approval.",
+      "limits": "The study uses existing public EEG only. It does not assume project membership, access to newer patient data, hardware, supervision or clinical endorsement. Proposed fit only: no examiner, supervisor, project membership or resource approval."
+    },
+    "independent_review_correction": "Visible words prevent isolated inner-speech identification. The study is a cued-task classification/artifact audit; no causal fraction of thought decoding is claimed."
+  },
+  {
+    "id": "LE1",
+    "status": "qualified_possibility_with_pilot_gates",
+    "title": "Teach a small model when an empty form field is for a signature",
+    "plain_problem": "An empty signature line and an ordinary text field can look almost identical. The clue is often beside the field: its label, neighbouring date field or place in the form.",
+    "example": "A form contains two blank underlined regions. One is a postal address and one is a signature. A crop of the blank line alone loses the information needed to tell them apart.",
+    "outcome": "A trained compact context model, a reproducible test of which surrounding evidence matters, and an explicit account of accuracy versus CPU cost. This is field-type recognition given candidate regions, not a claim to solve complete document extraction.",
+    "why_this_topic_now": "Started from LTU’s current Form Field Extraction project, then its September 2026 mini-CommonForms paper. The paper reports severe signature-class weakness and describes text/signature confusion. The proposed question isolates context and imbalance instead of repeating its detector comparison.",
+    "ai_question": "At equal training examples and parameter/CPU budgets, does learning the relation between an empty field and its surroundings improve signature-versus-text classification on unseen form families more than larger crops or class balancing alone? Does any gain survive perturbation of the candidate boundary?",
+    "learning_method": {
+      "train": "Train from scratch a small shared CNN with two views: field crop and an expanded context crop with the field location marked. Fuse the embeddings with relative geometry; compare simple concatenation against a learned gate. Use 96–128 pixel crops and a target below one million parameters. No LLM or paid model calls.",
+      "adaptation": "Class-balanced minibatches and a contrastive/margin term for confusing signature/text pairs. Keep loss weighting, context radius and feature fusion as separately tested factors.",
+      "scope_limit": "Primary endpoint is conditional field-type classification using provided boxes. Add deterministic line/rectangle candidates as a secondary operational test only after measuring their proposal recall; never report oracle-box accuracy as detector accuracy."
+    },
+    "data": {
+      "name": "mini-CommonForms",
+      "url": "https://huggingface.co/datasets/omoured/minicommonform",
+      "license": "Apache-2.0 declared in official dataset card",
+      "verified": "Complete 33,930,838-byte parquet sample downloaded and decoded: 200 image/annotation rows; first JPEG 1081x1400 with 138 boxes. Full train/validation/test archives and annotation JSON files are public in repository metadata.",
+      "scale": "Card lists 47,355 pages; sample is an access proof, not a sufficient thesis dataset. Full images total roughly 15.2 GB. Select up to 3,000 training pages by document family, with deliberate signature coverage and capped text negatives; retrieve sequential tar members without retaining the entire archive if disk is constrained.",
+      "gate": "Before committing, inventory unique signature-bearing document families and group overlap using full annotation metadata. Require enough independent held-out families for meaningful intervals; otherwise drop this topic or change the claim, not duplicate crops to inflate sample size."
+    },
+    "baselines": [
+      "HOG/geometry plus class-weighted linear classifier",
+      "Field-only small CNN",
+      "Expanded-context-only CNN with matched parameters",
+      "Two-view CNN with ordinary cross-entropy",
+      "Class balancing without relational fusion",
+      "Nearest-neighbour geometry/position classifier to expose page-template shortcuts"
+    ],
+    "evaluation": {
+      "splits": "Group all pages from the same source document (filename stem before page suffix), and merge near-duplicate form families before splitting. Official partitions are reported separately from a stricter family-disjoint split. No crop, page, augmentation or source-template overlap. If source identity cannot be recovered reliably, label the residual leakage limitation explicitly.",
+      "metrics": "Signature PR-AUC, signature precision/recall/F1, macro-F1 and confusion matrix; calibration Brier score; per-family bootstrap intervals. Report CPU train time, peak RAM and per-field latency. Pre-register recall at a fixed signature precision chosen on validation.",
+      "ablations": "Context size; hide surrounding text; shuffle context between fields within a page; remove absolute page position; boundary jitter; balancing alone; fusion alone. This distinguishes useful context from template or position memorisation.",
+      "statistics": "Three seeds for the final two methods; tuning on validation families only. Confidence intervals resample document families, not thousands of correlated crops."
+    },
+    "closest_work": "Mind the Gaps (September 2026): Curates labels and benchmarks large detectors, including FFDNet and transformer detectors; signature detection remains weak. Difference: A controlled small-model study of conditional type discrimination and relational context. Does not claim to invent form detection or outperform published detection mAP. AutoFormBench (March 2026): Compares classical image processing and YOLO variants on a 407-form benchmark. Abstract read; full HTML unavailable. Difference: Different endpoint and controlled factors: signature/text discrimination, matched CPU budgets, and template-disjoint evaluation. No data dependency on this unprobed benchmark.",
+    "compute_plan": "16GB CPU laptop; cached compact crops with a capped image pipeline; training budget target <=6 CPU-hours per final run, to be tested in a 200-page pilot. 4GB VPS is optional for bookkeeping only. Do not expand to end-to-end high-resolution detector training if pilot fails.",
+    "multi_month_scope": [
+      "Weeks 1–3: literature, document grouping, label audit, access and runtime pilot.",
+      "Weeks 4–7: implement compact baselines and controlled crop/context dataset.",
+      "Weeks 8–11: train relation model and run pre-registered factor ablations.",
+      "Weeks 12–15: held-out family evaluation, calibration and computational measurements.",
+      "Weeks 16–20: analyse failures, robustness and limits; reproducible artifact and thesis."
+    ],
+    "contribution": "A task-specific trained model and falsifiable explanation of when local relational context helps rare form fields under a fixed resource budget. A negative result remains useful if the controlled comparison is sound.",
+    "risks": [
+      "Only a few independent signature templates may survive grouping.",
+      "The data licence is a publisher declaration; upstream provenance is not independently legally audited.",
+      "Nearby text might be unreadable at small resolution; larger crops trade detail for context.",
+      "Classification can improve while candidate detection remains the dominant bottleneck.",
+      "Public benchmark evidence does not establish commercial demand or production readiness."
+    ],
+    "venture_hypothesis": "If accuracy and CPU cost are favourable, a possible later use is a local assistant for checking digitised forms. No customer demand, deployment or business validation is claimed.",
+    "academic_fit": {
+      "study_type": "Smaller empirical research project with a developed learning method and critical comparative evaluation; potentially compatible with X7013E, 30 credits, within TMDIA Applied AI 120 credits. Academic acceptance is not established.",
+      "alignment_kind": "direct",
+      "institutional_sources": [
+        {
+          "title": "LTU: Page segmentation and Layout analysis (updated 26 October 2026)",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/documentanalysis/projectarchivedocumentanalysis/pagesegmentationandlayoutanalysis.5.48f4e5b19e0230fb7e2cc78.html"
+        },
+        {
+          "title": "LTU: Document Analysis (updated 26 October 2026)",
+          "url": "https://www.ltu.se/en/research/research-subjects/machine-learning/research-areas/document-analysis"
+        }
+      ],
+      "limits": "Research connection is evidenced; supervision, topic approval and equipment access are not. No LTU GPU, paid cloud, private documents or institutional relationship assumed. Syllabus is an assessment criterion, not the idea source.",
+      "student_contribution": "A task-specific trained model and falsifiable explanation of when local relational context helps rare form fields under a fixed resource budget. A negative result remains useful if the controlled comparison is sound.",
+      "research_connection": "Direct extension of LTU’s current Form Field Extraction project and its September 2026 mini-CommonForms study; no supervisor endorsement implied."
+    },
+    "duplicate_check": "Different from ST6 table-localisation adaptation and NT1 reading-order correction: target is the learned semantic distinction between visually blank field types, with a specific context/imbalance interaction.",
+    "person": "A researcher developing local document-processing models for digitised forms.",
+    "problem": "An empty signature line and an ordinary text field can look almost identical. The clue is often beside the field: its label, neighbouring date field or place in the form.",
+    "everyday_example": "A form contains two blank underlined regions. One is a postal address and one is a signature. A crop of the blank line alone loses the information needed to tell them apart.",
+    "scientific_question": "At equal training examples and parameter/CPU budgets, does learning the relation between an empty field and its surroundings improve signature-versus-text classification on unseen form families more than larger crops or class balancing alone? Does any gain survive perturbation of the candidate boundary?",
+    "model_training_or_adaptation": "Train from scratch a small shared CNN with two views: field crop and an expanded context crop with the field location marked. Fuse the embeddings with relative geometry; compare simple concatenation against a learned gate. Use 96–128 pixel crops and a target below one million parameters. No LLM or paid model calls. Class-balanced minibatches and a contrastive/margin term for confusing signature/text pairs. Keep loss weighting, context radius and feature fusion as separately tested factors. Primary endpoint is conditional field-type classification using provided boxes. Add deterministic line/rectangle candidates as a secondary operational test only after measuring their proposal recall; never report oracle-box accuracy as detector accuracy.",
+    "baselines_and_comparisons": [
+      "HOG/geometry plus class-weighted linear classifier",
+      "Field-only small CNN",
+      "Expanded-context-only CNN with matched parameters",
+      "Two-view CNN with ordinary cross-entropy",
+      "Class balancing without relational fusion",
+      "Nearest-neighbour geometry/position classifier to expose page-template shortcuts"
+    ],
+    "leakage_aware_evaluation": "Group all pages from the same source document (filename stem before page suffix), and merge near-duplicate form families before splitting. Official partitions are reported separately from a stricter family-disjoint split. No crop, page, augmentation or source-template overlap. If source identity cannot be recovered reliably, label the residual leakage limitation explicitly. Signature PR-AUC, signature precision/recall/F1, macro-F1 and confusion matrix; calibration Brier score; per-family bootstrap intervals. Report CPU train time, peak RAM and per-field latency. Pre-register recall at a fixed signature precision chosen on validation. Context size; hide surrounding text; shuffle context between fields within a page; remove absolute page position; boundary jitter; balancing alone; fusion alone. This distinguishes useful context from template or position memorisation. Three seeds for the final two methods; tuning on validation families only. Confidence intervals resample document families, not thousands of correlated crops. Preserve natural signature prevalence in held-out document families; do not cap or oversample test negatives. Precision-recall and fixed-precision thresholds use this natural test mix.",
+    "cpu_plan": "16GB CPU laptop; cached compact crops with a capped image pipeline; training budget target <=6 CPU-hours per final run, to be tested in a 200-page pilot. 4GB VPS is optional for bookkeeping only. Do not expand to end-to-end high-resolution detector training if pilot fails.",
+    "concrete_output": "A trained compact context model, a reproducible test of which surrounding evidence matters, and an explicit account of accuracy versus CPU cost. This is field-type recognition given candidate regions, not a claim to solve complete document extraction.",
+    "proposed_difference": "A task-specific trained model and falsifiable explanation of when local relational context helps rare form fields under a fixed resource budget. A negative result remains useful if the controlled comparison is sound.",
+    "verdict": "keep",
+    "verdict_reason": "Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.",
+    "data_access": {
+      "check_id": "LE-D1",
+      "gate": "pass_for_research",
+      "access_proof": "Complete 33,930,838-byte parquet sample downloaded and decoded: 200 image/annotation rows; first JPEG 1081x1400 with 138 boxes. Full train/validation/test archives and annotation JSON files are public in repository metadata.",
+      "licence": "Apache-2.0 declared in official dataset card",
+      "uncertainty": "Before committing, inventory unique signature-bearing document families and group overlap using full annotation metadata. Require enough independent held-out families for meaningful intervals; otherwise drop this topic or change the claim, not duplicate crops to inflate sample size.",
+      "source_urls": [
+        "https://huggingface.co/datasets/omoured/minicommonform"
+      ],
+      "data_link": "https://huggingface.co/datasets/omoured/minicommonform"
+    },
+    "provenance": [
+      "LE-E1",
+      "LE-E2",
+      "LE-E3",
+      "LE-E4",
+      "LE-E5",
+      "LE-E6"
+    ],
+    "first_view": {
+      "title": "Teach a small model when an empty form field is for a signature",
+      "who": "A researcher developing local document-processing models for digitised forms.",
+      "problem": "An empty signature line and an ordinary text field can look almost identical. The clue is often beside the field: its label, neighbouring date field or place in the form.",
+      "example": "A form contains two blank underlined regions. One is a postal address and one is a signature. A crop of the blank line alone loses the information needed to tell them apart.",
+      "you_would_make": "A trained compact context model, a reproducible test of which surrounding evidence matters, and an explicit account of accuracy versus CPU cost. This is field-type recognition given candidate regions, not a claim to solve complete document extraction.",
+      "status": "keep"
+    },
+    "closest_work_details": [
+      {
+        "title": "Mind the Gaps (September 2026)",
+        "url": "https://arxiv.org/html/2609.23679v1",
+        "what_already_exists": "Curates labels and benchmarks large detectors, including FFDNet and transformer detectors; signature detection remains weak.",
+        "proposed_difference": "A controlled small-model study of conditional type discrimination and relational context. Does not claim to invent form detection or outperform published detection mAP."
+      },
+      {
+        "title": "AutoFormBench (March 2026)",
+        "url": "https://arxiv.org/abs/2603.29832",
+        "what_already_exists": "Compares classical image processing and YOLO variants on a 407-form benchmark. Abstract read; full HTML unavailable.",
+        "proposed_difference": "Different endpoint and controlled factors: signature/text discrimination, matched CPU budgets, and template-disjoint evaluation. No data dependency on this unprobed benchmark."
+      }
+    ],
+    "distinct_from_previous_batch": "Different from ST6 table-localisation adaptation and NT1 reading-order correction: target is the learned semantic distinction between visually blank field types, with a specific context/imbalance interaction.",
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "independent_review_correction": "Natural held-out signature prevalence must be preserved; only training negatives may be capped or resampled."
+  },
+  {
+    "id": "LE2",
+    "status": "qualified_possibility_with_pilot_gates",
+    "title": "Keep marginal notes separate when manuscript training labels are rough",
+    "plain_problem": "A digitisation model must separate main text from marginal notes. Precise pixel labels are expensive; coarse boundaries can teach a model to erase small notes or merge them into the main text.",
+    "example": "A narrow handwritten comment touches the main text. Enlarging its training mask by a few pixels may swallow surrounding strokes; an ordinary segmentation loss then treats this approximation as unquestionable truth.",
+    "outcome": "A compact segmentation model trained to tolerate a controlled amount of boundary uncertainty, plus evidence about which label approximations preserve small marginal notes across manuscripts.",
+    "why_this_topic_now": "Started from LTU’s current Page Layout Analysis work explicitly distinguishing main text and marginalia, corroborated by the 26 October 2026 project update and a document-analysis project beginning 1 November 2026. Public DIVA-HisDB is the experimental instrument, not a new dataset claim.",
+    "ai_question": "For a fixed small segmentation network and page budget, can an uncertainty-aware boundary loss retain marginalia under coarsened training masks better than hard labels, ignored boundary bands or standard label smoothing, without degrading clean-label performance? How much transfers to a held-out manuscript?",
+    "learning_method": {
+      "train": "Train a compact L-U-Net-inspired or narrow U-Net from scratch using 256x256 tiles, with main text/comment/decoration/background targets. A roughly 65k-parameter L-U-Net is described in the closest weak-label paper; the actual implementation and parameter count must be checked.",
+      "adaptation": "Create controlled label approximations only in training: polygon simplification and class-wise erosion/dilation with a fixed scale normalised by page resolution. Assign boundary pixels a set of plausible adjacent classes, preserve confident interior supervision, and add consistency between two image perturbations.",
+      "control": "Compare set-valued boundary loss with simply ignoring the same band, matched soft-label smoothing, and hard noisy masks. Do not mix boundary noise with missing-whole-region labels in the primary experiment. Optional missing-note stress test is separately reported.",
+      "claim_limit": "Synthetic coarsening measures tolerance to specified label defects. It does not prove human annotation-time savings, expert disagreement or restoration of historically correct text."
+    },
+    "data": {
+      "name": "DIVA-HisDB, official LTU-hosted Zenodo re-release",
+      "url": "https://zenodo.org/records/19127869",
+      "license": "CC-BY-4.0 explicitly returned by unauthenticated Zenodo metadata API",
+      "verified": "50,000,000 bytes fetched in two bounded HTTP ranges from a 1,295,308,933-byte archive. Nested archives yielded matching original JPEG and pixel mask for CB55 page 0019r, both 4872x6496, and its PAGE XML. Decoding succeeded. The archive is a website mirror containing nested zip files; a single flat image folder should not be assumed.",
+      "dates": "Original dataset publication 2016 and competition 2017; Zenodo publication 20 March 2026. This is not a new November dataset.",
+      "scale": "150 pages from three manuscripts according to release metadata. Full compressed download ~1.3GB; stream/decompress one page at a time and train on bounded tiles. Preserve official page identity and split manifests.",
+      "probe_handling": "The first available pair is in a legacy folder named private-test, now openly released. It is access/format evidence only and must not become development data. No model trained on it."
+    },
+    "baselines": [
+      "Same compact network with clean hard labels (upper reference)",
+      "Hard coarsened masks with cross-entropy plus class-weighted Dice",
+      "Ignore a fixed uncertain boundary band",
+      "Ordinary soft label smoothing with matched uncertain pixels",
+      "Boundary-Gaussian-distance inspired smooth boundary objective, identified as an adaptation",
+      "Morphological post-processing or local threshold refinement without changing training"
+    ],
+    "evaluation": {
+      "splits": "No tiles or augmentations from a page cross folds. Primary protocol uses official training/validation/test identities within each manuscript. Secondary strict transfer holds out an entire manuscript: learn on the other two and select hyperparameters using source pages; rotate three folds. Keep recto/verso and near-duplicate scans grouped where identities allow.",
+      "person_control": "Writer/person identities are not verified in the available release. Do not call a within-manuscript result writer-independent. Whole-manuscript holdout provides a stronger style/source separation but only three sources; cannot support population-wide writer-generalisation claims.",
+      "metrics": "Comment-class IoU and F1, macro-IoU excluding background, boundary F-score at specified pixel tolerance, connected-component split/merge counts, and recall of small comment components. Report clean-label accuracy drop and worst-manuscript result. Component size bins fixed from training data.",
+      "statistics": "Resample pages, never pixels, for within-manuscript intervals; report each held-out manuscript separately. Three final seeds. All noise seeds, radii and label-generation rules fixed before test evaluation.",
+      "ablations": "Noise type and radius, 2/5/10 training pages per manuscript if masks support it, interior supervision versus consistency term, class balance, context tile size, fixed parameter and training-time budgets."
+    },
+    "closest_work": "Approximate ground truth generation for semantic labeling of historical documents with minimal human effort (12 June 2024): Iterative synthetic-data bootstrapping, expert selection and morphological refinement produce approximate labels; a small L-U-Net is used. Evaluation explicitly examines differences among generated, corrected and manual labels. Difference: Controlled boundary-corruption learning against untouched released masks, without expert selection or generated evaluation targets. Not a claim to invent weak supervision. Boundary Gaussian Distance Loss Function for Enhancing Character Extraction from High-Resolution Scans of Ancient Metal-Type Printed Books (2024): A smoothed boundary-distance objective addresses inaccurate character-mask boundaries. Search excerpt inspected; full publisher page rate-limited. Difference: Multiclass semantic layout and rare marginalia, with source transfer and hard/ignored/set-valued-label controls. Include this as a close baseline principle, not claim first boundary-robust document loss. AF-CANet (Pattern Recognition Letters, August 2026): Attention U-Net, class-weighted Dice and cross-dataset curriculum on DIVA-HisDB; publisher abstract and section snippets inspected, full paper not accessed. Difference: Holds architecture small and fixed to isolate annotation uncertainty rather than proposing another attention/few-shot architecture. Full protocol comparison is an early thesis literature gate. On self-supervision in historical handwritten document segmentation (1 July 2025): Uses self-supervised features and few-shot probing; resolution affects small details. Difference: Studies controlled noisy supervision rather than recreating large multi-dataset SSL pretraining. Few-Shot Connectivity-Aware Text Line Segmentation (26 August 2025): Few-shot line connectivity and baseline detection already have dedicated methods. Difference: Semantic class preservation of comments versus body, not a new text-line connectivity claim.",
+    "compute_plan": "CPU laptop, 16GB RAM; decode one high-resolution page at a time; cache at most a bounded tile bank, batch 4–8. Pilot one compact model over <=10 pages and target <=4 CPU-hours per training run. Total final design capped around 24–36 selected runs; reduce configurations if measured runtime exceeds budget. No GPU or group hardware needed or assumed.",
+    "multi_month_scope": [
+      "Weeks 1–3: exact mask encoding/splits, literature and compact-network runtime pilot.",
+      "Weeks 4–6: deterministic label coarsening, page-level evaluation and clean/noisy controls.",
+      "Weeks 7–10: implement uncertainty-aware loss and tune on source validation only.",
+      "Weeks 11–14: fixed-budget ablations and held-out-manuscript experiments.",
+      "Weeks 15–20: error taxonomy, uncertainty/limitations, reproducibility and thesis writing."
+    ],
+    "contribution": "A trained noise-tolerant layout method with a reproducible map of failure thresholds for rare semantic regions; a controlled evaluation separating label uncertainty, small-region loss and manuscript shift.",
+    "risks": [
+      "Three manuscripts severely limit generalisation; no invented independent-writer count.",
+      "Morphological mask defects are controlled simulations, not measured human annotation behaviour.",
+      "Label palette/bit encoding must be verified before interpreting classes; RGB channels are not assumed to be direct class IDs.",
+      "Small tiles may remove needed layout context; include a fixed context-size control.",
+      "Large clean-label differences or identical performance to ignored boundaries could defeat the proposed method; a sound negative comparison is still a valid smaller research result."
+    ],
+    "venture_hypothesis": "Potential later application is reducing rework in archival digitisation. No archive partnership, buyer demand or annotation-effort saving established.",
+    "academic_fit": {
+      "study_type": "Smaller empirical research project with a developed learning method and critical comparative evaluation; potentially compatible with X7013E, 30 credits, within TMDIA Applied AI 120 credits. Academic acceptance is not established.",
+      "alignment_kind": "direct",
+      "institutional_sources": [
+        {
+          "title": "LTU: Page segmentation and Layout analysis (updated 26 October 2026)",
+          "url": "https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/documentanalysis/projectarchivedocumentanalysis/pagesegmentationandlayoutanalysis.5.48f4e5b19e0230fb7e2cc78.html"
+        },
+        {
+          "title": "LTU: Document Analysis (updated 26 October 2026)",
+          "url": "https://www.ltu.se/en/research/research-subjects/machine-learning/research-areas/document-analysis"
+        }
+      ],
+      "limits": "Research connection is evidenced; supervision, topic approval and equipment access are not. No LTU GPU, paid cloud, private documents or institutional relationship assumed. Syllabus is an assessment criterion, not the idea source.",
+      "student_contribution": "A trained noise-tolerant layout method with a reproducible map of failure thresholds for rare semantic regions; a controlled evaluation separating label uncertainty, small-region loss and manuscript shift.",
+      "research_connection": "Directly matches LTU’s current page-layout research on main text versus marginalia. The independent November 2026 NAISS project corroborates continuing document-analysis work; its compute allocation is not a resource available to this student."
+    },
+    "duplicate_check": "Different from NT1 reading-order corrections and ST6 modern table detection: learns pixel-level semantic segmentation under explicit training-label uncertainty, measured on small marginal notes.",
+    "person": "A researcher developing manuscript digitisation models without precise new annotations.",
+    "problem": "A digitisation model must separate main text from marginal notes. Precise pixel labels are expensive; coarse boundaries can teach a model to erase small notes or merge them into the main text.",
+    "everyday_example": "A narrow handwritten comment touches the main text. Enlarging its training mask by a few pixels may swallow surrounding strokes; an ordinary segmentation loss then treats this approximation as unquestionable truth.",
+    "scientific_question": "For a fixed small segmentation network and page budget, can an uncertainty-aware boundary loss retain marginalia under coarsened training masks better than hard labels, ignored boundary bands or standard label smoothing, without degrading clean-label performance? How much transfers to a held-out manuscript?",
+    "model_training_or_adaptation": "Train a compact L-U-Net-inspired or narrow U-Net from scratch using 256x256 tiles, with main text/comment/decoration/background targets. A roughly 65k-parameter L-U-Net is described in the closest weak-label paper; the actual implementation and parameter count must be checked. Create controlled label approximations only in training: polygon simplification and class-wise erosion/dilation with a fixed scale normalised by page resolution. Assign boundary pixels a set of plausible adjacent classes, preserve confident interior supervision, and add consistency between two image perturbations. Compare set-valued boundary loss with simply ignoring the same band, matched soft-label smoothing, and hard noisy masks. Do not mix boundary noise with missing-whole-region labels in the primary experiment. Optional missing-note stress test is separately reported. Synthetic coarsening measures tolerance to specified label defects. It does not prove human annotation-time savings, expert disagreement or restoration of historically correct text. Construct uncertain boundary bands and plausible classes solely from coarsened training labels. Keep clean source masks hidden from the weak-label learner; a separately labelled clean-supervision oracle may be reported as an upper reference, never an equal-information baseline.",
+    "baselines_and_comparisons": [
+      "Same compact network with clean hard labels (upper reference)",
+      "Hard coarsened masks with cross-entropy plus class-weighted Dice",
+      "Ignore a fixed uncertain boundary band",
+      "Ordinary soft label smoothing with matched uncertain pixels",
+      "Boundary-Gaussian-distance inspired smooth boundary objective, identified as an adaptation",
+      "Morphological post-processing or local threshold refinement without changing training"
+    ],
+    "leakage_aware_evaluation": "No tiles or augmentations from a page cross folds. Primary protocol uses official training/validation/test identities within each manuscript. Secondary strict transfer holds out an entire manuscript: learn on the other two and select hyperparameters using source pages; rotate three folds. Keep recto/verso and near-duplicate scans grouped where identities allow. Writer/person identities are not verified in the available release. Do not call a within-manuscript result writer-independent. Whole-manuscript holdout provides a stronger style/source separation but only three sources; cannot support population-wide writer-generalisation claims. Comment-class IoU and F1, macro-IoU excluding background, boundary F-score at specified pixel tolerance, connected-component split/merge counts, and recall of small comment components. Report clean-label accuracy drop and worst-manuscript result. Component size bins fixed from training data. Resample pages, never pixels, for within-manuscript intervals; report each held-out manuscript separately. Three final seeds. All noise seeds, radii and label-generation rules fixed before test evaluation. Noise type and radius, 2/5/10 training pages per manuscript if masks support it, interior supervision versus consistency term, class balance, context tile size, fixed parameter and training-time budgets.",
+    "cpu_plan": "CPU laptop, 16GB RAM; decode one high-resolution page at a time; cache at most a bounded tile bank, batch 4–8. Pilot one compact model over <=10 pages and target <=4 CPU-hours per training run. Total final design capped around 24–36 selected runs; reduce configurations if measured runtime exceeds budget. No GPU or group hardware needed or assumed.",
+    "concrete_output": "A compact segmentation model trained to tolerate a controlled amount of boundary uncertainty, plus evidence about which label approximations preserve small marginal notes across manuscripts.",
+    "proposed_difference": "A trained noise-tolerant layout method with a reproducible map of failure thresholds for rare semantic regions; a controlled evaluation separating label uncertainty, small-region loss and manuscript shift.",
+    "verdict": "keep",
+    "verdict_reason": "Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.",
+    "data_access": {
+      "check_id": "LE-D2",
+      "gate": "pass_for_research",
+      "access_proof": "50,000,000 bytes fetched in two bounded HTTP ranges from a 1,295,308,933-byte archive. Nested archives yielded matching original JPEG and pixel mask for CB55 page 0019r, both 4872x6496, and its PAGE XML. Decoding succeeded. The archive is a website mirror containing nested zip files; a single flat image folder should not be assumed.",
+      "licence": "CC-BY-4.0 explicitly returned by unauthenticated Zenodo metadata API",
+      "uncertainty": "Three manuscripts severely limit generalisation; no invented independent-writer count.",
+      "source_urls": [
+        "https://zenodo.org/records/19127869"
+      ],
+      "data_link": "https://zenodo.org/records/19127869"
+    },
+    "provenance": [
+      "LE-E1",
+      "LE-E2",
+      "LE-E3",
+      "LE-E7",
+      "LE-E8",
+      "LE-E9",
+      "LE-E10",
+      "LE-E11",
+      "LE-E12"
+    ],
+    "first_view": {
+      "title": "Keep marginal notes separate when manuscript training labels are rough",
+      "who": "A researcher developing manuscript digitisation models without precise new annotations.",
+      "problem": "A digitisation model must separate main text from marginal notes. Precise pixel labels are expensive; coarse boundaries can teach a model to erase small notes or merge them into the main text.",
+      "example": "A narrow handwritten comment touches the main text. Enlarging its training mask by a few pixels may swallow surrounding strokes; an ordinary segmentation loss then treats this approximation as unquestionable truth.",
+      "you_would_make": "A compact segmentation model trained to tolerate a controlled amount of boundary uncertainty, plus evidence about which label approximations preserve small marginal notes across manuscripts.",
+      "status": "keep"
+    },
+    "closest_work_details": [
+      {
+        "title": "Approximate ground truth generation for semantic labeling of historical documents with minimal human effort (12 June 2024)",
+        "url": "https://link.springer.com/article/10.1007/s10032-024-00475-w",
+        "what_already_exists": "Iterative synthetic-data bootstrapping, expert selection and morphological refinement produce approximate labels; a small L-U-Net is used. Evaluation explicitly examines differences among generated, corrected and manual labels.",
+        "proposed_difference": "Controlled boundary-corruption learning against untouched released masks, without expert selection or generated evaluation targets. Not a claim to invent weak supervision."
+      },
+      {
+        "title": "Boundary Gaussian Distance Loss Function for Enhancing Character Extraction from High-Resolution Scans of Ancient Metal-Type Printed Books (2024)",
+        "url": "https://doi.org/10.3390/electronics13101957",
+        "what_already_exists": "A smoothed boundary-distance objective addresses inaccurate character-mask boundaries. Search excerpt inspected; full publisher page rate-limited.",
+        "proposed_difference": "Multiclass semantic layout and rare marginalia, with source transfer and hard/ignored/set-valued-label controls. Include this as a close baseline principle, not claim first boundary-robust document loss."
+      },
+      {
+        "title": "AF-CANet (Pattern Recognition Letters, August 2026)",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0167865526001704",
+        "what_already_exists": "Attention U-Net, class-weighted Dice and cross-dataset curriculum on DIVA-HisDB; publisher abstract and section snippets inspected, full paper not accessed.",
+        "proposed_difference": "Holds architecture small and fixed to isolate annotation uncertainty rather than proposing another attention/few-shot architecture. Full protocol comparison is an early thesis literature gate."
+      },
+      {
+        "title": "On self-supervision in historical handwritten document segmentation (1 July 2025)",
+        "url": "https://link.springer.com/article/10.1007/s10032-025-00538-6",
+        "what_already_exists": "Uses self-supervised features and few-shot probing; resolution affects small details.",
+        "proposed_difference": "Studies controlled noisy supervision rather than recreating large multi-dataset SSL pretraining."
+      },
+      {
+        "title": "Few-Shot Connectivity-Aware Text Line Segmentation (26 August 2025)",
+        "url": "https://arxiv.org/abs/2508.19162",
+        "what_already_exists": "Few-shot line connectivity and baseline detection already have dedicated methods.",
+        "proposed_difference": "Semantic class preservation of comments versus body, not a new text-line connectivity claim."
+      }
+    ],
+    "distinct_from_previous_batch": "Different from NT1 reading-order corrections and ST6 modern table detection: learns pixel-level semantic segmentation under explicit training-label uncertainty, measured on small marginal notes.",
+    "investigation_status": "Feasibility and prior-work investigation only; no model trained or experiment run.",
+    "independent_review_correction": "Boundary uncertainty and plausible class sets must be computed from coarsened training labels only. Clean masks cannot silently provide privileged training supervision."
+  }
+]

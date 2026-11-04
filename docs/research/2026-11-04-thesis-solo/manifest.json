@@ -1,0 +1,105 @@
+{
+  "created_at": "2026-11-04T07:27:48.144737+00:00",
+  "files": [
+    {
+      "path": "briefs/LE1.txt",
+      "bytes": 7220,
+      "sha256": "8dfba83de0343b830f9173952110e78a6436a534fb2474c652b102c61ea39417"
+    },
+    {
+      "path": "briefs/LE2.txt",
+      "bytes": 9814,
+      "sha256": "72133c2267e22aab599514c3680751597b5ce1233899d559054f0a253a07b6c6"
+    },
+    {
+      "path": "briefs/ND1.txt",
+      "bytes": 4749,
+      "sha256": "15196ef3d484c5512358e699ef181446d41cabfe0befab6a4cd45b7e19f1067f"
+    },
+    {
+      "path": "briefs/ND10.txt",
+      "bytes": 7056,
+      "sha256": "f76d9bb804cfa65b346f3b30e3e45846289de5cd646874d20a7f1ca57e722345"
+    },
+    {
+      "path": "briefs/ND2.txt",
+      "bytes": 2850,
+      "sha256": "13d17508538c02a18879bc1528dbcfb8fdfa33232db9486cf6a268da3c9d5870"
+    },
+    {
+      "path": "briefs/ND3.txt",
+      "bytes": 3099,
+      "sha256": "92eaaaaa91ccf086379c1a6555a34bb9aac1a694efba26845e7ae8af3705abb1"
+    },
+    {
+      "path": "briefs/ND4.txt",
+      "bytes": 3074,
+      "sha256": "fae380715d4f6b5aa1238befecac0e2deffaff50706c446594f4239f9b5e92f2"
+    },
+    {
+      "path": "briefs/ND5.txt",
+      "bytes": 4989,
+      "sha256": "f5f8cb933765e8edb0c771e2c89e4464f897edc02f1d83ad388b1f03a8a011e2"
+    },
+    {
+      "path": "briefs/ND6.txt",
+      "bytes": 4454,
+      "sha256": "c4b1aefbc98a7ca1d8496653fa893dc40a369103aa91980f44a161adc123abd6"
+    },
+    {
+      "path": "briefs/ND7.txt",
+      "bytes": 4201,
+      "sha256": "b1d2f465825f35c10a2c68767996c1a80eebee37afc95347c97f24163a76f66c"
+    },
+    {
+      "path": "briefs/ND8.txt",
+      "bytes": 4637,
+      "sha256": "89edc18367fdc14209eb11c9a7a6de8c3919a692847762d9a6334909eec4c151"
+    },
+    {
+      "path": "briefs/ND9.txt",
+      "bytes": 4597,
+      "sha256": "d4aa149158246f8cdab98edeb6e1c4ee243e600ba368a995abaca01988e6d46e"
+    },
+    {
+      "path": "data-access-checks.json",
+      "bytes": 10429,
+      "sha256": "c125765c6faa36a559f006ec5d4c105b99d35f79bbd16be7e8146967786a25e3"
+    },
+    {
+      "path": "independent-review.json",
+      "bytes": 17835,
+      "sha256": "4353e007c1a4a8a55f6162fe8e488c46905acba1d8a5fb21ddedd3d187ec1437"
+    },
+    {
+      "path": "proposed-public-cards.json",
+      "bytes": 186038,
+      "sha256": "fd8b76f619487e449ff4baf2aba3b23e7d6ddfcd1fded79c5c96d47c7fbcb0e0"
+    },
+    {
+      "path": "qualification-audit.json",
+      "bytes": 6482,
+      "sha256": "945182b0c910ddfaf357dfb772825f8694e351f174f77609fef3660ea6691722"
+    },
+    {
+      "path": "research-summary.txt",
+      "bytes": 5059,
+      "sha256": "282825b1885e813af97278fd742008158788f5e1f4cea8ac0071973709d4e99e"
+    },
+    {
+      "path": "review-corrections.json",
+      "bytes": 1052,
+      "sha256": "0d57dc606caf4e49f71782c97903f13b06fd67f96b33f1848048f711e22b1929"
+    },
+    {
+      "path": "reviewed-candidates.json",
+      "bytes": 122876,
+      "sha256": "98977958d7b616152f740f544d22d8b22a4345701b19bb2f16d0171966a188c9"
+    },
+    {
+      "path": "source-ledger.json",
+      "bytes": 78813,
+      "sha256": "83b138f97efe1c42b5359de78f081649448abae4a2565cc3858f053d6bacfe50"
+    }
+  ]
+}

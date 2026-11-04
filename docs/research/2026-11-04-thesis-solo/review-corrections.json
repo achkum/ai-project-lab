@@ -1,0 +1,8 @@
+{
+  "ND1": "Removed an unsupported causal claim about separating sensor drift from environmental change. The contribution is a matched-budget sequential comparison, not the invention of reference-efficient calibration.",
+  "ND5": "Unseen-location evaluation requires shared node-wise scoring or scenario inference. Fixed multiclass trees are restricted to held-out episodes at known locations.",
+  "ND7": "Missing recorded lead channels are distinct from physical electrode failures; the example and simulated-missingness claim now preserve that distinction.",
+  "ND10": "Visible words prevent isolated inner-speech identification. The study is a cued-task classification/artifact audit; no causal fraction of thought decoding is claimed.",
+  "LE1": "Natural held-out signature prevalence must be preserved; only training negatives may be capped or resampled.",
+  "LE2": "Boundary uncertainty and plausible class sets must be computed from coarsened training labels only. Clean masks cannot silently provide privileged training supervision."
+}

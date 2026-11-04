@@ -1,0 +1,58 @@
+LE1: Teach a small model when an empty form field is for a signature
+4 November 2026 — KEEP
+
+Problem
+An empty signature line and an ordinary text field can look almost identical. The clue is often beside the field: its label, neighbouring date field or place in the form.
+
+Example
+A form contains two blank underlined regions. One is a postal address and one is a signature. A crop of the blank line alone loses the information needed to tell them apart.
+
+Research question
+At equal training examples and parameter/CPU budgets, does learning the relation between an empty field and its surroundings improve signature-versus-text classification on unseen form families more than larger crops or class balancing alone? Does any gain survive perturbation of the candidate boundary?
+
+What you would build/train
+Train from scratch a small shared CNN with two views: field crop and an expanded context crop with the field location marked. Fuse the embeddings with relative geometry; compare simple concatenation against a learned gate. Use 96–128 pixel crops and a target below one million parameters. No LLM or paid model calls. Class-balanced minibatches and a contrastive/margin term for confusing signature/text pairs. Keep loss weighting, context radius and feature fusion as separately tested factors. Primary endpoint is conditional field-type classification using provided boxes. Add deterministic line/rectangle candidates as a secondary operational test only after measuring their proposal recall; never report oracle-box accuracy as detector accuracy.
+
+Comparisons
+HOG/geometry plus class-weighted linear classifier Field-only small CNN Expanded-context-only CNN with matched parameters Two-view CNN with ordinary cross-entropy Class balancing without relational fusion Nearest-neighbour geometry/position classifier to expose page-template shortcuts
+
+Evaluation
+Group all pages from the same source document (filename stem before page suffix), and merge near-duplicate form families before splitting. Official partitions are reported separately from a stricter family-disjoint split. No crop, page, augmentation or source-template overlap. If source identity cannot be recovered reliably, label the residual leakage limitation explicitly. Signature PR-AUC, signature precision/recall/F1, macro-F1 and confusion matrix; calibration Brier score; per-family bootstrap intervals. Report CPU train time, peak RAM and per-field latency. Pre-register recall at a fixed signature precision chosen on validation. Context size; hide surrounding text; shuffle context between fields within a page; remove absolute page position; boundary jitter; balancing alone; fusion alone. This distinguishes useful context from template or position memorisation. Three seeds for the final two methods; tuning on validation families only. Confidence intervals resample document families, not thousands of correlated crops. Preserve natural signature prevalence in held-out document families; do not cap or oversample test negatives. Precision-recall and fixed-precision thresholds use this natural test mix.
+
+Data and terms
+Complete 33,930,838-byte parquet sample downloaded and decoded: 200 image/annotation rows; first JPEG 1081x1400 with 138 boxes. Full train/validation/test archives and annotation JSON files are public in repository metadata. Apache-2.0 declared in official dataset card Before committing, inventory unique signature-bearing document families and group overlap using full annotation metadata. Require enough independent held-out families for meaningful intervals; otherwise drop this topic or change the claim, not duplicate crops to inflate sample size.
+
+CPU plan
+16GB CPU laptop; cached compact crops with a capped image pipeline; training budget target <=6 CPU-hours per final run, to be tested in a 200-page pilot. 4GB VPS is optional for bookkeeping only. Do not expand to end-to-end high-resolution detector training if pilot fails.
+
+Semester scope
+Weeks 1–3: literature, document grouping, label audit, access and runtime pilot. Weeks 4–7: implement compact baselines and controlled crop/context dataset. Weeks 8–11: train relation model and run pre-registered factor ablations. Weeks 12–15: held-out family evaluation, calibration and computational measurements. Weeks 16–20: analyse failures, robustness and limits; reproducible artifact and thesis.
+
+Closest work
+Mind the Gaps (September 2026): Curates labels and benchmarks large detectors, including FFDNet and transformer detectors; signature detection remains weak. Difference: A controlled small-model study of conditional type discrimination and relational context. Does not claim to invent form detection or outperform published detection mAP. AutoFormBench (March 2026): Compares classical image processing and YOLO variants on a 407-form benchmark. Abstract read; full HTML unavailable. Difference: Different endpoint and controlled factors: signature/text discrimination, matched CPU budgets, and template-disjoint evaluation. No data dependency on this unprobed benchmark.
+
+Proposed contribution
+A task-specific trained model and falsifiable explanation of when local relational context helps rare form fields under a fixed resource budget. A negative result remains useful if the controlled comparison is sound.
+
+Research connection
+Direct extension of LTU’s current Form Field Extraction project and its September 2026 mini-CommonForms study; no supervisor endorsement implied.
+
+Limits
+Research connection is evidenced; supervision, topic approval and equipment access are not. No LTU GPU, paid cloud, private documents or institutional relationship assumed. Syllabus is an assessment criterion, not the idea source.
+
+Risks
+Only a few independent signature templates may survive grouping. The data licence is a publisher declaration; upstream provenance is not independently legally audited. Nearby text might be unreadable at small resolution; larger crops trade detail for context. Classification can improve while candidate detection remains the dominant bottleneck. Public benchmark evidence does not establish commercial demand or production readiness.
+
+Output
+A trained compact context model, a reproducible test of which surrounding evidence matters, and an explicit account of accuracy versus CPU cost. This is field-type recognition given candidate regions, not a claim to solve complete document extraction.
+
+Verdict
+Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.
+
+Source URLs
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/documentanalysis/projectarchivedocumentanalysis/pagesegmentationandlayoutanalysis.5.48f4e5b19e0230fb7e2cc78.html
+https://www.ltu.se/en/research/research-subjects/machine-learning/research-areas/document-analysis
+https://supr.naiss.se/public/project/39690/
+https://arxiv.org/html/2609.23679v1
+https://huggingface.co/datasets/omoured/minicommonform
+https://arxiv.org/abs/2603.29832

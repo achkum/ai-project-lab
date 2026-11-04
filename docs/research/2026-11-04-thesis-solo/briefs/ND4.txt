@@ -1,0 +1,57 @@
+ND4: Leave room for appliances the energy model has never seen
+4 November 2026 — WITHDRAW
+
+Problem
+A model can force all electricity use into known appliance labels, making an unseen appliance look like a familiar one.
+
+Example
+A heater is plugged in for the first time. A model should not automatically report that the washing machine used that energy.
+
+Research question
+Can an explicitly learned unknown-load residual reduce false attribution while preserving useful known-appliance estimates?
+
+What you would build/train
+Would train compact sequence-to-point regressors with a nonnegative residual and conservation penalty; compare matched models without the unknown component.
+
+Comparisons
+Appliance-state thresholds and factorial hidden Markov baseline Compact sequence-to-point CNN Event-aware physics-constrained NILM and recent transfer/attention approaches
+
+Evaluation
+Hold out houses and complete appliance instances; chronological splits within remaining homes. Preserve missing-data indicators and audit filled zeros. Evaluate false attribution, energy conservation and per-appliance errors.
+
+Data and terms
+UK-DALE owner page and REFIT publisher/Zenodo metadata read. UK-DALE legacy host redirected away from data; actual cleaned REFIT CSV and publisher files returned 403. UK-DALE/REFIT pages declare CC BY 4.0. A separate Figshare REFIT Smart Home record was inspected but is not the electrical-load dataset and is not treated as substitute access.
+
+CPU plan
+Unqualified. A downsampled week and a sub-500k-parameter model could fit CPU, but no usable selected waveform sample was verified.
+
+Semester scope
+Would require missingness audit, controlled unseen-appliance construction, model training, cross-house evaluation and uncertainty analysis.
+
+Closest work
+Recent physics-aware and event-aware NILM papers already use conservation; October 2026 diffusion NILM is a costly alternative with unavailable-on-request data.
+
+Proposed contribution
+Study unknown appliance attribution under realistic missing measurements, rather than claiming conservation itself is new.
+
+Research connection
+Efficient energy-related learning could be relevant, but no specific current LTU NILM research connection was verified.
+
+Limits
+Failed data access is independently sufficient to withdraw. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Data download failed Unknown residual may absorb all errors without identifying anything useful No verified bill savings or buyer demand
+
+Output
+Blocked data-access record and a scoped research question.
+
+Verdict
+Metadata openness did not translate into verified usable data.
+
+Source URLs
+https://jack-kelly.com/data/
+https://data.ukedc.rl.ac.uk/browse/edc/efficiency/residential/EnergyConsumption/Domestic/UK-DALE-2017/UK-DALE-FULL-disaggregated
+https://pureportal.strath.ac.uk/en/datasets/31da3ece-f902-4e95-a093-e0a9536983c4
+https://zenodo.org/records/5063428
+https://www.sciencedirect.com/science/article/pii/S0360544226029476

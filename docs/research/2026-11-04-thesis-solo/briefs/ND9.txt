@@ -1,0 +1,59 @@
+ND9: Teach a small voice-command model which similar words to ignore
+4 November 2026 — KEEP
+
+Problem
+Recognizing a command in an isolated clip does not ensure a model can reject other similar words.
+
+Example
+A device meant to respond to “go” should not activate on a different short word. The study controls how unknown words are selected during training.
+
+Research question
+Under a fixed negative-example and compute budget, which hard-negative training strategy best preserves command recall while rejecting previously unseen word types and speakers?
+
+What you would build/train
+Train a small depthwise CNN or causal TCN on log-mel features. Compare random negatives, score-mined negatives and phonetic/confusion-diverse negative selection. Learn an explicit rejection/energy head; keep threshold tuning separate from mining.
+
+Comparisons
+Log-mel statistics plus logistic regression Small DS-CNN with ordinary unknown class and threshold calibration Hard-negative mining, diversity-balanced mining, and energy/prototype rejection under matched examples and parameter count
+
+Evaluation
+Group by speaker using file naming conventions; hold out entire unknown-word types as well as speakers. Mine negatives only from training. Report recall at fixed false-positive rates and per-word confusion, with speaker bootstrap intervals. No deployment false activations per hour from isolated clips; synthetic concatenation is only a controlled stress test.
+
+Data and terms
+First 1 MiB of official Speech Commands v0.02 archive yielded a complete 16-kHz mono WAV: 16,000 frames. Dataset licence verified on primary Google release page. CC BY 4.0 for Speech Commands; software/other checkpoints retain their own terms. The verified archive is about 2.43 GB compressed; use a small deterministic subset first. No long real-background corpus was verified for this proposal; do not claim continuous-listening results.
+
+CPU plan
+Pilot: 3,000–5,000 one-second clips, cached log-mel features, model under 200k parameters. Start with linear and small CNN fits, measure time/peak RAM and cap runs. Full study uses bounded subsets and few seeds on the 16-GB laptop.
+
+Semester scope
+Weeks 1–3: speaker/word split audit and simple floors Weeks 4–8: compact model training and negative-selection policies Weeks 9–14: held-word/speaker evaluation, base-rate and threshold sensitivity Weeks 15–20: compute/accuracy trade-offs, reproducible model and write-up
+
+Closest work
+ZP-KWS (June initial, September revision) already studies personalized zero-shot keywords and speaker gating; its hard-minimal-pair failures show limits. FalseWake already builds CPU streaming evaluation and reports a poor linear baseline. Neither just building an engine nor a speaker split is a new contribution.
+
+Proposed contribution
+A matched-budget investigation of which negative examples teach useful rejection beyond memorized unknown words. It is an applied learning/evaluation thesis, not a wake-word demo.
+
+Research connection
+The official LTU master-supervision page lists speech recognition under noisy/speaker-varying conditions and audio event classification. Sustainable ML supports small, efficient models. The contribution is robust learned rejection under a resource budget.
+
+Limits
+A listed interest is not a commitment to supervise this particular proposal; no hardware or private audio assumed. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Only 35 short vocabulary items limit open-world claims Phonetic heuristics may underperform ordinary score mining Current noise-robust personalized systems are stronger alternatives but not all cheap to reproduce
+
+Output
+A compact trained command model, a reproducible unknown-word protocol and evidence about negative-selection strategies.
+
+Verdict
+Directly connected to LTU’s explicitly listed speech/audio master-thesis interests, verified public audio and a months-long scientific comparison. No new architecture is required.
+
+Source URLs
+https://www.research.google/blog/launching-the-speech-commands-dataset/
+https://arxiv.org/html/2606.20106v2
+https://www.tensorflow.org/datasets/catalog/speech_commands
+https://raw.githubusercontent.com/omar07ibrahim/falsewake/main/README.md
+https://www.sciencedirect.com/science/article/abs/pii/S0950705126016850
+https://www.ltu.se/en/staff/g/gyorgy-kovacs
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/sustainablemachinelearning.4.64257e3118d877d8daf91a07.html

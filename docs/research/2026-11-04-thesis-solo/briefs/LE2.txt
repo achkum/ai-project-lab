@@ -1,0 +1,61 @@
+LE2: Keep marginal notes separate when manuscript training labels are rough
+4 November 2026 — KEEP
+
+Problem
+A digitisation model must separate main text from marginal notes. Precise pixel labels are expensive; coarse boundaries can teach a model to erase small notes or merge them into the main text.
+
+Example
+A narrow handwritten comment touches the main text. Enlarging its training mask by a few pixels may swallow surrounding strokes; an ordinary segmentation loss then treats this approximation as unquestionable truth.
+
+Research question
+For a fixed small segmentation network and page budget, can an uncertainty-aware boundary loss retain marginalia under coarsened training masks better than hard labels, ignored boundary bands or standard label smoothing, without degrading clean-label performance? How much transfers to a held-out manuscript?
+
+What you would build/train
+Train a compact L-U-Net-inspired or narrow U-Net from scratch using 256x256 tiles, with main text/comment/decoration/background targets. A roughly 65k-parameter L-U-Net is described in the closest weak-label paper; the actual implementation and parameter count must be checked. Create controlled label approximations only in training: polygon simplification and class-wise erosion/dilation with a fixed scale normalised by page resolution. Assign boundary pixels a set of plausible adjacent classes, preserve confident interior supervision, and add consistency between two image perturbations. Compare set-valued boundary loss with simply ignoring the same band, matched soft-label smoothing, and hard noisy masks. Do not mix boundary noise with missing-whole-region labels in the primary experiment. Optional missing-note stress test is separately reported. Synthetic coarsening measures tolerance to specified label defects. It does not prove human annotation-time savings, expert disagreement or restoration of historically correct text. Construct uncertain boundary bands and plausible classes solely from coarsened training labels. Keep clean source masks hidden from the weak-label learner; a separately labelled clean-supervision oracle may be reported as an upper reference, never an equal-information baseline.
+
+Comparisons
+Same compact network with clean hard labels (upper reference) Hard coarsened masks with cross-entropy plus class-weighted Dice Ignore a fixed uncertain boundary band Ordinary soft label smoothing with matched uncertain pixels Boundary-Gaussian-distance inspired smooth boundary objective, identified as an adaptation Morphological post-processing or local threshold refinement without changing training
+
+Evaluation
+No tiles or augmentations from a page cross folds. Primary protocol uses official training/validation/test identities within each manuscript. Secondary strict transfer holds out an entire manuscript: learn on the other two and select hyperparameters using source pages; rotate three folds. Keep recto/verso and near-duplicate scans grouped where identities allow. Writer/person identities are not verified in the available release. Do not call a within-manuscript result writer-independent. Whole-manuscript holdout provides a stronger style/source separation but only three sources; cannot support population-wide writer-generalisation claims. Comment-class IoU and F1, macro-IoU excluding background, boundary F-score at specified pixel tolerance, connected-component split/merge counts, and recall of small comment components. Report clean-label accuracy drop and worst-manuscript result. Component size bins fixed from training data. Resample pages, never pixels, for within-manuscript intervals; report each held-out manuscript separately. Three final seeds. All noise seeds, radii and label-generation rules fixed before test evaluation. Noise type and radius, 2/5/10 training pages per manuscript if masks support it, interior supervision versus consistency term, class balance, context tile size, fixed parameter and training-time budgets.
+
+Data and terms
+50,000,000 bytes fetched in two bounded HTTP ranges from a 1,295,308,933-byte archive. Nested archives yielded matching original JPEG and pixel mask for CB55 page 0019r, both 4872x6496, and its PAGE XML. Decoding succeeded. The archive is a website mirror containing nested zip files; a single flat image folder should not be assumed. CC-BY-4.0 explicitly returned by unauthenticated Zenodo metadata API Three manuscripts severely limit generalisation; no invented independent-writer count.
+
+CPU plan
+CPU laptop, 16GB RAM; decode one high-resolution page at a time; cache at most a bounded tile bank, batch 4–8. Pilot one compact model over <=10 pages and target <=4 CPU-hours per training run. Total final design capped around 24–36 selected runs; reduce configurations if measured runtime exceeds budget. No GPU or group hardware needed or assumed.
+
+Semester scope
+Weeks 1–3: exact mask encoding/splits, literature and compact-network runtime pilot. Weeks 4–6: deterministic label coarsening, page-level evaluation and clean/noisy controls. Weeks 7–10: implement uncertainty-aware loss and tune on source validation only. Weeks 11–14: fixed-budget ablations and held-out-manuscript experiments. Weeks 15–20: error taxonomy, uncertainty/limitations, reproducibility and thesis writing.
+
+Closest work
+Approximate ground truth generation for semantic labeling of historical documents with minimal human effort (12 June 2024): Iterative synthetic-data bootstrapping, expert selection and morphological refinement produce approximate labels; a small L-U-Net is used. Evaluation explicitly examines differences among generated, corrected and manual labels. Difference: Controlled boundary-corruption learning against untouched released masks, without expert selection or generated evaluation targets. Not a claim to invent weak supervision. Boundary Gaussian Distance Loss Function for Enhancing Character Extraction from High-Resolution Scans of Ancient Metal-Type Printed Books (2024): A smoothed boundary-distance objective addresses inaccurate character-mask boundaries. Search excerpt inspected; full publisher page rate-limited. Difference: Multiclass semantic layout and rare marginalia, with source transfer and hard/ignored/set-valued-label controls. Include this as a close baseline principle, not claim first boundary-robust document loss. AF-CANet (Pattern Recognition Letters, August 2026): Attention U-Net, class-weighted Dice and cross-dataset curriculum on DIVA-HisDB; publisher abstract and section snippets inspected, full paper not accessed. Difference: Holds architecture small and fixed to isolate annotation uncertainty rather than proposing another attention/few-shot architecture. Full protocol comparison is an early thesis literature gate. On self-supervision in historical handwritten document segmentation (1 July 2025): Uses self-supervised features and few-shot probing; resolution affects small details. Difference: Studies controlled noisy supervision rather than recreating large multi-dataset SSL pretraining. Few-Shot Connectivity-Aware Text Line Segmentation (26 August 2025): Few-shot line connectivity and baseline detection already have dedicated methods. Difference: Semantic class preservation of comments versus body, not a new text-line connectivity claim.
+
+Proposed contribution
+A trained noise-tolerant layout method with a reproducible map of failure thresholds for rare semantic regions; a controlled evaluation separating label uncertainty, small-region loss and manuscript shift.
+
+Research connection
+Directly matches LTU’s current page-layout research on main text versus marginalia. The independent November 2026 NAISS project corroborates continuing document-analysis work; its compute allocation is not a resource available to this student.
+
+Limits
+Research connection is evidenced; supervision, topic approval and equipment access are not. No LTU GPU, paid cloud, private documents or institutional relationship assumed. Syllabus is an assessment criterion, not the idea source.
+
+Risks
+Three manuscripts severely limit generalisation; no invented independent-writer count. Morphological mask defects are controlled simulations, not measured human annotation behaviour. Label palette/bit encoding must be verified before interpreting classes; RGB channels are not assumed to be direct class IDs. Small tiles may remove needed layout context; include a fixed context-size control. Large clean-label differences or identical performance to ignored boundaries could defeat the proposed method; a sound negative comparison is still a valid smaller research result.
+
+Output
+A compact segmentation model trained to tolerate a controlled amount of boundary uncertainty, plus evidence about which label approximations preserve small marginal notes across manuscripts.
+
+Verdict
+Direct current LTU research connection, public permitted image/annotation pair decoded, and a substantive CPU-sized model-training design. Feasibility is prospective: runtime and grouping/mask-encoding pilots remain, as in any unstarted thesis.
+
+Source URLs
+https://www.ltu.se/luleauniversityoftechnology/research/researchsubjects/machinelearning/researchareas/documentanalysis/projectarchivedocumentanalysis/pagesegmentationandlayoutanalysis.5.48f4e5b19e0230fb7e2cc78.html
+https://www.ltu.se/en/research/research-subjects/machine-learning/research-areas/document-analysis
+https://supr.naiss.se/public/project/39690/
+https://zenodo.org/api/records/19127869
+https://link.springer.com/article/10.1007/s10032-024-00475-w
+https://www.sciencedirect.com/science/article/pii/S0167865526001704
+https://link.springer.com/article/10.1007/s10032-025-00538-6
+https://doi.org/10.3390/electronics13101957
+https://arxiv.org/abs/2508.19162

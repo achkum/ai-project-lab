@@ -1,0 +1,61 @@
+ND8: Let a small earthquake detector admit when its timing is unreliable
+4 November 2026 — REVISE
+
+Problem
+A small model may put a precise-looking timestamp on noise or on a poorly defined arrival.
+
+Example
+A trace has a weak first arrival. Returning a broad uncertain interval may be more honest than a timestamp that is wrong by half a second.
+
+Research question
+Can label-quality-aware training and calibrated pick intervals reduce confidently wrong seismic arrival times at a fixed model size and accepted-pick rate?
+
+What you would build/train
+Train a small 1-D phase-picking CNN with quality-weighted/soft arrival targets and a confidence head. Use handcrafted onset features plus a boosted model as a strong low-cost alternative. Pretrained PhaseNet weights are optional only after their exact release/licence and training exposure are verified.
+
+Comparisons
+STA/LTA onset detector Handcrafted features plus boosted trees; GreenPhase-style shallow pipeline Same tiny CNN with hard labels, soft labels, quality weights and post-hoc calibration separately
+
+Evaluation
+Keep each earthquake event and its traces within a split; independently stress held-out stations. Do not use event/arrival metadata as model inputs. Include real noise recordings. Report timing error conditional on successful detection, missed arrivals, false picks per noise window and coverage/interval width. Do not equate per-window rates with continuous false alarms or earthquake-warning performance.
+
+Data and terms
+All 100 STEAD sample traces and metadata decoded (7.57 MB). Separately decoded a complete real noise trace from official SeisBench HDF5 using 99,480 bytes in 15 bounded range requests. STEAD CC BY 4.0 confirmed in official distribution/source. 100-sample file contains earthquakes only; it is not a negative dataset. Full SeisBench waveform object is about 91 GB and was not downloaded. Larger pilot requires selective ranges and a streamed metadata pass.
+
+CPU plan
+Pilot: 100 events plus selected noise; then 2,000–5,000 traces, downsampled if scientifically justified. Tiny CNN under 300k parameters, cached features, under 6 GB RAM. A shallow baseline remains the fallback if timed training is slow.
+
+Semester scope
+Weeks 1–4: trace/label audit, event grouping and real-noise sampling Weeks 5–9: build onset and tiny-neural baselines Weeks 10–15: label-quality, uncertainty and station-transfer experiments Weeks 16–20: calibration limits, runtime and report
+
+Closest work
+October regional fine-tuning and October edge-distillation papers already address adaptation and efficient picking. GreenPhase offers a shallow alternative; its runtime/comparisons do not constitute a laptop benchmark. Tiny-picker authors report weak noise rejection, but their weights are not assumed available.
+
+Proposed contribution
+Study the reliability/coverage trade-off with imperfect labels and real noise, not simply compress a phase picker.
+
+Research connection
+Applied Geophysics works on physical-signal interpretation and geological/environmental inference; Sustainable ML studies model efficiency.
+
+Limits
+Current verified geophysics project D-Rex concerns exploration; its data/problem are not STEAD earthquake phase picking. No LTU seismic-AI supervisor/project was verified. Proposed fit only: no examiner, supervisor, project membership or resource approval.
+
+Risks
+Regional earthquake data does not validate mining microseismic monitoring Label-quality flags can be weak proxies LTU Applied Geophysics page/project list does not establish a close seismic-AI topic match
+
+Output
+A compact picker, controlled label-quality ablations and uncertainty/false-pick evaluation on public traces.
+
+Verdict
+Data and CPU study are credible, but institutional/application fit is weaker than the directly linked LTU ML topics. Keep as reserve; do not promote based only on the word geophysics.
+
+Source URLs
+https://raw.githubusercontent.com/smousavi05/STEAD/master/README.md
+https://raw.githubusercontent.com/smousavi05/EQTransformer/master/ModelsAndSampleData/100samples.csv
+https://raw.githubusercontent.com/smousavi05/STEAD/master/LICENSE
+https://arxiv.org/html/2603.03344v1
+https://pubs.geoscienceworld.org/ssa/srl/article-abstract/doi/10.1785/0220260259/799182/Regional-Fine-Tuning-of-Pretrained-Phase-Pickers
+https://academic.oup.com/pnasnexus/article/5/10/pgag322/8817284
+https://lab.cloud/research/tiny-seismic-phase-picker/
+https://www.ltu.se/en/research/research-subjects/applied-geophysics
+https://www.ltu.se/en/research/research-subjects/applied-geophysics/research-projects

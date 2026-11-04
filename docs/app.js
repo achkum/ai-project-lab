@@ -36,21 +36,54 @@ function renderDecisions(lane) {
 function ideaFlow(x) {
  return '<ol class="idea-flow">'+(x.flow||[]).map((s,i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><p>'+esc(s)+'</p></li>').join('')+'</ol>';
 }
+const academicFitFields=[['study_type','Study type'],['student_contribution','Your contribution'],['research_connection','Connection to research'],['limits','Limits and conditions']];
+function reviewedAcademicFit(fit) {
+ return !!fit&&['direct','indirect'].includes(fit.alignment_kind)&&
+  academicFitFields.every(([field])=>typeof fit[field]==='string'&&fit[field].trim());
+}
+function institutionalLink(value) {
+ if(typeof value!=='string')return '';
+ const link=safeLink(value);
+ if(!link.startsWith('https://'))return '';
+ const url=new URL(link);
+ return !url.username&&!url.password?link:'';
+}
+function academicFitDetails(fit) {
+ if(!reviewedAcademicFit(fit))return '<p class="muted">LTU course fit has not yet been reviewed.</p>';
+ const alignment=fit.alignment_kind==='direct'?'Direct alignment':'Indirect alignment';
+ const sources=Array.isArray(fit.institutional_sources)?fit.institutional_sources.map(source=>{
+  const url=institutionalLink(source?.url);
+  if(!url||typeof source?.title!=='string'||!source.title.trim())return '';
+  return '<li><a class="text-link" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(source.title)+' ↗</a></li>';
+ }).join(''):'';
+ return '<details class="evidence-details"><summary>Why this fits an Applied AI thesis</summary>'+
+  '<p><strong>Proposed fit for LTU’s Applied AI thesis course · '+alignment+'</strong></p>'+
+  academicFitFields.map(([field,label])=>'<h3>'+label+'</h3><p>'+esc(fit[field])+'</p>').join('')+
+  '<p class="muted">Course approval and access to supervision, data and computing resources require separate confirmation.</p>'+
+  (sources?'<h3>Research and course sources</h3><ul>'+sources+'</ul>':'')+'</details>';
+}
 function presentIdea(x){
  const copy=data.opportunity_copy?.[x.id];
  if(!copy)return x;
  const view={...x,technical:x};
  const fields=['title','summary','why_it_matters','proposed_fix','example','flow','deliverable','contribution','question','measure','audience','effort','market','feasibility','next','risk','venture','customer_test','week_test','reason'];
  for(const field of fields)if(copy[field]!==undefined)view[field]=copy[field];
+ if(x.lane==='Thesis'&&reviewedAcademicFit(x.academic_fit)&&copy.academic_fit){
+  view.academic_fit={...x.academic_fit};
+  for(const [field] of academicFitFields){
+   const wording=copy.academic_fit[field];
+   if(typeof wording==='string'&&wording.trim())view.academic_fit[field]=wording;
+  }
+ }
  return view;
 }
 function sourcePreview(x){
  const s=(x.provenance||[])[0];
  const note=x.business_case?'<p class="muted">'+esc(x.evidence_level)+'</p>':'';
- return note+(s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(pretty(s.kind))+' · '+esc(s.published_at||'Date unknown')+' · Novelty unverified</small></div>':'');
+ return note+(s?'<div class="source-preview"><span class="label">PROBLEM / EVIDENCE SOURCE</span><a href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><small>'+esc(pretty(s.kind))+' · Published: '+esc(s.published_at||'Unknown')+(s.revised_at?' · Updated: '+esc(s.revised_at):'')+' · Novelty unverified</small></div>':'');
 }
 function provenanceDetails(x){
- return '<section class="provenance-panel"><h3>Where this idea came from</h3>'+(x.provenance||[]).map(s=>'<article><span class="tag">'+esc(s.kind)+'</span><a class="text-link" href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><p>'+esc(s.finding)+'</p><small>Published: '+esc(s.published_at||'Unknown')+' · Checked: '+esc(s.verified_at||'Not recorded')+'</small><p>Read scope: '+esc(s.read_scope||'Not recorded')+'</p></article>').join('')+'<h3>What already exists</h3><p>'+esc(x.baseline||x.alternative)+'</p><h3>What we propose to add or test</h3><p>'+esc(x.proposed_difference||x.question)+'</p><p class="originality-note">'+esc(x.originality||'Novelty has not been established.')+'</p></section>';
+ return '<section class="provenance-panel"><h3>Where this idea came from</h3>'+(x.provenance||[]).map(s=>'<article><span class="tag">'+esc(s.kind)+'</span><a class="text-link" href="'+esc(safeLink(s.url))+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' ↗</a><p>'+esc(s.finding)+'</p><small>Published: '+esc(s.published_at||'Unknown')+(s.revised_at?' · Revised / page updated: '+esc(s.revised_at):'')+(s.event_date?' · Project event: '+esc(s.event_date):'')+' · Checked: '+esc(s.verified_at||'Not recorded')+'</small>'+(s.date_notes?'<p class="muted">Date context: '+esc(s.date_notes)+'</p>':'')+'<p>Read scope: '+esc(s.read_scope||'Not recorded')+'</p></article>').join('')+'<h3>What already exists</h3><p>'+esc(x.baseline||x.alternative)+'</p><h3>What we propose to add or test</h3><p>'+esc(x.proposed_difference||x.question)+'</p><p class="originality-note">'+esc(x.originality||'Novelty has not been established.')+'</p></section>';
 }
 function outcomeSummary(x) {
  if(x.investigated_result){
@@ -137,7 +170,9 @@ function renderCards(lane,query=''){
  const pinned=all.filter(x=>!batchMatches(x,batch,lane)&&(activeState(x.status)||(typeof liveJobs!=='undefined'&&liveJobs.some(j=>j.candidate===x.id&&j.version===x.version&&activeState(j.state)))));
  const rest=earlier.filter(x=>!pinned.includes(x));
  const date=lane==='Thesis'?batch?.date:batch?.published_at;
- const progress=lane==='Thesis'&&batch&&Number.isInteger(batch.investigated_topics)&&Number.isInteger(batch.target_topics)?'<p><strong>'+esc(batch.investigated_topics)+' / '+esc(batch.target_topics)+' topics investigated</strong></p>':'';
+ const progress=lane==='Thesis'&&batch&&Number.isInteger(batch.investigated_topics)&&Number.isInteger(batch.target_topics)?
+  (Number.isInteger(batch.qualified_topics)?'<p><strong>'+esc(batch.qualified_topics)+' / '+esc(batch.target_topics)+' possibilities retained</strong> · '+esc(batch.investigated_topics)+' leads investigated</p>':
+   '<p><strong>'+esc(batch.investigated_topics)+' / '+esc(batch.target_topics)+' topics investigated</strong></p>'):'';
  const research=batch?'<div class="lane-focus"><div><span class="tag">'+(lane==='Thesis'?'CURRENT RESEARCH · ':'CURRENT BATCH · ')+esc(displayDay(date))+' · '+esc(pretty(batch.state))+'</span>'+progress+(lane==='Thesis'?'<p>'+esc(batch.note||'')+'</p>':'')+'</div></div>':'';
  const currentEmpty=query?'No current ideas match this search.':lane==='Thesis'?'Current research is underway; its topic cards have not yet been published.':'No ideas are available for this batch.';
  const cardGrid=rows=>'<div class="idea-grid">'+rows.map(ideaCard).join('')+'</div>';
@@ -200,7 +235,7 @@ document.addEventListener('click',async e=>{
    const t=original.technical_detail||{};
    const details=[['Formal research question',t.research_question],['Methods to compare',original.model_plan],['Evaluation design',t.design],['How to measure the result',original.measure],['Data and permission to use it',original.data_plan],['Computer limits',t.compute],['The first experiment',original.week_test],['Closest existing work',original.baseline],['What this study might add',original.proposed_difference],['What would make us revise or drop it',t.kill_test]];
    const grid=items=>'<div class="detail-grid">'+items.filter(([,v])=>v).map(([k,v])=>'<section><h3>'+esc(k)+'</h3><p>'+esc(v)+'</p></section>').join('')+'</div>';
-   $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / Thesis idea</span><h2>'+esc(x.title)+'</h2>'+grid(sections)+ideaFlow(x)+outcomeSummary(x)+'<details class="evidence-details"><summary>Research methods and data — optional detail</summary>'+grid(details)+'</details><details class="evidence-details"><summary>Sources, dates and what already exists</summary>'+provenanceDetails(original)+'</details>'+(typeof singleJobAction==='function'?singleJobAction(x):'')+'<div class="discussion-actions"><button data-conversation="ask" data-lane="thesis" data-idea="'+esc(x.id)+'">Ask about this idea</button></div>';
+   $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / Thesis idea</span><h2>'+esc(x.title)+'</h2>'+grid(sections)+ideaFlow(x)+outcomeSummary(x)+academicFitDetails(x.academic_fit)+'<details class="evidence-details"><summary>Research methods and data — optional detail</summary>'+grid(details)+'</details><details class="evidence-details"><summary>Sources, dates and what already exists</summary>'+provenanceDetails(original)+'</details>'+(typeof singleJobAction==='function'?singleJobAction(x):'')+'<div class="discussion-actions"><button data-conversation="ask" data-lane="thesis" data-idea="'+esc(x.id)+'">Ask about this idea</button></div>';
    $('detail').showModal();return;
  }
  $('detail-content').innerHTML='<span class="tag">'+esc(x.id)+' / '+esc(x.domain||x.lane)+'</span><h2>'+esc(x.title)+'</h2><p class="detail-lead">'+esc(x.summary)+'</p>'+outcomeSummary(x)+sourcePreview(x)+ideaFlow(x)+'<div class="detail-grid">'+[
