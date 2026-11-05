@@ -776,9 +776,11 @@
           "checked_at": "2026-11-05T21:21:02.345030+00:00",
           "source_updated_at": "15 March 2024",
           "original_published_at": null,
-          "review_scope": "Full thematic page read; four areas described and four further areas named. Linked publications and staff not reviewed."
+          "review_scope": "Full thematic page read; four areas described and four further areas named. Linked publications and staff not reviewed.",
+          "source_url": "https://www.ltu.se/en/research/research-subjects/applied-mathematics/research-areas"
         }
-      ]
+      ],
+      "ai_connection": "The research-areas page explicitly combines machine learning with spatial statistics and sparse methods for vibration analysis."
     },
     {
       "id": "ltu-05",
@@ -27107,5 +27109,5 @@
       ]
     }
   ],
-  "presentation_reviewed_at": "2026-11-05T21:23:35.970380+00:00"
+  "presentation_reviewed_at": "2026-11-05T21:35:52.190548+00:00"
 }

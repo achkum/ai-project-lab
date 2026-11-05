@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-05T21:27:53.733487+00:00",
+  "generated_at": "2026-11-05T21:35:56.111540+00:00",
   "connected": true,
   "thesis": {
     "state": "possibilities_ready",
@@ -7805,12 +7805,12 @@
       "full_topic_pages_reviewed": 55,
       "additional_thesis_routes": 8,
       "ltu_exhausted": false,
-      "data_sha256": "b5cc47de393245d6f0bd83b9c84267ea9af2dfba1bace9a4158af5b293b5488b",
+      "data_sha256": "5717c50fad0622b9cbcaee2babe28cc24b376ac72133f2398c4fa02164487c3d",
       "catalog_generated_at": "2026-11-04T08:00:13.639384+00:00",
-      "presentation_reviewed_at": "2026-11-05T21:23:35.970380+00:00",
+      "presentation_reviewed_at": "2026-11-05T21:35:52.190548+00:00",
       "url": "https://achkum.github.io/ai-project-lab/#ltu-research",
       "note": "A partial official research catalog. Indexed listings are not unique projects or qualified thesis possibilities.",
-      "published_at": "2026-11-05T21:27:52.834260+00:00",
+      "published_at": "2026-11-05T21:35:55.099769+00:00",
       "last_mapping_slice": {
         "full_topic_pages": 7,
         "research_area_pages": 1,
