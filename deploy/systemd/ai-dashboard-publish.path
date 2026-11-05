@@ -8,6 +8,7 @@ PathChanged=/home/openclaw/ai-discovery/config/public-opportunities.json
 PathChanged=/home/openclaw/ai-discovery/config/discovery-audit.json
 PathChanged=/home/openclaw/ai-discovery/config/discovery-batches.json
 PathChanged=/home/openclaw/ai-discovery/config/discovery-signals.json
+PathChanged=/home/openclaw/ai-discovery/config/ltu-research.json
 Unit=ai-dashboard-publish.service
 
 [Install]

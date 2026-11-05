@@ -5,6 +5,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -25,6 +26,46 @@ def read_jobs(path, clock=time.time):
                  for k in ('candidate', 'version', 'lane', 'state', 'updated')} for row in rows]
     finally:
         queue.close()
+
+
+def load_ltu_catalog(path):
+    if not path.exists():
+        return None
+    catalog=json.loads(path.read_text(encoding='utf-8'))
+    text=lambda value:isinstance(value,str) and bool(value.strip())
+    if (not isinstance(catalog,dict) or catalog.get('mode')=='sample' or type(catalog.get('schema_version')) is not int or
+            catalog['schema_version']!=1 or not text(catalog.get('generated_at')) or
+            not text(catalog.get('directory_url')) or not isinstance(catalog.get('coverage'),dict) or
+            not isinstance(catalog.get('subjects'),list)):
+        raise ValueError('Invalid LTU research catalog schema')
+    for subject in catalog['subjects']:
+        if (not isinstance(subject,dict) or not all(text(subject.get(key)) for key in ('id','name','url')) or
+                subject.get('review_status') not in ('reviewed','not_reviewed','inaccessible') or
+                not isinstance(subject.get('topics',[]),list)):
+            raise ValueError('Invalid LTU research subject schema')
+        for topic in subject.get('topics',[]):
+            if not isinstance(topic,dict) or not all(text(topic.get(key)) for key in ('id','title','url')):
+                raise ValueError('Invalid LTU research listing schema')
+    json.dumps(catalog,allow_nan=False)
+    return catalog
+
+
+def write_catalog(path,catalog):
+    temporary=None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w',encoding='utf-8',dir=path.parent,
+                                         prefix='.ltu-research-',suffix='.tmp',delete=False) as handle:
+            temporary=Path(handle.name)
+            json.dump(catalog,handle,ensure_ascii=False,indent=2,allow_nan=False)
+            handle.write('\n')
+            handle.flush()
+            # The publisher's private umask must not make public data unreadable to nginx.
+            os.chmod(temporary,0o644)
+            os.fsync(handle.fileno())
+        os.replace(temporary,path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def compose(seed, catalog, audit, collection, jobs, sources, now, thesis_research=None):
@@ -84,6 +125,9 @@ def main(refresh_assets=False):
         copy_file=root/'config/opportunity-copy.json'
         presentation=load(copy_file) if copy_file.exists() else {}
         inputs={'catalog':catalog,'audit':audit,'collected_at':collection['generated_at'],'jobs':jobs,'sources':sources,'signals':signals,'batches':batches,'presentation':presentation}
+        ltu_catalog=load_ltu_catalog(root/'config/ltu-research.json')
+        if ltu_catalog is not None:
+            inputs['ltu_research']=ltu_catalog
         fingerprint=hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()
         receipt=runtime/'dashboard-publish.json'
         unchanged=receipt.exists() and load(receipt).get('fingerprint')==fingerprint
@@ -107,9 +151,13 @@ def main(refresh_assets=False):
                 snapshot['project']['current_batch']={k:current[k] for k in ('id','project_ids','published_at','state') if k in current}
         snapshot['opportunity_copy']=presentation
         path.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-        git('add','--','docs/data/status.json')
-        if git('diff','--cached','--name-only'):
-            git('-c','user.name=Lab VPS publisher','-c','user.email=achkum@users.noreply.github.com','commit','--only','-m','Refresh public dashboard from VPS','--','docs/data/status.json')
+        publish_paths=['docs/data/status.json']
+        if ltu_catalog is not None:
+            write_catalog(checkout/'docs/data/ltu-research.json',ltu_catalog)
+            publish_paths.append('docs/data/ltu-research.json')
+        git('add','--',*publish_paths)
+        if git('diff','--cached','--name-only','--',*publish_paths):
+            git('-c','user.name=Lab VPS publisher','-c','user.email=achkum@users.noreply.github.com','commit','--only','-m','Refresh public dashboard from VPS','--',*publish_paths)
         for attempt in range(3):
             try:
                 git('push','origin','HEAD:main')
