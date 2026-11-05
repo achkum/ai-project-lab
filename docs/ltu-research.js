@@ -33,7 +33,12 @@
  }
 
  function date(value,fallback) {
-  return typeof value==='string'&&value.trim()?esc(value):fallback;
+  if(typeof value!=='string'||!value.trim())return fallback;
+  if(/^\d{4}-\d{2}-\d{2}T/.test(value)&&Number.isFinite(Date.parse(value))){
+   return '<time datetime="'+esc(value)+'" title="'+esc(value)+'">'+esc(new Date(value).toLocaleString('en-GB',{
+    timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}))+'</time>';
+  }
+  return esc(value);
  }
 
  function topicStatus(topic) {
@@ -162,6 +167,7 @@
    '<p>Topic listings indexed · '+indexed+' · Topic pages reviewed · '+reviewedTopics+'</p>'+
    (catalog.coverage?.exhausted===true?'':'<p><strong>LTU review still in progress</strong></p>')+
    (catalog.generated_at?'<p>Catalog generated · '+date(catalog.generated_at,'Not recorded')+'</p>':'')+
+   (catalog.presentation_reviewed_at?'<p>Catalog review and source-route update · '+date(catalog.presentation_reviewed_at,'Not recorded')+'</p>':'')+
    '<p>'+(catalog.coverage?.note?esc(catalog.coverage.note):'Listing counts include index entries. Review counts cover full topic pages.')+'</p></section>'+
    thesisListingSources(catalog)+'<div class="ltu-toolbar"><label>Search subjects and topics<input data-ltu-query type="search" value="'+esc(filters.query)+
    '" placeholder="Search names, topics or research methods"></label>'+
