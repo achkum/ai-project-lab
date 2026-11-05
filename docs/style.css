@@ -36,3 +36,48 @@ dialog{width:min(900px,94vw)}.detail-lead{font-size:17px!important;color:#526874
 .existing-apps{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px 0}.existing-apps a{font-size:13px;color:var(--accent);font-weight:650}
 
 .decision-note{font-size:12px;line-height:1.5;padding:8px 10px;border-left:3px solid #b18a44;background:#faf7ef;color:#61523c}
+
+.ltu-catalog{display:grid;gap:16px}
+.ltu-intro p,.ltu-coverage p,.ltu-error p{margin:0 0 6px}
+.ltu-coverage{padding:14px 17px;border:1px solid #c5dacd;border-radius:10px;background:#edf4ef}
+.ltu-coverage p{font-size:13px;color:#365d53}
+.ltu-coverage p:last-child{margin-bottom:0}
+.ltu-toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:14px 22px}
+.ltu-toolbar label{margin:0}
+.ltu-toolbar label:first-child{flex:1 1 260px}
+.ltu-toolbar .ltu-check{display:flex;align-items:center;gap:8px;min-height:42px;cursor:pointer}
+.ltu-check input{width:16px;height:16px;margin:0;accent-color:#237254}
+.ltu-result-count{font-size:13px;margin:0 0 10px;color:#526874}
+.ltu-subjects{display:grid;gap:8px}
+.ltu-subject{min-width:0;border:1px solid #dce4e8;border-radius:10px;background:#fff}
+.ltu-subject summary{padding:13px 16px;cursor:pointer;overflow-wrap:anywhere}
+.ltu-subject summary:hover{background:#f2f7f5;border-radius:10px}
+.ltu-subject-name{font-weight:650}
+.ltu-subject-meta{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-inline-start:10px;font-size:12px;color:#526874}
+.ltu-badge{display:inline-block;padding:2px 8px;border:1px solid #d6e0e4;border-radius:20px;background:#f3f6f8;font-size:11px;color:#365566}
+.ltu-review-reviewed{background:#eaf4ed;color:#245840;border-color:#bdd8c6}
+.ltu-review-inaccessible{background:#fcf4e4;color:#714e21;border-color:#ead6ae}
+.ltu-subject-body{padding:4px 16px 16px;border-top:1px solid #e9eff1;overflow-wrap:anywhere}
+.ltu-subject-body>p{margin:10px 0}
+.ltu-topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:12px;margin-top:14px}
+.ltu-topic{min-width:0;padding:14px;border:1px solid #e0e7e9;border-radius:9px;background:#f8fafb}
+.ltu-topic h4{font-size:15px;line-height:1.4;margin:0 0 6px}
+.ltu-topic p{font-size:13px;margin:9px 0}
+.ltu-evidence,.ltu-dates{font-size:12px;color:#526874}
+.ltu-dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px 12px;margin:10px 0}
+.ltu-dates dt{font-weight:650}
+.ltu-dates dd{margin:0}
+.ltu-source{color:#246358;font-size:13px;font-weight:650;text-decoration:underline;text-underline-offset:2px}
+.ltu-empty{margin:0;padding:12px 15px;border:1px dashed #b9cbd0;border-radius:9px;color:#526874}
+.ltu-error{background:#fff3ec;color:#7b422e}
+.ltu-error p{color:inherit}
+.ltu-error .ltu-source{display:inline-block;margin:5px}
+.ltu-listing-sources{padding:14px 16px;border:1px solid #dce4e8;border-radius:10px;background:#fff}
+.ltu-listing-sources>summary{cursor:pointer;font-weight:650}
+.ltu-listing-sources>p{font-size:13px;margin:12px 0}
+.ltu-related{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px}
+@media(max-width:600px){
+ .ltu-subject-meta{display:flex;margin:6px 0 0 15px}
+ .ltu-toolbar{gap:8px}
+ .ltu-toolbar .ltu-check{min-height:34px}
+}

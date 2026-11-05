@@ -3,6 +3,7 @@ const $ = id => document.getElementById(id);
 let data = window.LAB_SAMPLE;
 let lastError = '';
 let snapshotPending = true;
+let ltuCatalogStarted = false;
 const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pretty = s => String(s || 'Unknown').replaceAll('_',' ');
 const when = (s,fallback) => s && Number.isFinite(Date.parse(s)) ? new Date(s).toLocaleString('en-GB',{timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}) : fallback;
@@ -120,11 +121,13 @@ function businessDetails(x){
 }
 function safeLink(value) { try { const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:'#'; } catch{return '#';} }
 function showView(){
- const key=location.hash.slice(1);const v=['overview','thesis','projects','sources','setup'].includes(key)?key:'overview';
+ const key=location.hash.slice(1);const v=['overview','thesis','ltu-research','projects','sources','setup'].includes(key)?key:'overview';
  document.querySelectorAll('.view').forEach(el=>el.hidden=el.id!=='view-'+v);
  document.querySelectorAll('nav a').forEach(el=>{el.classList.toggle('active',el.dataset.view===v);if(el.dataset.view===v)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
  const meta={overview:['TWO LANES. ONE WORKSPACE.','A clear view of your next move.','Daily research, continuous building. Progress without opening a terminal.'],thesis:['01 / THESIS DISCOVERY','Find a problem worth studying.','What goes wrong, what you could try and what you would find out.'],projects:['02 / PROJECT STUDIO','Build towards a business.','A customer, a recurring problem and a working first version.'],sources:['DISCOVERY NETWORK','Look beyond your usual sources.','Research, communities, engineering and real-world problems.'],setup:['YOUR LAB, YOUR DIRECTION','Set the boundaries.','Choose your interests and prepare the machines for autonomous work.']};
+ meta['ltu-research']=['LTU / RESEARCH SUBJECTS','Explore research across LTU.','Official research directions and projects, organised by LTU’s own subjects.'];
  [$('eyebrow').textContent,$('title').textContent,$('subtitle').textContent]=meta[v];
+ if(v==='ltu-research'&&!ltuCatalogStarted&&window.LtuResearch){ltuCatalogStarted=true;window.LtuResearch.init($('ltu-research-catalog'));}
 }
 function openConversation(mode,lane,id) {
  const x=data.opportunities.find(c=>c.id===id);
@@ -190,6 +193,10 @@ function renderSources(){
  $('source-rows').innerHTML=rows.length?rows.map(x=>'<tr><td><a href="'+esc(safeLink(x.url))+'" target="_blank" rel="noopener noreferrer">'+esc(x.name)+' ↗</a></td><td>'+esc(x.category)+'</td><td>'+esc(x.access)+'</td><td><span class="pill">'+esc(pretty(x.status))+'</span></td></tr>').join(''):'<tr><td colspan="4">No matching sources.</td></tr>';
 }
 function render(){
+ const notice=$('workflow-notice');
+ if(notice)notice.textContent=snapshotPending?'Loading current research and project status…':
+  data.audit?.owner_project_pause?.state==='paused'?'Project work is paused. Thesis research continues.':
+  'Selected projects continue through implementation, testing and deployment automatically.';
  const sample=data.mode==='sample',age=data.generated_at?Date.now()-Date.parse(data.generated_at):null,stale=!sample&&age>10800000;
  $('notice').textContent=lastError || (sample&&snapshotPending?'Loading the latest published research…':sample?'Sample mode · Illustrative records only. No workflow is connected.':!data.connected?'Not connected · Backend setup is incomplete.':stale?'Stale snapshot · The last update is over three hours old. Check the coordinator.':'Live snapshot · Public-safe status only. Private details stay in GitHub.');
  $('notice').classList.toggle('error',!!lastError||stale);
