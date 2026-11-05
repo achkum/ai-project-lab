@@ -85,6 +85,55 @@ test('search finds topic content within subject groups and AI filter requires ev
  assert.doesNotMatch(container.innerHTML,/data-ltu-ai/);
 });
 
+test('subject-level AI evidence retains a shared research-area page without inflating topic reviews',()=>{
+ const catalog=sample();
+ const mathematics={id:'math',name:'Applied Mathematics',review_status:'reviewed',topics:[],
+  ai_connection:'Research areas explicitly use <machine learning>.',
+  reviewed_routes:[{title:'Research <areas>',url:'https://www.ltu.se/mathematics/research',
+   summary:'Eight named areas are described on this shared page.',review_scope:'research_area_page',
+   original_published_at:'2020-01-01',source_updated_at:'2026-11-03',checked_at:'2026-11-05',
+   retrieved_at:'2026-11-04',source_url:'https://www.ltu.se/mathematics/research'},
+   {title:'Unsafe source',url:'javascript:alert(1)',review_scope:'<route>'}]};
+ catalog.subjects.push(mathematics);
+ catalog.coverage.directory_subjects=4;
+ const renderer=load();
+ const container={};
+ renderer.render(container,catalog,{aiOnly:true});
+ const html=container.innerHTML;
+ assert.match(html,/Showing 2 of 4 subjects · 1 listing/);
+ assert.match(html,/Applied Mathematics/);
+ assert.match(html,/Subject AI connection · Research areas explicitly use &lt;machine learning&gt;/);
+ assert.match(html,/No individual topic URLs are indexed\. Research areas may be described/);
+ assert.match(html,/Reviewed source pages \(2\)/);
+ assert.match(html,/href="https:\/\/www\.ltu\.se\/mathematics\/research"[^>]*>Research &lt;areas&gt;/);
+ assert.match(html,/Review scope · research_area_page/);
+ assert.match(html,/Original publication<\/dt><dd>2020-01-01/);
+ assert.match(html,/Source page updated<\/dt><dd>2026-11-03/);
+ assert.match(html,/Checked<\/dt><dd>2026-11-05/);
+ assert.match(html,/Retrieved<\/dt><dd>2026-11-04/);
+ assert.match(html,/Topic listings indexed · 858 · Topic pages reviewed · 1/);
+ assert.doesNotMatch(html,/javascript:|<machine learning>|<route>/);
+ renderer.render(container,catalog,{aiOnly:true,query:'eight named areas'});
+ assert.match(container.innerHTML,/Showing 1 of 4 subjects · 0 listings/);
+ mathematics.topics.push({title:'Unassessed topic card',url:'https://www.ltu.se/unassessed'});
+ renderer.render(container,catalog,{aiOnly:true});
+ assert.match(container.innerHTML,/Applied Mathematics/);
+ assert.doesNotMatch(container.innerHTML,/Unassessed topic card/);
+ assert.match(container.innerHTML,/Topic pages reviewed · 1/);
+});
+
+test('negative and unknown subject AI notes do not qualify subjects for the evidence filter',()=>{
+ const catalog=sample();
+ for(const [id,note] of [['negative','No explicit evidence of AI in the source'],['unknown','Unknown']]){
+  catalog.subjects.push({id,name:id+' research subject',review_status:'reviewed',ai_connection:note,topics:[]});
+ }
+ const container={};
+ load().render(container,catalog,{aiOnly:true});
+ assert.match(container.innerHTML,/Showing 1 of 5 subjects · 1 listing/);
+ assert.doesNotMatch(container.innerHTML,/negative research subject|unknown research subject/);
+ assert.match(container.innerHTML,/Topic pages reviewed · 1/);
+});
+
 test('initializer surfaces fetch and schema errors, retries once per click and keeps search controls mounted',async()=>{
  const handlers={};
  const results={};

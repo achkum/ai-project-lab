@@ -8,6 +8,7 @@
  const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
  const words=value=>String(value??'').normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
  const topicsFor=subject=>Array.isArray(subject.topics)?subject.topics:[];
+ const routesFor=subject=>Array.isArray(subject.reviewed_routes)?subject.reviewed_routes.filter(route=>route&&typeof route==='object'):[];
  const reviewOf=subject=>Object.hasOwn(reviewLabels,subject.review_status)?subject.review_status:'not_reviewed';
  const topicReviewed=topic=>topic.review_status==='reviewed'||topic.review_scope==='full_topic_page';
 
@@ -57,8 +58,20 @@
   const label=record.source_date_kind==='listing_page_updated'?'Listing page updated':updatedLabel;
   return '<dl class="ltu-dates"><div><dt>Original publication</dt><dd>'+date(record.original_published_at,'Not stated')+'</dd></div>'+
    '<div><dt>'+label+'</dt><dd>'+date(record.source_updated_at,'Not stated')+'</dd></div>'+
-   '<div><dt>Checked</dt><dd>'+date(record.checked_at,'Not recorded')+'</dd></div></dl>'+
+   '<div><dt>Checked</dt><dd>'+date(record.checked_at,'Not recorded')+'</dd></div>'+
+   (record.retrieved_at?'<div><dt>Retrieved</dt><dd>'+date(record.retrieved_at,'Not recorded')+'</dd></div>':'')+'</dl>'+
    link(record.source_url,'Open date source');
+ }
+
+ function reviewedRoutes(subject) {
+  const routes=routesFor(subject);
+  if(!routes.length)return '';
+  return '<details class="ltu-listing-sources"><summary>Reviewed source pages ('+routes.length+')</summary><ul>'+
+   routes.map(route=>'<li>'+
+    (link(route.url,typeof route.title==='string'&&route.title.trim()?route.title:'Reviewed source page')||'<span>Source link unavailable</span>')+
+    (route.summary?'<p>'+esc(route.summary)+'</p>':'')+
+    '<p class="ltu-evidence">Review scope · '+esc(route.review_scope||'Not recorded')+'</p>'+
+    sourceDates(route,'Source page updated')+'</li>').join('')+'</ul></details>';
  }
 
  function thesisListingSources(catalog) {
@@ -89,7 +102,7 @@
 
  function select(catalog,filters) {
   const terms=words(filters.query).trim().split(/\s+/).filter(Boolean);
-  const hasAiEvidence=catalog.subjects.some(subject=>topicsFor(subject).some(evidenceNote));
+  const hasAiEvidence=catalog.subjects.some(subject=>evidenceNote(subject)||topicsFor(subject).some(evidenceNote));
   const aiOnly=hasAiEvidence&&filters.aiOnly===true;
   const matches=fields=>{
    const text=words(fields.join(' '));
@@ -97,11 +110,12 @@
   };
   const groups=[];
   for(const subject of catalog.subjects){
-   const subjectFields=[subject.name,subject.summary];
+   const subjectFields=[subject.name,subject.summary,evidenceNote(subject),
+    ...routesFor(subject).flatMap(route=>[route.title,route.summary])];
    const topics=topicsFor(subject).filter(topic=>(!aiOnly||evidenceNote(topic))&&matches([
     ...subjectFields,topic.title,topic.summary,topic.status_evidence,evidenceNote(topic),topicStatus(topic)
    ]));
-   if(topics.length||(!aiOnly&&matches(subjectFields)))groups.push({subject,topics});
+   if(topics.length||((!aiOnly||evidenceNote(subject))&&matches(subjectFields)))groups.push({subject,topics});
   }
   return {groups,hasAiEvidence,aiOnly,filtered:terms.length>0||aiOnly};
  }
@@ -123,18 +137,21 @@
  function subjectGroup({subject,topics},filtered) {
   const review=reviewOf(subject);
   const total=topicsFor(subject).length;
+  const ai=evidenceNote(subject);
   const count=filtered&&topics.length!==total?topics.length+' of '+total:String(total);
-  const empty=total?'No topics in this subject match the filters.':
-   review==='reviewed'?'No topic pages were recorded in this review.':
-   review==='inaccessible'?'The subject page could not be accessed during review.':'Topic pages have yet to be reviewed.';
-  return '<details class="ltu-subject"'+(filtered&&topics.length?' open':'')+'><summary>'+
+  const empty=total?'No topic listings in this subject match the filters.':
+   review==='inaccessible'?'No individual topic URLs are indexed. The subject page could not be accessed during review.':
+   'No individual topic URLs are indexed. Research areas may be described within the subject or reviewed route pages.';
+  return '<details class="ltu-subject"'+(filtered&&(topics.length||ai)?' open':'')+'><summary>'+
    '<span class="ltu-subject-name">'+esc(subject.name)+'</span>'+
    '<span class="ltu-subject-meta"><span class="ltu-badge ltu-review-'+review+'">'+reviewLabels[review]+'</span>'+
    '<span>'+count+' '+(total===1?'listing':'listings')+'</span></span></summary>'+
    '<div class="ltu-subject-body">'+(subject.summary?'<p>'+esc(subject.summary)+'</p>':'')+
+   (ai?'<p class="ltu-evidence">Subject AI connection · '+esc(ai)+'</p>':'')+
    '<p class="ltu-evidence">Subject checked · '+date(subject.checked_at,'Not recorded')+'</p>'+
    link(subject.url,'Open LTU subject page')+
    (topics.length?'<div class="ltu-topics">'+topics.map(topicCard).join('')+'</div>':'<p class="ltu-empty">'+empty+'</p>')+
+   reviewedRoutes(subject)+
    '</div></details>';
  }
 
