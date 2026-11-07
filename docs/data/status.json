@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-06T06:32:17.556052+00:00",
+  "generated_at": "2026-11-07T06:31:17.105782+00:00",
   "connected": true,
   "thesis": {
     "state": "possibilities_ready",
     "last_success": "2026-11-04T07:33:11.908889+00:00",
-    "next_run": "2026-11-06T08:00:00+01:00",
-    "collection_last_success": "2026-11-06T06:32:16.553168+00:00",
+    "next_run": "2026-11-07T08:00:00+01:00",
+    "collection_last_success": "2026-11-07T06:31:16.090571+00:00",
     "research_run": {
       "id": "20261104-thesis-solo",
       "date": "2026-11-04",
@@ -70,11 +70,11 @@
     "limit_sek": 0
   },
   "coverage": {
-    "checked": 34,
+    "checked": 26,
     "target": 20,
     "registered": 35,
     "blocked": 0,
-    "source_families": 4
+    "source_families": 3
   },
   "sources": [
     {
@@ -83,7 +83,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.AI/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-hci",
@@ -91,7 +91,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.HC/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-se",
@@ -99,7 +99,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.SE/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "hn",
@@ -323,7 +323,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.CV/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-cs-sd",
@@ -331,7 +331,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.SD/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-cs-lg",
@@ -339,7 +339,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/cs.LG/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-stat-ml",
@@ -347,7 +347,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/stat.ML/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     },
     {
       "id": "arxiv-eess-sp",
@@ -355,7 +355,7 @@
       "category": "Research",
       "url": "https://arxiv.org/list/eess.SP/recent",
       "access": "Public feed",
-      "status": "checked"
+      "status": "empty"
     }
   ],
   "opportunities": [
