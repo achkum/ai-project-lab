@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-07T06:31:17.105782+00:00",
+  "generated_at": "2026-11-07T19:40:55.551037+00:00",
   "connected": true,
   "thesis": {
     "state": "possibilities_ready",
     "last_success": "2026-11-04T07:33:11.908889+00:00",
-    "next_run": "2026-11-07T08:00:00+01:00",
+    "next_run": "2026-11-08T08:00:00+01:00",
     "collection_last_success": "2026-11-07T06:31:16.090571+00:00",
     "research_run": {
       "id": "20261104-thesis-solo",
@@ -22,7 +22,7 @@
       "missed_days": [
         "2026-11-03"
       ],
-      "note": "4 November: 12 leads investigated; 9 possibilities retained (5 keep, 4 revise), 3 withdrawn. This fell short of the target of ten; 3 November was missed. 5 November: the LTU Research tab maps all 67 official directory subjects, 1,234 topic listings and 55 full topic-page reads. Eight additional thesis-source routes are shown. The catalog is not a new batch of ten investigated theses. LTU coverage remains incomplete. Personalised ranking awaits the owner’s interest answers; factual mapping continues. Project work remains paused.",
+      "note": "4 November: 12 leads investigated; 9 possibilities retained (5 keep, 4 revise), 3 withdrawn. This fell short of the target of ten; 3 November was missed. 5 November: the LTU Research tab maps all 67 official directory subjects, 1,234 topic listings and 55 full topic-page reads. Eight additional thesis-source routes are shown. The catalog is not a new batch of ten investigated theses. LTU coverage remains incomplete. Personalised ranking awaits the owner’s interest answers; factual mapping continues. Project work remains paused. 7 November: the same LTU catalogue now maps 73 full topic-page reviews. Sixteen topic pages were newly read, two earlier full reviews were reconciled, and three further source pages were reviewed. No new qualified thesis batch or personalised ranking was produced. The 6 November heartbeat resumed on 7 November; no results are backdated.",
       "published_at": "2026-11-04T07:33:11.908889+00:00",
       "qualified_topics": 9,
       "kept": 5,
@@ -43,7 +43,7 @@
       ],
       "summary_url": "https://achkum.github.io/ai-project-lab/research/2026-11-04-thesis-solo/research-summary.txt",
       "current_phase": "ltu_research_mapping",
-      "current_phase_date": "2026-11-05"
+      "current_phase_date": "2026-11-07"
     }
   },
   "project": {
@@ -64,7 +64,7 @@
       "state": "awaiting_selection"
     }
   },
-  "releases_last_7_days": 2,
+  "releases_last_7_days": 0,
   "usage": {
     "spent_sek": 0,
     "limit_sek": 0
@@ -7802,19 +7802,22 @@
     "ltu_catalog": {
       "directory_subjects": 67,
       "topic_listings_indexed": 1234,
-      "full_topic_pages_reviewed": 55,
-      "additional_thesis_routes": 8,
+      "full_topic_pages_reviewed": 73,
+      "additional_thesis_routes": 9,
       "ltu_exhausted": false,
-      "data_sha256": "5717c50fad0622b9cbcaee2babe28cc24b376ac72133f2398c4fa02164487c3d",
+      "data_sha256": "87ba7958cd4bbe68ef48ed439e1282c42004e1b94f4f2934d92be99aa8a0f9c4",
       "catalog_generated_at": "2026-11-04T08:00:13.639384+00:00",
-      "presentation_reviewed_at": "2026-11-05T21:35:52.190548+00:00",
+      "presentation_reviewed_at": "2026-11-07T19:37:25.830900+00:00",
       "url": "https://achkum.github.io/ai-project-lab/#ltu-research",
       "note": "A partial official research catalog. Indexed listings are not unique projects or qualified thesis possibilities.",
-      "published_at": "2026-11-05T21:35:55.099769+00:00",
+      "published_at": "2026-11-07T19:40:54.585555+00:00",
       "last_mapping_slice": {
-        "full_topic_pages": 7,
-        "research_area_pages": 1,
-        "checked_at": "2026-11-05T21:27:52.834260+00:00"
+        "date": "2026-11-07",
+        "fresh_source_pages": 19,
+        "new_individual_topic_reads": 16,
+        "prior_reviews_reconciled": 2,
+        "additional_route_pages": 3,
+        "checked_at": "2026-11-07T19:40:54.585555+00:00"
       }
     },
     "research_priority": {
