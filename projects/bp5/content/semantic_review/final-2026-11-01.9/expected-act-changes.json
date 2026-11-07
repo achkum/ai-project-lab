@@ -1,0 +1,5750 @@
+{
+  "content_version": "2026-11-01.9",
+  "note": "Speech-act metadata changes are reported separately from canonical predicates and responses. These are meaning descriptions, not keyword requirements.",
+  "changes": [
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "verify_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "affirm_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "deny_the_stated_name_or_explicitly_decline_verification"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "verify_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "affirm_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "deny_the_stated_name_or_explicitly_decline_verification"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_one_offered_course_group"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": "choose_morning",
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_the_morning_group"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": "choose_afternoon",
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_the_afternoon_group"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_2",
+      "intent_id": "detail_2_answer",
+      "old_expected_act": null,
+      "new_expected_act": "propose_day_before_notice"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "choice",
+      "intent_id": "choose_message",
+      "old_expected_act": null,
+      "new_expected_act": "choose_day_before_notice"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_2",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "offer_a_plausible_hypothesis_about_low_attendance"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_2",
+      "intent_id": "detail_2_answer",
+      "old_expected_act": null,
+      "new_expected_act": "offer_a_plausible_hypothesis_about_low_attendance"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "choice",
+      "intent_id": "choose_class",
+      "old_expected_act": null,
+      "new_expected_act": "inquire_about_a_trial_lesson"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "choice",
+      "intent_id": "choose_selfstudy",
+      "old_expected_act": null,
+      "new_expected_act": "choose_to_try_an_independent_study_plan"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "choice",
+      "intent_id": "choose_journey",
+      "old_expected_act": null,
+      "new_expected_act": "choose_to_try_the_journey"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "choice",
+      "intent_id": "choose_digital",
+      "old_expected_act": null,
+      "new_expected_act": "inquire_about_a_digital_participation_option"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.7",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_stay",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m1",
+      "step_id": "confirm_takeaway",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_sandwich",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m2",
+      "step_id": "confirm_bun",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_black",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_cafe_m3",
+      "step_id": "confirm_green",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_white",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m1",
+      "step_id": "confirm_wholegrain",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_slices",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m2",
+      "step_id": "confirm_piece",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_substitute",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_groceries_m3",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m1",
+      "step_id": "confirm_go",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_single",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m2",
+      "step_id": "confirm_return",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_park",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_transport_m3",
+      "step_id": "confirm_direct",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_story",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m1",
+      "step_id": "confirm_nature",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_paper",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m2",
+      "step_id": "confirm_screen",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_colour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_library_m3",
+      "step_id": "confirm_bw",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_blue",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m1",
+      "step_id": "confirm_green",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_wait",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m2",
+      "step_id": "confirm_return",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_same",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_clothes_m3",
+      "step_id": "confirm_other",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_teacher",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m1",
+      "step_id": "confirm_adviser",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "verify_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "affirm_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_spell",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "deny_the_stated_name_or_explicitly_decline_verification"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "verify_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "affirm_the_stated_name"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m2",
+      "step_id": "confirm_write",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "deny_the_stated_name_or_explicitly_decline_verification"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_upstairs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_reception_m3",
+      "step_id": "confirm_downstairs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_phone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m1",
+      "step_id": "confirm_paper",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_box",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m2",
+      "step_id": "confirm_packed",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_search",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_parcel_m3",
+      "step_id": "confirm_later",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_monday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m1",
+      "step_id": "confirm_thursday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_hour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m2",
+      "step_id": "confirm_closing",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_rebook",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_centre_m3",
+      "step_id": "confirm_cancel",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_friday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m1",
+      "step_id": "confirm_saturday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tonight",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m2",
+      "step_id": "confirm_tomorrow",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_lower",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_neighbours_m3",
+      "step_id": "confirm_headphones",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_swap",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m1",
+      "step_id": "confirm_ask",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_now",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m2",
+      "step_id": "confirm_later",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_alone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_colleagues_m3",
+      "step_id": "confirm_together",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_tuesday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m1",
+      "step_id": "confirm_wednesday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_call",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m2",
+      "step_id": "confirm_visit",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_thursday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_housing_m3",
+      "step_id": "confirm_friday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_exchange",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m1",
+      "step_id": "confirm_refund",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_today",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m2",
+      "step_id": "confirm_investigate",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_written",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_customer_service_m3",
+      "step_id": "confirm_explain",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_alone",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m1",
+      "step_id": "confirm_peer",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_shop",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m2",
+      "step_id": "confirm_neighbour",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_one_offered_course_group"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": "choose_morning",
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_the_morning_group"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "choice",
+      "intent_id": "choose_afternoon",
+      "old_expected_act": null,
+      "new_expected_act": "request_information_about_the_afternoon_group"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_morning",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_course_planning_m3",
+      "step_id": "confirm_afternoon",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_sunday",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m1",
+      "step_id": "confirm_nextweek",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_soup",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m2",
+      "step_id": "confirm_pasta",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_limit",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_social_plans_m3",
+      "step_id": "confirm_contribute",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_morning",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m1",
+      "step_id": "confirm_twice",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_room",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m2",
+      "step_id": "confirm_notifications",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_message",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_time_balance_m3",
+      "step_id": "confirm_partner",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_schedule",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m1",
+      "step_id": "confirm_fixed",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_2",
+      "intent_id": "detail_2_answer",
+      "old_expected_act": null,
+      "new_expected_act": "propose_day_before_notice"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "choice",
+      "intent_id": "choose_message",
+      "old_expected_act": null,
+      "new_expected_act": "choose_day_before_notice"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_message",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m2",
+      "step_id": "confirm_weekly",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_time",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_shared_home_m3",
+      "step_id": "confirm_places",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_park",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m1",
+      "step_id": "confirm_indoors",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_welcome",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m2",
+      "step_id": "confirm_signs",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_2",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "offer_a_plausible_hypothesis_about_low_attendance"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_2",
+      "intent_id": "detail_2_answer",
+      "old_expected_act": null,
+      "new_expected_act": "offer_a_plausible_hypothesis_about_low_attendance"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_survey",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_community_project_m3",
+      "step_id": "confirm_calls",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "choice",
+      "intent_id": "choose_class",
+      "old_expected_act": null,
+      "new_expected_act": "inquire_about_a_trial_lesson"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "choice",
+      "intent_id": "choose_selfstudy",
+      "old_expected_act": null,
+      "new_expected_act": "choose_to_try_an_independent_study_plan"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_class",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m1",
+      "step_id": "confirm_selfstudy",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_aloud",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m2",
+      "step_id": "confirm_notes",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "detail_5",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "detail_5",
+      "intent_id": "detail_5_answer",
+      "old_expected_act": null,
+      "new_expected_act": "request_the_partners_view_or_feedback"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "choice",
+      "intent_id": "choose_journey",
+      "old_expected_act": null,
+      "new_expected_act": "choose_to_try_the_journey"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "choice",
+      "intent_id": "choose_digital",
+      "old_expected_act": null,
+      "new_expected_act": "inquire_about_a_digital_participation_option"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_journey",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": null,
+      "old_expected_act": null,
+      "new_expected_act": "respond_to_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": "confirm",
+      "old_expected_act": null,
+      "new_expected_act": "accept_the_current_offer"
+    },
+    {
+      "from_version": "2026-11-01.8",
+      "mission_id": "lib_next_steps_m3",
+      "step_id": "confirm_digital",
+      "intent_id": "decline",
+      "old_expected_act": null,
+      "new_expected_act": "explicitly_refuse_the_current_offer"
+    }
+  ]
+}

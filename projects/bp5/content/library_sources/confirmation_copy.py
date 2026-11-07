@@ -89,7 +89,7 @@ QUESTIONS={
 # meanings do not add aliases or change what the automatic matcher accepts.
 BRANCHES={
 ('clothes_m2','confirm_wait'):('I will wait by the mirror.','Waiting there does not work for me.','Jag väntar vid spegeln.','Det passar inte att vänta där.'),
-('clothes_m2','confirm_return'):('Please put the trousers aside; I will return in five minutes.','Returning in five minutes does not work for me.','Lägg gärna undan byxorna, så kommer jag om fem minuter.','Jag kan inte komma tillbaka om fem minuter.'),
+('clothes_m2','confirm_return'):('Please put the trousers aside for now.','You do not need to put the trousers aside.','Lägg gärna undan byxorna så länge.','Du behöver inte lägga undan byxorna.'),
 ('parcel_m1','confirm_phone'):('I can show the code on my phone.','I cannot show the code on my phone right now.','Jag kan visa koden i telefonen.','Jag kan inte visa koden i telefonen just nu.'),
 ('parcel_m1','confirm_paper'):('I can show you the note with the code.','I cannot show you the note with the code.','Jag kan visa lappen med koden.','Jag kan inte visa lappen med koden.'),
 ('community_centre_m2','confirm_hour'):('I will return the ball in an hour.','I cannot return the ball in an hour.','Jag lämnar tillbaka bollen om en timme.','Jag kan inte lämna tillbaka bollen om en timme.'),
@@ -97,7 +97,7 @@ BRANCHES={
 ('neighbours_m1','confirm_saturday'):('I can bring the key on Saturday morning before nine.','Saturday morning before nine does not work for me.','Jag kan lämna nyckeln på lördag morgon före nio.','Lördag morgon före nio passar inte mig.'),
 ('neighbours_m2','confirm_tonight'):('I can return the tool after seven this evening.','After seven this evening does not work for me.','Jag kan lämna tillbaka den efter sju i kväll.','Efter sju i kväll passar inte mig.'),
 ('neighbours_m2','confirm_tomorrow'):('I can return the tool before lunch tomorrow.','Before lunch tomorrow does not work for me.','Jag kan lämna tillbaka den före lunch i morgon.','Före lunch i morgon passar inte mig.'),
-('social_plans_m1','confirm_nextweek'):('Meeting for a fika next week works for me.','Meeting for a fika next week does not work for me.','Vi kan ta en fika nästa vecka.','Nästa vecka passar inte för en fika.'),
+('social_plans_m1','confirm_nextweek'):('We can get in touch on Monday to arrange a time.','Getting in touch on Monday does not work for me.','Vi kan höras på måndag för att bestämma en tid.','Det passar inte att höras på måndag.'),
 ('community_centre_m1','confirm_monday'):('I will come on Monday.','I cannot come on Monday.'),
 ('community_centre_m1','confirm_thursday'):('I will come on Thursday.','I cannot come on Thursday.'),
 ('community_centre_m3','confirm_cancel'):('Yes, please cancel my place.','No, that is not the change I wanted.'),

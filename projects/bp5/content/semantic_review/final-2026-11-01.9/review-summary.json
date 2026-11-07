@@ -1,0 +1,31 @@
+{
+  "content_version": "2026-11-01.9",
+  "source_sha256": "c8142f993e390f90234d651c515e0d1c708bf78070e8361d2039b133c0ceb3e8",
+  "record_count": 294,
+  "decline_nodes": 108,
+  "compatibility": [
+    {
+      "from": "2026-11-01.7",
+      "predicate_changed": 131,
+      "response_changed": 108,
+      "question_changed": 2,
+      "offered_context_changed": 2,
+      "goal_changed": 0,
+      "legacy_manual_label_offer_mismatch": 4,
+      "matcher_inventory_changed": 8,
+      "canonical_example_changed": 4
+    },
+    {
+      "from": "2026-11-01.8",
+      "predicate_changed": 114,
+      "response_changed": 106,
+      "question_changed": 2,
+      "offered_context_changed": 2,
+      "goal_changed": 0,
+      "legacy_manual_label_offer_mismatch": 0,
+      "matcher_inventory_changed": 8,
+      "canonical_example_changed": 4
+    }
+  ],
+  "stripped_sha256": "06eca18b84a8412e1b927a46def3d9ef9df4934ed17afd15acffd88e54ffec57"
+}

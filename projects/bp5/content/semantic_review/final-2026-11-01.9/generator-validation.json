@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "rebuild_sha256": "c8142f993e390f90234d651c515e0d1c708bf78070e8361d2039b133c0ceb3e8",
+  "preserved_artifacts": {
+    "library.json": "99be582abcdb920fc3c0b0dd59d5d3ad7359ac509f4c407ee64ab1f257702eca",
+    "snapshots/library-2026-11-01.7.json": "e2317c4172296a8377775f09866db9d4fe6b8995759c48fda6c1cc6efcc9a609",
+    "snapshots/library-2026-11-01.8.json": "99be582abcdb920fc3c0b0dd59d5d3ad7359ac509f4c407ee64ab1f257702eca",
+    "natural_reply_evaluation.json": "7153873045923383a87523f92a05acb2a76fd9789361abcfd300aa37fd0b6d9e",
+    "natural_reply_results.json": "4c4eb40db70b1066375c590b722732eafcf82e8f696c9687b54cb2727cde9aca"
+  },
+  "note": "The complete source rebuild is byte-identical to the independently reviewed candidate. Versioned adjudication conserved historical input bytes."
+}

@@ -1,0 +1,142 @@
+{
+  "lib_customer_service_m1/choice/choose_exchange": {
+    "old": "I would like the correct size.",
+    "new": "I would like to exchange the shoes for the correct size."
+  },
+  "lib_neighbours_m3/choice/choose_headphones": {
+    "old": "Headphones would help most.",
+    "new": "It would help most if you used headphones."
+  },
+  "lib_clothes_m2/confirm_wait/decline": {
+    "old": "Waiting there does not work for me.",
+    "new": "Waiting by the mirror does not work for me."
+  },
+  "lib_reception_m3/confirm_downstairs/confirm": {
+    "old": "I would like to sit there.",
+    "new": "I would like to sit on the chair by the door."
+  },
+  "lib_reception_m3/confirm_downstairs/decline": {
+    "old": "I would like to sit somewhere else.",
+    "new": "I would rather not sit on the chair by the door."
+  },
+  "lib_community_centre_m1/confirm_monday/confirm": {
+    "old": "I will come on Monday.",
+    "new": "I will come to the language café on Monday at five."
+  },
+  "lib_community_centre_m1/confirm_monday/decline": {
+    "old": "I cannot come on Monday.",
+    "new": "I cannot come to the language café on Monday at five."
+  },
+  "lib_community_centre_m1/confirm_thursday/confirm": {
+    "old": "I will come on Thursday.",
+    "new": "I will come to the language café on Thursday at six."
+  },
+  "lib_community_centre_m1/confirm_thursday/decline": {
+    "old": "I cannot come on Thursday.",
+    "new": "I cannot come to the language café on Thursday at six."
+  },
+  "lib_community_centre_m3/confirm_cancel/decline": {
+    "old": "No, that is not the change I wanted.",
+    "new": "No, I do not want you to cancel my place in the painting activity."
+  },
+  "lib_colleagues_m1/confirm_swap/confirm": {
+    "old": "We can ask together.",
+    "new": "We can ask the supervisor about the shift swap together."
+  },
+  "lib_colleagues_m1/confirm_swap/decline": {
+    "old": "I would like to ask by myself.",
+    "new": "I would prefer not to ask the supervisor about the shift swap together."
+  },
+  "lib_housing_m1/confirm_tuesday/confirm": {
+    "old": "I can be at home on Tuesday morning.",
+    "new": "I can be at home on Tuesday between nine and eleven."
+  },
+  "lib_housing_m1/confirm_tuesday/decline": {
+    "old": "I cannot be at home on Tuesday morning.",
+    "new": "I cannot be at home on Tuesday between nine and eleven."
+  },
+  "lib_housing_m1/confirm_wednesday/confirm": {
+    "old": "I can be at home on Wednesday afternoon.",
+    "new": "I can be at home on Wednesday between one and three in the afternoon."
+  },
+  "lib_housing_m1/confirm_wednesday/decline": {
+    "old": "I cannot be at home on Wednesday afternoon.",
+    "new": "I cannot be at home on Wednesday between one and three in the afternoon."
+  },
+  "lib_customer_service_m1/confirm_exchange/decline": {
+    "old": "I would like to wait before checking the exchange.",
+    "new": "I would like to wait before you check whether the correct shoe size is available."
+  },
+  "lib_course_planning_m1/confirm_alone/decline": {
+    "old": "I will not have time before the next lesson.",
+    "new": "I will not have time to send a question before the next lesson."
+  },
+  "lib_course_planning_m1/confirm_peer/decline": {
+    "old": "I will not have time before the next lesson.",
+    "new": "I will not have time to send a question before the next lesson."
+  },
+  "lib_social_plans_m3/confirm_limit/confirm": {
+    "old": "That amount seems reasonable.",
+    "new": "A limit of fifty kronor per person seems reasonable."
+  },
+  "lib_social_plans_m3/confirm_limit/decline": {
+    "old": "That would be too expensive for me.",
+    "new": "Fifty kronor per person would be too expensive for me."
+  },
+  "lib_shared_home_m2/confirm_weekly/confirm": {
+    "old": "Next week works for me.",
+    "new": "Next week works for trying our Sunday check-in about planned visits."
+  },
+  "lib_shared_home_m2/confirm_weekly/decline": {
+    "old": "I cannot do it next week.",
+    "new": "I cannot try our Sunday check-in about planned visits next week."
+  },
+  "lib_community_project_m1/confirm_park/confirm": {
+    "old": "We can share the tasks.",
+    "new": "We can split responsibility for checking the route to the park and the backup room."
+  },
+  "lib_community_project_m1/confirm_park/decline": {
+    "old": "I would like to divide the tasks differently.",
+    "new": "I would like a different arrangement for checking the route to the park and the backup room."
+  },
+  "lib_community_project_m1/confirm_indoors/confirm": {
+    "old": "We can share the questions.",
+    "new": "We can split responsibility for checking the room's size, accessibility and cost."
+  },
+  "lib_community_project_m1/confirm_indoors/decline": {
+    "old": "I would like to divide the questions differently.",
+    "new": "I would like a different arrangement for checking the room's size, accessibility and cost."
+  },
+  "lib_community_project_m2/confirm_welcome/decline": {
+    "old": "I would like to wait before putting it in the plan.",
+    "new": "I would like to wait before adding the handover to the plan."
+  },
+  "lib_community_project_m2/confirm_signs/confirm": {
+    "old": "Wednesday works for receiving the text.",
+    "new": "Receiving the text for the signs by Wednesday works for me."
+  },
+  "lib_community_project_m2/confirm_signs/decline": {
+    "old": "I need the text earlier.",
+    "new": "I need the text for the signs before Wednesday."
+  },
+  "lib_next_steps_m1/confirm_class/confirm": {
+    "old": "I will write down the questions.",
+    "new": "I will write down the questions about the course schedule, teaching approach and cost."
+  },
+  "lib_next_steps_m1/confirm_class/decline": {
+    "old": "I do not want to write them down now.",
+    "new": "I do not want to write down the questions about the course schedule, teaching approach and cost now."
+  },
+  "lib_next_steps_m1/confirm_selfstudy/decline": {
+    "old": "I would like to start without choosing a date yet.",
+    "new": "I would like to start my own study plan without setting a follow-up date yet."
+  },
+  "lib_next_steps_m3/confirm_journey/confirm": {
+    "old": "I will do it before next week.",
+    "new": "I will try the journey before next week."
+  },
+  "lib_next_steps_m3/confirm_journey/decline": {
+    "old": "I will not have time before next week.",
+    "new": "I will not have time to try the journey before next week."
+  }
+}

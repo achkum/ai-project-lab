@@ -16,8 +16,10 @@ def match(step,text):
     results=[i for i in step['intents'] if any(tokens(text)==tokens(p) for p in i.get('exact_replies_sv',[])) or (i.get('required_groups') and all(any(contains(text,p) for p in group) for group in i['required_groups']) and not any(contains(text,p) for p in i.get('reject_terms',[])))]
     return results[0]['id'] if len(results)==1 else None
 
-def main():
-    library=json.loads((ROOT/'library.json').read_text(encoding='utf-8'))
+def main(library_path=None,report_path=None):
+    library_path=Path(library_path) if library_path else ROOT/'library.json'
+    report_path=Path(report_path) if report_path else ROOT/'library_validation.json'
+    library=json.loads(library_path.read_text(encoding='utf-8'))
     curriculum=json.loads((ROOT/'curriculum.json').read_text(encoding='utf-8'))
     criteria={c['id']:c for c in curriculum['criteria']}
     situations=library['situations']; assert len(situations)==18
@@ -81,7 +83,12 @@ def main():
     for failure in failures: print('FAIL',*failure,sep=' | ')
     if failures: raise SystemExit(f'{len(failures)} content/recognition failures')
     report={'content_version':library['content_version'],'passed':True,'situations':18,'missions':54,'terminal_paths':paths,'authored_examples':examples,'approved_exact_reply_contexts':exact_examples,'contradictory_exact_suffix_checks':exact_examples,'rejected_term_checks':rejects,'separately_authored_regression_cases':len(cases),'additional_common_phrase_cases':4,'hashes':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['library.json','library_evaluation.json','curriculum.json','scenarios.json']},'limits':['Engineering checks only; production backend must verify the same fixtures with its own matcher.','The 162 separate cases were authored without importing the canonical examples; first execution revealed three failures which were fixed. They are now regression cases.','No independent Swedish educator review or learner-effectiveness study.','Exact pattern matching deliberately rejects unsupported paraphrases; completion is practice, not mastery.']}
-    (ROOT/'library_validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    report['hashes']['library.json']=hashlib.sha256(library_path.read_bytes()).hexdigest()
+    report['library_input']=str(library_path)
+    report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'PASS: 18 situations, 54 missions, {paths} terminal paths, {examples} authored replies, {exact_examples} approved exact reply contexts, {rejects} reject checks, {len(cases)} separate evaluation cases.')
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--library');parser.add_argument('--report')
+    args=parser.parse_args();main(args.library,args.report)
