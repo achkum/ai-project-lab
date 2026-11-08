@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-08T06:32:17.057901+00:00",
+  "generated_at": "2026-11-08T20:05:50.678303+00:00",
   "connected": true,
   "thesis": {
     "state": "possibilities_ready",
     "last_success": "2026-11-04T07:33:11.908889+00:00",
-    "next_run": "2026-11-08T08:00:00+01:00",
+    "next_run": "2026-11-09T08:00:00+01:00",
     "collection_last_success": "2026-11-08T06:32:15.980217+00:00",
     "research_run": {
       "id": "20261104-thesis-solo",
@@ -22,7 +22,7 @@
       "missed_days": [
         "2026-11-03"
       ],
-      "note": "4 November: 12 leads investigated; 9 possibilities retained (5 keep, 4 revise), 3 withdrawn. This fell short of the target of ten; 3 November was missed. 5 November: the LTU Research tab maps all 67 official directory subjects, 1,234 topic listings and 55 full topic-page reads. Eight additional thesis-source routes are shown. The catalog is not a new batch of ten investigated theses. LTU coverage remains incomplete. Personalised ranking awaits the owner’s interest answers; factual mapping continues. Project work remains paused. 7 November: the same LTU catalogue now maps 73 full topic-page reviews. Sixteen topic pages were newly read, two earlier full reviews were reconciled, and three further source pages were reviewed. No new qualified thesis batch or personalised ranking was produced. The 6 November heartbeat resumed on 7 November; no results are backdated. A second 7 November mapping slice read 21 further topic pages and five source routes. The same catalogue now has 94 full topic-page reviews, including the two earlier reconciliations. No new qualified thesis batch or personalised ranking was produced. A third 7 November source-mapping slice resolved the public advertisement search: 12 portal adverts were read, four explicitly about AI, and one expired deadline was labelled. These are advertised scopes, not twelve qualified solo theses; the research-topic review count remains 94. A fourth 7 November factual slice reviewed 15 Signal Processing topics and nine further source pages, including four doctoral interviews. Seven additional elapsed schedules are labelled uncertain. The catalogue now has 109 full research-topic page reviews, not 109 qualified thesis proposals.",
+      "note": "4 November: 12 leads investigated; 9 possibilities retained (5 keep, 4 revise), 3 withdrawn. This fell short of the target of ten; 3 November was missed. 5 November: the LTU Research tab maps all 67 official directory subjects, 1,234 topic listings and 55 full topic-page reads. Eight additional thesis-source routes are shown. The catalog is not a new batch of ten investigated theses. LTU coverage remains incomplete. Personalised ranking awaits the owner’s interest answers; factual mapping continues. Project work remains paused. 7 November: the same LTU catalogue now maps 73 full topic-page reviews. Sixteen topic pages were newly read, two earlier full reviews were reconciled, and three further source pages were reviewed. No new qualified thesis batch or personalised ranking was produced. The 6 November heartbeat resumed on 7 November; no results are backdated. A second 7 November mapping slice read 21 further topic pages and five source routes. The same catalogue now has 94 full topic-page reviews, including the two earlier reconciliations. No new qualified thesis batch or personalised ranking was produced. A third 7 November source-mapping slice resolved the public advertisement search: 12 portal adverts were read, four explicitly about AI, and one expired deadline was labelled. These are advertised scopes, not twelve qualified solo theses; the research-topic review count remains 94. A fourth 7 November factual slice reviewed 15 Signal Processing topics and nine further source pages, including four doctoral interviews. Seven additional elapsed schedules are labelled uncertain. The catalogue now has 109 full research-topic page reviews, not 109 qualified thesis proposals. The 8 November mapping slice resumed morning receipts and reviewed 21 CPS/Cyber Security topic pages plus 12 further pages, including six researcher interviews. Four elapsed project schedules and differing project/employment timelines are labelled uncertain. The catalogue now has 130 topic-page reviews, not qualified thesis proposals.",
       "published_at": "2026-11-04T07:33:11.908889+00:00",
       "qualified_topics": 9,
       "kept": 5,
@@ -43,7 +43,7 @@
       ],
       "summary_url": "https://achkum.github.io/ai-project-lab/research/2026-11-04-thesis-solo/research-summary.txt",
       "current_phase": "ltu_research_mapping",
-      "current_phase_date": "2026-11-07"
+      "current_phase_date": "2026-11-08"
     }
   },
   "project": {
@@ -7802,28 +7802,29 @@
     "ltu_catalog": {
       "directory_subjects": 67,
       "topic_listings_indexed": 1234,
-      "full_topic_pages_reviewed": 109,
+      "full_topic_pages_reviewed": 130,
       "additional_thesis_routes": 11,
       "ltu_exhausted": false,
-      "data_sha256": "cd040769cc5af9aff777e96065de5c98e4050673d60f7988f2610001b7edb7bd",
+      "data_sha256": "ea3854247b43497e9fd48fbe0fe511fde673a8cff6bc60cd2c6593fc56c14868",
       "catalog_generated_at": "2026-11-04T08:00:13.639384+00:00",
-      "presentation_reviewed_at": "2026-11-07T22:15:41.449378+00:00",
+      "presentation_reviewed_at": "2026-11-08T19:59:42.724595+00:00",
       "url": "https://achkum.github.io/ai-project-lab/#ltu-research",
       "note": "A partial official research catalog. Indexed listings are not unique projects or qualified thesis possibilities.",
-      "published_at": "2026-11-07T22:17:45.427214+00:00",
+      "published_at": "2026-11-08T20:05:49.742041+00:00",
       "last_mapping_slice": {
-        "date": "2026-11-07",
+        "date": "2026-11-08",
         "source_routes": [
-          "Signal Processing",
-          "Audio Technology",
-          "Linked doctoral interviews"
+          "Cyber-Physical Systems",
+          "Cyber Security",
+          "Linked researcher interviews",
+          "Official Eclipse Arrowhead verification"
         ],
-        "fresh_source_pages": 24,
-        "new_individual_topic_reads": 15,
+        "fresh_source_pages": 33,
+        "new_individual_topic_reads": 21,
         "advertisement_pages_read": 0,
         "prior_reviews_reconciled": 0,
-        "additional_route_pages": 9,
-        "checked_at": "2026-11-07T22:17:45.427214+00:00"
+        "additional_route_pages": 12,
+        "checked_at": "2026-11-08T20:05:49.742041+00:00"
       },
       "advertised_thesis_pages_reviewed": 12,
       "advertised_ai_thesis_pages": 4,
