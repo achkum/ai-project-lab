@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "mode": "live",
-  "generated_at": "2026-11-07T22:17:46.420099+00:00",
+  "generated_at": "2026-11-08T06:32:17.057901+00:00",
   "connected": true,
   "thesis": {
     "state": "possibilities_ready",
     "last_success": "2026-11-04T07:33:11.908889+00:00",
     "next_run": "2026-11-08T08:00:00+01:00",
-    "collection_last_success": "2026-11-07T06:31:16.090571+00:00",
+    "collection_last_success": "2026-11-08T06:32:15.980217+00:00",
     "research_run": {
       "id": "20261104-thesis-solo",
       "date": "2026-11-04",
