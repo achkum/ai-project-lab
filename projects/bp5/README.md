@@ -2,6 +2,8 @@
 
 **[Open Prata](https://198.44.116.159.sslip.io/apps/bp5/)**
 
+> Language-checking repair is in progress on this branch. The corrected exercise contracts and saved-session upgrade are reviewed, but the replacement checker has not passed independent language acceptance or been deployed.
+
 Practise before a real interaction: buy the right ticket, explain a wrong order, ask a colleague for help or discuss a problem. The mobile web app has **18 situations and 54 different guided tasks**: eight Basic situations, six Medium and four High, with three tasks in each. Finishing one offers a different task. It runs on the existing VPS; the laptop can be off.
 
 Speak or type, listen to the character, then practise related listening, reading and writing. Save phrases, return to a session and revisit earlier work. Speech transcripts are editable before sending. Conversations use authored responses and bounded matching. If the app misses a valid reply, choose the meaning you intended to continue; your original reply is preserved and this help is recorded. This is guided practice, not unrestricted conversation or automatic grammar assessment. [Language checks and their limits](content/language_quality_report.json) include the poor coverage of previously unseen wording.

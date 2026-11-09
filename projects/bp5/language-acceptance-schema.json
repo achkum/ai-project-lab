@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BP5 independent language release evidence, schema 1",
+  "$comment": "This is a report schema, NOT acceptance evidence. No passing report is installed. check_language_acceptance.py is the enforcing implementation. Root pins exact report bytes in the canonical acceptance-contract only after checking independent artifacts; the candidate cannot supply its own trust policy.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "suite",
+    "evaluation_id",
+    "created_at_utc",
+    "evaluator",
+    "corpus",
+    "candidate",
+    "results"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "suite": {
+      "const": "bp5-language-acceptance"
+    },
+    "evaluation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evaluator": {
+      "type": "object",
+      "required": [
+        "id",
+        "role",
+        "independent",
+        "case_selection",
+        "production_adapter"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Must equal trusted active corpus evaluator identity."
+        },
+        "role": {
+          "const": "independent_acceptance"
+        },
+        "independent": {
+          "const": true
+        },
+        "case_selection": {
+          "const": "full_frozen_corpus"
+        },
+        "production_adapter": {
+          "const": true
+        }
+      }
+    },
+    "corpus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "metadata_sha256"
+      ],
+      "properties": {
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "metadata_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "description": "Metadata hash covers sorted-by-case_id projections of exactly case_id,mission_id,difficulty,bucket,expected_intent,challenge_type. Serialize with ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False; SHA256 UTF8. No learner text is copied into release evidence. Corpus rotation requires an independently frozen new SHA/metadata/count inventory and clears the report pin; old records remain history."
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "source_files",
+        "source_sha256",
+        "library",
+        "adapter_sha256",
+        "artifacts"
+      ],
+      "description": "Use check_language_acceptance.candidate_binding(workspace, trusted_model_root)[0] before evaluation and require same binding after evaluation. Do not regenerate a binding for changed code and attach old scores. Evaluator must invoke the declared production adapter with its actual grammar, prompt, language gate, thresholds and configuration, not a simplified test substitute.",
+      "properties": {
+        "source_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "sha256",
+              "encoding"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              },
+              "encoding": {
+                "enum": [
+                  "utf8-lf",
+                  "raw"
+                ]
+              }
+            }
+          }
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "library": {
+          "type": "object",
+          "required": [
+            "version",
+            "sha256"
+          ],
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        "adapter_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 240,
+      "items": {
+        "type": "object",
+        "required": [
+          "case_id",
+          "mission_id",
+          "difficulty",
+          "bucket",
+          "expected_intent",
+          "challenge_type",
+          "actual_intent",
+          "advanced",
+          "source",
+          "outcome"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mission_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "difficulty": {
+            "enum": [
+              "basic",
+              "medium",
+              "high"
+            ]
+          },
+          "bucket": {
+            "enum": [
+              "valid",
+              "negative"
+            ]
+          },
+          "expected_intent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "challenge_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "actual_intent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "advanced": {
+            "type": "boolean"
+          },
+          "source": {
+            "enum": [
+              "authored",
+              "semantic",
+              "unavailable",
+              "manual",
+              "none"
+            ]
+          },
+          "outcome": {
+            "enum": [
+              "completed",
+              "unavailable",
+              "error"
+            ]
+          }
+        }
+      },
+      "description": "Exactly every case in the pinned independent corpus, no skipped/unavailable case omitted. Correct automatic valid means actual_intent==expected_intent AND advanced==true AND outcome==completed AND source authored or semantic. Manual selection and unavailable results never count as correct. Every negative must have outcome completed and source authored,semantic or none; unavailable/manual negatives block release rather than masquerading as safe rejections. Scores are recomputed; any summary/pass flag is ignored. At least90% overall and85% each basic/medium/high, zero wrong-intent advances, zero negative advances; valid and negative coverage for every one of54tasks. The metadata-bound long_* High subgroup must independently reach at least90% automatic correct valid replies; every long negative must be automatically evaluated without advancement. Current independent v2 subgroup is24valid/12negative across12High tasks; full corpus826cases (505valid/321negative)."
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Safe relative path under operator BP5_ACCEPTANCE_ARTIFACT_ROOT or canonical contract model_root. The directory location is private and is not proof identity; exact evaluated Linux bytes must match each pinned hash."
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "checker_manifest": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "adapter",
+        "artifacts"
+      ],
+      "description": "Candidate root LANGUAGE_CHECKER_MANIFEST.json. Inventory ALL model weights, tokenizer/configuration, language detector, inference executable and native libraries used. Prompt/grammar and thresholds must be source-bound or artifact-bound. No manifest exists until an actual candidate exists; absence blocks release.",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "adapter": {
+          "type": "object",
+          "required": [
+            "entrypoint",
+            "configuration",
+            "execution_mode",
+            "environment",
+            "runtime_platform",
+            "evaluation_target"
+          ],
+          "properties": {
+            "entrypoint": {
+              "type": "string",
+              "description": "server/module.py:callable; implementation must be in bound runtime sources."
+            },
+            "configuration": {
+              "type": "object"
+            },
+            "execution_mode": {
+              "const": "production_adapter"
+            },
+            "environment": {
+              "type": "object",
+              "required": [
+                "BP5_SEMANTIC_REQUIRED"
+              ],
+              "properties": {
+                "BP5_SEMANTIC_REQUIRED": {
+                  "const": "1"
+                }
+              },
+              "description": "Evaluated adapter and managed deploy/activate.py start() values dictionary must both enable the required checker. A direct standalone checker proof cannot authorize a deployment that retains the disabled old matcher."
+            },
+            "runtime_platform": {
+              "const": "linux",
+              "description": "Evaluate actual deployment executable/native runtime bytes; Windows development binary results cannot authorize Linux release."
+            },
+            "evaluation_target": {
+              "enum": [
+                "isolated_vps_candidate",
+                "identical_linux_container"
+              ]
+            }
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        }
+      }
+    }
+  }
+}

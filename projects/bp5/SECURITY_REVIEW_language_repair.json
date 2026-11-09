@@ -1,0 +1,344 @@
+{
+  "review_phase": "Infrastructure and release-gate review; no qualified language candidate",
+  "review_date": "2026-11-02",
+  "reviewer": "Independent BP5 security/reliability agent",
+  "status": "open_quality_acceptance_and_linux_resource_evidence_required",
+  "scope": "Proposed local contextual NLI checker and its production integration. This is a new review; SECURITY_REVIEW_v3.json remains historical evidence for the previous bounded matcher.",
+  "constraints": {
+    "hidden_acceptance_cases_opened": false,
+    "hidden_acceptance_path": "research/discovery/2026-11-01-bp5-language-repair/acceptance",
+    "vps_mutated": false,
+    "implementation_modified": true,
+    "committed_or_deployed": false,
+    "credentials_or_real_user_data_accessed": false,
+    "modification_scope": "Worker cleanup, isolated infrastructure tests, release-gate portability/long-reply subgroup checks and this report. No checker-model integration, deployment or queue changes."
+  },
+  "current_evidence": [
+    "Existing production turn logic performs deterministic matching inside BEGIN IMMEDIATE. New native inference must not be inserted at that point while holding SQLite write lock.",
+    "Existing container limits are1536MiB memory/no swap,1.8CPU,64PIDs; speech is admitted via a single semaphore. Current readiness checks only library and audio runtime. New checking capability needs its own truthful readiness/failure signal.",
+    "Backend reports no checker integration or frozen source yet. Development evaluation of proposed339MB mDeBERTa model still fails known diagnostic cases: reply-only7/18 valid with a wrong branch; adding question to premise2valid with multiple false accepts. These are author-reported development results, not independent hidden acceptance results.",
+    "Backend additionally reports entailment0.94 for confirmation on explicit contextual decline 'Nej, jag tar en bild av datumet i stället'. Confidence alone therefore cannot establish safe acceptance. Backend is withholding integration."
+  ],
+  "required_integration_checks": [
+    {
+      "id": "LANG-01",
+      "area": "Ownership and stale inference",
+      "requirement": "Capture an owner-scoped immutable snapshot and exact run/turn revision, release DB connection before inference, then BEGIN IMMEDIATE and recheck live auth token/expiry, owner, mission existence and exact revision before any mutation. Reset can reuse current step and turn index; those are insufficient as a version.",
+      "proof": "Pause inference; concurrently reset, advance, delete mission, delete account, logout/recover account and expire token. Resume inference and verify stale result cannot advance, recreate data or use revoked authentication. Independent account reads/writes must complete while inference is paused."
+    },
+    {
+      "id": "LANG-02",
+      "area": "Idempotence",
+      "requirement": "Validate request ID and payload hash before expensive work and recheck under commit lock. Concurrent identical retries append once; changed payload with reused ID409. Stale completed inference cannot overwrite later state.",
+      "proof": "Two simultaneous identical requests, different request IDs on one revision, changed payload reuse, response loss then retry, replay after reset/deletion. Verify exact turn count and no unexpected objective advancement."
+    },
+    {
+      "id": "LANG-03",
+      "area": "Busy, failure, timeout and cancellation",
+      "requirement": "Failing inference is a retryable service condition, never a successful match or verdict that Swedish is wrong. Bound admission without unbounded waiter/thread/process growth. A Python future timeout does not stop native ONNX computation: retain permit until real completion or terminate/reap a killable worker before replacement.",
+      "proof": "Missing/corrupt model, initialization failure, exception, native hang, timeout, cancellation/disconnect, deletion during inference, repeated timeouts and subsequent recovery. Verify no mutation, no false match, accurate HTTP status, bounded workers and permits, child reaping and no request text in errors/logs."
+    },
+    {
+      "id": "LANG-04",
+      "area": "Input/output bounds and semantic contamination",
+      "requirement": "Bound latest text, recent context, candidates and token sequence before inference. Do not silently discard trailing negation/uncertainty through truncation. Treat prior user text as untrusted context, not instructions or evidence that supersedes the latest answer. Outputs must be finite and selected intent must belong uniquely to current snapshot step; source/reason should be bounded structured metadata.",
+      "proof": "Long repeated context, negation at truncation boundary, prior affirmative followed by current negative, quoted prior answer, embedded instructions, mixed languages, NaN/infinite scores, nonexistent/duplicate intent IDs and malformed worker output. Verify no arbitrary branch, logging or serialization leak."
+    },
+    {
+      "id": "LANG-05",
+      "area": "Language checking and teaching behavior",
+      "requirement": "Do not treat entailment as grammatical correctness, mastery or pronunciation. Swedish-language gate must reject clear English replies without rejecting legitimate context-dependent names, numbers or short Swedish answers. Explicit uncertainty, questions about an option and denial of both choices must not become acceptance. Contradiction of one option is not automatically selection of another.",
+      "proof": "Independent hidden acceptance owner tests plus separate public failure probes. Record match source and supported limitations honestly. Quality failures keep production repair open; manual meaning selection or disclaimers do not satisfy automatic reply-checking requirements."
+    },
+    {
+      "id": "LANG-06",
+      "area": "Native runtime and supply chain",
+      "requirement": "Pinned model/tokenizer/runtime metadata and SHA256 checked before native load, local-only files, no runtime download or remote code execution. Bound ORT/inter-op/intra-op threads, process count, scratch files and retained model instances. Avoid requests/body logging. Model presence alone is not readiness.",
+      "proof": "Offline initialization with expected manifests, wrong digest/path/missing files, no available network, model load failure and repeated warmup. Inspect package/container/runtime paths and verify no secret/model download fallback."
+    },
+    {
+      "id": "LANG-07",
+      "area": "CPU and memory containment",
+      "requirement": "Measure peak resident memory and elapsed CPU under the actual container limits with concurrent speech/checker work, plus old/candidate overlap during deployment on4GBhost.339MB file size is not RAM evidence. Avoid loaded-model duplication across worker restarts and candidate readiness; keep health/account operations responsive.",
+      "proof": "Root-managed Linux resource measurement after credible candidate freeze: cold load, largest admitted input, inference plus transcription, repeated timeout/restart and old/candidate coexistence. Verify cgroup memory and latency limits; no OOM restart loops or host oversubscription."
+    }
+  ],
+  "review_actions_completed": [
+    "Inspected current production transaction/auth/body/limits, readiness, deployment container limits and Python dependency manifest.",
+    "Sent concrete concurrency, cancellation, model-output, local-runtime and resource requirements to backend and root before integration.",
+    "No hidden acceptance material was read; no new implementation or deployment was performed."
+  ],
+  "next_review_step": "Per-account admission budget is implemented. Require actual immutable Linux candidate, measured final capacity settings/combined speech resources, and independent full826-case acceptance before release; report pin remains null.",
+  "release_gate_implementation": {
+    "updated_at_utc": "2026-11-01T19:26:17.721557+00:00",
+    "status": "implemented_fail_closed; real acceptance report absent/unpinned",
+    "files": [
+      "projects/bp5/check_language_acceptance.py",
+      "projects/bp5/acceptance-contract.json",
+      "projects/bp5/language-acceptance-schema.json",
+      "projects/bp5/tests/test_language_release_gate.py",
+      "engine/product_delivery.py"
+    ],
+    "integration": "Canonical verifier invoked by Prata version>=3 VPS contract validation, including direct managed deploy, and rechecked after product tests. Existing unrelated local/static delivery logic retained; no job/corequeue edits.",
+    "thresholds": "At least90percent automatic correct valid,85percent eachdifficulty,zero wrong-intent advances,zero negative advances; full frozen corpus and valid+negative coverage all54tasks,at least120valid+120negative.",
+    "provenance": "Evaluator supplied metadata-only manifest:790cases,481valid,309negative; active corpus857eb7a3ae3dc95519d23ad5d15991d8f9c5411884cba9f8b5bc9f2d94410a36,canonical metadatafd5e6e49ce00239eb9b3cfba9695f71f7cb8a53d98c01b9a33e8a404bcbfb31b. Only METADATA-MANIFEST.json read; hidden reply texts/builders/corpus not opened.",
+    "proof_binding": "Exact independently pinned report bytes; canonical source manifest with UTF8 LF-normalized text hashes; library content_version/hash; production adapter declaration/configuration hash; every declared model/tokenizer/detector/native runtime artifact rehashed from trusted local model_root. Full case metadata digest prevents omitted/relabelled/hand-selected results. Scores recomputed; self-reported summary ignored; unavailable/manual never automatic correct.",
+    "current_pins": "accepted_report_sha256=null,model_root=null; corpus metadata verified and pinned. No real LANGUAGE_ACCEPTANCE.json or LANGUAGE_CHECKER_MANIFEST.json created. Passing test evidence exists only in TemporaryDirectory fixtures.",
+    "tests": "13new gate tests passed;6existing product delivery tests passed. Includes actual non-BP5 local acceptance, direct VPS deploy blocked before any network call, missing/stale/changed report/source/prompt/dependency/config/model,wrong-intent/negative advance,weak difficulty,manual/unavailable,subset/relabel/duplicate/self-review,corpusrotation and LF/CRLF equivalence. CLI on actual BP5 candidate exits1: no independently accepted report pinned.",
+    "trust_limit": "Protects accidental/stale automation completion. A trusted repo editor can alter verifier/policy; this is not tamper-proof cryptographic identity enforcement. Root verifies independent artifacts and pins as part of implementation, with no new human approval step.",
+    "rotation": "Contract documents replacing active independently frozen corpus SHA/metadata/counts/evaluator and resetting reportpinnull; old evidence preserved. Subsequent runs of disclosed corpus are regression, not fresh acceptance.",
+    "source_sha256": {
+      "projects/bp5/check_language_acceptance.py": "b9bca6b89a631b1675c87bc56e0df9ca24b25d0bbc9b6c36ef4caff423ab6d8e",
+      "projects/bp5/acceptance-contract.json": "8711d1e6b5514b486a585182e7ae8560a2ffc93cd282d13d447dc9c82f778d26",
+      "projects/bp5/language-acceptance-schema.json": "f03e06aed18aa993a84119be50999b1d0599b14d0b53b3bb83ee5c9ddf2e9a63",
+      "projects/bp5/tests/test_language_release_gate.py": "e189122004db2db99117ea35164f69892b949c2ee60d504d2dc78f6af83cbbaa",
+      "engine/product_delivery.py": "aead5020d8f1269725e2aa550c79747f6049d2d1709ba9cbc04b772d04b4babd"
+    },
+    "enabled_runtime_requirement": "Adapter declaration must enable BP5_SEMANTIC_REQUIRED=1 and report isolated_vps_candidate or identical_linux_container on Linux. Verifier parses the bound managed deploy start() values dictionary and requires the same enabled flag. Windows runtime proofs, standalone/disabled path and unavailable negative outcomes cannot qualify. Backend coordinated fail-closed required-checker readiness; placeholder remains deliberately unavailable and is not a release candidate."
+  },
+  "architecture_evidence_note": "current_evidence and required_integration_checks above preserve the earlier architecture review; latest status is recorded in infrastructure_review below.",
+  "infrastructure_review": {
+    "updated_at_utc": "2026-11-02T10:14:00.266486+00:00",
+    "language_acceptance_passed": false,
+    "candidate_manifest_present": false,
+    "tests_are_infrastructure_only": true,
+    "tests": {
+      "checker_process": "10 passed, including real Windows hanging/crashed/malformed workers, deadline child termination, healthy-busy readiness, and mocked failed reap/tree-kill recovery",
+      "semantic_api_existing": "6 passed: unavailable/invalid output, idempotence/busy, reset/logout/deletion, foreign-language verdict and required-checker readiness",
+      "independent_security": "2 passed: ownership/CSRF rejected before inference; paused inference with expired auth and account deletion cannot commit and does not retain SQLite write lock",
+      "authored_context": "5 passed",
+      "language_support_contract": "5 passed; known authored cases only, not generalization",
+      "release_gate": "15 passed; all passing artifacts synthetic TemporaryDirectory fixtures"
+    },
+    "fixed_findings": [
+      {
+        "id": "LANG-PROC-01",
+        "severity": "medium",
+        "problem": "Supervisor cleared its process handle before wait/reap succeeded and ignored nonzero Windows tree-termination status. Failed cleanup could lose the worker handle and make later cleanup impossible.",
+        "fix": "Keep handle until successful reap, permanently block replacement after unsuccessful cleanup, allow close to retry the retained handle, fail closed when Windows process-tree termination cannot be verified, and drain I/O thread even if cleanup raises.",
+        "evidence": "test_failed_reap_keeps_handle_and_blocks_replacement and test_failed_windows_tree_kill_fails_closed pass."
+      }
+    ],
+    "observed_guards": [
+      "Inference outside SQLite transaction, owner-scoped snapshot and raw payload hash; commit rechecks current live token/expiry/CSRF and unchanged payload in BEGIN IMMEDIATE.",
+      "Bounded one-slot checker and supervisor admission; bounded JSON IPC and child startup/inference deadlines; Linux worker owns a process group.",
+      "Tokenizer truncation explicitly disabled and overflow rejected; candidates and input lengths bounded; finite-score/known-intent validation before mutation.",
+      "Authored graph context uses assistant offers and never learner text to invent the current offer.",
+      "Model/tokenizer/language-model hashes checked in parent/child, vocabulary and library source checked in parent; no runtime download or transcript logging found.",
+      "Language support is separate from semantic intent and raw detector language is retained; thresholds still require actual independent acceptance."
+    ],
+    "open_release_requirements": [
+      {
+        "id": "LANG-QUALITY",
+        "severity": "blocker",
+        "requirement": "No qualified model, bound adapter or independent report exists. Module-level check remains unavailable and ready false. Do not approve/activate on mocked infrastructure tests."
+      },
+      {
+        "id": "LANG-RESOURCE",
+        "severity": "high_before_activation",
+        "requirement": "Measure actual Linux model plus speech peak RAM/CPU, worker timeout/restart and candidate/active overlap under container/host limits; separate audio/checker semaphores currently allow concurrent residency and work. Enforce shared admission/unloading if measurements require it."
+      },
+      {
+        "id": "LANG-RATE",
+        "severity": "medium_before_activation",
+        "requirement": "Add per-account inference admission budget after deduplication and live-auth recheck, charged only for admitted expensive work. Current global single slot bounds concurrency but one invited account can repeatedly occupy it; account deletion must not leave stale rate records."
+      },
+      {
+        "id": "LANG-ARTIFACT",
+        "severity": "required_candidate_check",
+        "requirement": "Mount exact evaluated Linux artifacts read-only in production; verify full inference dependency inventory, including any ONNX external tensors. Hash-check then native-open relies on artifact immutability."
+      }
+    ],
+    "limitations": [
+      "Linux process-group cleanup path not executed in this Windows review; run focused checker process suite in isolated Linux candidate.",
+      "Windows taskkill cannot guarantee cleanup of descendants orphaned by an already-exited parent; Windows remains development-only, not an accepted production runtime.",
+      "HTTP disconnect does not immediately cancel synchronous semantic inference; work remains bounded by worker deadline and admission, and auth/state revalidation still applies.",
+      "No hidden acceptance texts, builders or histories read; only authorized metadata manifest read. No real user data or VPS mutation."
+    ],
+    "release_gate_updates": {
+      "active_corpus": "843834b551d1f707ff3b7c41cfc27f75302ee1aecf9a9843c9ffcaf2318e1fd2",
+      "metadata": "d15d2cfdb47001f52ea3f54689c8bdfb1510978b555227144056979deb88f21a",
+      "cases": 826,
+      "valid": 505,
+      "negative": 321,
+      "long_valid": 24,
+      "long_negative": 12,
+      "long_missions": 12,
+      "separate_long_valid_threshold_percent": 90,
+      "private_artifact_root": "BP5_ACCEPTANCE_ARTIFACT_ROOT permits operator-local path; every declared actual Linux artifact hash still checked. Public model_root remains null.",
+      "accepted_report_sha256": null,
+      "staging_vs_release": "Private isolated staging/build may proceed without acceptance. Public activation/finish remains gated; no bypass added."
+    },
+    "source_hash_format": "SHA256 of exact current file bytes; final candidate binding separately normalizes UTF8 line endings.",
+    "source_sha256": {
+      "projects/bp5/server/production.py": "5ecb2d9558784c9a426fe97f744a5b6640be41b3d074bb110649201140be44c2",
+      "projects/bp5/server/language_process.py": "37985c15da45a7c184982cf32ca7a56dd7b2ab69787cddacf2c312f2ee3c876a",
+      "projects/bp5/server/language_worker.py": "2d80f7b47c261b6d0ede78cbd5f90692b42a82037bdd22a25f6b841b95458694",
+      "projects/bp5/server/language_checker.py": "bf5f48c7630cee475579f165d3355eee41d436fc886fdead225aac504234429e",
+      "projects/bp5/server/language_context.py": "c368060539716d38d8accdc2cb11131ae1db6330a769caf13492327f5331354c",
+      "projects/bp5/server/language_support.py": "5cce46d7c7eae8efd28708a72c12a9d80ca0268518b48b8329541f5be8b1bd91",
+      "projects/bp5/server/swedish_support_vocabulary.json": "450df0e54edab12bd70b9f0adb5088465d85f39821e211ae686279f26bf7df66",
+      "projects/bp5/server/requirements-language.txt": "27ff1c550a1ae0cb56450f65d39bbfdea9a9a4516c7aaf8554dd057a5003f184",
+      "projects/bp5/server/test_language_checker.py": "a7470c89487cf9203a582a6533b99f9ad88d2362ae38c1dba4a05f605e6051cb",
+      "projects/bp5/server/test_language_context.py": "e15adfa0c2a1bc79399b48ad0a943fd9e45e4deb4a967d646b4b063cc4d1230a",
+      "projects/bp5/server/test_language_support.py": "49210fc3ffd41205e962c17dfb0d3ccbc61b59f1db22b9273f5122cd786da27d",
+      "projects/bp5/server/test_language_security.py": "d26767dab34845176570560d818d2575188910b5515c130685615dfbeebcfe8c",
+      "projects/bp5/server/test_production.py": "961327c7fae3592bb0676259a8dbd2a3a1dd345c1a750396d064c5f0d83cc37c",
+      "projects/bp5/check_language_acceptance.py": "2a0b6dbf1f821b79b1005d6de5e5ff725ecf40c66ef4320ffc2c010291b38a61",
+      "projects/bp5/acceptance-contract.json": "81c3dc644507eda443edd6e83b3e8ae73d32d6dd184eb4b4c6a5aa7384a59766",
+      "projects/bp5/language-acceptance-schema.json": "27888e043c289d92f45bcdb628dd9e6b4c6fa0d180a71acd9b43e800952d932e",
+      "projects/bp5/tests/test_language_release_gate.py": "d1d063714005f97e01b1939216a58f3e34cc52064af0d2fbd80146388c4768fc",
+      "projects/bp5/content/library.json": "99be582abcdb920fc3c0b0dd59d5d3ad7359ac509f4c407ee64ab1f257702eca",
+      "engine/product_delivery.py": "aead5020d8f1269725e2aa550c79747f6049d2d1709ba9cbc04b772d04b4babd"
+    }
+  },
+  "semantic_budget_review": {
+    "updated_at_utc": "2026-11-02T10:38:20.206875+00:00",
+    "status": "implemented; provisional operational defaults require Linux candidate timing",
+    "resolves": "LANG-RATE from prior infrastructure review; language quality acceptance and combined speech/checker resource evidence remain open",
+    "scope": "production semantic admission, additive SQLite budget schema/migration, documentation and isolated tests. No candidate binding, deployment, queue or publisher edits.",
+    "policy": {
+      "burst_units": 48,
+      "refill_units_per_minute": 24,
+      "cooldown_percent_of_measured_slot_occupancy": 100,
+      "cooldown_cap_seconds": 300,
+      "cost": "min(48, max(1,ceil(trimmed UTF8 reply bytes/512))^2 * ceil(current intent count/2))",
+      "configuration_bounds": {
+        "BP5_SEMANTIC_BURST_UNITS": [
+          48,
+          240
+        ],
+        "BP5_SEMANTIC_REFILL_UNITS_PER_MINUTE": [
+          1,
+          120
+        ],
+        "BP5_SEMANTIC_COOLDOWN_PERCENT": [
+          25,
+          200
+        ]
+      }
+    },
+    "behavior": [
+      "One persisted row per account, foreign-key cascade on account deletion; no text or transcripts recorded.",
+      "Nonblocking global slot precedes short BEGIN IMMEDIATE admission. Live token/expiry/CSRF, cached result/payload and exact mission revision rechecked before atomic debit.",
+      "Cached retries, busy, already stale, unauthorized and failed-commit attempts cost zero. Admitted work remains charged on model error/timeout/input overflow or later mission mutation.",
+      "Native inference remains outside SQLite transactions. Completion persists cooldown on success and failure with UPDATE only, so deletion cannot recreate state. Slot always released; no cooldown sleep before response.",
+      "Refill survives reconnect/restart and is capped; backward wall time adds no credit. Reset, deleted history, many missions and logout do not replenish credit.",
+      "Capacity429 carries Retry-After and availability wording. Browser test proves original draft, voice provenance, support and stable retry identity survive."
+    ],
+    "validation": {
+      "budget_suite": "11 passed: persistence, reset/many missions, failure debit, cached/conflicting retries, busy isolation, stale reset/logout, account deletion during work, refill/backward clock/cap, overlapped duplicate, failed commit cleanup, cooldown success/failure, safe schema migration.",
+      "production_suite": "40 run:39 passed,1 optional real-audio test skipped. No unchanged voice benchmark rerun.",
+      "independent_security_suite": "2 passed after budget integration.",
+      "frontend_capacity": "1 suite passed; no application JS changes needed.",
+      "diff_check": "git diff --check passed for changed implementation/docs/tests."
+    },
+    "limitations": [
+      "Default bucket/cooldown settings are provisional until measured Linux inference latency; no claim of completed language acceptance.",
+      "Cooldown provides other accounts opportunities to acquire the slot, not FIFO scheduling or a global throughput guarantee.",
+      "A hard process kill after admission but before completion retains the charged units but can prevent completion cooldown from being persisted; normal exceptions/timeouts persist it. No new worker starts until supervisor cleanup rules permit it.",
+      "If model work was admitted before reset/deletion/revocation, consumed work remains charged (account deletion removes the row). Only requests already stale at admission are free."
+    ],
+    "controller_read_only_review": {
+      "files": [
+        "work/bp5_language_managed_handoff.py",
+        "work/bp5_resume_language_remote.py"
+      ],
+      "guards": "Exact BP5v3 job/previous lease token/expired lease and acquired slot4 checked before reclaim; Jobs.claim moves lost leases to needs_attention rather than duplicate launch.",
+      "reported_to_root": "Remote BEGIN IMMEDIATE waits on unbounded stdin handshake and local stdout.readline is also unbounded; stalled transport can hold queue write lock indefinitely. Partial JSON progress/state and transient heartbeat failures can exit controller. Root owns bounded handshake, atomic state and retry repair; no controller edits here."
+    },
+    "source_sha256": {
+      "server/production.py": "70b90a343d7acad0085d684dd389b898bab36f96d162ddf94b194a67a9d64e0e",
+      "server/production_store.py": "e25f9929ac13f136d0a3b733c79e1d3b2af650419680ff1fcbea59a5dea3755d",
+      "server/test_semantic_budget.py": "429e5f44170c93a3d324a2ac9ad915dc7ec8102605bf433f1e4951f322d11260",
+      "server/test_language_security.py": "d26767dab34845176570560d818d2575188910b5515c130685615dfbeebcfe8c",
+      "server/PRODUCTION-RUNBOOK.md": "3bb6cbf4eed571fce262fc061fef2473d15832aec3073a18583736ab40dee47b",
+      "server/PRODUCTION-API-CONTRACT.json": "4c781691d7c9cc557273e801927cc8cd106331c15ce0c9e6463e6ca9dda35fff",
+      "web/tests/semantic-capacity.test.cjs": "a7368c1f75e8af403cfbe7db711156dbc8258fc4d0aad37e603bbf0ede249233"
+    }
+  },
+  "candidate_binding_review": {
+    "updated_at_utc": "2026-11-02T11:33:21.944819+00:00",
+    "status": "infrastructure reviewed; no qualified or activated model; complete-image/native dependency proof and Linux capacity evidence remain pending",
+    "scope": "Manifest loader/module binding, worker/cache interaction, export/input/parity/inventory/resource helpers, semantic budget interaction. No builds, model activation, deployments, controller or queue changes. Hidden acceptance material not accessed.",
+    "hashing_findings": {
+      "warm_path": "No large-file hashing on every warm request. Binding.valid rereads at most64KiB manifest and checks path/stat identity. Checker._verify hashes model/tokenizer/detector/vocabulary/source only when its fingerprint changes. Child hashes at startup.",
+      "instrumented_test": "A4MiB synthetic model plus fixture runtime:25 repeated check+ready rounds produced zero additional _hashfile/_digest calls after initial readiness. The only _bounded_bytes reads were the manifest. This proves file-I/O behavior, not native inference latency.",
+      "cold_path": "Large model artifacts currently verified three times at cold construction: binding loader, Checker first verification, child initialization. Preserved SHA checks; startup latency must be measured on actual Linux candidate. No full-model hashes were removed."
+    },
+    "fixed_findings": [
+      {
+        "id": "LANG-BIND-READY",
+        "severity": "medium",
+        "problem": "candidate() took a nonblocking lock even for an initialized immutable binding, causing transient unavailable/readiness503 under harmless concurrent binding validation.",
+        "fix": "Use validated immutable cached binding without its construction lock; keep exclusive nonblocking cold initialization.",
+        "evidence": "Initialized binding remains ready while construction lock is held; initial missing/unavailable binding still fails closed."
+      },
+      {
+        "id": "LANG-BIND-IDENTITY",
+        "severity": "medium",
+        "problem": "Metadata fingerprints omitted filesystem device/link identity; initial configured artifact root could be a symlink alias.",
+        "fix": "Fingerprint device/inode/link count along with size/mtime/ctime; reject hardlinks and symlink/junction roots/ancestors. Retain path resolution, manifest hash and post-inference validation.",
+        "evidence": "Hardlink, root-link swap and same-size/same-mtime inode replacement tests reject the candidate."
+      },
+      {
+        "id": "LANG-BUILD-LOCK",
+        "severity": "medium",
+        "problem": "Candidate Dockerfile consumes root language-linux.lock, which was absent from release source inventory.",
+        "fix": "Include that optional root lockfile in canonical source hashing; mutation now invalidates report binding.",
+        "evidence": "Existing stale-dependency gate test now covers language-linux.lock; thresholds and null pins unchanged."
+      }
+    ],
+    "validation": {
+      "binding_suite": "14run:13passed,1Windows symlink privilege skip. Includes synthetic cached warm I/O and post-inference manifest revocation.",
+      "checker_process_suite": "10passed after fingerprint change",
+      "semantic_budget_suite": "11passed with final module binding",
+      "deployment_helper_tests": "7passed: input pinning/tamper/duplicate keys/output preservation, staging isolation refusal, Linux-only inventory and corrupted parity artifact refusal. No native export or Linux resource probe executed.",
+      "release_gate_suite": "15passed; actual candidate CLI still exits1 because no accepted report is pinned"
+    },
+    "observed_safeguards": [
+      "Fixed project manifest path; only explicitly required Linux module path can bind; no request-supplied model path.",
+      "Strict manifest/configuration/environment including actual semantic budget settings; artifact paths/hashes, tokenizer/base revision, labels and context format checked.",
+      "No automatic rebind after mutation: live path/stat/manifest check fails closed before and after inference; restart required for a new binding.",
+      "Ambiguous graph context yields UNKNOWN only after actual checker readiness, not as successful unavailable-model evidence.",
+      "Offline export pins base/checkpoint inputs before and after reconstruction; weights_only checkpoint load, exact trained-parameter subset, no external export files, synthetic PyTorch/ONNX parity at export, distinct unqualified receipt.",
+      "Resource probe requires isolated marker/token/loopback origin/required semantic mode and expected bounded cgroup limits; sanitized output and disposable account cleanup; no quality claim."
+    ],
+    "remaining_candidate_requirements": [
+      {
+        "id": "LANG-RUNTIME-IMAGE",
+        "severity": "high_before_release",
+        "finding": "Child checks actual Python/ORT/tokenizers/numpy/fastText role binaries, but additional native libraries inventoried as artifact copies are not matched to all actually mapped libraries. Python package code is also not guaranteed by those five binary hashes.",
+        "required_check": "Bind and deploy the actual immutable evaluated image digest, or comprehensively verify actual mapped native/package inventory. Loader/worker files and requirements plus declared copied artifacts alone must not be described as complete runtime identity. Sent to root/backend."
+      },
+      {
+        "id": "LANG-LINUX-PARITY",
+        "severity": "validation_limit",
+        "finding": "language_runtime_parity.py verifies model/tokenizer hashes and tokenizer vectors only; it does not compare Linux ONNX logits to export reference logits.",
+        "required_check": "Describe it as tokenizer parity only. Actual Linux inference remains required in resource and independent acceptance runs; optional cross-runtime numerical parity needs exported reference logits and runtime comparison."
+      },
+      {
+        "id": "LANG-WORST-CASE",
+        "severity": "required_resource_evidence",
+        "finding": "Current resource probe exercises one short basic turn concurrently with synthetic speech transcription. Library.8 has294steps and at most2intents, while configured sequence cap is512tokens.",
+        "required_check": "Also measure largest admitted sequence/batch, repeated inference/worker failure/restart, final cgroup limits and old/candidate host overlap. A short-turn measurement alone cannot establish safe production RAM/latency."
+      }
+    ],
+    "source_sha256": {
+      "server/language_binding.py": "1f21d79b4836679957607e4921f06c5e29dd3bef5be77b0cf460141558a31e5f",
+      "server/language_checker.py": "d921865f7bbd520fe51a4b600073590b6ecd175aff7a2e4b8118044177bdc1b4",
+      "server/language_worker.py": "76fcfa825d6eac53ce42539ab1c8540cfb27c5b71714fc300519f26441c24d1b",
+      "server/test_language_binding.py": "6e645187101d360d993134c9766b0d2b0332c576afb4e4049c4432d2b9a9bbf5",
+      "deploy/export_language_fp32.py": "6c2fa98a65ca4455e3efdced9153f17e7a50e6d3d7fb4afe3f48dae458c34a03",
+      "deploy/prepare_language_export_manifest.py": "315643ce7cfb5f813d426f534a2bbfdb081ad5d8504aab9774f809c06096f92e",
+      "deploy/language_runtime_inventory.py": "0d681e4cf50b6a67f7536c797cb2e55e4c40be659fbe9ade14e8ba6a5834cb23",
+      "deploy/language_runtime_parity.py": "e0e305f52c5f035733e663336eeaed7d5015e79d3c9619d03b9cfca77ec396ed",
+      "deploy/language_resource_probe.py": "2f28af7f89948b2a267e147a02688cff4be150c043b33c6073586ecbdeaa2bf4",
+      "deploy/Dockerfile.language-candidate": "cd52ea22757679e398ef04d7e3860d383f390651305c55d597a822fcf7321416",
+      "deploy/test_language_candidate_helpers.py": "b3a04ebf62699e5dce6e7a8493623c4d3a3b4b7a97630d05ef6e815a35a07c79",
+      "deploy/test_export_language_fp32.py": "431819c527094ca4cdfa5e951fbd22182229d4b7a1f2f31981c8cee13f45491d",
+      "check_language_acceptance.py": "15a9ddad85b7347abf602fa1833114d33ffc0044476064a024135d046788414c",
+      "tests/test_language_release_gate.py": "897b01c48b63de2784ae039e2e61f14a95e3bcad8c91530290704da844cdd2fc"
+    }
+  }
+}

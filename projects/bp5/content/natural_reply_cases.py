@@ -143,7 +143,7 @@ DISTRACTORS={
 'next_steps':['Ordet provlektion är nytt för mig.','Stödord är ett sammansatt ord.','Min vän skrev om ett digitalt alternativ.']
 }
 
-def make_cases(library):
+def make_legacy_cases(library):
     cases=[]
     def add(mid,step,text,expected,kind):
         cases.append(dict(mission_id=mid,step_id=step,text_sv=text,expected_intent=expected,kind=kind))
@@ -175,6 +175,7 @@ def make_cases(library):
 
 if __name__=='__main__':
     baseline=json.loads((ROOT/'snapshots/library-2026-11-01.2.json').read_text(encoding='utf-8'))
-    out=make_cases(baseline)
-    (ROOT/'natural_reply_evaluation.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(len(out['cases']),'natural-reply evaluation cases written')
+    # Preserve the historical generator for reproducibility, but never publish its
+    # synthetic labels as fresh gold or overwrite the frozen original artifact.
+    from adjudicate_natural_controls import publish
+    publish(make_legacy_cases(baseline))

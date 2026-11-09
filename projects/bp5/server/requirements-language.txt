@@ -1,0 +1,5 @@
+# Experimental local inference dependencies. Do not enable without a separately validated candidate.
+onnxruntime==1.31.1
+tokenizers==0.23.3
+numpy==1.26.4
+fasttext-wheel==0.9.2

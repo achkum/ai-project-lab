@@ -1,0 +1,98 @@
+{
+  "review": "Historical-session upgrade safety only",
+  "reviewed_at_utc": "2026-11-02T14:41:11.013380+00:00",
+  "status": "No remaining blocker found within this patch after narrow repairs; not a language-quality or production-readiness approval.",
+  "scope": [
+    "server/production.py",
+    "server/production_store.py",
+    "server/test_production.py",
+    "web/app.js",
+    "web/tests/stale-session.test.cjs"
+  ],
+  "source_hashes": {
+    "server/production.py": {
+      "sha256_bytes": "11244dd5f1b96affdc543d76c5c2149b6dc947267a8b43daecc0befdd5dde5e6",
+      "sha256_lf": "877168c83361df28947135c96d331901731572a21fddf4deb0c4c3145484c8ae"
+    },
+    "server/production_store.py": {
+      "sha256_bytes": "9431c7146aa07c3d61b2f8b3f320280681fbdb518670fc94dc21a27432c353a4",
+      "sha256_lf": "7b52ed3742d9f98792da27b2687424212e1452e0c38f9232be4a8d4e5e6cade1"
+    },
+    "server/test_production.py": {
+      "sha256_bytes": "35e2ceb4b4c0fdb9471d73598254bc02cceafe6be55ce03a9ecdee43e7aa3712",
+      "sha256_lf": "34a302ee25043988d3c63b35fd87a838e5dcb332fae3b53bd81d2cea628238fd"
+    },
+    "web/app.js": {
+      "sha256_bytes": "672349d503dd65fba43a70668fe76f19711074a52ac6045cd84821ad0511b040",
+      "sha256_lf": "3f7fa502d7f1904b2e1a389c5ad90cd5e91552a1f53c536641ac355f4de1ffdf"
+    },
+    "web/tests/stale-session.test.cjs": {
+      "sha256_bytes": "a045df39ae389351519e660b77398c7523e1eb1ed25586cc94e779d5a5e0fc1c",
+      "sha256_lf": "b80c13448d90337005e6ca791786b2ae5e6476679b30da409da49c675d0b5784"
+    }
+  },
+  "resolved_findings": [
+    {
+      "id": "SESSION-01",
+      "severity": "medium",
+      "finding": "A content change observed by the final response view could still commit a turn.",
+      "evidence": "The new deterministic test changed the server library during matching; before repair the endpoint returned 200 with current=false and mutated the mission.",
+      "fix": "Before save/commit, turn/clarify/reset reject a final stale view with exercise_updated; transaction rollback preserves the exact stored payload.",
+      "test": "test_historical_library_change_observed_before_save_rolls_back"
+    },
+    {
+      "id": "SESSION-02",
+      "severity": "medium",
+      "finding": "Clarification wrapped exercise_updated as a generic 409 and lost the stale-session status.",
+      "fix": "Preserve structured exercise_updated errors so the UI marks the history stale and offers the separate updated task.",
+      "test": "stale-session.test.cjs: clarification race retains draft and hides Send"
+    },
+    {
+      "id": "SESSION-03",
+      "severity": "medium",
+      "finding": "Starting the updated task retained the cached old mission for follow-up activities.",
+      "fix": "Use the returned session snapshot mission for state.mission.",
+      "test": "stale-session.test.cjs: old cached library plus new server snapshot uses updated follow-up content"
+    },
+    {
+      "id": "SESSION-04",
+      "severity": "low",
+      "finding": "Deleting an active task cleared the saved draft map but retained active draft and voice buffers.",
+      "fix": "Clear active draft, original transcript, pending audio and support on active-task/all-practice deletion.",
+      "test": "stale-session.test.cjs: individual and bulk deletion clear buffers and map"
+    },
+    {
+      "id": "SESSION-05",
+      "severity": "low",
+      "finding": "A cached completion response marked stale could still open the normal completion page.",
+      "fix": "Stale send/clarify responses open the historical practice view before testing completion status.",
+      "test": "stale-session.test.cjs: cached completed retry shows update notice"
+    }
+  ],
+  "verified_properties": [
+    "Full canonical mission content is compared, not only library version; client-supplied snapshot/status fields cannot override the server snapshot.",
+    "Owner lookup and existing authentication/CSRF checks precede mutation; cached same-payload retries preserve prior results and attach current stale status without replaying mutation.",
+    "Stale turn/clarify/reset requests retain history, labels, completion evidence and selection. New updated sessions preserve prior SFI selection without transferring the old task draft.",
+    "Stale semantic requests reject before inference and budget admission; post-inference guards reject a changed library. Tests use mocked inference only.",
+    "Drafts are memory-only and session-scoped; account changes invalidate delayed starts, while deletion/signout clear applicable buffers. Copy explicitly states reload loss."
+  ],
+  "test_evidence": [
+    {
+      "command": "runtime/local-products/bp5/venv/Scripts/python.exe -m unittest discover -s projects/bp5/server -p test_production.py -v",
+      "result": "44 tests: 43 passed, 1 optional real-audio test skipped;110.803 seconds. Includes historical, library-change, isolation/CSRF, reset/delete and idempotency coverage."
+    },
+    {
+      "command": "Run each projects/bp5/web/tests/*.test.cjs with Node",
+      "result": "All 10 frontend suites passed, including expanded stale-session regression."
+    },
+    {
+      "command": "git diff --check -- projects/bp5/server/production.py projects/bp5/server/test_production.py projects/bp5/web/app.js projects/bp5/web/tests/stale-session.test.cjs",
+      "result": "Passed."
+    }
+  ],
+  "limits": [
+    "Library-change tests deterministically replace the library returned by the loader; they do not claim atomic synchronization between arbitrary filesystem writes and SQLite commits. Production must retain the existing immutable source/image discipline.",
+    "No hidden acceptance texts read, native models run, builds performed or deployment changed. Native language acceptance remains unqualified and separate.",
+    "This report preserves earlier security reports and does not approve unrestricted conversation or learner efficacy."
+  ]
+}

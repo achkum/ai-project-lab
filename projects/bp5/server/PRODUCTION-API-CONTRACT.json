@@ -26,12 +26,14 @@
     "POST api/speech": "{text,slow} + X-Audio-Job -> audio/wav",
     "DELETE api/audio/jobs/{id}": "cancel owned running job -> {ok}",
     "GET health": "{ok,instance} (liveness only)",
-    "GET ready": "{ok,library,audio}; 503 until library and audio dependencies are present",
+    "GET ready": "{ok,library,audio,semantic_required,semantic}; 503 if required library, audio, or enabled semantic checker is unavailable",
     "GET api/config": "{support_contact,privacy_contact} (empty if not configured)",
     "POST api/auth/recovery-codes": "{password} -> {recovery_codes}; authenticated, CSRF-protected, atomically invalidates prior codes",
     "POST api/missions/{id}/clarify": "{request_id,step_id,intent_id,turn_index,turn_id} -> {session,reply,matched:false,feedback,clarified:true,match_source:learner_confirmation}; learner selects a meaning for the latest unmatched turn, recorded as supported practice",
     "GET api/progress": "{sessions:[{id,mission_id,status,updated_at}]} account-scoped, at most 200 summaries; excludes conversation and snapshots"
   },
   "matching": "An explicitly authored exact reply matches only an entire normalized token sequence and may deliberately include a negation. Otherwise every required group must match and reject terms block; unknown or multiple matching intents never advance. Completion requires all authored objectives. Sessions freeze scenario, mission, criteria, framework and content version.",
-  "limits": "One audio job at a time; 12 MiB/180 sec audio; 200 missions per account; request IDs deduplicated and cannot be reused with different input.; 128 KiB per mission record; invitation expires in seven days by default."
+  "limits": "One audio job at a time; 12 MiB/180 sec audio; 200 missions per account; request IDs deduplicated and cannot be reused with different input.; 128 KiB per mission record; invitation expires in seven days by default.",
+  "semantic_integration": "Experimental, disabled by default. BP5_SEMANTIC_REQUIRED=1 uses an unavailable placeholder and returns 503 with no turn mutation until a separately validated checker replaces it. No semantic model has passed the release gate.",
+  "semantic_capacity": "Enabled semantic checking uses a persistent per-account weighted token bucket and occupancy-based cooldown. Provisional defaults: burst48, refill24units/minute, cooldown100% of slot occupancy capped300seconds; all legal single requests fit. Busy/cached/unauthorized/already-stale requests cost0; admitted failures remain charged. Reset/history deletion/restart do not refill; account deletion cascades state. Capacity429 includes Retry-After, preserves draft and means temporary availability, not incorrect Swedish. See PRODUCTION-RUNBOOK.md for bounded settings and cost formula."
 }

@@ -22,6 +22,54 @@ class ProductionTest(unittest.TestCase):
  def register(self,name):
   invite=st.create_invite();r=self.c.post('/api/auth/register',headers=ORIGIN,json={'username':name,'password':'correct horse battery staple','invite':invite});self.assertEqual(r.status_code,200,r.text);return r.json()
  def hdr(self,csrf):return {**ORIGIN,'x-csrf-token':csrf}
+ def test_historical_mission_update_preserves_history_and_blocks_mutations(self):
+  old=json.loads((Path(__file__).resolve().parent.parent/'content'/'snapshots'/'library-2026-11-01.7.json').read_text(encoding='utf8'))
+  current=json.loads(json.dumps(old));newmission=current['situations'][0]['missions'][0];mid=newmission['id'];newmission['steps'][0]['prompt_sv']+=' updated';current['content_version']='2026-11-01.9';active=[old]
+  with patch.object(st,'get_library',side_effect=lambda:active[0]):
+   a=self.register('historicalowner');h=self.hdr(a['csrf']);selection={'framework_id':'','course':'2B','study_path':'2'}
+   s=self.c.post('/api/missions',headers=h,json={'mission_id':mid,'request_id':'old-start',**selection}).json()['session'];sid=s['id'];self.assertTrue(s['content_status']['current'])
+   body={'request_id':'old-unmatched','text':'zzzzz nonsens'};response=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(response.status_code,200);self.assertFalse(response.json()['matched']);s=response.json()['session'];idx=len(s['turns'])-2;step=next(x for x in s['snapshot']['mission']['steps'] if x['id']==s['current_step']);initial={'request_id':'confirmed-before-update','step_id':step['id'],'intent_id':step['intents'][0]['id'],'turn_index':idx,'turn_id':s['turns'][idx]['turn_id']};s=self.c.post(f'/api/missions/{sid}/clarify',headers=h,json=initial).json()['session'];self.assertEqual(s['turns'][idx]['confirmed_intent_id'],initial['intent_id'])
+   response=self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'second-unmatched','text':'zzzzz nonsens'});self.assertEqual(response.status_code,200);self.assertFalse(response.json()['matched']);s=response.json()['session'];idx=len(s['turns'])-2;step=next(x for x in s['snapshot']['mission']['steps'] if x['id']==s['current_step']);clarify={'request_id':'choose-old','step_id':step['id'],'intent_id':step['intents'][0]['id'],'turn_index':idx,'turn_id':s['turns'][idx]['turn_id']}
+   with st.connect() as c:before=c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload']
+   same_version=json.loads(json.dumps(current));same_version['content_version']=old['content_version'];active[0]=same_version;self.assertFalse(self.c.get(f'/api/missions/{sid}').json()['session']['content_status']['current'])
+   active[0]=current;view=self.c.get(f'/api/missions/{sid}');self.assertEqual(view.status_code,200);self.assertEqual(view.json()['session']['content_status'],{'current':False,'can_start_updated':True})
+   self.assertEqual(self.c.post(f'/api/missions/{sid}/clarify',headers=ORIGIN,json=clarify).status_code,403)
+   for action,payload in [('turn',{'request_id':'new-turn','text':'kaffe'}),('clarify',clarify),('reset',{'request_id':'reset-old'})]:
+    r=self.c.post(f'/api/missions/{sid}/{action}',headers=h,json=payload);self.assertEqual(r.status_code,409,r.text);self.assertEqual(r.json()['code'],'exercise_updated')
+   retry=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(retry.status_code,200);self.assertFalse(retry.json()['session']['content_status']['current']);self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json={**body,'text':'changed'}).status_code,409)
+   with st.connect() as c:self.assertEqual(c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload'],before)
+   exported=self.c.get('/api/export').json()['sessions'][0];self.assertEqual(exported,json.loads(before))
+   fresh=self.c.post('/api/missions',headers=h,json={'mission_id':mid,'request_id':'updated-start',**selection});self.assertEqual(fresh.status_code,200,fresh.text);ns=fresh.json()['session'];self.assertNotEqual(ns['id'],sid);self.assertTrue(ns['content_status']['current']);self.assertEqual(ns['snapshot']['selection'],s['snapshot']['selection'])
+   self.c.post('/api/auth/logout',headers=h,json={});b=self.register('historicalother');bh=self.hdr(b['csrf']);self.assertEqual(self.c.get(f'/api/missions/{sid}').status_code,404);self.assertEqual(self.c.post(f'/api/missions/{sid}/reset',headers=bh,json={'request_id':'attack'}).status_code,404);self.assertEqual(self.c.post(f'/api/missions/{sid}/clarify',headers=bh,json=clarify).status_code,404);self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=bh,json={'request_id':'cross-turn','text':'kaffe'}).status_code,404)
+
+ def test_semantic_library_change_during_inference_never_commits(self):
+  a=self.register('libraryracetest');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'race-start'}).json()['session']['id'];real=st.get_library();modified=json.loads(json.dumps(real));modified['situations'][0]['missions'][0]['opening_sv']='Updated opening';active=[real]
+  def infer(*args):
+   active[0]=modified
+   return {'intent_id':'coffee','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}
+  with patch.object(st,'get_library',side_effect=lambda:active[0]),patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check',side_effect=infer):
+   r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'race-turn','text':'kaffe'});self.assertEqual(r.status_code,409,r.text);self.assertEqual(r.json()['code'],'exercise_updated');self.assertEqual(len(self.c.get(f'/api/missions/{sid}').json()['session']['turns']),1)
+ def test_historical_library_change_observed_before_save_rolls_back(self):
+  a=self.register('historicalcommit');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'historical-commit-start'}).json()['session']['id'];original=st.get_library();changed=json.loads(json.dumps(original));changed['situations'][0]['missions'][0]['opening_sv']='Different current offer';active=[original];match=st.match_step
+  with st.connect() as c:before=c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload']
+  def change_during_match(step,text):active[0]=changed;return match(step,text)
+  with patch.object(st,'get_library',side_effect=lambda:active[0]),patch.object(st,'match_step',side_effect=change_during_match):
+   r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'commit-race','text':'jag vill ha kaffe'})
+  self.assertEqual(r.status_code,409,r.text);self.assertEqual(r.json()['code'],'exercise_updated')
+  with st.connect() as c:self.assertEqual(c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload'],before)
+ def test_historical_semantic_stale_is_free_and_client_snapshot_cannot_override(self):
+  a=self.register('historicalsemantic');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'stale-sem-start'}).json()['session']['id'];original=st.get_library();changed=json.loads(json.dumps(original));changed['situations'][0]['missions'][0]['steps'][0]['intents'][0]['meaning_sv']='Changed meaning';active=[changed]
+  with st.connect() as c:before=c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload']
+  with patch.object(st,'get_library',side_effect=lambda:active[0]),patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check') as infer:
+   body={'request_id':'stale-sem-turn','text':'jag vill ha kaffe'}
+   r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(r.status_code,409);self.assertEqual(r.json()['code'],'exercise_updated')
+   self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json={**body,'snapshot':{'mission':changed['situations'][0]['missions'][0]},'content_status':{'current':True}}).status_code,400);infer.assert_not_called()
+  with st.connect() as c:
+   self.assertEqual(c.execute('SELECT count(*) FROM semantic_budgets WHERE user_id=?',(a['user']['id'],)).fetchone()[0],0)
+   self.assertEqual(c.execute('SELECT payload FROM missions WHERE id=?',(sid,)).fetchone()['payload'],before)
+  # Canonical content, not an unrelated version tag or object key order, is authoritative.
+  active[0]=json.loads(json.dumps(original));active[0]['content_version']='unrelated-new-version'
+  with patch.object(st,'get_library',side_effect=lambda:active[0]):self.assertTrue(self.c.get(f'/api/missions/{sid}').json()['session']['content_status']['current'])
  def test_sql_injection_in_login_does_not_authenticate(self):
   r=self.c.post('/api/auth/login',headers=ORIGIN,json={'username':"alice' OR 1=1 --",'password':'anything'});self.assertEqual(r.status_code,400);self.assertNotIn('anything',r.text)
  def test_match_boundaries_reject_and_ambiguity(self):
@@ -99,6 +147,53 @@ class ProductionTest(unittest.TestCase):
    self.assertEqual(fresh.post(f'/api/missions/{sid}/reset',headers=h,json={'request_id':'progress-reset'}).status_code,200);self.assertEqual(fresh.get('/api/progress').json()['sessions'][0]['status'],'in_progress')
   self.c.post('/api/auth/logout',headers=h,json={});other=self.register('progressother');oh=self.hdr(other['csrf']);self.assertEqual(self.c.get('/api/progress').json()['sessions'],[]);self.assertEqual(self.c.delete(f'/api/missions/{sid}',headers=oh).status_code,404)
   self.c.post('/api/auth/logout',headers=oh,json={});login=self.c.post('/api/auth/login',headers=ORIGIN,json={'username':'progressowner','password':'correct horse battery staple'}).json();h=self.hdr(login['csrf']);self.assertEqual(self.c.delete(f'/api/missions/{sid}',headers=h).status_code,200);self.assertEqual(self.c.get('/api/progress').json()['sessions'],[])
+ def test_semantic_mode_fails_closed_and_checks_decisions(self):
+  a=self.register('semanticowner');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'sem-start'}).json()['session']['id'];body={'request_id':'sem-turn','text':'please coffee'}
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}):
+   self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body).status_code,503);self.assertEqual(len(self.c.get(f'/api/missions/{sid}').json()['session']['turns']),1)
+   for invalid in [{'intent_id':'bogus','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'},{'intent_id':'coffee','confidence':float('nan'),'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'},{'intent_id':'coffee','confidence':1,'source':'untrusted','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}]:
+    with patch.object(production.language_checker,'check',return_value=invalid):self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body).status_code,503)
+   with patch.object(production.language_checker,'check',return_value={'intent_id':'coffee','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}) as check:
+    r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(r.status_code,200,r.text);self.assertEqual(r.json()['match_source'],'semantic');self.assertEqual(r.json()['session']['current_step'],'two');self.assertEqual(r.json()['session']['turns'][1]['match_source'],'semantic');self.assertEqual(r.json()['session']['turns'][1]['checker_revision'],'test-v1');self.assertEqual(r.json()['session']['turns'][1]['detected_language'],'sv');self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body).status_code,200);self.assertEqual(check.call_count,1);self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json={**body,'text':'changed'}).status_code,409)
+ def test_semantic_overflow_has_actionable_error_and_no_mutation(self):
+  a=self.register('semanticlong');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'long-start'}).json()['session']['id'];body={'request_id':'long-reply','text':'very long answer'}
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check',side_effect=production.language_checker.CheckerInputTooLong([513,514])):
+   r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(r.status_code,413);self.assertIn('shorter reply',r.json()['error']);self.assertEqual(len(self.c.get(f'/api/missions/{sid}').json()['session']['turns']),1)
+ def test_semantic_raw_detector_and_combined_support_are_distinct(self):
+  a=self.register('semanticsupport');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'support-start'}).json()['session']['id']
+  decision={'intent_id':'coffee','confidence':.9,'source':'semantic','language':'zh','language_supported':True,'language_evidence':'lexical_support','checker_revision':'test-v1'}
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check',return_value=decision):
+   r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'support-turn','text':'En bulle tack.'});self.assertEqual(r.status_code,200);self.assertTrue(r.json()['matched']);turn=r.json()['session']['turns'][-2];self.assertEqual(turn['detected_language'],'zh');self.assertTrue(turn['language_supported']);self.assertEqual(turn['language_evidence'],'lexical_support')
+ def test_semantic_foreign_language_cannot_advance(self):
+  a=self.register('semanticforeign');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'foreign-start'}).json()['session']['id']
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}):
+   for language,text in [('en','I would like coffee.'),('de','Ich möchte Kaffee.')]:
+    with patch.object(production.language_checker,'check',return_value={'intent_id':'coffee','confidence':.99,'source':'semantic','language':language,'language_supported':False,'language_evidence':'foreign_veto','checker_revision':'test-v1'}):
+     r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'foreign-'+language,'text':text});self.assertEqual(r.status_code,200);self.assertFalse(r.json()['matched']);self.assertEqual(r.json()['session']['current_step'],'one');self.assertIsNone(r.json()['session']['turns'][-2]['intent_id'])
+ def test_semantic_stale_reset_and_auth_revocation_never_commit(self):
+  a=self.register('semanticrace');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'sem-race-start'}).json()['session']['id']
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}):
+   for action in ('reset','logout'):
+    entered=threading.Event();release=threading.Event();answers=[]
+    def slow(*args):entered.set();release.wait(5);return {'intent_id':'coffee','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}
+    def go():answers.append(self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'sem-'+action,'text':'coffee'}).status_code)
+    with patch.object(production.language_checker,'check',side_effect=slow):
+     t=threading.Thread(target=go);t.start();self.assertTrue(entered.wait(3))
+     if action=='reset':self.assertEqual(self.c.post(f'/api/missions/{sid}/reset',headers=h,json={'request_id':'sem-reset'}).status_code,200)
+     else:self.assertEqual(self.c.post('/api/auth/logout',headers=h,json={}).status_code,200)
+     release.set();t.join(5);self.assertFalse(t.is_alive())
+    self.assertEqual(answers,[409 if action=='reset' else 401])
+    if action=='reset':self.assertEqual(len(self.c.get(f'/api/missions/{sid}').json()['session']['turns']),1)
+ def test_semantic_deleted_mission_is_not_resurrected(self):
+  a=self.register('semanticdelete');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'sem-del-start'}).json()['session']['id'];entered=threading.Event();release=threading.Event();answers=[]
+  def slow(*args):entered.set();release.wait(5);return {'intent_id':'coffee','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check',side_effect=slow):
+   t=threading.Thread(target=lambda:answers.append(self.c.post(f'/api/missions/{sid}/turn',headers=h,json={'request_id':'sem-del','text':'coffee'}).status_code));t.start();self.assertTrue(entered.wait(3));self.assertEqual(self.c.delete(f'/api/missions/{sid}',headers=h).status_code,200);release.set();t.join(5);self.assertEqual(answers,[404]);self.assertEqual(self.c.get(f'/api/missions/{sid}').status_code,404)
+ def test_semantic_busy_request_cannot_duplicate(self):
+  a=self.register('semanticbusy');h=self.hdr(a['csrf']);sid=self.c.post('/api/missions',headers=h,json={'mission_id':'lib_test_m1','request_id':'sem-busy-start'}).json()['session']['id'];body={'request_id':'sem-same','text':'coffee'};entered=threading.Event();release=threading.Event();answers=[]
+  def slow(*args):entered.set();release.wait(5);return {'intent_id':'coffee','confidence':.9,'source':'semantic','language':'sv','language_supported':True,'language_evidence':'detector','checker_revision':'test-v1'}
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(production.language_checker,'check',side_effect=slow):
+   t=threading.Thread(target=lambda:answers.append(self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body).status_code));t.start();self.assertTrue(entered.wait(3));self.assertEqual(self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body).status_code,429);release.set();t.join(5);self.assertEqual(answers,[200]);r=self.c.post(f'/api/missions/{sid}/turn',headers=h,json=body);self.assertEqual(r.status_code,200);self.assertEqual(len(r.json()['session']['turns']),3)
  def test_deleted_history_cannot_be_recreated_by_retry(self):
   a=self.register('deleteme');h=self.hdr(a['csrf']);payload={'mission_id':'lib_test_m1','request_id':'start-delete'}
   self.assertEqual(self.c.post('/api/missions',headers=h,json=payload).status_code,200);self.assertEqual(self.c.delete('/api/missions',headers=h).status_code,200);self.assertEqual(self.c.post('/api/missions',headers=h,json=payload).status_code,409);export=self.c.get('/api/export');self.assertEqual(export.json()['sessions'],[]);self.assertIn('attachment',export.headers['content-disposition'])
@@ -120,6 +215,12 @@ class ProductionTest(unittest.TestCase):
    p.terminate();p.wait(timeout=5);p=start();self.assertTrue(json.load(opener.open(base+'/api/auth/session'))['authenticated'])
   finally:
    if p.poll() is None:p.terminate();p.wait(timeout=5)
+ def test_semantic_readiness_fails_closed_for_unavailable_checker(self):
+  situations=[{'id':f's{n}','missions':[dict(mission,id=f'm{n}-{j}') for j in range(3)]} for n in range(18)]
+  with patch.dict(os.environ,{'BP5_SEMANTIC_REQUIRED':'1'}),patch.object(st,'get_library',return_value={'situations':situations}),patch.object(production.shutil,'which',return_value='/fake'),patch.object(production.Path,'is_file',return_value=True):
+   r=production.readiness();self.assertEqual(r.status_code,503);self.assertTrue(json.loads(r.body)['semantic_required']);self.assertFalse(json.loads(r.body)['semantic'])
+   with patch.object(production.language_checker,'ready',return_value=True):self.assertEqual(production.readiness().status_code,200)
+   with patch.object(production.language_checker,'ready',side_effect=RuntimeError('secret')):self.assertEqual(production.readiness().status_code,503)
  def test_ready_requires_library_and_runtime(self):
   situations=[]
   for n in range(18):

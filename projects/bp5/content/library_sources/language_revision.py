@@ -327,7 +327,11 @@ def revise(situation):
                     # A bare 'ja' must not match an unrelated sentence containing it.
                     intent['required_groups']=[]
                     answers=ANSWERS.get(step['prompt_sv'],([],[]))[0 if intent['id']=='confirm' else 1]
-                    intent['meaning_sv']=answers[0] if answers else ('Jag accepterar ditt sista förslag.' if intent['id']=='confirm' else 'Jag tackar nej till ditt sista förslag.')
+                    # Examples are never the authority for the .9 refusal meaning.
+                    # The explicit offer-scoped contract is applied after legacy
+                    # display clarifications. Keep this inventory illustrative only.
+                    if intent['id']=='confirm':
+                        intent['meaning_sv']=answers[0] if answers else 'Jag accepterar ditt sista förslag.'
                     intent['meaning_en']='Accept the specific final question or follow-up.' if intent['id']=='confirm' else 'Decline the specific final question or follow-up; this does not automatically cancel the earlier choice.'
                     intent['feedback_en']='You accepted the final follow-up. This completes guided practice, not a language level.' if intent['id']=='confirm' else 'You declined that specific follow-up. The character response explains what remains agreed or unresolved. This is a valid practice outcome.'
                     # Finite authored statements have finite yes/no discourse variants.
